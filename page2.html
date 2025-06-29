@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>モチヨル - グループ作成</title>
+    <link rel="stylesheet" href="page2.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=M+PLUS+1p:wght@500&family=Mochiy+Pop+P+One&family=Zen+Kaku+Gothic+New:wght@500;900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header onclick="location.href='index.html'">
+        <img src="img/title.svg" alt="モチヨル" class="h1-image">
+    </header>
+
+    <main>
+        <h2>グループを作成しよう</h2>
+
+        <p>グループ名とメンバー全員の名前を追加しましょう👇</p>
+        <form id="groupForm">
+            <label for="groupName">グループ名</label>
+            <input type="text" id="groupName" name="groupName" placeholder="例：おはなグループ" required>
+
+            <label for="memberName">メンバー</label>
+            <div class="input-container">
+                <input type="text" id="memberName" name="memberName" class="member-input" placeholder="例：まりん" required>
+                <button type="button" id="addMember">追加</button>
+            </div>
+
+            <ul id="memberList">
+                <!-- 追加されたメンバー名がここに表示される -->
+            </ul>
+
+            <a href="#" class="group-button" id="createGroupBtn">グループを作成
+                <span class="arrow">→</span>
+            </a>
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer-lists">
+            <ul class="left-list">
+                <li>よくある質問</li>
+                <li>お問い合わせ</li>
+                <li>広告掲載について</li>
+                <li>アンケート</li>
+            </ul>
+            <ul class="right-list">
+                <li>プライバシーポリシー</li>
+                <li>利用規約</li>
+                <li>運営元情報</li>
+            </ul>
+        </div>
+        <hr>
+        <p>&copy; 2025 モチヨル</p>
+    </footer>
+
+    <!-- 外部JavaScriptファイルを読み込み -->
+    <script src="page2.js"></script>
+</body>
+
+</html>

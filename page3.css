@@ -1,0 +1,303 @@
+/* ===== ベーススタイル ===== */
+html {
+    box-sizing: border-box;
+    font-family: 'M PLUS 1p', sans-serif;
+    max-width: 375px;
+    width: 100vw;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #f2fff1;
+    min-height: 100vh;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== ヘッダー ===== */
+header {
+    text-align: center;
+    padding: 12px 0;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto 30px auto;
+    cursor: pointer;
+}
+
+/* ===== ロゴ ===== */
+.h1-image {
+    width: 90px;
+    height: auto;
+}
+
+/* ===== メイン（Page2と同じスタイルに変更） ===== */
+main {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ===== 成功コンテナ ===== */
+.success-container {
+    text-align: center;
+    max-width: 335px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+/* ===== 成功アイコン ===== */
+.success-icon {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.checkmark-circle {
+    width: 30px;
+    height: 30px;
+    background-color: #00E1A9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.checkmark {
+    width: 10px;
+    height: 6px;
+    border-left: 4px solid white;
+    border-bottom: 4px solid white;
+    transform: rotate(-45deg);
+    position: relative;
+    top: -2px;
+}
+
+/* ===== 見出し ===== */
+h2 {
+    font-family: "Mochiy Pop P One", sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+/* ===== パラグラフ ===== */
+.success-container p {
+    font-family: "M PLUS 1p", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #404040;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* ===== URLコンテナ ===== */
+.url-container {
+    margin-bottom: 40px;
+}
+
+.url-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+/* 入力フィールドのボックス */
+.url-box {
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0 15px;
+    flex: 1;
+    position: relative;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.url-input-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.url-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    padding: 0;
+    font-family: inherit;
+    overflow-x: auto;
+    white-space: nowrap;
+    cursor: text;
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+.url-input::-webkit-scrollbar {
+    height: 0;
+}
+
+.url-input::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.url-input[readonly] {
+    cursor: pointer;
+}
+
+.url-input:focus {
+    cursor: text;
+}
+
+.copy-btn {
+    background: #4DD5DA;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 70px;
+    height: 40px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.copy-btn:hover {
+    background: #3bc4c9;
+}
+
+/* ===== 持ち物を運ぶボタン ===== */
+.group-button {
+    width: 240px;
+    min-width: 240px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #35E4A1 0%, #08DBF3 100%);
+    color: white;
+    padding: 10px 25px 10px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.group-button .arrow {
+    width: 36px;
+    height: 13px;
+    background-color: white;
+    clip-path: polygon(0 40%, 50% 40%, 50% 15%, 100% 50%, 50% 85%, 50% 60%, 0 60%);
+    margin-left: auto;
+}
+
+.group-button:hover {
+    opacity: 0.9;
+}
+
+/* ===== コピー成功メッセージ ===== */
+.copy-success-message {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translate(-50%, -20px);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1000;
+}
+
+.copy-success-message.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
+/* ===== フッター ===== */
+footer {
+    background-color: #404040;
+    color: #fff;
+    padding: 36px 24px 18px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+footer hr {
+    border: none;
+    border-top: 1px solid #888;
+    margin: 18px 0 10px 0;
+    width: 100%;
+    max-width: 600px;
+    opacity: 0.4;
+}
+
+footer p {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+}
+
+.footer-lists {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 12px;
+}
+
+.footer-lists ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+
+.footer-lists li {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    margin-bottom: 12px;
+    opacity: 0.95;
+}

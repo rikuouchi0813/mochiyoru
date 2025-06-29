@@ -1,0 +1,18 @@
+{
+	"geolocation": {
+		"data": {
+			"country": {
+				"code": "JP",
+				"name": "Japan"
+			},
+			"subdivision": {
+				"code": "23",
+				"name": "Aichi"
+			},
+			"timezone": "Asia/Tokyo",
+			"latitude": 35.1784,
+			"longitude": 136.9043
+		},
+		"timestamp": 1751194876649
+	}
+}

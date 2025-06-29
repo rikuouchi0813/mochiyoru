@@ -1,0 +1,418 @@
+/* ===== ベーススタイル ===== */
+html {
+    box-sizing: border-box;
+    font-family: 'M PLUS 1p', sans-serif;
+    max-width: 375px;
+    width: 100vw;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #f2fff1;
+    min-height: 100vh;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== ヘッダー ===== */
+header {
+    text-align: center;
+    padding: 12px 0;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto 30px auto;
+    cursor: pointer;
+}
+
+/* ===== ロゴ ===== */
+.h1-image {
+    width: 90px;
+    height: auto;
+}
+
+/* ===== メイン ===== */
+main {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ===== 見出し ===== */
+h2 {
+    font-family: "Mochiy Pop P One", sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: #242424;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+/* ===== 入力セクション ===== */
+.input-section {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 320px;
+    height: 40px;
+    margin-bottom: 30px;
+}
+
+#itemInput {
+    width: 235px;
+    height: 40px;
+    flex: unset;
+    padding: 0 16px; /* 上下パディングを削除 */
+    border: 2px solid #C6EBE2;
+    border-radius: 8px;
+    font-family: "M PLUS 1p", sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box; /* ボックスサイズを明確に指定 */
+}
+
+#itemInput:focus {
+    border-color: #4DD5DA;
+}
+
+#addButton {
+    width: 70px;
+    height: 40px;
+    padding: 0;
+    background-color: #4DD5DA;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-family: "M PLUS 1p", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 150%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    box-sizing: border-box; /* ボックスサイズを明確に指定 */
+}
+
+#addButton:hover {
+    background-color: #45b7b8;
+}
+
+/* Items List */
+.items-list {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.item-row {
+    background: rgba(232, 248, 245, 0.8);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #1dd1a1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Speech Bubbles Header */
+.speech-bubbles-header {
+    display: grid;
+    grid-template-columns: 82px 82px 82px; /* 固定幅に変更 */
+    gap: 8px;
+    margin-bottom: 15px;
+    padding: 0 15px; /* アイテムのpaddingと揃える */
+    align-items: end; /* 吹き出しを下端で揃える */
+}
+
+.speech-bubbles-header .speech-bubble:first-child {
+    margin-left: 8px; /* 左に10pxずらす */
+}
+
+.speech-bubbles-header .speech-bubble:nth-child(2) {
+    margin-left: 8px;
+}
+
+.speech-bubbles-header .speech-bubble:nth-child(3) {
+    margin-left: 8px;
+}
+
+.speech-bubble {
+    font-family: "Mochiy Pop P One", sans-serif;
+    font-weight: 400;
+    position: relative;
+    background: #00E1A9;
+    color: white;
+    border-radius: 10px;
+    font-size: 11px;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 25px;
+    padding: 4px 8px;
+    margin-bottom: 6px; /* 吹き出しの矢印のスペース分を確保 */
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6.5px solid transparent;
+    border-right: 6.5px solid transparent;
+    border-top: 6px solid #00E1A9;
+}
+
+/* Item Content */
+.item-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 82px 82px 82px;; /* 吹き出しと同じ固定幅 */
+    gap: 8px;
+    align-items: center; /* アイテム内容を中央で揃える */
+}
+
+.item-name {
+    font-size: 13px;
+    font-family: "M PLUS 1p", s0ans-serif;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    padding: 0 8px;
+    background: white;
+    border-radius: 6px;
+    border: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    box-sizing: border-box;
+    word-break: break-all; /* 長い文字列を折り返す */
+    overflow-wrap: break-word; /* 単語の途中でも折り返す */
+    line-height: 1.2; /* 行間を調整 */
+}
+
+.item-select {
+    padding: 0 12px; /* 上下パディングを削除 */
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    background: white;
+    font-size: 12px;
+    color: #666;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    min-width: 0;
+    height: 40px; /* 高さを40pxに固定 */
+    display: flex; /* flexboxを使用して中央揃え */
+    align-items: center; /* 縦方向の中央揃え */
+    box-sizing: border-box; /* ボックスサイズを明確に指定 */
+}
+
+.item-select:focus {
+    outline: none;
+    border-color: #1dd1a1;
+}
+
+/* No Items Message */
+.no-items-message {
+    font-family: "M PLUS 1p", sans-serif;
+    text-align: center;
+    color: #666;
+    padding: 40px 20px;
+    background: rgba(232, 248, 245, 0.5);
+    border-radius: 8px;
+    border: 2px dashed #c0c0c0;
+    display: none; /* 初期状態では非表示 */
+}
+
+.no-items-message p {
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.no-items-message p:first-child {
+    font-weight: 600;
+    color: #242424;
+}
+
+/* Delete Button */
+.delete-btn {
+    width: 25px;
+    height: 25px;
+    border: none;
+    border-radius: 50%;
+    background-color: #4DD5DA;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    line-height: 1;
+    position: relative;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .item-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .delete-btn {
+        align-self: flex-end;
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+    
+    .item-content {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .speech-bubbles-header {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+    
+    .header-spacer {
+        display: none;
+    }
+}
+
+/* Edit Button */
+.edit-button-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.edit-btn {
+    width: 30px;
+    height: 30px;
+    background: #242424;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.edit-btn .icon {
+    font-size: 14px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-label {
+    font-size: 12px;
+    font-family: "M PLUS 1p", sans-serif;
+    color: #404040;
+    font-weight: 700;
+}
+
+/* ===== フッター ===== */
+footer {
+    background-color: #404040;
+    color: #fff;
+    padding: 36px 24px 18px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+footer hr {
+    border: none;
+    border-top: 1px solid #888;
+    margin: 18px 0 10px 0;
+    width: 100%;
+    max-width: 600px;
+    opacity: 0.4;
+}
+
+footer p {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+}
+
+.footer-lists {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 12px;
+}
+
+.footer-lists ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+
+.footer-lists li {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    margin-bottom: 12px;
+    opacity: 0.95;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.item-row {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.item-row:nth-child(even) {
+    animation-delay: 0.1s;
+}
+
+/* 削除された個別の吹き出しスタイル（不要になったため） */

@@ -1,0 +1,291 @@
+/* ===== ベーススタイル ===== */
+html {
+    box-sizing: border-box;
+    font-family: 'M PLUS 1p', sans-serif;
+    max-width: 375px;
+    width: 100vw;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #f2fff1;
+    min-height: 100vh;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== ヘッダー ===== */
+header {
+    text-align: center;
+    padding: 12px 0;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto 30px auto;
+    cursor: pointer;
+}
+
+/* ===== ロゴ ===== */
+.h1-image {
+    width: 90px;
+    height: auto;
+}
+
+/* ===== メイン ===== */
+main {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ===== ラベル ===== */
+label {
+    display: block;
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* ===== 入力フィールドコンテナ ===== */
+.input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* ===== 見出し ===== */
+h2 {
+    font-family: "Mochiy Pop P One", sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+/* ===== パラグラフ ===== */
+.success-container p {
+    font-family: "M PLUS 1p", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #404040;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* メインのpタグも中央揃えに */
+main p {
+    font-family: "M PLUS 1p", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #404040;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* ===== 入力フィールド（共通） ===== */
+input[type="text"] {
+    padding: 8px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    background: white !important;
+    transition: border-color 0.3s ease;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    background: white !important;
+}
+
+/* オートコンプリート時の背景色も白に固定 */
+input[type="text"]:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    background: white !important;
+}
+
+input[type="text"]:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    background: white !important;
+}
+
+/* グループ名入力フィールド */
+#groupName {
+    font-size: 16px;
+    width: 315px;
+    height: 40px;
+}
+
+/* メンバー入力フィールド */
+input[type="text"].member-input {
+    font-size: 16px;
+    width: 235px;
+    height: 40px;
+    margin-bottom: 0;
+}
+
+/* ===== 追加ボタン ===== */
+#addMember {
+    width: 70px;
+    height: 40px;
+    background: #4DD5DA;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+#addMember:hover {
+    background: #45b7b8;
+}
+
+/* ===== メンバーリスト ===== */
+#memberList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.member-tag {
+    display: inline-flex;
+    align-items: center;
+    background: #00E1A9;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    gap: 8px;
+}
+
+.member-name {
+    margin: 0;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.remove-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== グループ作成ボタン ===== */
+.group-button {
+    width: 240px;
+    min-width: 240px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #35E4A1 0%, #08DBF3 100%);
+    color: white;
+    padding: 10px 25px 10px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.group-button .arrow {
+    width: 36px;
+    height: 13px;
+    background-color: white;
+    clip-path: polygon(0 40%, 50% 40%, 50% 15%, 100% 50%, 50% 85%, 50% 60%, 0 60%);
+    margin-left: auto;
+}
+
+.group-button:hover {
+    opacity: 0.9;
+}
+
+/* ===== フッター ===== */
+footer {
+    background-color: #404040;
+    color: #fff;
+    padding: 36px 24px 18px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+footer hr {
+    border: none;
+    border-top: 1px solid #888;
+    margin: 18px 0 10px 0;
+    width: 100%;
+    max-width: 600px;
+    opacity: 0.4;
+}
+
+footer p {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+}
+
+.footer-lists {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 12px;
+}
+
+.footer-lists ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+
+.footer-lists li {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    margin-bottom: 12px;
+    opacity: 0.95;
+}
