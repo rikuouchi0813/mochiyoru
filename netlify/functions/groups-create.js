@@ -10,22 +10,21 @@ const supabase = createClient(
 exports.handler = async (event, context) => {
   console.log("=== Groups Create Function Called ===");
   console.log("Method:", event.httpMethod);
-  console.log("Headers:", event.headers);
   console.log("Body:", event.body);
 
   // CORS設定
   const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
   };
 
   // プリフライトリクエスト処理
-  if (event.httpMethod === 'OPTIONS') {
+  if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 200,
       headers,
-      body: '',
+      body: "",
     };
   }
 
@@ -84,7 +83,7 @@ exports.handler = async (event, context) => {
       body: JSON.stringify({ groupId }),
     };
   } catch (err) {
-    console.error("Function error:", err);
+    console.error("Failed to save group:", err);
     return {
       statusCode: 500,
       headers,
