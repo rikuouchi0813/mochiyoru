@@ -44,9 +44,16 @@ class ItemAssignmentManager {
 
   /* ---------- グループ情報を取得 or 新規作成 ---------- */
   async loadOrCreateGroup() {
+    console.log("=== loadOrCreateGroup 開始 ===");
+
     // 1. URLパスからgroupIdを取得（/group/xxxxx形式）
     const path = window.location.pathname;
-    const groupIdFromPath = path.match(/\/group\/(.+)/);
+    console.log("現在のパス:", path);
+    
+    // より厳密な正規表現を使用
+    const groupIdFromPath = path.match(/\/group\/([^\/\?#]+)/);
+    console.log("パスからの抽出結果:", groupIdFromPath);
+    console.log("抽出されたgroupId:", groupIdFromPath ? groupIdFromPath[1] : "なし");
 
     // 2. URL パラメータからも取得（従来の方式も維持）
     const params = new URLSearchParams(window.location.search);
@@ -54,17 +61,22 @@ class ItemAssignmentManager {
     const urlGroupName = params.get("groupName");
     const urlMembers = params.get("members"); // JSON 文字列
 
+    console.log("URLパラメータ:", { urlGroupId, urlGroupName, urlMembers });
+
     // 3. sessionStorage
     const saved = sessionStorage.getItem("groupData");
     if (saved) {
       this.groupData = JSON.parse(saved);
+      console.log("sessionStorageから復元:", this.groupData);
     }
 
     // 4. groupIdの優先順位：パス > URLパラメータ > sessionStorage
-    if (groupIdFromPath) {
+    if (groupIdFromPath && groupIdFromPath[1]) {
       this.groupData.groupId = groupIdFromPath[1];
+      console.log("パスからgroupIdを設定:", groupIdFromPath[1]);
     } else if (urlGroupId) {
       this.groupData.groupId = urlGroupId;
+      console.log("URLパラメータからgroupIdを設定:", urlGroupId);
     }
 
     // 5. その他のパラメータ処理（従来通り）
@@ -82,9 +94,12 @@ class ItemAssignmentManager {
     }
 
     this.members = this.groupData.members || [];
+    console.log("現在のメンバー:", this.members);
+    console.log("最終的なgroupId:", this.groupData.groupId);
 
     // 6. groupId が無ければサーバーで新規作成（従来通り）
     if (!this.groupData.groupId) {
+      console.log("groupIdが無いため、新規作成します");
       const res = await fetch("/api/groups", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -115,8 +130,13 @@ class ItemAssignmentManager {
         !this.groupData.members ||
         this.members.length === 0)
     ) {
+      console.log("メンバー情報が不足しているため、Supabaseから取得します");
+      console.log("リクエストURL:", `/api/groups/${this.groupData.groupId}`);
+      
       try {
         const res = await fetch(`/api/groups/${this.groupData.groupId}`);
+        console.log("API Response status:", res.status);
+        
         if (res.ok) {
           const groupInfo = await res.json();
           console.log("Supabaseから取得したグループ情報:", groupInfo);
@@ -128,15 +148,21 @@ class ItemAssignmentManager {
           if (!this.groupData.members || this.members.length === 0) {
             this.groupData.members = groupInfo.members;
             this.members = groupInfo.members || [];
+            console.log("メンバー情報を更新:", this.members);
           }
+        } else {
+          console.error("API レスポンスエラー:", res.status, await res.text());
         }
       } catch (err) {
-        console.warn("グループ情報の取得に失敗:", err);
+        console.error("グループ情報の取得に失敗:", err);
       }
     }
 
     // 7. 最終データを保存
     sessionStorage.setItem("groupData", JSON.stringify(this.groupData));
+    console.log("最終的なgroupData:", this.groupData);
+    console.log("最終的なmembers:", this.members);
+    console.log("=== loadOrCreateGroup 完了 ===");
   }
 
   /* ---------- API ベース URL ---------- */
@@ -274,7 +300,7 @@ class ItemAssignmentManager {
     ]);
     const selQty = this.createSelect(idx, "quantity", [
       "",
-      ...Array.from({ length: 10 }, (_, i) => i + 1),
+      ...Array.from({ length, 10 }, (_, i) => i + 1),
     ]);
 
     wrap.append(nameBox, selWho, selQty);
