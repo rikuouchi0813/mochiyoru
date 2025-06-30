@@ -24,3 +24,8 @@
   to = "/.netlify/functions/groups-create"
   status = 200
   conditions = {Method = ["POST"]}
+
+[[redirects]]
+  from = "/group/*"
+  to = "/page4.html"
+  status = 200
