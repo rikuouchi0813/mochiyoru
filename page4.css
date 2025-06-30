@@ -51,6 +51,7 @@ h2 {
     color: #242424;
     margin-bottom: 30px;
     line-height: 1.4;
+    text-align: center;
 }
 
 /* ===== 入力セクション ===== */
@@ -60,7 +61,7 @@ h2 {
     width: 100%;
     max-width: 350px; /* 320px → 350px に拡大 */
     height: 40px;
-    margin-bottom: 30px;
+    margin: 0 auto 30px auto; /* 中央揃えを追加 */
 }
 
 #itemInput {
@@ -129,6 +130,11 @@ h2 {
     margin-bottom: 15px;
     padding: 0 12px; /* 15px → 12px に調整 */
     align-items: end;
+    justify-content: center; /* 中央揃えを追加 */
+    width: 100%;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
@@ -267,6 +273,8 @@ h2 {
     flex-shrink: 0;
     line-height: 1;
     position: relative;
+    aspect-ratio: 1; /* 正円を保証 */
+    min-width: 28px; /* 最小幅を設定 */
 }
 
 /* Edit Button */
@@ -439,5 +447,7 @@ footer p {
         width: 24px; /* 22px → 24px に拡大 */
         height: 24px; /* 22px → 24px に拡大 */
         font-size: 14px;
+        aspect-ratio: 1; /* 正円を保証 */
+        min-width: 24px; /* 最小幅を設定 */
     }
 }
