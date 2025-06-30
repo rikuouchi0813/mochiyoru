@@ -1,26 +1,31 @@
 // netlify/functions/groups-create.js
-import { createClient } from "@supabase/supabase-js";
-import { v4 as uuidv4 } from "uuid";
+const { createClient } = require("@supabase/supabase-js");
+const { v4: uuidv4 } = require("uuid");
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_ANON_KEY
 );
 
-export const handler = async (event, context) => {
+exports.handler = async (event, context) => {
+  console.log("=== Groups Create Function Called ===");
+  console.log("Method:", event.httpMethod);
+  console.log("Headers:", event.headers);
+  console.log("Body:", event.body);
+
   // CORS設定
   const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
   };
 
   // プリフライトリクエスト処理
-  if (event.httpMethod === "OPTIONS") {
+  if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
       headers,
-      body: "",
+      body: '',
     };
   }
 
@@ -34,8 +39,10 @@ export const handler = async (event, context) => {
 
   try {
     const { groupName, members } = JSON.parse(event.body);
+    console.log("Parsed data:", { groupName, members });
 
     if (!groupName || !Array.isArray(members)) {
+      console.error("Invalid payload:", { groupName, members });
       return {
         statusCode: 400,
         headers,
@@ -44,8 +51,10 @@ export const handler = async (event, context) => {
     }
 
     const groupId = uuidv4();
+    console.log("Generated groupId:", groupId);
 
     // Supabaseのgroupsテーブルに保存
+    console.log("Inserting to Supabase...");
     const { data, error } = await supabase
       .from("groups")
       .insert([
@@ -63,9 +72,11 @@ export const handler = async (event, context) => {
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ error: "Failed to create group" }),
+        body: JSON.stringify({ error: "Failed to create group", details: error.message }),
       };
     }
+
+    console.log("Supabase insert success:", data);
 
     return {
       statusCode: 200,
@@ -73,11 +84,11 @@ export const handler = async (event, context) => {
       body: JSON.stringify({ groupId }),
     };
   } catch (err) {
-    console.error("Failed to save group:", err);
+    console.error("Function error:", err);
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: "Failed to save group" }),
+      body: JSON.stringify({ error: "Failed to save group", details: err.message }),
     };
   }
 };
