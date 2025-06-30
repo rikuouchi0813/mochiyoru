@@ -108,6 +108,33 @@ class ItemAssignmentManager {
       );
     }
 
+    // 6-2. groupIdがあるがメンバー情報がない場合、Supabaseから取得
+    if (
+      this.groupData.groupId &&
+      (!this.groupData.groupName ||
+        !this.groupData.members ||
+        this.members.length === 0)
+    ) {
+      try {
+        const res = await fetch(`/api/groups/${this.groupData.groupId}`);
+        if (res.ok) {
+          const groupInfo = await res.json();
+          console.log("Supabaseから取得したグループ情報:", groupInfo);
+
+          // Supabaseから取得した情報で補完
+          if (!this.groupData.groupName) {
+            this.groupData.groupName = groupInfo.groupName;
+          }
+          if (!this.groupData.members || this.members.length === 0) {
+            this.groupData.members = groupInfo.members;
+            this.members = groupInfo.members || [];
+          }
+        }
+      } catch (err) {
+        console.warn("グループ情報の取得に失敗:", err);
+      }
+    }
+
     // 7. 最終データを保存
     sessionStorage.setItem("groupData", JSON.stringify(this.groupData));
   }
