@@ -67,14 +67,14 @@ h2 {
     width: 235px;
     height: 40px;
     flex: unset;
-    padding: 0 16px; /* 上下パディングを削除 */
+    padding: 0 16px;
     border: 2px solid #C6EBE2;
     border-radius: 8px;
     font-family: "M PLUS 1p", sans-serif;
     font-size: 13px;
     outline: none;
     transition: border-color 0.3s ease;
-    box-sizing: border-box; /* ボックスサイズを明確に指定 */
+    box-sizing: border-box;
 }
 
 #itemInput:focus {
@@ -96,7 +96,7 @@ h2 {
     cursor: pointer;
     transition: background-color 0.3s ease;
     white-space: nowrap;
-    box-sizing: border-box; /* ボックスサイズを明確に指定 */
+    box-sizing: border-box;
 }
 
 #addButton:hover {
@@ -121,18 +121,18 @@ h2 {
     gap: 10px;
 }
 
-/* Speech Bubbles Header */
+/* Speech Bubbles Header - 常に横並び */
 .speech-bubbles-header {
     display: grid;
-    grid-template-columns: 82px 82px 82px; /* 固定幅に変更 */
+    grid-template-columns: 82px 82px 82px;
     gap: 8px;
     margin-bottom: 15px;
-    padding: 0 15px; /* アイテムのpaddingと揃える */
-    align-items: end; /* 吹き出しを下端で揃える */
+    padding: 0 15px;
+    align-items: end;
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
-    margin-left: 8px; /* 左に10pxずらす */
+    margin-left: 8px;
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(2) {
@@ -159,7 +159,7 @@ h2 {
     text-align: center;
     height: 25px;
     padding: 4px 8px;
-    margin-bottom: 6px; /* 吹き出しの矢印のスペース分を確保 */
+    margin-bottom: 6px;
 }
 
 .speech-bubble::after {
@@ -175,18 +175,18 @@ h2 {
     border-top: 6px solid #00E1A9;
 }
 
-/* Item Content */
+/* Item Content - 常に横並び */
 .item-content {
     flex: 1;
     display: grid;
-    grid-template-columns: 82px 82px 82px;; /* 吹き出しと同じ固定幅 */
+    grid-template-columns: 82px 82px 82px;
     gap: 8px;
-    align-items: center; /* アイテム内容を中央で揃える */
+    align-items: center;
 }
 
 .item-name {
     font-size: 13px;
-    font-family: "M PLUS 1p", s0ans-serif;
+    font-family: "M PLUS 1p", sans-serif;
     font-weight: 700;
     color: #333;
     text-align: center;
@@ -199,25 +199,26 @@ h2 {
     justify-content: center;
     height: 40px;
     box-sizing: border-box;
-    word-break: break-all; /* 長い文字列を折り返す */
-    overflow-wrap: break-word; /* 単語の途中でも折り返す */
-    line-height: 1.2; /* 行間を調整 */
+    word-break: break-all;
+    overflow-wrap: break-word;
+    line-height: 1.2;
 }
 
 .item-select {
-    padding: 0 12px; /* 上下パディングを削除 */
+    padding: 0 8px; /* モバイル用にパディングを調整 */
     border: 2px solid #e0e0e0;
     border-radius: 6px;
     background: white;
-    font-size: 12px;
+    font-size: 11px; /* モバイル用にフォントサイズを小さく */
     color: #666;
     cursor: pointer;
     transition: border-color 0.3s ease;
     min-width: 0;
-    height: 40px; /* 高さを40pxに固定 */
-    display: flex; /* flexboxを使用して中央揃え */
-    align-items: center; /* 縦方向の中央揃え */
-    box-sizing: border-box; /* ボックスサイズを明確に指定 */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%; /* 幅を100%に設定 */
 }
 
 .item-select:focus {
@@ -234,7 +235,7 @@ h2 {
     background: rgba(232, 248, 245, 0.5);
     border-radius: 8px;
     border: 2px dashed #c0c0c0;
-    display: none; /* 初期状態では非表示 */
+    display: none;
 }
 
 .no-items-message p {
@@ -266,37 +267,6 @@ h2 {
     flex-shrink: 0;
     line-height: 1;
     position: relative;
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 480px) {
-    .item-row {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-    }
-    
-    .delete-btn {
-        align-self: flex-end;
-        width: 28px;
-        height: 28px;
-        font-size: 14px;
-    }
-    
-    .item-content {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-    
-    .speech-bubbles-header {
-        grid-template-columns: 1fr;
-        gap: 5px;
-    }
-    
-    .header-spacer {
-        display: none;
-    }
 }
 
 /* Edit Button */
@@ -415,4 +385,59 @@ footer p {
     animation-delay: 0.1s;
 }
 
-/* 削除された個別の吹き出しスタイル（不要になったため） */
+/* スマホ用の微調整 - 既存のメディアクエリを削除して横並びを維持 */
+@media (max-width: 480px) {
+    .input-section {
+        max-width: 280px; /* 入力エリアを少し狭く */
+    }
+    
+    #itemInput {
+        width: 200px; /* 入力欄を少し狭く */
+        font-size: 12px;
+    }
+    
+    #addButton {
+        width: 65px; /* ボタンを少し狭く */
+        font-size: 12px;
+    }
+    
+    .speech-bubbles-header {
+        grid-template-columns: 75px 75px 75px; /* 吹き出しを少し小さく */
+        gap: 6px;
+        padding: 0 10px;
+    }
+    
+    .speech-bubble {
+        font-size: 10px;
+        height: 22px;
+        padding: 2px 6px;
+    }
+    
+    .item-content {
+        grid-template-columns: 75px 75px 75px; /* アイテムコンテンツも同じサイズに */
+        gap: 6px;
+    }
+    
+    .item-name {
+        font-size: 12px;
+        height: 35px;
+        padding: 0 4px;
+    }
+    
+    .item-select {
+        font-size: 10px;
+        height: 35px;
+        padding: 0 4px;
+    }
+    
+    .item-row {
+        padding: 10px;
+        gap: 8px;
+    }
+    
+    .delete-btn {
+        width: 22px;
+        height: 22px;
+        font-size: 14px;
+    }
+}
