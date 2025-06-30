@@ -58,13 +58,13 @@ h2 {
     display: flex;
     gap: 10px;
     width: 100%;
-    max-width: 320px;
+    max-width: 350px; /* 320px → 350px に拡大 */
     height: 40px;
     margin-bottom: 30px;
 }
 
 #itemInput {
-    width: 235px;
+    width: 265px; /* 235px → 265px に拡大 */
     height: 40px;
     flex: unset;
     padding: 0 16px;
@@ -111,36 +111,36 @@ h2 {
 
 .item-row {
     background: rgba(232, 248, 245, 0.8);
-    padding: 15px;
+    padding: 15px 12px; /* 左右のパディングを少し縮小 */
     margin-bottom: 15px;
     border-radius: 8px;
     border-left: 4px solid #1dd1a1;
     position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px; /* ギャップを少し縮小 */
 }
 
-/* Speech Bubbles Header - 常に横並び */
+/* Speech Bubbles Header - 幅を拡大 */
 .speech-bubbles-header {
     display: grid;
-    grid-template-columns: 82px 82px 82px;
-    gap: 8px;
+    grid-template-columns: 100px 100px 100px; /* 82px → 100px に拡大 */
+    gap: 12px; /* 8px → 12px に拡大 */
     margin-bottom: 15px;
-    padding: 0 15px;
+    padding: 0 12px; /* 15px → 12px に調整 */
     align-items: end;
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
-    margin-left: 8px;
+    margin-left: 0; /* 8px → 0 に調整 */
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(2) {
-    margin-left: 8px;
+    margin-left: 0; /* 8px → 0 に調整 */
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(3) {
-    margin-left: 8px;
+    margin-left: 0; /* 8px → 0 に調整 */
 }
 
 .speech-bubble {
@@ -150,15 +150,15 @@ h2 {
     background: #00E1A9;
     color: white;
     border-radius: 10px;
-    font-size: 11px;
+    font-size: 12px; /* 11px → 12px に拡大 */
     white-space: nowrap;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 25px;
-    padding: 4px 8px;
+    height: 28px; /* 25px → 28px に拡大 */
+    padding: 4px 10px; /* 8px → 10px に拡大 */
     margin-bottom: 6px;
 }
 
@@ -175,29 +175,29 @@ h2 {
     border-top: 6px solid #00E1A9;
 }
 
-/* Item Content - 常に横並び */
+/* Item Content - 幅を拡大 */
 .item-content {
     flex: 1;
     display: grid;
-    grid-template-columns: 82px 82px 82px;
-    gap: 8px;
+    grid-template-columns: 100px 100px 100px; /* 82px → 100px に拡大 */
+    gap: 12px; /* 8px → 12px に拡大 */
     align-items: center;
 }
 
 .item-name {
-    font-size: 13px;
+    font-size: 14px; /* 13px → 14px に拡大 */
     font-family: "M PLUS 1p", sans-serif;
     font-weight: 700;
     color: #333;
     text-align: center;
-    padding: 0 8px;
+    padding: 0 10px; /* 8px → 10px に拡大 */
     background: white;
     border-radius: 6px;
     border: 2px solid #e0e0e0;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
+    height: 44px; /* 40px → 44px に拡大 */
     box-sizing: border-box;
     word-break: break-all;
     overflow-wrap: break-word;
@@ -205,20 +205,20 @@ h2 {
 }
 
 .item-select {
-    padding: 0 8px; /* モバイル用にパディングを調整 */
+    padding: 0 10px; /* 8px → 10px に拡大 */
     border: 2px solid #e0e0e0;
     border-radius: 6px;
     background: white;
-    font-size: 11px; /* モバイル用にフォントサイズを小さく */
+    font-size: 12px; /* 11px → 12px に拡大 */
     color: #666;
     cursor: pointer;
     transition: border-color 0.3s ease;
     min-width: 0;
-    height: 40px;
+    height: 44px; /* 40px → 44px に拡大 */
     display: flex;
     align-items: center;
     box-sizing: border-box;
-    width: 100%; /* 幅を100%に設定 */
+    width: 100%;
 }
 
 .item-select:focus {
@@ -251,8 +251,8 @@ h2 {
 
 /* Delete Button */
 .delete-btn {
-    width: 25px;
-    height: 25px;
+    width: 28px; /* 25px → 28px に拡大 */
+    height: 28px; /* 25px → 28px に拡大 */
     border: none;
     border-radius: 50%;
     background-color: #4DD5DA;
@@ -277,8 +277,8 @@ h2 {
 }
 
 .edit-btn {
-    width: 30px;
-    height: 30px;
+    width: 32px; /* 30px → 32px に拡大 */
+    height: 32px; /* 30px → 32px に拡大 */
     background: #242424;
     color: white;
     border: none;
@@ -295,7 +295,7 @@ h2 {
 }
 
 .edit-btn .icon {
-    font-size: 14px;
+    font-size: 15px; /* 14px → 15px に拡大 */
     color: white;
     display: flex;
     align-items: center;
@@ -385,59 +385,59 @@ footer p {
     animation-delay: 0.1s;
 }
 
-/* スマホ用の微調整 - 既存のメディアクエリを削除して横並びを維持 */
+/* スマホ用の微調整 - 拡大に対応 */
 @media (max-width: 480px) {
     .input-section {
-        max-width: 280px; /* 入力エリアを少し狭く */
+        max-width: 310px; /* 280px → 310px に拡大 */
     }
     
     #itemInput {
-        width: 200px; /* 入力欄を少し狭く */
+        width: 230px; /* 200px → 230px に拡大 */
         font-size: 12px;
     }
     
     #addButton {
-        width: 65px; /* ボタンを少し狭く */
+        width: 65px;
         font-size: 12px;
     }
     
     .speech-bubbles-header {
-        grid-template-columns: 75px 75px 75px; /* 吹き出しを少し小さく */
-        gap: 6px;
-        padding: 0 10px;
+        grid-template-columns: 90px 90px 90px; /* 75px → 90px に拡大 */
+        gap: 8px; /* 6px → 8px に拡大 */
+        padding: 0 8px; /* 10px → 8px に調整 */
     }
     
     .speech-bubble {
-        font-size: 10px;
-        height: 22px;
-        padding: 2px 6px;
+        font-size: 11px; /* 10px → 11px に拡大 */
+        height: 24px; /* 22px → 24px に拡大 */
+        padding: 3px 7px; /* 2px 6px → 3px 7px に拡大 */
     }
     
     .item-content {
-        grid-template-columns: 75px 75px 75px; /* アイテムコンテンツも同じサイズに */
-        gap: 6px;
+        grid-template-columns: 90px 90px 90px; /* 75px → 90px に拡大 */
+        gap: 8px; /* 6px → 8px に拡大 */
     }
     
     .item-name {
-        font-size: 12px;
-        height: 35px;
-        padding: 0 4px;
+        font-size: 13px; /* 12px → 13px に拡大 */
+        height: 38px; /* 35px → 38px に拡大 */
+        padding: 0 6px; /* 4px → 6px に拡大 */
     }
     
     .item-select {
-        font-size: 10px;
-        height: 35px;
-        padding: 0 4px;
+        font-size: 11px; /* 10px → 11px に拡大 */
+        height: 38px; /* 35px → 38px に拡大 */
+        padding: 0 6px; /* 4px → 6px に拡大 */
     }
     
     .item-row {
-        padding: 10px;
-        gap: 8px;
+        padding: 12px 8px; /* 10px → 12px 8px に調整 */
+        gap: 6px; /* 8px → 6px に調整（スペース確保のため） */
     }
     
     .delete-btn {
-        width: 22px;
-        height: 22px;
+        width: 24px; /* 22px → 24px に拡大 */
+        height: 24px; /* 22px → 24px に拡大 */
         font-size: 14px;
     }
 }
