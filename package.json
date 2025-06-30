@@ -2,7 +2,6 @@
     "name": "mochiyoru-app",
     "version": "1.0.0",
     "description": "持ち寄りアプリ",
-    "type": "module",
     "scripts": {
       "dev": "netlify dev",
       "build": "echo 'Build complete'",
