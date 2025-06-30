@@ -300,7 +300,7 @@ class ItemAssignmentManager {
     ]);
     const selQty = this.createSelect(idx, "quantity", [
       "",
-      ...Array.from({ length, 10 }, (_, i) => i + 1),
+      ...Array.from({ length: 10 }, (_, i) => i + 1),
     ]);
 
     wrap.append(nameBox, selWho, selQty);
