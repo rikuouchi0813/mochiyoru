@@ -7,6 +7,11 @@ const supabase = createClient(
 );
 
 export const handler = async (event, context) => {
+  console.log("=== Groups GET Function Called ===");
+  console.log("Method:", event.httpMethod);
+  console.log("Path:", event.path);
+  console.log("Query:", event.queryStringParameters);
+
   // CORS設定
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -31,14 +36,38 @@ export const handler = async (event, context) => {
     };
   }
 
-  // URLからgroupIdを取得
-  const path = event.path;
-  const pathSegments = path.split("/");
-  const groupId = pathSegments[pathSegments.length - 1];
+  // groupIdを複数の方法で取得を試行
+  let groupId = null;
 
-  console.log("Group GET for:", groupId);
+  // 方法1: クエリパラメータから
+  if (event.queryStringParameters && event.queryStringParameters.groupId) {
+    groupId = event.queryStringParameters.groupId;
+    console.log("groupId from query:", groupId);
+  }
 
-  if (!groupId) {
+  // 方法2: パスから抽出
+  if (!groupId && event.path) {
+    const pathMatch = event.path.match(/\/api\/groups\/([^\/\?]+)/);
+    if (pathMatch) {
+      groupId = pathMatch[1];
+      console.log("groupId from path regex:", groupId);
+    }
+  }
+
+  // 方法3: パスセグメントから（従来の方法）
+  if (!groupId && event.path) {
+    const pathSegments = event.path.split("/");
+    const lastSegment = pathSegments[pathSegments.length - 1];
+    if (lastSegment && lastSegment !== "groups-get" && lastSegment !== "groups") {
+      groupId = lastSegment;
+      console.log("groupId from segments:", groupId);
+    }
+  }
+
+  console.log("Final groupId:", groupId);
+
+  if (!groupId || groupId === "groups-get") {
+    console.error("No valid groupId provided");
     return {
       statusCode: 400,
       headers,
@@ -47,6 +76,8 @@ export const handler = async (event, context) => {
   }
 
   try {
+    console.log("Querying Supabase for groupId:", groupId);
+    
     const { data, error } = await supabase
       .from("groups")
       .select("*")
@@ -61,6 +92,8 @@ export const handler = async (event, context) => {
         body: JSON.stringify({ error: "Group not found" }),
       };
     }
+
+    console.log("Supabase data found:", data);
 
     return {
       statusCode: 200,
