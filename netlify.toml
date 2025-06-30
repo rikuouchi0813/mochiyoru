@@ -2,28 +2,24 @@
   functions = "netlify/functions"
   publish = "."
 
+# 最も具体的なパスから順番に定義
 [[redirects]]
   from = "/api/groups/*/items"
   to = "/.netlify/functions/items"
   status = 200
-
-[[redirects]]
-  from = "/api/groups/:groupId"
-  to = "/.netlify/functions/groups-update"
-  status = 200
-  conditions = {Method = ["POST"]}
-
-[[redirects]]
-  from = "/api/groups/:groupId"
-  to = "/.netlify/functions/groups-get"
-  status = 200
-  conditions = {Method = ["GET"]}
+  force = true
 
 [[redirects]]
   from = "/api/groups"
   to = "/.netlify/functions/groups-create"
   status = 200
-  conditions = {Method = ["POST"]}
+  force = true
+
+[[redirects]]
+  from = "/api/groups/*"
+  to = "/.netlify/functions/groups-get"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/group/*"
