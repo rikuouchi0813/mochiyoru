@@ -409,7 +409,7 @@ footer p {
     
     .speech-bubbles-header {
         grid-template-columns: 90px 90px 90px; /* 75px → 90px に拡大 */
-        gap: 8px; /* 6px → 8px に拡大 */
+        gap: 12px; /* 6px → 8px に拡大 */
         padding: 0 8px; /* 10px → 8px に調整 */
     }
     
