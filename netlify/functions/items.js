@@ -17,7 +17,7 @@ exports.handler = async (event, context) => {
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Methods": "GET, POST, DELETE, OPTIONS",
   };
 
   // プリフライトリクエスト処理
@@ -155,6 +155,52 @@ exports.handler = async (event, context) => {
       };
     } catch (err) {
       console.error("POST items error:", err);
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: "Internal server error" }),
+      };
+    }
+  }
+
+  // 削除 -----------------------------------------------------
+  if (event.httpMethod === "DELETE") {
+    try {
+      const { name: item_name } = JSON.parse(event.body);
+
+      console.log("DELETE request for item:", { item_name, groupId });
+
+      if (!item_name) {
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: "item name required" }),
+        };
+      }
+
+      const { error } = await supabase
+        .from("items")
+        .delete()
+        .eq("group_id", groupId)
+        .eq("item_name", item_name);
+
+      if (error) {
+        console.error("Supabase DELETE error:", error);
+        return {
+          statusCode: 500,
+          headers,
+          body: JSON.stringify({ error: error.message }),
+        };
+      }
+
+      console.log("Item deleted successfully");
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ message: "deleted" }),
+      };
+    } catch (err) {
+      console.error("DELETE items error:", err);
       return {
         statusCode: 500,
         headers,
