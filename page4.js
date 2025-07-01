@@ -240,14 +240,23 @@ class ItemAssignmentManager {
   renderItems() {
     if (this.items.length === 0) {
       this.noMsg.style.display = "block";
+      // ヘッダーも非表示にする
+      const existingHeader = this.listWrap.querySelector(".speech-bubbles-header");
+      if (existingHeader) {
+        existingHeader.style.display = "none";
+      }
       return;
     }
     this.noMsg.style.display = "none";
 
     // ヘッダーが無ければ作る
-    if (!this.listWrap.querySelector(".speech-bubbles-header")) {
-      this.listWrap.prepend(this.createHeader());
+    let header = this.listWrap.querySelector(".speech-bubbles-header");
+    if (!header) {
+      header = this.createHeader();
+      this.listWrap.prepend(header);
     }
+    // ヘッダーを表示状態にする
+    header.style.display = "grid";
 
     // 既存行を再利用 or 追加
     this.assignments.forEach((a, idx) => {
@@ -351,7 +360,15 @@ class ItemAssignmentManager {
     this.items = this.items.filter((n) => n !== name);
     const el = this.listWrap.querySelector(`[data-name="${name}"]`);
     if (el) el.remove();
-    if (this.items.length === 0) this.noMsg.style.display = "block";
+    
+    // アイテムが0個になった場合の処理を改善
+    if (this.items.length === 0) {
+      this.noMsg.style.display = "block";
+      const header = this.listWrap.querySelector(".speech-bubbles-header");
+      if (header) {
+        header.style.display = "none";
+      }
+    }
   }
 }
 
