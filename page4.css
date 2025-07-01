@@ -133,7 +133,7 @@ h2 {
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
-    margin-left: 0; /* 8px → 0 に調整 */
+    margin-left: 8; /* 8px → 0 に調整 */
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(2) {
@@ -151,7 +151,7 @@ h2 {
     background: #00E1A9;
     color: white;
     border-radius: 10px;
-    font-size: 16px; /* 11px → 12px に拡大 */
+    font-size: 12px; /* 11px → 12px に拡大 */
     white-space: nowrap;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
