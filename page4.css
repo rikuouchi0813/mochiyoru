@@ -409,7 +409,7 @@ footer p {
     }
     
     .speech-bubble {
-        font-size: 16px; /* 10px → 11px に拡大 */
+        font-size: 12px; /* 10px → 11px に拡大 */
         height: 24px; /* 22px → 24px に拡大 */
         padding: 3px 7px; /* 2px 6px → 3px 7px に拡大 */
     }
