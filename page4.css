@@ -62,12 +62,13 @@ h2 {
     width: 100%;
     max-width: 350px;
     height: 40px;
-    margin: 0 auto 30px auto;
+    margin-bottom: 30px;
 }
 
 #itemInput {
-    flex: 1;
+    width: 265px;
     height: 40px;
+    flex: unset;
     padding: 0 16px;
     border: 2px solid #C6EBE2;
     border-radius: 8px;
@@ -76,7 +77,6 @@ h2 {
     outline: none;
     transition: border-color 0.3s ease;
     box-sizing: border-box;
-    min-width: 0;
 }
 
 #itemInput:focus {
@@ -84,7 +84,7 @@ h2 {
 }
 
 #addButton {
-    width: 65px;
+    width: 70px;
     height: 40px;
     padding: 0;
     background-color: #4DD5DA;
@@ -99,7 +99,6 @@ h2 {
     transition: background-color 0.3s ease;
     white-space: nowrap;
     box-sizing: border-box;
-    flex-shrink: 0;
 }
 
 #addButton:hover {
@@ -110,9 +109,6 @@ h2 {
 .items-list {
     margin-bottom: 30px;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .item-row {
@@ -125,38 +121,28 @@ h2 {
     display: flex;
     align-items: center;
     gap: 8px;
-    width: 100%;
-    max-width: 350px;
-    justify-content: center;
-    box-sizing: border-box;
 }
 
-/* Speech Bubbles Header */
+/* Speech Bubbles Header - 幅を拡大 */
 .speech-bubbles-header {
     display: grid;
     grid-template-columns: 100px 100px 100px;
     gap: 12px;
     margin-bottom: 15px;
-    padding: 0;
+    padding: 0 12px;
     align-items: end;
-    justify-content: center;
-    width: 100%;
-    max-width: 350px;
-    margin-left: auto;
-    margin-right: auto;
-    justify-items: center;
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
-    margin-left: 0;
+    margin-left: 8;
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(2) {
-    margin-left: 0;
+    margin-left: 8;
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(3) {
-    margin-left: 0;
+    margin-left: 8;
 }
 
 .speech-bubble {
@@ -191,16 +177,13 @@ h2 {
     border-top: 6px solid #00E1A9;
 }
 
-/* Item Content */
+/* Item Content - 幅を拡大 */
 .item-content {
     flex: 1;
     display: grid;
     grid-template-columns: 100px 100px 100px;
     gap: 12px;
     align-items: center;
-    justify-items: center;
-    width: 100%;
-    max-width: 324px;
 }
 
 .item-name {
@@ -416,22 +399,19 @@ footer p {
     }
     
     #itemInput {
-        flex: 1;
+        width: 230px;
         font-size: 16px;
-        min-width: 0;
     }
     
     #addButton {
         width: 65px;
         font-size: 16px;
-        flex-shrink: 0;
     }
     
     .speech-bubbles-header {
         grid-template-columns: 90px 90px 90px;
-        gap: 8px;
-        padding: 0;
-        max-width: 310px;
+        gap: 12px;
+        padding: 0 8px;
     }
     
     .speech-bubble {
@@ -443,7 +423,6 @@ footer p {
     .item-content {
         grid-template-columns: 90px 90px 90px;
         gap: 8px;
-        max-width: 286px;
     }
     
     .item-name {
@@ -461,7 +440,6 @@ footer p {
     .item-row {
         padding: 12px 8px;
         gap: 6px;
-        max-width: 310px;
     }
     
     .delete-btn {
