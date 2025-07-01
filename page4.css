@@ -445,5 +445,10 @@ footer p {
         width: 24px; /* 22px → 24px に拡大 */
         height: 24px; /* 22px → 24px に拡大 */
         font-size: 14px;
+        aspect-ratio: 1/1; 
+        min-width: 24px; /* ← この行を追加 */
+        max-width: 24px; /* ← この行を追加 */
+        padding: 0; /* ← この行を追加 */
+        box-sizing: border-box; /* ← この行を追加 */
     }
 }
