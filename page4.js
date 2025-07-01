@@ -196,6 +196,16 @@ class ItemAssignmentManager {
     if (!res.ok) throw new Error("保存失敗");
   }
 
+  /* ---------- アイテム削除 ---------- */
+  async deleteItemFromServer(name) {
+    const res = await fetch(this.baseUrl("/items"), {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }),
+    });
+    if (!res.ok) throw new Error("削除失敗");
+  }
+
   /* ---------- イベント ---------- */
   attachEventListeners() {
     this.addBtn.addEventListener("click", () => this.handleAdd());
@@ -353,20 +363,57 @@ class ItemAssignmentManager {
     });
   }
 
-  /* ----- 未実装：削除 ----- */
-  handleDelete(name) {
-    alert("削除 API はまだ実装していません（UI だけ削除します）");
-    this.assignments = this.assignments.filter((a) => a.name !== name);
-    this.items = this.items.filter((n) => n !== name);
-    const el = this.listWrap.querySelector(`[data-name="${name}"]`);
-    if (el) el.remove();
-    
-    // アイテムが0個になった場合の処理を改善
-    if (this.items.length === 0) {
-      this.noMsg.style.display = "block";
-      const header = this.listWrap.querySelector(".speech-bubbles-header");
-      if (header) {
-        header.style.display = "none";
+  /* ---------- 削除処理（実装済み） ---------- */
+  async handleDelete(name) {
+    // 確認ダイアログを表示
+    if (!confirm(`「${name}」を削除しますか？`)) {
+      return;
+    }
+
+    // 削除ボタンを一時的に無効化（連続クリック防止）
+    const deleteBtn = this.listWrap.querySelector(`[data-name="${name}"] .delete-btn`);
+    if (deleteBtn) {
+      deleteBtn.disabled = true;
+      deleteBtn.textContent = "...";
+    }
+
+    try {
+      // サーバーから削除
+      await this.deleteItemFromServer(name);
+
+      // UIから削除
+      this.assignments = this.assignments.filter((a) => a.name !== name);
+      this.items = this.items.filter((n) => n !== name);
+      const el = this.listWrap.querySelector(`[data-name="${name}"]`);
+      if (el) {
+        // フェードアウトアニメーション
+        el.style.transition = "all 0.3s ease-out";
+        el.style.opacity = "0";
+        el.style.transform = "translateX(-20px)";
+        
+        setTimeout(() => {
+          el.remove();
+          
+          // アイテムが0個になった場合の処理
+          if (this.items.length === 0) {
+            this.noMsg.style.display = "block";
+            const header = this.listWrap.querySelector(".speech-bubbles-header");
+            if (header) {
+              header.style.display = "none";
+            }
+          }
+        }, 300);
+      }
+
+      console.log(`アイテム「${name}」を削除しました`);
+    } catch (err) {
+      console.error("削除エラー:", err);
+      alert("削除に失敗しました。ネットワーク接続を確認してください。");
+      
+      // エラー時はボタンを元に戻す
+      if (deleteBtn) {
+        deleteBtn.disabled = false;
+        deleteBtn.textContent = "×";
       }
     }
   }
