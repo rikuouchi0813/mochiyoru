@@ -62,11 +62,11 @@ h2 {
     width: 100%;
     max-width: 350px;
     height: 40px;
-    margin: 0 auto 30px auto; /* 中央揃えを追加 */
+    margin: 0 auto 30px auto;
 }
 
 #itemInput {
-    flex: 1; /* 残りのスペースを全て使用 */
+    flex: 1;
     height: 40px;
     padding: 0 16px;
     border: 2px solid #C6EBE2;
@@ -76,7 +76,7 @@ h2 {
     outline: none;
     transition: border-color 0.3s ease;
     box-sizing: border-box;
-    min-width: 0; /* flexアイテムの最小幅を0に */
+    min-width: 0;
 }
 
 #itemInput:focus {
@@ -84,7 +84,7 @@ h2 {
 }
 
 #addButton {
-    width: 65px; /* 65px固定 */
+    width: 65px;
     height: 40px;
     padding: 0;
     background-color: #4DD5DA;
@@ -99,7 +99,7 @@ h2 {
     transition: background-color 0.3s ease;
     white-space: nowrap;
     box-sizing: border-box;
-    flex-shrink: 0; /* ボタンが縮まないように */
+    flex-shrink: 0;
 }
 
 #addButton:hover {
@@ -112,51 +112,51 @@ h2 {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 全体を中央揃え */
+    align-items: center;
 }
 
 .item-row {
     background: rgba(232, 248, 245, 0.8);
-    padding: 15px 12px; /* 左右のパディングを少し縮小 */
+    padding: 15px 12px;
     margin-bottom: 15px;
     border-radius: 8px;
     border-left: 4px solid #1dd1a1;
     position: relative;
     display: flex;
     align-items: center;
-    gap: 8px; /* ギャップを少し縮小 */
+    gap: 8px;
     width: 100%;
-    max-width: 350px; /* 最大幅を設定 */
-    justify-content: center; /* 中央揃え */
+    max-width: 350px;
+    justify-content: center;
     box-sizing: border-box;
 }
 
-/* Speech Bubbles Header - 幅を拡大 */
+/* Speech Bubbles Header */
 .speech-bubbles-header {
     display: grid;
-    grid-template-columns: 100px 100px 100px; /* 82px → 100px に拡大 */
-    gap: 12px; /* 8px → 12px に拡大 */
+    grid-template-columns: 100px 100px 100px;
+    gap: 12px;
     margin-bottom: 15px;
-    padding: 0; /* パディングを削除 */
+    padding: 0;
     align-items: end;
-    justify-content: center; /* 中央揃えを追加 */
+    justify-content: center;
     width: 100%;
     max-width: 350px;
     margin-left: auto;
     margin-right: auto;
-    justify-items: center; /* グリッドアイテムを中央揃え */
+    justify-items: center;
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
-    margin-left: 0; /* 0に調整 */
+    margin-left: 0;
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(2) {
-    margin-left: 0; /* 0に調整 */
+    margin-left: 0;
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(3) {
-    margin-left: 0; /* 0に調整 */
+    margin-left: 0;
 }
 
 .speech-bubble {
@@ -166,15 +166,15 @@ h2 {
     background: #00E1A9;
     color: white;
     border-radius: 10px;
-    font-size: 12px; /* 11px → 12px に拡大 */
+    font-size: 12px;
     white-space: nowrap;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 28px; /* 25px → 28px に拡大 */
-    padding: 4px 10px; /* 8px → 10px に拡大 */
+    height: 28px;
+    padding: 4px 10px;
     margin-bottom: 6px;
 }
 
@@ -191,32 +191,32 @@ h2 {
     border-top: 6px solid #00E1A9;
 }
 
-/* Item Content - 幅を拡大 */
+/* Item Content */
 .item-content {
     flex: 1;
     display: grid;
-    grid-template-columns: 100px 100px 100px; /* 82px → 100px に拡大 */
-    gap: 12px; /* 8px → 12px に拡大 */
+    grid-template-columns: 100px 100px 100px;
+    gap: 12px;
     align-items: center;
-    justify-items: center; /* グリッドアイテムを中央揃え */
+    justify-items: center;
     width: 100%;
-    max-width: 324px; /* 100px * 3 + 12px * 2 = 324px */
+    max-width: 324px;
 }
 
 .item-name {
-    font-size: 14px; /* 13px → 14px に拡大 */
+    font-size: 14px;
     font-family: "M PLUS 1p", sans-serif;
     font-weight: 700;
     color: #333;
     text-align: center;
-    padding: 0 10px; /* 8px → 10px に拡大 */
+    padding: 0 10px;
     background: white;
     border-radius: 6px;
     border: 2px solid #e0e0e0;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 44px; /* 40px → 44px に拡大 */
+    height: 44px;
     box-sizing: border-box;
     word-break: break-all;
     overflow-wrap: break-word;
@@ -224,16 +224,16 @@ h2 {
 }
 
 .item-select {
-    padding: 0 10px; /* 8px → 10px に拡大 */
+    padding: 0 10px;
     border: 2px solid #e0e0e0;
     border-radius: 6px;
     background: white;
-    font-size: 14px; /* 11px → 12px に拡大 */
+    font-size: 14px;
     color: #666;
     cursor: pointer;
     transition: border-color 0.3s ease;
     min-width: 0;
-    height: 44px; /* 40px → 44px に拡大 */
+    height: 44px;
     display: flex;
     align-items: center;
     box-sizing: border-box;
@@ -270,8 +270,8 @@ h2 {
 
 /* Delete Button */
 .delete-btn {
-    width: 28px; /* 25px → 28px に拡大 */
-    height: 28px; /* 25px → 28px に拡大 */
+    width: 28px;
+    height: 28px;
     border: none;
     border-radius: 50%;
     background-color: #4DD5DA;
@@ -286,10 +286,10 @@ h2 {
     flex-shrink: 0;
     line-height: 1;
     position: relative;
-    aspect-ratio: 1/1; /* 正円を保証 */
-    min-width: 28px; /* 最小幅を設定 */
-    max-width: 28px; /* 最大幅を設定 */
-    padding: 0; /* パディングを明示的に0に */
+    aspect-ratio: 1/1;
+    min-width: 28px;
+    max-width: 28px;
+    padding: 0;
     box-sizing: border-box;
 }
 
@@ -301,8 +301,8 @@ h2 {
 }
 
 .edit-btn {
-    width: 32px; /* 30px → 32px に拡大 */
-    height: 32px; /* 30px → 32px に拡大 */
+    width: 32px;
+    height: 32px;
     background: #242424;
     color: white;
     border: none;
@@ -319,7 +319,7 @@ h2 {
 }
 
 .edit-btn .icon {
-    font-size: 15px; /* 14px → 15px に拡大 */
+    font-size: 15px;
     color: white;
     display: flex;
     align-items: center;
@@ -409,69 +409,69 @@ footer p {
     animation-delay: 0.1s;
 }
 
-/* スマホ用の微調整 - 拡大に対応 */
+/* スマホ用の微調整 */
 @media (max-width: 480px) {
     .input-section {
-        max-width: 310px; /* 280px → 310px に拡大 */
+        max-width: 310px;
     }
     
     #itemInput {
-        flex: 1; /* スマホでもflex使用 */
+        flex: 1;
         font-size: 16px;
         min-width: 0;
     }
     
     #addButton {
-        width: 65px; /* 65px固定 */
+        width: 65px;
         font-size: 16px;
         flex-shrink: 0;
     }
     
     .speech-bubbles-header {
-        grid-template-columns: 90px 90px 90px; /* 75px → 90px に拡大 */
-        gap: 8px; /* 8px に拡大 */
-        padding: 0; /* パディングを削除 */
-        max-width: 310px; /* 幅を調整 */
+        grid-template-columns: 90px 90px 90px;
+        gap: 8px;
+        padding: 0;
+        max-width: 310px;
     }
     
     .speech-bubble {
-        font-size: 12px; /* 12px に拡大 */
-        height: 24px; /* 22px → 24px に拡大 */
-        padding: 3px 7px; /* 2px 6px → 3px 7px に拡大 */
+        font-size: 12px;
+        height: 24px;
+        padding: 3px 7px;
     }
     
     .item-content {
-        grid-template-columns: 90px 90px 90px; /* 75px → 90px に拡大 */
-        gap: 8px; /* 6px → 8px に拡大 */
-        max-width: 286px; /* 90px * 3 + 8px * 2 = 286px */
+        grid-template-columns: 90px 90px 90px;
+        gap: 8px;
+        max-width: 286px;
     }
     
     .item-name {
-        font-size: 13px; /* 12px → 13px に拡大 */
-        height: 38px; /* 35px → 38px に拡大 */
-        padding: 0 6px; /* 4px → 6px に拡大 */
+        font-size: 13px;
+        height: 38px;
+        padding: 0 6px;
     }
     
     .item-select {
-        font-size: 16px; /* 16px に拡大 */
-        height: 38px; /* 35px → 38px に拡大 */
-        padding: 0 6px; /* 4px → 6px に拡大 */
+        font-size: 16px;
+        height: 38px;
+        padding: 0 6px;
     }
     
     .item-row {
-        padding: 12px 8px; /* 10px → 12px 8px に調整 */
-        gap: 6px; /* 8px → 6px に調整（スペース確保のため） */
-        max-width: 310px; /* スマホ用の最大幅 */
+        padding: 12px 8px;
+        gap: 6px;
+        max-width: 310px;
     }
     
     .delete-btn {
-        width: 24px; /* 22px → 24px に拡大 */
-        height: 24px; /* 22px → 24px に拡大 */
+        width: 24px;
+        height: 24px;
         font-size: 14px;
-        aspect-ratio: 1/1; 
-        min-width: 24px; 
-        max-width: 24px; 
-        padding: 0; 
-        box-sizing: border-box; 
+        aspect-ratio: 1/1;
+        min-width: 24px;
+        max-width: 24px;
+        padding: 0;
+        box-sizing: border-box;
     }
 }
