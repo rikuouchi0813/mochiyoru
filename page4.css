@@ -137,11 +137,11 @@ h2 {
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(2) {
-    margin-left: 0; /* 8px → 0 に調整 */
+    margin-left: 8; /* 8px → 0 に調整 */
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(3) {
-    margin-left: 0; /* 8px → 0 に調整 */
+    margin-left: 8; /* 8px → 0 に調整 */
 }
 
 .speech-bubble {
