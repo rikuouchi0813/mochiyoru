@@ -108,6 +108,9 @@ h2 {
 .items-list {
     margin-bottom: 30px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 全体を中央揃え */
 }
 
 .item-row {
@@ -120,6 +123,10 @@ h2 {
     display: flex;
     align-items: center;
     gap: 8px; /* ギャップを少し縮小 */
+    width: 100%;
+    max-width: 350px; /* 最大幅を設定 */
+    justify-content: center; /* 中央揃え */
+    box-sizing: border-box;
 }
 
 /* Speech Bubbles Header - 幅を拡大 */
@@ -128,13 +135,14 @@ h2 {
     grid-template-columns: 100px 100px 100px; /* 82px → 100px に拡大 */
     gap: 12px; /* 8px → 12px に拡大 */
     margin-bottom: 15px;
-    padding: 0 12px; /* 15px → 12px に調整 */
+    padding: 0; /* パディングを削除 */
     align-items: end;
     justify-content: center; /* 中央揃えを追加 */
     width: 100%;
     max-width: 350px;
     margin-left: auto;
     margin-right: auto;
+    justify-items: center; /* グリッドアイテムを中央揃え */
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
@@ -188,6 +196,9 @@ h2 {
     grid-template-columns: 100px 100px 100px; /* 82px → 100px に拡大 */
     gap: 12px; /* 8px → 12px に拡大 */
     align-items: center;
+    justify-items: center; /* グリッドアイテムを中央揃え */
+    width: 100%;
+    max-width: 324px; /* 100px * 3 + 12px * 2 = 324px */
 }
 
 .item-name {
@@ -273,8 +284,11 @@ h2 {
     flex-shrink: 0;
     line-height: 1;
     position: relative;
-    aspect-ratio: 1; /* 正円を保証 */
+    aspect-ratio: 1/1; /* 正円を保証 */
     min-width: 28px; /* 最小幅を設定 */
+    max-width: 28px; /* 最大幅を設定 */
+    padding: 0; /* パディングを明示的に0に */
+    box-sizing: border-box;
 }
 
 /* Edit Button */
