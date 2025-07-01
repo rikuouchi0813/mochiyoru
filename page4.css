@@ -60,15 +60,14 @@ h2 {
     display: flex;
     gap: 10px;
     width: 100%;
-    max-width: 350px; /* 320px → 350px に拡大 */
+    max-width: 350px;
     height: 40px;
-    margin-bottom: 30px;
+    margin: 0 auto 30px auto; /* 中央揃えを追加 */
 }
 
 #itemInput {
-    width: 265px; /* 235px → 265px に拡大 */
+    flex: 1; /* 残りのスペースを全て使用 */
     height: 40px;
-    flex: unset;
     padding: 0 16px;
     border: 2px solid #C6EBE2;
     border-radius: 8px;
@@ -77,6 +76,7 @@ h2 {
     outline: none;
     transition: border-color 0.3s ease;
     box-sizing: border-box;
+    min-width: 0; /* flexアイテムの最小幅を0に */
 }
 
 #itemInput:focus {
@@ -84,7 +84,7 @@ h2 {
 }
 
 #addButton {
-    width: 70px;
+    width: 65px; /* 65px固定 */
     height: 40px;
     padding: 0;
     background-color: #4DD5DA;
@@ -99,6 +99,7 @@ h2 {
     transition: background-color 0.3s ease;
     white-space: nowrap;
     box-sizing: border-box;
+    flex-shrink: 0; /* ボタンが縮まないように */
 }
 
 #addButton:hover {
@@ -109,6 +110,9 @@ h2 {
 .items-list {
     margin-bottom: 30px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 全体を中央揃え */
 }
 
 .item-row {
@@ -121,6 +125,10 @@ h2 {
     display: flex;
     align-items: center;
     gap: 8px; /* ギャップを少し縮小 */
+    width: 100%;
+    max-width: 350px; /* 最大幅を設定 */
+    justify-content: center; /* 中央揃え */
+    box-sizing: border-box;
 }
 
 /* Speech Bubbles Header - 幅を拡大 */
@@ -129,20 +137,26 @@ h2 {
     grid-template-columns: 100px 100px 100px; /* 82px → 100px に拡大 */
     gap: 12px; /* 8px → 12px に拡大 */
     margin-bottom: 15px;
-    padding: 0 12px; /* 15px → 12px に調整 */
+    padding: 0; /* パディングを削除 */
     align-items: end;
+    justify-content: center; /* 中央揃えを追加 */
+    width: 100%;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-items: center; /* グリッドアイテムを中央揃え */
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
-    margin-left: 8; /* 8px → 0 に調整 */
+    margin-left: 0; /* 0に調整 */
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(2) {
-    margin-left: 8; /* 8px → 0 に調整 */
+    margin-left: 0; /* 0に調整 */
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(3) {
-    margin-left: 8; /* 8px → 0 に調整 */
+    margin-left: 0; /* 0に調整 */
 }
 
 .speech-bubble {
@@ -184,6 +198,9 @@ h2 {
     grid-template-columns: 100px 100px 100px; /* 82px → 100px に拡大 */
     gap: 12px; /* 8px → 12px に拡大 */
     align-items: center;
+    justify-items: center; /* グリッドアイテムを中央揃え */
+    width: 100%;
+    max-width: 324px; /* 100px * 3 + 12px * 2 = 324px */
 }
 
 .item-name {
@@ -399,23 +416,26 @@ footer p {
     }
     
     #itemInput {
-        width: 230px; /* 200px → 230px に拡大 */
+        flex: 1; /* スマホでもflex使用 */
         font-size: 16px;
+        min-width: 0;
     }
     
     #addButton {
-        width: 65px;
+        width: 65px; /* 65px固定 */
         font-size: 16px;
+        flex-shrink: 0;
     }
     
     .speech-bubbles-header {
         grid-template-columns: 90px 90px 90px; /* 75px → 90px に拡大 */
-        gap: 12px; /* 6px → 8px に拡大 */
-        padding: 0 8px; /* 10px → 8px に調整 */
+        gap: 8px; /* 8px に拡大 */
+        padding: 0; /* パディングを削除 */
+        max-width: 310px; /* 幅を調整 */
     }
     
     .speech-bubble {
-        font-size: 12px; /* 10px → 11px に拡大 */
+        font-size: 12px; /* 12px に拡大 */
         height: 24px; /* 22px → 24px に拡大 */
         padding: 3px 7px; /* 2px 6px → 3px 7px に拡大 */
     }
@@ -423,6 +443,7 @@ footer p {
     .item-content {
         grid-template-columns: 90px 90px 90px; /* 75px → 90px に拡大 */
         gap: 8px; /* 6px → 8px に拡大 */
+        max-width: 286px; /* 90px * 3 + 8px * 2 = 286px */
     }
     
     .item-name {
@@ -432,7 +453,7 @@ footer p {
     }
     
     .item-select {
-        font-size: 16px; /* 10px → 11px に拡大 */
+        font-size: 16px; /* 16px に拡大 */
         height: 38px; /* 35px → 38px に拡大 */
         padding: 0 6px; /* 4px → 6px に拡大 */
     }
@@ -440,6 +461,7 @@ footer p {
     .item-row {
         padding: 12px 8px; /* 10px → 12px 8px に調整 */
         gap: 6px; /* 8px → 6px に調整（スペース確保のため） */
+        max-width: 310px; /* スマホ用の最大幅 */
     }
     
     .delete-btn {
@@ -447,9 +469,9 @@ footer p {
         height: 24px; /* 22px → 24px に拡大 */
         font-size: 14px;
         aspect-ratio: 1/1; 
-        min-width: 24px; /* ← この行を追加 */
-        max-width: 24px; /* ← この行を追加 */
-        padding: 0; /* ← この行を追加 */
-        box-sizing: border-box; /* ← この行を追加 */
+        min-width: 24px; 
+        max-width: 24px; 
+        padding: 0; 
+        box-sizing: border-box; 
     }
 }
