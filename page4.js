@@ -417,6 +417,22 @@ document.addEventListener(
   () => new ItemAssignmentManager()
 );
 
+// ヘッダークリックでindex.htmlに戻る処理
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector("header");
+  if (header) {
+    // 既存のonclickを上書きしてindex.htmlに戻る
+    header.onclick = () => {
+      window.location.href = "/index.html";
+    };
+    
+    // カーソルスタイルを確実にpointerに設定
+    header.style.cursor = "pointer";
+    
+    console.log("ヘッダークリックイベントを設定しました");
+  }
+});
+
 // 編集ボタンが押されたら page2.html に戻る処理
 document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.querySelector(".edit-btn[data-type='members']");
