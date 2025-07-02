@@ -1,11 +1,3 @@
-/**
- * page4.js – フロントエンド版
- *   ・グループ情報を URL / sessionStorage から取得
- *   ・/api/groups/:id/items に対し fetch で CRUD
- *   ・UI まわりは元のまま
- *   ※ import / export は一切入れない（ブラウザ実行用）
- */
-
 class ItemAssignmentManager {
   // ===== コンストラクタ =====
   constructor() {
