@@ -331,31 +331,16 @@ class ItemAssignmentManager {
     s.className = "item-select";
     s.dataset.index = idx;
     s.dataset.type = type;
-    
     opts.forEach((v) => {
       const o = document.createElement("option");
       o.value = v === "" ? "" : String(v);
-      
-      // テキストの長さに応じて表示を調整
-      const displayText = v === "" ? "選択してください" : String(v);
-      
-      // 長いテキストの場合は適切に改行できるようにする
-      if (displayText.length > 8) {
-        // 長いテキストの場合、CSSで折り返し処理される
-        o.textContent = displayText;
-        o.style.whiteSpace = "normal";
-        o.style.wordWrap = "break-word";
-      } else {
-        o.textContent = displayText;
-      }
-      
+      o.textContent = v === "" ? "選択してください" : String(v);
       if (v === "全員") {
         o.style.fontWeight = "bold";
         o.style.color = "#1dd1a1";
       }
       s.appendChild(o);
     });
-    
     s.onchange = (e) => this.handleSelectChange(e);
     return s;
   }
