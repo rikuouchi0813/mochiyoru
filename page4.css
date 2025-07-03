@@ -181,7 +181,7 @@ h2 {
 /* Speech Bubbles Header - 幅を調整 */
 .speech-bubbles-header {
     display: grid;
-    grid-template-columns: 85px 85px 85px;
+    grid-template-columns: 85px 85px 65px;
     gap: 8px;
     margin-bottom: 15px;
     padding: 0 8px;
@@ -240,7 +240,7 @@ h2 {
 .item-content {
     flex: 1;
     display: grid;
-    grid-template-columns: 85px 85px 85px;
+    grid-template-columns: 85px 85px 65px;
     gap: 8px;
     align-items: center;
     min-width: 0;
