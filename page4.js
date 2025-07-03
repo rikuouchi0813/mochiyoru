@@ -283,7 +283,7 @@ class ItemAssignmentManager {
   createHeader() {
     const h = document.createElement("div");
     h.className = "speech-bubbles-header";
-    ["何を？", "誰が？", "どのくらい？"].forEach((t) => {
+    ["何を？", "誰が？", "どれだけ？"].forEach((t) => {
       const d = document.createElement("div");
       d.className = "speech-bubble";
       d.textContent = t;
