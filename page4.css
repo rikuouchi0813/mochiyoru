@@ -189,6 +189,7 @@ h2 {
     max-width: calc(100vw - 40px);
     margin-left: auto;
     margin-right: auto;
+    justify-content: center;
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
@@ -221,6 +222,8 @@ h2 {
     padding: 3px 8px;
     margin-bottom: 6px;
     box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .speech-bubble::after {
@@ -244,6 +247,7 @@ h2 {
     gap: 8px;
     align-items: center;
     min-width: 0;
+    justify-items: center;
 }
 
 .item-name {
@@ -264,6 +268,8 @@ h2 {
     word-break: break-all;
     overflow-wrap: break-word;
     line-height: 1.2;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .item-select {
@@ -281,6 +287,9 @@ h2 {
     align-items: center;
     box-sizing: border-box;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
 
 .item-select:focus {
@@ -476,6 +485,7 @@ footer p {
         gap: 6px;
         padding: 0 6px;
         max-width: calc(100vw - 20px);
+        justify-content: center;
     }
     
     .speech-bubble {
@@ -487,6 +497,7 @@ footer p {
     .item-content {
         grid-template-columns: 2fr 1.5fr 1fr;
         gap: 6px;
+        justify-items: center;
     }
     
     .item-name {
