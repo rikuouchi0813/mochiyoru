@@ -504,17 +504,24 @@ footer p {
         padding: 3px 4px;
     }
 
+	.speech-bubbles-header .speech-bubble:nth-child(2) {
+    margin-left: -29px;
+	}
+	
+	.speech-bubbles-header .speech-bubble:nth-child(3) {
+    margin-left: -42px;
+	}
     /* スマホ用の吹き出し幅調整 */
     .speech-bubble:nth-child(1) {
-        min-width: 70px; /* アイテム名と同じ */
+        min-width: 124px; /* アイテム名と同じ */
     }
 
     .speech-bubble:nth-child(2) {
-        min-width: 50px; /* メンバー選択と同じ */
+        min-width: 92px; /* メンバー選択と同じ */
     }
 
     .speech-bubble:nth-child(3) {
-        min-width: 50px; /* 数量選択と同じ */
+        min-width: 62px; /* 数量選択と同じ */
     }
     
     .item-content {
