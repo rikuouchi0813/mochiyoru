@@ -197,7 +197,7 @@ h2 {
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(2) {
-    margin-left: -24px;
+    margin-left: -32px;
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(3) {
@@ -230,7 +230,7 @@ h2 {
 }
 
 .speech-bubble:nth-child(2) {
-    min-width: 180px; /* メンバー選択と同じ */
+    min-width: 190px; /* メンバー選択と同じ */
 }
 
 .speech-bubble:nth-child(3) {
