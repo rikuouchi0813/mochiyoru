@@ -51,7 +51,7 @@ table {
 html {
     box-sizing: border-box;
     font-family: 'M PLUS 1p', sans-serif;
-    max-width: 375px;
+    max-width: 100vw;
     margin: 0 auto;
     overflow-x: hidden;
 }
@@ -74,7 +74,7 @@ header {
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 375px;
+    max-width: 100vw;
     margin: 0 auto 30px auto;
     cursor: pointer;
 }
@@ -87,7 +87,7 @@ header {
 
 /* ===== メイン ===== */
 main {
-    max-width: 400px;
+    max-width: calc(100vw - 40px);
     margin: 0 auto;
     padding: 20px;
 }
@@ -174,14 +174,16 @@ input[type="text"]:-webkit-autofill:focus {
 /* グループ名入力フィールド */
 #groupName {
     font-size: 16px;
-    width: 315px;
+    width: calc(100vw - 100px);
+    max-width: 315px;
     height: 40px;
 }
 
 /* メンバー入力フィールド */
 input[type="text"].member-input {
     font-size: 16px;
-    width: 235px;
+    width: calc(100vw - 160px);
+    max-width: 235px;
     height: 40px;
     margin-bottom: 0;
 }
