@@ -412,9 +412,13 @@ class ItemAssignmentManager {
 }
 
 /* ===== 起動 ===== */
+// ItemAssignmentManagerインスタンスをグローバルに保存するため、
+// 先に宣言してから初期化
 document.addEventListener(
   "DOMContentLoaded",
-  () => new ItemAssignmentManager()
+  () => {
+    window.itemManager = new ItemAssignmentManager();
+  }
 );
 
 // ヘッダークリックでindex.htmlに戻る処理
@@ -438,11 +442,52 @@ document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.querySelector(".edit-btn[data-type='members']");
   if (!editBtn) return;
 
-  editBtn.addEventListener("click", () => {
-    // メンバー編集のためのフラグを sessionStorage に設定
-    sessionStorage.setItem("editMode", "members");
+  editBtn.addEventListener("click", async () => {
+    try {
+      // メンバー編集のためのフラグを sessionStorage に設定
+      sessionStorage.setItem("editMode", "members");
 
-    // 現在の groupId などは sessionStorage に残したまま
-    window.location.href = "page2.html";
+      // 現在のグループデータを確実に sessionStorage に保存
+      const currentGroupData = {
+        groupId: window.itemManager?.groupData?.groupId,
+        groupName: window.itemManager?.groupData?.groupName,
+        members: window.itemManager?.members || []
+      };
+
+      // グループIDが存在する場合は、最新情報をサーバーから取得
+      if (currentGroupData.groupId) {
+        console.log("編集ボタン：サーバーから最新のグループ情報を取得中...");
+        
+        try {
+          const response = await fetch(`/api/groups/${currentGroupData.groupId}`);
+          if (response.ok) {
+            const serverGroupData = await response.json();
+            console.log("サーバーから取得した最新データ:", serverGroupData);
+            
+            // サーバーの最新データで更新
+            currentGroupData.groupName = serverGroupData.groupName || currentGroupData.groupName;
+            currentGroupData.members = serverGroupData.members || currentGroupData.members;
+          }
+        } catch (err) {
+          console.warn("サーバーからの情報取得に失敗、ローカルデータを使用:", err);
+        }
+      }
+
+      // sessionStorageに保存
+      sessionStorage.setItem("groupData", JSON.stringify(currentGroupData));
+      console.log("編集用にsessionStorageに保存:", currentGroupData);
+
+      // page2.htmlに遷移
+      window.location.href = "page2.html";
+      
+    } catch (err) {
+      console.error("編集ボタンエラー:", err);
+      alert("編集画面への移動に失敗しました。もう一度お試しください。");
+    }
   });
+});
+
+// ItemAssignmentManagerインスタンスをグローバルに保存
+document.addEventListener("DOMContentLoaded", () => {
+  window.itemManager = new ItemAssignmentManager();
 });
