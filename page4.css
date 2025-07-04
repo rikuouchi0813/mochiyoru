@@ -222,7 +222,19 @@ h2 {
     padding: 3px 8px;
     margin-bottom: 6px;
     box-sizing: border-box;
-    width: 100%;
+}
+
+/* 各吹き出しに対応する幅を設定 */
+.speech-bubble:nth-child(1) {
+    min-width: 80px; /* アイテム名と同じ */
+}
+
+.speech-bubble:nth-child(2) {
+    min-width: 60px; /* メンバー選択と同じ */
+}
+
+.speech-bubble:nth-child(3) {
+    min-width: 60px; /* 数量選択と同じ */
 }
 
 .speech-bubble::after {
@@ -490,6 +502,19 @@ footer p {
         font-size: 10px;
         height: 24px;
         padding: 3px 4px;
+    }
+
+    /* スマホ用の吹き出し幅調整 */
+    .speech-bubble:nth-child(1) {
+        min-width: 70px; /* アイテム名と同じ */
+    }
+
+    .speech-bubble:nth-child(2) {
+        min-width: 50px; /* メンバー選択と同じ */
+    }
+
+    .speech-bubble:nth-child(3) {
+        min-width: 50px; /* 数量選択と同じ */
     }
     
     .item-content {
