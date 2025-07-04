@@ -222,6 +222,7 @@ h2 {
     padding: 3px 8px;
     margin-bottom: 6px;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .speech-bubble::after {
