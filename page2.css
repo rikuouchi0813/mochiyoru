@@ -174,16 +174,14 @@ input[type="text"]:-webkit-autofill:focus {
 /* グループ名入力フィールド */
 #groupName {
     font-size: 16px;
-    width: calc(100vw - 100px);
-    max-width: 315px;
+    width: 315px;
     height: 40px;
 }
 
 /* メンバー入力フィールド */
 input[type="text"].member-input {
     font-size: 16px;
-    width: calc(100vw - 160px);
-    max-width: 235px;
+    width: 235px;
     height: 40px;
     margin-bottom: 0;
 }
@@ -289,7 +287,7 @@ input[type="text"].member-input {
 footer {
     background-color: #404040;
     color: #fff;
-    padding: 30px 16px 12px 16px;
+    padding: 36px 24px 18px 24px;
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -301,7 +299,7 @@ footer {
 footer hr {
     border: none;
     border-top: 1px solid #888;
-    margin: 14px 0 8px 0;
+    margin: 18px 0 10px 0;
     width: 100%;
     max-width: 600px;
     opacity: 0.4;
@@ -310,7 +308,7 @@ footer hr {
 footer p {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 11px;
     margin: 0;
     text-align: left;
     width: 100%;
@@ -323,8 +321,7 @@ footer p {
     align-items: flex-start;
     width: 100%;
     max-width: 600px;
-    margin-bottom: 8px;
-    gap: 16px;
+    margin-bottom: 12px;
 }
 
 .footer-lists ul {
@@ -337,32 +334,7 @@ footer p {
 .footer-lists li {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-weight: 500;
-    font-size: 13px;
-    margin-bottom: 8px;
+    font-size: 12px;
+    margin-bottom: 12px;
     opacity: 0.95;
-}
-
-/* スマホ用の調整 */
-@media (max-width: 480px) {
-    footer {
-        padding: 24px 12px 8px 12px;
-    }
-    
-    footer p {
-        font-size: 11px;
-    }
-    
-    .footer-lists {
-        gap: 12px;
-        margin-bottom: 6px;
-    }
-    
-    .footer-lists li {
-        font-size: 12px;
-        margin-bottom: 6px;
-    }
-    
-    footer hr {
-        margin: 12px 0 6px 0;
-    }
 }
