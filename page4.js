@@ -171,7 +171,14 @@ class ItemAssignmentManager {
       if (!res.ok) throw new Error();
 
       const items = await res.json(); // [{name,quantity,assignee}]
-      this.assignments = items.map((it) => ({ ...it }));
+      
+      // データを正規化（空文字に統一）
+      this.assignments = items.map((it) => ({
+        name: it.name || "",
+        assignee: it.assignee || "",
+        quantity: it.quantity || ""
+      }));
+      
       this.items = items.map((it) => it.name);
     } catch (err) {
       console.warn("アイテム取得スキップ（404 or ネットワーク）");
@@ -341,6 +348,10 @@ class ItemAssignmentManager {
       }
       s.appendChild(o);
     });
+    
+    // デフォルトで「選択してください」を選択状態にする
+    s.value = "";
+    
     s.onchange = (e) => this.handleSelectChange(e);
     return s;
   }
