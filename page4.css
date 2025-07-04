@@ -193,15 +193,15 @@ h2 {
 }
 
 .speech-bubbles-header .speech-bubble:first-child {
-    margin-left: 0;
+    margin-left: -6px;
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(2) {
-    margin-left: 0;
+    margin-left: -24px;
 }
 
 .speech-bubbles-header .speech-bubble:nth-child(3) {
-    margin-left: 0;
+    margin-left: -53px;
 }
 
 .speech-bubble {
@@ -226,15 +226,15 @@ h2 {
 
 /* 各吹き出しに対応する幅を設定 */
 .speech-bubble:nth-child(1) {
-    min-width: 80px; /* アイテム名と同じ */
+    min-width: 263px; /* アイテム名と同じ */
 }
 
 .speech-bubble:nth-child(2) {
-    min-width: 60px; /* メンバー選択と同じ */
+    min-width: 180px; /* メンバー選択と同じ */
 }
 
 .speech-bubble:nth-child(3) {
-    min-width: 60px; /* 数量選択と同じ */
+    min-width: 122px; /* 数量選択と同じ */
 }
 
 .speech-bubble::after {
