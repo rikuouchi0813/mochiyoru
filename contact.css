@@ -252,7 +252,7 @@ a:hover {
 }
 
 .required {
-    color: #dc3545;
+    color: #00E1A9;
     font-weight: 700;
 }
 
@@ -275,8 +275,8 @@ a:hover {
 .form-select:focus,
 .form-textarea:focus {
     outline: none;
-    border-color: #4DD5DA;
-    box-shadow: 0 0 0 3px rgba(77, 213, 218, 0.1);
+    border-color: #00E1A9;
+    box-shadow: 0 0 0 3px rgba(0, 225, 169, 0.1);
 }
 
 /* テキストエリア */
@@ -406,14 +406,14 @@ a:hover {
 .form-input:invalid,
 .form-select:invalid,
 .form-textarea:invalid {
-    border-color: #dc3545;
+    border-color: #00E1A9;
 }
 
 .form-input:invalid:focus,
 .form-select:invalid:focus,
 .form-textarea:invalid:focus {
-    border-color: #dc3545;
-    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+    border-color: #00E1A9;
+    box-shadow: 0 0 0 3px rgba(0, 225, 169, 0.1);
 }
 
 /* レスポンシブ対応 */
