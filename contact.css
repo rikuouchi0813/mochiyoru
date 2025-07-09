@@ -217,16 +217,263 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ===== お問い合わせ方法 ===== */
-.contact-method {
-    margin: 30px 0;
+/* ===== フォーム関連スタイル ===== */
+
+/* フォーム全体 */
+.contact-form-section {
+    margin: 40px 0;
 }
 
-.contact-method h3 {
-    margin-top: 20px;
+.contact-form {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e9ecef;
+    margin: 20px 0;
+}
+
+/* フォームグループ */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+/* ラベル */
+.form-label {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+    font-family: "M PLUS 1p", sans-serif;
+}
+
+.required {
+    color: #dc3545;
+    font-weight: 700;
+}
+
+/* 入力フィールド共通スタイル（既存page2.htmlと統一） */
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: "M PLUS 1p", sans-serif;
+    background: white;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #4DD5DA;
+    box-shadow: 0 0 0 3px rgba(77, 213, 218, 0.1);
+}
+
+/* テキストエリア */
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* セレクトボックス */
+.form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23666' d='M8 13L2 7h12l-6 6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* プレースホルダー */
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #999;
+    opacity: 1;
+}
+
+/* ヘルプテキスト */
+.form-help {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* 送信ボタンエリア */
+.form-submit {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* 送信ボタン（既存の.group-buttonを使用） */
+.form-submit .group-button {
+    min-width: 200px;
+}
+
+.form-submit .group-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* スパム対策用の非表示フィールド */
+.hidden {
+    display: none;
+}
+
+/* 成功メッセージ */
+.success-message {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #155724;
+}
+
+.success-message h3 {
+    color: #155724;
+    margin-top: 15px;
     margin-bottom: 15px;
     font-size: 18px;
-    color: #242424;
+}
+
+.success-message p {
+    margin-bottom: 0;
+    color: #155724;
+}
+
+.success-message .success-icon {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.success-message .checkmark-circle {
+    width: 40px;
+    height: 40px;
+    background-color: #28a745;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.success-message .checkmark {
+    width: 12px;
+    height: 8px;
+    border-left: 3px solid white;
+    border-bottom: 3px solid white;
+    transform: rotate(-45deg);
+    position: relative;
+    top: -2px;
+}
+
+/* 直接メール連絡セクション */
+.direct-contact {
+    margin: 40px 0;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #00E1A9;
+}
+
+.direct-contact h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.direct-contact p {
+    margin-bottom: 15px;
+}
+
+/* バリデーションエラー（ブラウザ標準） */
+.form-input:invalid,
+.form-select:invalid,
+.form-textarea:invalid {
+    border-color: #dc3545;
+}
+
+.form-input:invalid:focus,
+.form-select:invalid:focus,
+.form-textarea:invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .contact-form {
+        padding: 20px;
+    }
+    
+    .form-input,
+    .form-select,
+    .form-textarea {
+        font-size: 16px; /* iOS zooming prevention */
+    }
+    
+    .direct-contact {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-form {
+        padding: 15px;
+        border-radius: 8px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-label {
+        font-size: 13px;
+    }
+    
+    .form-input,
+    .form-select,
+    .form-textarea {
+        padding: 10px 14px;
+        font-size: 16px;
+    }
+    
+    .form-textarea {
+        min-height: 100px;
+    }
+    
+    .form-submit .group-button {
+        min-width: 180px;
+        font-size: 14px;
+    }
+    
+    .success-message {
+        padding: 20px;
+    }
+    
+    .success-message h3 {
+        font-size: 16px;
+    }
+    
+    .direct-contact {
+        padding: 15px;
+    }
 }
 
 /* ===== 連絡先情報 ===== */
