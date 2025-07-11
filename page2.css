@@ -287,19 +287,20 @@ input[type="text"].member-input {
 footer {
     background-color: #404040;
     color: #fff;
-    padding: 36px 24px 18px 24px;
+    padding: 30px 16px 0 16px;
     width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
+    margin-top: auto;
+    margin-bottom: 0;
 }
 
 footer hr {
     border: none;
     border-top: 1px solid #888;
-    margin: 18px 0 10px 0;
+    margin: 14px 0 8px 0;
     width: 100%;
     max-width: 600px;
     opacity: 0.4;
@@ -308,7 +309,7 @@ footer hr {
 footer p {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-weight: 500;
-    font-size: 11px;
+    font-size: 12px;
     margin: 0;
     text-align: left;
     width: 100%;
@@ -321,7 +322,8 @@ footer p {
     align-items: flex-start;
     width: 100%;
     max-width: 600px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
+    gap: 16px;
 }
 
 .footer-lists ul {
@@ -334,7 +336,43 @@ footer p {
 .footer-lists li {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-weight: 500;
-    font-size: 14px;
-    margin-bottom: 30px;
+    font-size: 13px;
+    margin-bottom: 8px;
     opacity: 0.95;
+    list-style-type: none;
+}
+
+.footer-lists a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-lists a:hover {
+    color: #00E1A9;
+}
+
+/* ===== レスポンシブ対応 ===== */
+@media (max-width: 480px) {
+    footer {
+        padding: 24px 12px 0 12px;
+    }
+    
+    footer p {
+        font-size: 11px;
+    }
+    
+    .footer-lists {
+        gap: 12px;
+        margin-bottom: 6px;
+    }
+    
+    .footer-lists li {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+    
+    footer hr {
+        margin: 12px 0 6px 0;
+    }
 }
