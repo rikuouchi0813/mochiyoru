@@ -320,12 +320,45 @@ a:hover {
 
 /* 送信ボタン（既存の.group-buttonを使用） */
 .form-submit .group-button {
-    min-width: 200px;
+    width: 240px;
+    min-width: 240px;
+    height: 49px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #35E4A1 0%, #08DBF3 100%);
+    color: white;
+    padding: 10px 25px 10px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-family: "M PLUS 1p", sans-serif;
+}
+
+.form-submit .group-button:hover {
+    opacity: 0.9;
+    color: white;
+    text-decoration: none;
 }
 
 .form-submit .group-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    border: none;
+}
+
+.form-submit .group-button .arrow {
+    width: 36px;
+    height: 13px;
+    background-color: white;
+    clip-path: polygon(0 40%, 50% 40%, 50% 15%, 100% 50%, 50% 85%, 50% 60%, 0 60%);
+    margin-left: auto;
 }
 
 /* スパム対策用の非表示フィールド */
