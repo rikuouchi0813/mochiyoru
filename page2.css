@@ -89,10 +89,17 @@ header {
     cursor: pointer;
 }
 
-/* ===== ロゴ ===== */
+.h1-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .h1-image {
-    width: 90px;
-    height: auto;
+    font-family: "Mochiy Pop P One", sans-serif;
+    font-size: 24px;
+    color: #00E1A9;
+    margin: 0;
 }
 
 /* ===== メイン ===== */
@@ -265,11 +272,16 @@ input[type="text"].member-input {
 }
 
 /* ===== グループ作成ボタン ===== */
+.group-button-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
 .group-button {
     width: 240px;
     min-width: 240px;
     height: 49px;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
@@ -280,8 +292,8 @@ input[type="text"].member-input {
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
-    margin: 0 auto;
     box-sizing: border-box;
+    transition: opacity 0.3s ease;
 }
 
 .group-button .arrow {
@@ -294,6 +306,8 @@ input[type="text"].member-input {
 
 .group-button:hover {
     opacity: 0.9;
+    color: white;
+    text-decoration: none;
 }
 
 /* ===== フッター ===== */
