@@ -349,3 +349,30 @@ footer p {
 .footer-lists a:hover {
     color: #00E1A9;
 }
+
+/* ===== レスポンシブ対応 ===== */
+@media (max-width: 480px) {
+  
+    footer {
+        padding: 24px 12px 0 12px;
+    }
+    
+    footer p {
+        font-size: 11px;
+    }
+    
+    .footer-lists {
+        gap: 12px;
+        margin-bottom: 6px;
+    }
+    
+    .footer-lists li {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+    
+    footer hr {
+        margin: 12px 0 6px 0;
+    }
+}
+
