@@ -13,6 +13,7 @@ class GroupManager {
     if (!this.isEditMode) sessionStorage.removeItem("editMode");
 
     this.members = [];
+    this.isSubmitting = false; // 二重送信防止
 
     this.init();
   }
@@ -52,7 +53,10 @@ class GroupManager {
   bindEvents() {
     this.$addBtn.addEventListener("click", () => this.addMember());
     this.$memberInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") this.addMember();
+      if (e.key === "Enter") {
+        e.preventDefault();
+        this.addMember();
+      }
     });
     this.$createBtn.addEventListener("click", (e) => this.handleSubmit(e));
     this.$groupName.addEventListener("input", () => this.persistTemp());
@@ -82,14 +86,27 @@ class GroupManager {
   /* ---------- メンバー操作 ---------- */
   addMember() {
     const name = this.$memberInput.value.trim();
-    if (!name) return alert("メンバー名を入力してください");
-    if (name.length > 20) return alert("20 文字以内で入力してください");
-    if (this.members.includes(name)) return alert("同じ名前があります");
+    if (!name) {
+      this.showAlert("メンバー名を入力してください");
+      this.$memberInput.focus();
+      return;
+    }
+    if (name.length > 20) {
+      this.showAlert("20 文字以内で入力してください");
+      this.$memberInput.focus();
+      return;
+    }
+    if (this.members.includes(name)) {
+      this.showAlert("同じ名前があります");
+      this.$memberInput.focus();
+      return;
+    }
 
     this.members.push(name);
     this.$memberInput.value = "";
     this.renderMembers();
     this.persistTemp();
+    this.$memberInput.focus(); // 連続入力のため
   }
 
   removeMember(name) {
@@ -104,8 +121,8 @@ class GroupManager {
       const li = document.createElement("li");
       li.className = "member-tag";
       li.innerHTML =
-        `<span class="member-name">${m}</span>` +
-        `<button class="remove-btn" type="button">×</button>`;
+        `<span class="member-name">${this.escapeHtml(m)}</span>` +
+        `<button class="remove-btn" type="button" aria-label="${this.escapeHtml(m)}を削除">×</button>`;
       li.querySelector(".remove-btn").onclick = () => this.removeMember(m);
       this.$memberList.appendChild(li);
     });
@@ -114,7 +131,13 @@ class GroupManager {
   /* ---------- 作成 / 更新 ---------- */
   async handleSubmit(e) {
     e.preventDefault();
+    
+    // 二重送信防止
+    if (this.isSubmitting) return;
     if (!this.validate()) return;
+
+    this.isSubmitting = true;
+    this.setButtonState(true, "処理中...");
 
     const payload = {
       groupName: this.$groupName.value.trim(),
@@ -125,44 +148,68 @@ class GroupManager {
     console.log("Payload:", payload);
     console.log("Edit mode:", this.isEditMode);
 
-    /* === 編集モード === */
-    if (this.isEditMode) {
-      console.log("編集モードで更新中...");
-      /* サーバ更新（失敗しても続行） */
-      try {
-        const updateRes = await fetch(`/api/groups/${this.groupData.groupId}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...payload, groupId: this.groupData.groupId }),
-        });
-        console.log("更新レスポンス:", updateRes.status);
-      } catch (err) {
-        console.error("更新エラー:", err);
+    try {
+      /* === 編集モード === */
+      if (this.isEditMode) {
+        await this.handleEditMode(payload);
+        return;
       }
 
-      /* 保存してフラグ解除 */
-      this.groupData = { ...this.groupData, ...payload };
-      sessionStorage.setItem("groupData", JSON.stringify(this.groupData));
-      sessionStorage.removeItem("editMode");
+      /* === 新規モード === */
+      await this.handleCreateMode(payload);
+      
+    } catch (error) {
+      console.error("処理エラー:", error);
+      this.showAlert("エラーが発生しました。もう一度お試しください。");
+    } finally {
+      this.isSubmitting = false;
+      this.setButtonState(false);
+    }
+  }
 
-      /* page3→page4 に戻す */
-      const qp = new URLSearchParams({
-        groupId: this.groupData.groupId,
-        groupName: this.groupData.groupName,
-        members: JSON.stringify(this.members),
+  async handleEditMode(payload) {
+    console.log("編集モードで更新中...");
+    
+    try {
+      const updateRes = await this.fetchWithTimeout(`/api/groups/${this.groupData.groupId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...payload, groupId: this.groupData.groupId }),
       });
-      location.href = `page3.html?${qp.toString()}`;
-      return;
+      
+      if (!updateRes.ok) {
+        throw new Error(`更新失敗: ${updateRes.status}`);
+      }
+      
+      console.log("更新成功:", updateRes.status);
+    } catch (err) {
+      console.error("更新エラー:", err);
+      this.showAlert("更新に失敗しました。オフラインで続行します。");
     }
 
-    /* === 新規モード === */
+    /* 保存してフラグ解除 */
+    this.groupData = { ...this.groupData, ...payload };
+    sessionStorage.setItem("groupData", JSON.stringify(this.groupData));
+    sessionStorage.removeItem("editMode");
+
+    /* page3→page4 に戻す */
+    const qp = new URLSearchParams({
+      groupId: this.groupData.groupId,
+      groupName: this.groupData.groupName,
+      members: JSON.stringify(this.members),
+    });
+    
+    this.navigateToPage(`page3.html?${qp.toString()}`);
+  }
+
+  async handleCreateMode(payload) {
     console.log("新規グループ作成中...");
     let groupId;
     let apiSuccess = false;
     
     try {
       console.log("API呼び出し開始:", "/api/groups");
-      const res = await fetch("/api/groups", {
+      const res = await this.fetchWithTimeout("/api/groups", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -186,7 +233,7 @@ class GroupManager {
     } catch (err) {
       console.error("API呼び出し失敗:", err);
       console.log("オフラインモードに切り替え");
-      groupId = this.generateId(); // オフライン
+      groupId = this.generateId();
       apiSuccess = false;
     }
 
@@ -206,23 +253,88 @@ class GroupManager {
     });
     
     console.log("page3へのURL:", `page3.html?${qp.toString()}`);
-    location.href = `page3.html?${qp.toString()}`;
+    this.navigateToPage(`page3.html?${qp.toString()}`);
   }
 
   /* ---------- バリデーション ---------- */
   validate() {
-    if (!this.$groupName.value.trim())
-      return alert("グループ名を入力してください"), false;
-    if (this.members.length === 0)
-      return alert("メンバーを 1 人以上追加してください"), false;
-    if (this.members.length > 10)
-      return alert("メンバーは 10 名までです"), false;
+    if (!this.$groupName.value.trim()) {
+      this.showAlert("グループ名を入力してください");
+      this.$groupName.focus();
+      return false;
+    }
+    if (this.members.length === 0) {
+      this.showAlert("メンバーを 1 人以上追加してください");
+      this.$memberInput.focus();
+      return false;
+    }
+    if (this.members.length > 10) {
+      this.showAlert("メンバーは 10 名までです");
+      return false;
+    }
     return true;
   }
 
-  /* ---------- Utils ---------- */
+  /* ---------- ユーティリティ関数 ---------- */
   generateId() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+  }
+
+  escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  showAlert(message) {
+    alert(message);
+  }
+
+  setButtonState(isLoading, loadingText = "処理中...") {
+    if (isLoading) {
+      this.$createBtn.style.opacity = "0.6";
+      this.$createBtn.style.pointerEvents = "none";
+      const originalText = this.$createBtn.childNodes[0].textContent;
+      this.$createBtn.setAttribute('data-original-text', originalText);
+      this.$createBtn.childNodes[0].textContent = loadingText;
+    } else {
+      this.$createBtn.style.opacity = "";
+      this.$createBtn.style.pointerEvents = "";
+      const originalText = this.$createBtn.getAttribute('data-original-text');
+      if (originalText) {
+        this.$createBtn.childNodes[0].textContent = originalText;
+        this.$createBtn.removeAttribute('data-original-text');
+      }
+    }
+  }
+
+  // タイムアウト付きfetch
+  async fetchWithTimeout(url, options, timeout = 10000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      return response;
+    } catch (error) {
+      clearTimeout(timeoutId);
+      if (error.name === 'AbortError') {
+        throw new Error('リクエストがタイムアウトしました');
+      }
+      throw error;
+    }
+  }
+
+  // 安全な画面遷移
+  navigateToPage(url) {
+    // 少し遅延を入れて確実にセッションストレージが保存されるようにする
+    setTimeout(() => {
+      location.href = url;
+    }, 100);
   }
 }
 
