@@ -357,13 +357,7 @@ main {
 
 /* ===== ローディング状態 ===== */
 .start-button.loading {
-    opacity: 0.7;
     cursor: not-allowed;
-    transform: none !important;
-}
-
-.start-button.loading:hover {
-    transform: none !important;
 }
 
 /* ===== フッター ===== */
