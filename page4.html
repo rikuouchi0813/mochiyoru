@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>モチヨル - 持ち物の追加・分担</title>
-    <link rel="stylesheet" href="/page4.css">
-
+    <title>モチヨル - グループ作成</title>
+    <link rel="stylesheet" href="page2.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Bevan:ital@0;1&family=M+PLUS+1p:wght@500&family=Mochiy+Pop+P+One&family=Zen+Kaku+Gothic+New:wght@500;900&display=swap"
         rel="stylesheet">
-                <!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QCMEXLR7WB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-QCMEXLR7WB');
-</script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QCMEXLR7WB"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-QCMEXLR7WB');
+    </script>
 </head>
-
 <body>
-    <header onclick="location.href='index.html'">
-        <img src="/img/title.svg" alt="モチヨル" class="h1-image">
-    </header>
-
-    <main>
-        <h2>持ち物を追加・分担しよう</h2>
-
-        <div class="input-section">
-            <input type="text" id="itemInput" placeholder="持ち物を入力してください">
-            <button id="addButton">追加</button>
-        </div>
-
-        <div class="items-list" id="itemsList">
-            <!-- アイテムはJavaScriptで動的に生成されます -->
-            <div class="no-items-message" id="noItemsMessage">
-                <p>持ち物がありません。</p>
-                <p>持ち物を入力し、追加してください。</p>
-            </div>
-        </div>
-
-        <div class="edit-button-wrapper">
-            <button class="edit-btn" data-type="members">
-                <span class="icon">✏️</span>
-            </button>
-            <span class="edit-label">メンバーを追加・変更</span>
-        </div>
-    </main>
-
+    <div class="content-wrapper">
+        <header onclick="location.href='index.html'">
+            <img src="img/title.svg" alt="モチヨル" class="h1-image">
+        </header>
+        <main>
+            <section class="form-section">
+                <h2 id="pageTitle">グループを作成しよう</h2>
+                <p id="pageDescription">グループ名を決めてメンバー全員の名前を追加しましょう👇</p>
+                <form id="groupForm">
+                    <div class="form-group">
+                        <label for="groupName">グループ名</label>
+                        <input type="text" id="groupName" name="groupName" placeholder="例：おはなグループ" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="memberName">メンバー</label>
+                        <div class="input-container">
+                            <input type="text" id="memberName" name="memberName" class="member-input"
+                                placeholder="例：まりん" required>
+                            <button type="button" id="addMember">追加</button>
+                        </div>
+                        <ul id="memberList">
+                            <!-- 追加されたメンバー名がここに表示される -->
+                        </ul>
+                    </div>
+                    <div class="button-container">
+                        <a href="#" class="start-button" id="createGroupBtn">
+                            <span id="buttonText">グループを作成</span>
+                            <span class="arrow"></span>
+                        </a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
     <footer>
         <div class="footer-lists">
             <ul class="left-list">
                 <li><a href="/contact.html">お問い合わせ</a></li>
-                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeG2ZQuE-VzHRKGg05T2WjYQQWnBd7c_hSxGFm9DF7P9cLpPA/viewform?usp=header" target="_blank" rel="noopener">アンケート</a></li>
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeG2ZQuE-VzHRKGg05T2WjYQQWnBd7c_hSxGFm9DF7P9cLpPA/viewform?usp=header"
+                        target="_blank" rel="noopener">アンケート</a></li>
                 <li><a href="/terms.html">利用規約</a></li>
             </ul>
             <ul class="right-list">
@@ -66,9 +70,7 @@
         <hr>
         <p>&copy; 2025 モチヨル</p>
     </footer>
-
-    <script src="/page4.js"></script>
+    <!-- 外部JavaScriptファイルを読み込み -->
+    <script src="page2.js"></script>
 </body>
-
 </html>
-
