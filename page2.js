@@ -1,342 +1,292 @@
 class GroupManager {
-  constructor() {
-    /* --- セッション読み出し --- */
-    const rawEdit = sessionStorage.getItem("editMode");
-    const rawGroup = sessionStorage.getItem("groupData");
-    this.groupData = rawGroup ? JSON.parse(rawGroup) : {};
-
-    /* editMode 判定を厳密に */
-    this.isEditMode =
-      rawEdit === "members" && this.groupData && this.groupData.groupId;
-
-    /* 編集モードでないのに editMode フラグだけ残っていたら掃除 */
-    if (!this.isEditMode) sessionStorage.removeItem("editMode");
-
-    this.members = [];
-    this.isSubmitting = false; // 二重送信防止
-
-    this.init();
-  }
-
-  /* ---------- 初期化 ---------- */
-  init() {
-    /* 新規モードなら残データをリセット */
-    if (!this.isEditMode) {
-      sessionStorage.removeItem("groupData");
-      sessionStorage.removeItem("currentGroupId");
-      this.groupData = {};
+    constructor() {
+        this.members = [];
+        this.isEditMode = false;
+        this.editingGroupId = null;
+        this.originalGroupData = null;
+        
+        this.bindElements();
+        this.initialize();
+        this.attachEventListeners();
     }
 
-    this.bindDOM();
-    this.bindEvents();
-    this.restoreIfAny();
-
-    /* UI 切り替え */
-    if (this.isEditMode) {
-      this.$groupName.readOnly = true;
-      this.$createBtn.textContent = "メンバーを更新";
-    } else {
-      this.$createBtn.textContent = "グループを作成";
-    }
-  }
-
-  /* ---------- DOM 取得 ---------- */
-  bindDOM() {
-    this.$memberInput = document.getElementById("memberName");
-    this.$addBtn = document.getElementById("addMember");
-    this.$memberList = document.getElementById("memberList");
-    this.$groupName = document.getElementById("groupName");
-    this.$createBtn = document.getElementById("createGroupBtn");
-  }
-
-  /* ---------- イベント ---------- */
-  bindEvents() {
-    this.$addBtn.addEventListener("click", () => this.addMember());
-    this.$memberInput.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        this.addMember();
-      }
-    });
-    this.$createBtn.addEventListener("click", (e) => this.handleSubmit(e));
-    this.$groupName.addEventListener("input", () => this.persistTemp());
-  }
-
-  /* ---------- 復元 ---------- */
-  restoreIfAny() {
-    if (this.groupData.groupName)
-      this.$groupName.value = this.groupData.groupName;
-
-    if (Array.isArray(this.groupData.members)) {
-      this.members = [...this.groupData.members];
-      this.renderMembers();
-    }
-  }
-
-  /* ---------- 一時保存 ---------- */
-  persistTemp() {
-    const tmp = {
-      groupName: this.$groupName.value.trim(),
-      members: [...this.members],
-      groupId: this.groupData.groupId || null,
-    };
-    sessionStorage.setItem("groupData", JSON.stringify(tmp));
-  }
-
-  /* ---------- メンバー操作 ---------- */
-  addMember() {
-    const name = this.$memberInput.value.trim();
-    if (!name) {
-      this.showAlert("メンバー名を入力してください");
-      this.$memberInput.focus();
-      return;
-    }
-    if (name.length > 20) {
-      this.showAlert("20 文字以内で入力してください");
-      this.$memberInput.focus();
-      return;
-    }
-    if (this.members.includes(name)) {
-      this.showAlert("同じ名前があります");
-      this.$memberInput.focus();
-      return;
+    bindElements() {
+        this.memberInput = document.getElementById('memberName');
+        this.addMemberBtn = document.getElementById('addMember');
+        this.memberList = document.getElementById('memberList');
+        this.groupNameInput = document.getElementById('groupName');
+        this.createBtn = document.getElementById('createGroupBtn');
+        this.pageTitle = document.getElementById('pageTitle');
+        this.pageDescription = document.getElementById('pageDescription');
+        this.buttonText = document.getElementById('buttonText');
     }
 
-    this.members.push(name);
-    this.$memberInput.value = "";
-    this.renderMembers();
-    this.persistTemp();
-    this.$memberInput.focus(); // 連続入力のため
-  }
-
-  removeMember(name) {
-    this.members = this.members.filter((m) => m !== name);
-    this.renderMembers();
-    this.persistTemp();
-  }
-
-  renderMembers() {
-    this.$memberList.innerHTML = "";
-    this.members.forEach((m) => {
-      const li = document.createElement("li");
-      li.className = "member-tag";
-      li.innerHTML =
-        `<span class="member-name">${this.escapeHtml(m)}</span>` +
-        `<button class="remove-btn" type="button" aria-label="${this.escapeHtml(m)}を削除">×</button>`;
-      li.querySelector(".remove-btn").onclick = () => this.removeMember(m);
-      this.$memberList.appendChild(li);
-    });
-  }
-
-  /* ---------- 作成 / 更新 ---------- */
-  async handleSubmit(e) {
-    e.preventDefault();
-    
-    // 二重送信防止
-    if (this.isSubmitting) return;
-    if (!this.validate()) return;
-
-    this.isSubmitting = true;
-    this.setButtonState(true, "処理中...");
-
-    const payload = {
-      groupName: this.$groupName.value.trim(),
-      members: [...this.members],
-    };
-
-    console.log("=== グループ作成/更新開始 ===");
-    console.log("Payload:", payload);
-    console.log("Edit mode:", this.isEditMode);
-
-    try {
-      /* === 編集モード === */
-      if (this.isEditMode) {
-        await this.handleEditMode(payload);
-        return;
-      }
-
-      /* === 新規モード === */
-      await this.handleCreateMode(payload);
-      
-    } catch (error) {
-      console.error("処理エラー:", error);
-      this.showAlert("エラーが発生しました。もう一度お試しください。");
-    } finally {
-      this.isSubmitting = false;
-      this.setButtonState(false);
-    }
-  }
-
-  async handleEditMode(payload) {
-    console.log("編集モードで更新中...");
-    
-    try {
-      const updateRes = await this.fetchWithTimeout(`/api/groups/${this.groupData.groupId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, groupId: this.groupData.groupId }),
-      });
-      
-      if (!updateRes.ok) {
-        throw new Error(`更新失敗: ${updateRes.status}`);
-      }
-      
-      console.log("更新成功:", updateRes.status);
-    } catch (err) {
-      console.error("更新エラー:", err);
-      this.showAlert("更新に失敗しました。オフラインで続行します。");
+    initialize() {
+        console.log('GroupManager初期化開始');
+        
+        // 編集モードかどうかチェック
+        const editMode = sessionStorage.getItem('editMode');
+        const groupData = sessionStorage.getItem('groupData');
+        
+        console.log('editMode:', editMode);
+        console.log('groupData:', groupData);
+        
+        if (editMode === 'members' && groupData) {
+            this.setupEditMode(JSON.parse(groupData));
+        } else {
+            this.setupCreateMode();
+        }
     }
 
-    /* 保存してフラグ解除 */
-    this.groupData = { ...this.groupData, ...payload };
-    sessionStorage.setItem("groupData", JSON.stringify(this.groupData));
-    sessionStorage.removeItem("editMode");
-
-    /* page3→page4 に戻す */
-    const qp = new URLSearchParams({
-      groupId: this.groupData.groupId,
-      groupName: this.groupData.groupName,
-      members: JSON.stringify(this.members),
-    });
-    
-    this.navigateToPage(`page3.html?${qp.toString()}`);
-  }
-
-  async handleCreateMode(payload) {
-    console.log("新規グループ作成中...");
-    let groupId;
-    let apiSuccess = false;
-    
-    try {
-      console.log("API呼び出し開始:", "/api/groups");
-      const res = await this.fetchWithTimeout("/api/groups", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      
-      console.log("API レスポンス status:", res.status);
-      
-      if (!res.ok) {
-        const errorText = await res.text();
-        console.error("API エラー詳細:", errorText);
-        throw new Error(`API Error: ${res.status} - ${errorText}`);
-      }
-      
-      const responseData = await res.json();
-      console.log("API レスポンスデータ:", responseData);
-      
-      groupId = responseData.groupId;
-      apiSuccess = true;
-      console.log("API成功！ groupId:", groupId);
-      
-    } catch (err) {
-      console.error("API呼び出し失敗:", err);
-      console.log("オフラインモードに切り替え");
-      groupId = this.generateId();
-      apiSuccess = false;
+    setupEditMode(groupData) {
+        console.log('編集モード設定:', groupData);
+        
+        this.isEditMode = true;
+        this.editingGroupId = groupData.groupId;
+        this.originalGroupData = { ...groupData };
+        
+        // UI更新
+        this.pageTitle.textContent = 'メンバーを編集しよう';
+        this.pageDescription.textContent = 'メンバーを追加・削除して更新しましょう👇';
+        this.buttonText.textContent = 'メンバーを更新';
+        
+        // フォームにデータ設定
+        this.groupNameInput.value = groupData.groupName || '';
+        this.members = [...(groupData.members || [])];
+        
+        this.renderMembers();
+        
+        // editModeフラグをクリア
+        sessionStorage.removeItem('editMode');
     }
 
-    console.log("最終的な groupId:", groupId);
-    console.log("API成功:", apiSuccess);
-
-    const full = { ...payload, groupId, apiSuccess };
-    sessionStorage.setItem("groupData", JSON.stringify(full));
-    sessionStorage.setItem("currentGroupId", groupId);
-
-    console.log("保存したデータ:", full);
-
-    const qp = new URLSearchParams({
-      groupId,
-      groupName: payload.groupName,
-      members: JSON.stringify(this.members),
-    });
-    
-    console.log("page3へのURL:", `page3.html?${qp.toString()}`);
-    this.navigateToPage(`page3.html?${qp.toString()}`);
-  }
-
-  /* ---------- バリデーション ---------- */
-  validate() {
-    if (!this.$groupName.value.trim()) {
-      this.showAlert("グループ名を入力してください");
-      this.$groupName.focus();
-      return false;
+    setupCreateMode() {
+        console.log('新規作成モード設定');
+        
+        this.isEditMode = false;
+        this.editingGroupId = null;
+        this.originalGroupData = null;
+        
+        // UI更新（デフォルト状態）
+        this.pageTitle.textContent = 'グループを作成しよう';
+        this.pageDescription.textContent = 'グループ名を決めてメンバー全員の名前を追加しましょう👇';
+        this.buttonText.textContent = 'グループを作成';
+        
+        this.members = [];
+        this.renderMembers();
     }
-    if (this.members.length === 0) {
-      this.showAlert("メンバーを 1 人以上追加してください");
-      this.$memberInput.focus();
-      return false;
+
+    attachEventListeners() {
+        this.addMemberBtn.addEventListener('click', () => this.addMember());
+        this.memberInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.addMember();
+            }
+        });
+
+        this.createBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (this.isEditMode) {
+                this.updateGroup();
+            } else {
+                this.createGroup();
+            }
+        });
     }
-    if (this.members.length > 10) {
-      this.showAlert("メンバーは 10 名までです");
-      return false;
+
+    addMember() {
+        const name = this.memberInput.value.trim();
+        if (!name) {
+            alert('メンバー名を入力してください。');
+            return;
+        }
+
+        if (this.members.includes(name)) {
+            alert('すでに追加されているメンバーです。');
+            this.memberInput.value = '';
+            return;
+        }
+
+        this.members.push(name);
+        this.memberInput.value = '';
+        this.renderMembers();
+        
+        console.log('メンバー追加:', name, '現在のメンバー:', this.members);
     }
-    return true;
-  }
 
-  /* ---------- ユーティリティ関数 ---------- */
-  generateId() {
-    return Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
-  }
-
-  escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  showAlert(message) {
-    alert(message);
-  }
-
-  setButtonState(isLoading, loadingText = "処理中...") {
-    if (isLoading) {
-      this.$createBtn.style.opacity = "0.6";
-      this.$createBtn.style.pointerEvents = "none";
-      const originalText = this.$createBtn.childNodes[0].textContent;
-      this.$createBtn.setAttribute('data-original-text', originalText);
-      this.$createBtn.childNodes[0].textContent = loadingText;
-    } else {
-      this.$createBtn.style.opacity = "";
-      this.$createBtn.style.pointerEvents = "";
-      const originalText = this.$createBtn.getAttribute('data-original-text');
-      if (originalText) {
-        this.$createBtn.childNodes[0].textContent = originalText;
-        this.$createBtn.removeAttribute('data-original-text');
-      }
+    removeMember(name) {
+        this.members = this.members.filter(member => member !== name);
+        this.renderMembers();
+        
+        console.log('メンバー削除:', name, '現在のメンバー:', this.members);
     }
-  }
 
-  // タイムアウト付きfetch
-  async fetchWithTimeout(url, options, timeout = 10000) {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
-    
-    try {
-      const response = await fetch(url, {
-        ...options,
-        signal: controller.signal
-      });
-      clearTimeout(timeoutId);
-      return response;
-    } catch (error) {
-      clearTimeout(timeoutId);
-      if (error.name === 'AbortError') {
-        throw new Error('リクエストがタイムアウトしました');
-      }
-      throw error;
+    renderMembers() {
+        this.memberList.innerHTML = '';
+        
+        this.members.forEach(member => {
+            const li = document.createElement('li');
+            li.className = 'member-tag';
+            li.innerHTML = `
+                ${member}
+                <button type="button" class="remove-member">×</button>
+            `;
+            
+            const removeBtn = li.querySelector('.remove-member');
+            removeBtn.addEventListener('click', () => this.removeMember(member));
+            
+            this.memberList.appendChild(li);
+        });
     }
-  }
 
-  // 安全な画面遷移
-  navigateToPage(url) {
-    // 少し遅延を入れて確実にセッションストレージが保存されるようにする
-    setTimeout(() => {
-      location.href = url;
-    }, 100);
-  }
+    async createGroup() {
+        const groupName = this.groupNameInput.value.trim();
+        
+        if (!groupName) {
+            alert('グループ名を入力してください。');
+            return;
+        }
+        
+        if (this.members.length === 0) {
+            alert('少なくとも1人のメンバーを追加してください。');
+            return;
+        }
+
+        this.setLoading(true);
+
+        try {
+            console.log('グループ作成リクエスト:', { groupName, members: this.members });
+            
+            const response = await fetch('/api/groups', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    groupName,
+                    members: this.members
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('グループ作成成功:', data);
+
+            // sessionStorageに保存
+            const groupData = {
+                groupId: data.groupId,
+                groupName: groupName,
+                members: this.members
+            };
+            
+            sessionStorage.setItem('groupData', JSON.stringify(groupData));
+
+            // page4.htmlに遷移
+            const params = new URLSearchParams({
+                groupId: data.groupId,
+                groupName: encodeURIComponent(groupName),
+                members: JSON.stringify(this.members)
+            });
+
+            window.location.href = `/page4.html?${params.toString()}`;
+
+        } catch (error) {
+            console.error('グループ作成エラー:', error);
+            alert('グループの作成に失敗しました。ネットワーク接続を確認して、もう一度お試しください。');
+        } finally {
+            this.setLoading(false);
+        }
+    }
+
+    async updateGroup() {
+        const groupName = this.groupNameInput.value.trim();
+        
+        if (!groupName) {
+            alert('グループ名を入力してください。');
+            return;
+        }
+        
+        if (this.members.length === 0) {
+            alert('少なくとも1人のメンバーを追加してください。');
+            return;
+        }
+
+        if (!this.editingGroupId) {
+            alert('グループIDが見つかりません。');
+            return;
+        }
+
+        this.setLoading(true);
+
+        try {
+            console.log('グループ更新リクエスト:', {
+                groupId: this.editingGroupId,
+                groupName,
+                members: this.members
+            });
+            
+            const response = await fetch(`/api/groups/${this.editingGroupId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    groupName,
+                    members: this.members
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log('グループ更新成功:', data);
+
+            // sessionStorageを更新
+            const updatedGroupData = {
+                groupId: this.editingGroupId,
+                groupName: groupName,
+                members: this.members
+            };
+            
+            sessionStorage.setItem('groupData', JSON.stringify(updatedGroupData));
+
+            // page4.htmlに戻る
+            const params = new URLSearchParams({
+                groupId: this.editingGroupId,
+                groupName: encodeURIComponent(groupName),
+                members: JSON.stringify(this.members)
+            });
+
+            window.location.href = `/page4.html?${params.toString()}`;
+
+        } catch (error) {
+            console.error('グループ更新エラー:', error);
+            alert('メンバーの更新に失敗しました。ネットワーク接続を確認して、もう一度お試しください。');
+        } finally {
+            this.setLoading(false);
+        }
+    }
+
+    setLoading(loading) {
+        if (loading) {
+            this.createBtn.classList.add('loading');
+            this.buttonText.textContent = this.isEditMode ? '更新中...' : '作成中...';
+            this.createBtn.style.pointerEvents = 'none';
+        } else {
+            this.createBtn.classList.remove('loading');
+            this.buttonText.textContent = this.isEditMode ? 'メンバーを更新' : 'グループを作成';
+            this.createBtn.style.pointerEvents = 'auto';
+        }
+    }
 }
 
-/* ---------- 起動 ---------- */
-document.addEventListener("DOMContentLoaded", () => new GroupManager());
+// DOMContentLoaded時にGroupManagerを初期化
+document.addEventListener('DOMContentLoaded', () => {
+    new GroupManager();
+});
