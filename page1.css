@@ -47,12 +47,10 @@ table {
 	border-spacing: 0;
 }
 
-/* ===== ベーススタイル ===== */
+/* ===== ベーススタイル（デスクトップ） ===== */
 html {
     box-sizing: border-box;
     font-family: 'M PLUS 1p', sans-serif;
-    max-width: 375px;
-    width: 100vw;
     margin: 0 auto;
     overflow-x: hidden;
 }
@@ -69,18 +67,18 @@ body {
 /* ===== ヘッダー ===== */
 header {
     text-align: center;
-    padding: 30px 0 0 0;
+    padding: 40px 0 0 0;
 }
 
-/* ===== ロゴボックス（タイトル部分） ===== */
+/* ===== ロゴボックス ===== */
 .logo-box {
-    width: 320px;
+    width: 500px;
     background-color: #fff;
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     border-radius: 110px;
-    padding: 30px 0;
-    margin: 30px auto 0;
+    padding: 50px 0;
+    margin: 40px auto 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,22 +86,22 @@ header {
 }
 
 .h1-image {
-    width: 135px;
-    height: 30.72px;
+    width: 200px;
+    height: 45.3px;
     margin: 0 auto 0px;
 }
 
 .subtitle-image {
-    width: 220px;
-    height: 13.7px;
-    margin: 0 auto 15px;
+    width: 330px;
+    height: 20.2px;
+    margin: 0 auto 25px;
 }
 
-/* ===== ロゴボックス〜はじめるボタン背景グラデーション ===== */
+/* ===== グラデーション背景 ===== */
 .logo-gradient-bg {
     width: 100%;
     background: linear-gradient(135deg, rgba(180, 255, 205, 0.2), rgba(87, 231, 247, 0.2));
-    padding-bottom: 30px;
+    padding-bottom: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -111,60 +109,57 @@ header {
     border-bottom-left-radius: 2100px 700px;
 }
 
-/* ===== メインセクション ===== */
-main {
-    flex: 1;
-    padding: 20px;
-    padding-bottom: 60px;
-}
-
+/* ===== イントロセクション ===== */
 .intro {
     text-align: center;
-    padding: 0px 30px 30px 30px;
+    padding: 0px 50px 50px 50px;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .intro h3 {
     font-family: 'Mochiy Pop P One', sans-serif;
     font-weight: 400;
-    font-size: 22px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    font-size: 32px;
+    margin-top: 20px;
+    margin-bottom: 25px;
     color: #242424;
     line-height: 170%;
 }
 
 .intro p {
     font-weight: 500;
-    font-size: 13px;
+    font-size: 16px;
     color: #404040;
     line-height: 200%;
     text-align: left;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 
-/* ===== 「はじめる」ボタン ===== */
+/* ===== はじめるボタン ===== */
 .start-button {
-    width: 240px;
-    min-width: 240px;
-    height: 49px;
+    width: 320px;
+    min-width: 320px;
+    height: 64px;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     background: linear-gradient(90deg, #35E4A1 0%, #08DBF3 100%);
     color: white;
-    padding: 10px 25px 10px 30px;
+    padding: 12px 30px 12px 35px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 20px;
     margin: 0 auto;
     box-sizing: border-box;
+    transition: opacity 0.3s ease;
 }
 
 .start-button .arrow {
-    width: 36px;
-    height: 13px;
+    width: 40px;
+    height: 15px;
     background-color: white;
     clip-path: polygon(0 40%, 50% 40%, 50% 15%, 100% 50%, 50% 85%, 50% 60%, 0 60%);
     margin-left: auto;
@@ -172,62 +167,66 @@ main {
 
 .start-button:hover {
     opacity: 0.9;
+    color: white;
+    text-decoration: none;
 }
 
 /* ===== 絵文字バー ===== */
 .emoji-bar {
     text-align: center;
-    font-size: 24px;
-    margin: 30px 0 30px 0;
+    font-size: 40px;
+    margin: 50px 0;
+    padding: 0 20px;
 }
 
 .emoji-bar span {
-    margin: 0 5px;
+    margin: 0 8px;
 }
 
 /* ===== 使い方セクション ===== */
-.how-to-use h3 {
+.how-to-use {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.how-to-use h3.section-title {
     font-family: "Mochiy Pop P One", sans-serif;
     font-weight: 400;
     text-align: center;
-    font-size: 22px;
+    font-size: 32px;
     color: #242424;
-}
-
-/* ===== section-title（見出し用） ===== */
-.section-title {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 20px;
+    font-size: 28px;
     color: #404040;
-    padding-bottom: 30px;
+    padding-bottom: 50px;
 }
 
 .section-title::before,
 .section-title::after {
     content: "";
-    width: 38px;
+    width: 50px;
     height: 2px;
     background: #404040;
-    margin: 0 12px;
+    margin: 0 20px;
 }
 
 .steps {
-    max-width: 325px;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 0px 40px 40px 40px;
+    padding: 0px 50px 60px 50px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 35px;
 }
 
 .step {
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
-    padding: 28px 18px 24px 18px;
+    padding: 40px 30px 35px 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -236,9 +235,9 @@ main {
 
 .step h4 {
     font-family: "Zen Kaku Gothic New", sans-serif;
-    font-size: 19px;
+    font-size: 24px;
     font-weight: 900;
-    margin: 0 0 18px 0;
+    margin: 0 0 25px 0;
     color: #242424;
 }
 
@@ -248,25 +247,25 @@ main {
     background: #00E1A9;
     color: #fff;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     border-radius: 50%;
-    width: 38px;
-    height: 38px;
-    line-height: 40px;
+    width: 45px;
+    height: 45px;
+    line-height: 47px;
     text-align: center;
-    margin: 0 0 12px 0;
+    margin: 0 0 15px 0;
 }
 
 .step p {
-    font-size: 12px;
+    font-size: 15px;
     color: #404040;
     line-height: 1.7;
-    margin: 18px 0 0 0;
+    margin: 25px 0 0 0;
 }
 
 .step-content {
-    width: 255px;
-    min-height: 110px;
+    width: 380px;
+    min-height: 140px;
     background: #f6fff8;
     border-radius: 8px;
     margin: 0 auto 12px;
@@ -275,9 +274,9 @@ main {
 .step-arrow {
     width: 0;
     height: 0;
-    border-left: 16px solid transparent;
-    border-right: 16px solid transparent;
-    border-top: 19px solid #00E1A9;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 24px solid #00E1A9;
     margin: 0 auto;
 }
 
@@ -285,13 +284,13 @@ main {
 footer {
     background-color: #404040;
     color: #fff;
-    padding: 36px 24px 18px 24px;
+    padding: 50px 40px 25px 40px;
     width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 80px;
 }
 
 footer hr {
@@ -306,7 +305,7 @@ footer hr {
 footer p {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-weight: 500;
-    font-size: 11px;
+    font-size: 12px;
     margin: 0;
     text-align: left;
     width: 100%;
@@ -320,6 +319,7 @@ footer p {
     width: 100%;
     max-width: 600px;
     margin-bottom: 12px;
+    gap: 16px;
 }
 
 .footer-lists ul {
@@ -332,7 +332,274 @@ footer p {
 .footer-lists li {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-weight: 500;
-    font-size: 14px;
-    margin-bottom: 30px;
+    font-size: 15px;
+    margin-bottom: 35px;
     opacity: 0.95;
+}
+
+.footer-lists a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-lists a:hover {
+    color: #00E1A9;
+}
+
+/* ===== タブレット対応（768px以下） ===== */
+@media (max-width: 768px) {
+    header {
+        padding: 30px 0 0 0;
+    }
+    
+    .logo-box {
+        width: 400px;
+        padding: 40px 0;
+        margin: 30px auto 0;
+    }
+    
+    .h1-image {
+        width: 170px;
+        height: 38.4px;
+    }
+    
+    .subtitle-image {
+        width: 280px;
+        height: 17.1px;
+        margin: 0 auto 20px;
+    }
+    
+    .logo-gradient-bg {
+        padding-bottom: 40px;
+    }
+    
+    .intro {
+        padding: 0px 40px 40px 40px;
+        max-width: 600px;
+    }
+    
+    .intro h3 {
+        font-size: 28px;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .intro p {
+        font-size: 15px;
+        margin-bottom: 40px;
+    }
+    
+    .start-button {
+        width: 280px;
+        min-width: 280px;
+        height: 56px;
+        font-size: 18px;
+        padding: 10px 25px 10px 30px;
+    }
+    
+    .start-button .arrow {
+        width: 36px;
+        height: 13px;
+    }
+    
+    .emoji-bar {
+        font-size: 32px;
+        margin: 40px 0;
+    }
+    
+    .emoji-bar span {
+        margin: 0 6px;
+    }
+    
+    .how-to-use {
+        padding: 0 30px;
+    }
+    
+    .how-to-use h3.section-title {
+        font-size: 24px;
+        padding-bottom: 40px;
+    }
+    
+    .section-title::before,
+    .section-title::after {
+        width: 38px;
+        margin: 0 15px;
+    }
+    
+    .steps {
+        max-width: 400px;
+        padding: 0px 40px 50px 40px;
+        gap: 30px;
+    }
+    
+    .step {
+        padding: 32px 24px 28px 24px;
+    }
+    
+    .step h4 {
+        font-size: 21px;
+        margin: 0 0 20px 0;
+    }
+    
+    .step-badge {
+        width: 42px;
+        height: 42px;
+        font-size: 17px;
+        line-height: 44px;
+        margin: 0 0 12px 0;
+    }
+    
+    .step p {
+        font-size: 14px;
+        margin: 20px 0 0 0;
+    }
+    
+    .step-content {
+        width: 300px;
+        min-height: 120px;
+    }
+    
+    .step-arrow {
+        border-left: 18px solid transparent;
+        border-right: 18px solid transparent;
+        border-top: 21px solid #00E1A9;
+    }
+    
+    footer {
+        padding: 36px 24px 18px 24px;
+        margin-top: 50px;
+    }
+    
+    .footer-lists li {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+}
+
+/* ===== スマートフォン対応（480px以下） ===== */
+@media (max-width: 480px) {
+    .logo-box {
+        width: 320px;
+        max-width: 90%;
+        padding: 30px 0;
+    }
+    
+    .h1-image {
+        width: 135px;
+        height: 30.72px;
+    }
+    
+    .subtitle-image {
+        width: 220px;
+        height: 13.7px;
+        margin: 0 auto 15px;
+    }
+    
+    .logo-gradient-bg {
+        padding-bottom: 30px;
+    }
+    
+    .intro {
+        padding: 0px 30px 30px 30px;
+        max-width: 500px;
+    }
+    
+    .intro h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    .intro p {
+        font-size: 13px;
+        margin-bottom: 30px;
+    }
+    
+    .start-button {
+        width: 240px;
+        min-width: 240px;
+        height: 49px;
+        font-size: 16px;
+    }
+    
+    .emoji-bar {
+        font-size: 22px;
+        margin: 30px 0;
+    }
+    
+    .emoji-bar span {
+        margin: 0 5px;
+    }
+    
+    .how-to-use {
+        padding: 0 20px;
+    }
+    
+    .how-to-use h3.section-title {
+        font-size: 20px;
+        padding-bottom: 30px;
+    }
+    
+    .section-title::before,
+    .section-title::after {
+        width: 38px;
+        margin: 0 12px;
+    }
+    
+    .steps {
+        max-width: 325px;
+        padding: 0px 20px 40px 20px;
+        gap: 24px;
+    }
+    
+    .step {
+        padding: 28px 18px 24px 18px;
+    }
+    
+    .step h4 {
+        font-size: 19px;
+        margin: 0 0 18px 0;
+    }
+    
+    .step-badge {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        line-height: 40px;
+        margin: 0 0 12px 0;
+    }
+    
+    .step p {
+        font-size: 12px;
+        margin: 18px 0 0 0;
+    }
+    
+    .step-content {
+        width: 255px;
+        min-height: 110px;
+    }
+    
+    .step-arrow {
+        border-left: 16px solid transparent;
+        border-right: 16px solid transparent;
+        border-top: 19px solid #00E1A9;
+    }
+    
+    footer {
+        padding: 36px 24px 18px 24px;
+    }
+    
+    footer p {
+        font-size: 11px;
+    }
+    
+    .footer-lists {
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .footer-lists li {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
 }
