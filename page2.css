@@ -313,46 +313,40 @@ main {
     margin-top: 40px;
 }
 
+/* ===== グループ作成ボタン ===== */
 .start-button {
-    display: inline-flex;
+    width: 320px;
+    min-width: 320px;
+    height: 64px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #4DD5DA 0%, #00E1A9 100%);
+    gap: 10px;
+    background: linear-gradient(90deg, #35E4A1 0%, #08DBF3 100%);
     color: white;
+    padding: 12px 30px 12px 35px;
+    border-radius: 8px;
     text-decoration: none;
-    font-size: 16px;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
     font-family: "M PLUS 1p", sans-serif;
-    font-weight: 700;
-    padding: 16px 32px;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(77, 213, 218, 0.3);
-    position: relative;
-    overflow: hidden;
-    min-width: 200px;
-}
-
-.start-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(77, 213, 218, 0.4);
-}
-
-.start-button:active {
-    transform: translateY(0);
 }
 
 .start-button .arrow {
-    width: 0;
-    height: 0;
-    border-left: 6px solid white;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    transition: transform 0.3s ease;
+    width: 40px;
+    height: 15px;
+    background-color: white;
+    clip-path: polygon(0 40%, 50% 40%, 50% 15%, 100% 50%, 50% 85%, 50% 60%, 0 60%);
+    margin-left: auto;
 }
 
-.start-button:hover .arrow {
-    transform: translateX(4px);
+.start-button:hover {
+    opacity: 0.9;
+    color: white;
+    text-decoration: none;
 }
 
 /* ===== ローディング状態 ===== */
@@ -505,3 +499,4 @@ footer p {
         margin: 12px 0 6px 0;
     }
 }
+
