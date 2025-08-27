@@ -234,7 +234,7 @@ label {
     margin-top: 40px;
 }
 
-/* ===== スタートボタン ===== */
+/* ===== 持ち物を選ぶボタン ===== */
 .start-button {
     width: 320px;
     min-width: 320px;
@@ -538,3 +538,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
