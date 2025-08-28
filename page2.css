@@ -429,7 +429,7 @@ footer p {
     
     input[type="text"] {
         padding: 12px 18px;
-        font-size: 15px;
+        font-size: 16px;
     }
     
     #addMember {
@@ -494,7 +494,7 @@ footer p {
     
     input[type="text"] {
         padding: 10px 15px;
-        font-size: 14px;
+        font-size: 16px;
     }
     
     .input-container {
@@ -556,3 +556,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
