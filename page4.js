@@ -159,9 +159,11 @@ class ItemAssignmentManager {
 
   /* ---------- API ベース URL ---------- */
   baseUrl(path = "") {
-    //return `https://mochiyoru.vercel.app/api/groups/${this.groupData.groupId}${path}`;
-    return `/api/groups/${this.groupData.groupId}${path}`;
+  if (path === "/items") {
+    return `/.netlify/functions/items?groupId=${this.groupData.groupId}`;
   }
+  return `/api/groups/${this.groupData.groupId}${path}`;
+}
 
   /* ---------- 既存アイテム取得 ---------- */
   async fetchItemsFromServer() {
@@ -502,3 +504,4 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
+
