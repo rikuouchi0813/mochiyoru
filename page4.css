@@ -187,48 +187,23 @@ h2 {
     animation-delay: 0.1s;
 }
 
-/* Speech Bubbles Header */
-.speech-bubbles-header {
+/* シンプルなカラムヘッダー */
+.column-headers {
     display: grid;
     grid-template-columns: 2fr 1.5fr 1fr;
     gap: 12px;
-    margin-bottom: 20px;
-    align-items: end;
-    justify-items: center;
+    margin-bottom: 15px;
+    padding: 0 16px 10px 16px;
+    border-bottom: 1px solid #C6EBE2;
 }
 
-.speech-bubble {
-    font-family: "Mochiy Pop P One", sans-serif;
-    font-weight: 400;
-    position: relative;
-    background: #00E1A9;
-    color: white;
-    border-radius: 10px;
-    font-size: 12px;
-    white-space: nowrap;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.column-header {
+    font-family: "M PLUS 1p", sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: #404040;
     text-align: center;
-    height: 30px;
-    padding: 4px 12px;
-    margin-bottom: 8px;
-    box-sizing: border-box;
-    min-width: 120px;
-}
-
-.speech-bubble::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-top: 7px solid #00E1A9;
+    padding: 0;
 }
 
 /* Item Content */
@@ -518,16 +493,14 @@ footer p {
         margin-bottom: 12px;
     }
     
-    .speech-bubbles-header {
+    .column-headers {
         gap: 8px;
-        margin-bottom: 15px;
+        margin-bottom: 12px;
+        padding: 0 12px 8px 12px;
     }
     
-    .speech-bubble {
-        height: 26px;
-        font-size: 11px;
-        padding: 3px 8px;
-        min-width: 100px;
+    .column-header {
+        font-size: 13px;
     }
     
     .item-content {
@@ -639,16 +612,14 @@ footer p {
         margin-bottom: 10px;
     }
     
-    .speech-bubbles-header {
+    .column-headers {
         gap: 6px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
+        padding: 0 10px 6px 10px;
     }
     
-    .speech-bubble {
-        height: 24px;
-        font-size: 10px;
-        padding: 2px 6px;
-        min-width: 80px;
+    .column-header {
+        font-size: 12px;
     }
     
     .item-content {
