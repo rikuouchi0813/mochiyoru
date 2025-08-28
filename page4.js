@@ -327,17 +327,17 @@ async deleteItemFromServer(name) {
     });
   }
 
-  createHeader() {
+createHeader() {
     const h = document.createElement("div");
-    h.className = "speech-bubbles-header";
-    ["何を？", "誰が？", "どれだけ？"].forEach((t) => {
-      const d = document.createElement("div");
-      d.className = "speech-bubble";
-      d.textContent = t;
-      h.appendChild(d);
+    h.className = "column-headers";
+    ["持ち物", "担当者", "数量"].forEach((t) => {
+        const d = document.createElement("div");
+        d.className = "column-header";
+        d.textContent = t;
+        h.appendChild(d);
     });
     return h;
-  }
+}
 
   createRow(a, idx) {
     const row = document.createElement("div");
@@ -532,4 +532,5 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
+
 
