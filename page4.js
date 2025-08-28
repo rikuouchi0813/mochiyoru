@@ -334,7 +334,7 @@ createHeader() {
     const headerContent = document.createElement("div");
     headerContent.className = "column-headers-content";
     
-    ["持ち物", "担当者", "数量"].forEach((t) => {
+    ["何を？", "誰が？", "どれくらい？"].forEach((t) => {
       const d = document.createElement("div");
       d.className = "column-header";
       d.textContent = t;
@@ -543,6 +543,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
+
 
 
 
