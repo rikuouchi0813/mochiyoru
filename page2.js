@@ -318,9 +318,9 @@ class GroupManager {
             console.log('新しいグループ名:', groupName);
             console.log('新しいメンバー:', this.members);
             
-            // Supabase用のPUTリクエストを送信
-            const response = await fetch(`/api/groups/${this.editingGroupId}`, {
-                method: 'PUT',
+            // Netlify Functionsのgroups-updateエンドポイントを呼び出し
+            const response = await fetch(`/.netlify/functions/groups-update/${this.editingGroupId}`, {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -341,9 +341,11 @@ class GroupManager {
                     body: errorText
                 });
                 
-                // 404の場合は、APIエンドポイントが実装されていない可能性
-                if (response.status === 404 || response.status === 405) {
-                    throw new Error('UPDATE_ENDPOINT_NOT_IMPLEMENTED');
+                // 404/405の場合は、エンドポイントが正しく設定されていない可能性
+                if (response.status === 404) {
+                    throw new Error('NETLIFY_FUNCTION_NOT_FOUND');
+                } else if (response.status === 405) {
+                    throw new Error('METHOD_NOT_ALLOWED');
                 } else {
                     throw new Error(`HTTP ${response.status}: ${errorText}`);
                 }
@@ -376,18 +378,17 @@ class GroupManager {
         } catch (error) {
             console.error('グループ更新エラー:', error);
             
-            if (error.message === 'UPDATE_ENDPOINT_NOT_IMPLEMENTED') {
-                alert('申し訳ございません。現在、メンバー更新機能を実装中です。\n\n一時的に新しいグループとして作成してください。');
-                
-                // 一時的な回避策：新しいグループとして作成
-                this.createGroup();
-                return;
-            }
-            
-            // その他のエラー
             let errorMessage = 'メンバーの更新に失敗しました。\n\n';
-            if (error.message.includes('500')) {
+            
+            if (error.message === 'NETLIFY_FUNCTION_NOT_FOUND') {
+                errorMessage += 'Netlify Functionが見つかりません。\n';
+                errorMessage += 'groups-update.js が正しくデプロイされているか確認してください。';
+            } else if (error.message === 'METHOD_NOT_ALLOWED') {
+                errorMessage += 'リクエストメソッドが許可されていません。';
+            } else if (error.message.includes('500')) {
                 errorMessage += 'サーバーでエラーが発生しました。少し時間をおいてからお試しください。';
+            } else if (error.message.includes('404')) {
+                errorMessage += 'グループが見つかりませんでした。URLが正しいか確認してください。';
             } else if (error.message.includes('Network')) {
                 errorMessage += 'ネットワーク接続を確認してください。';
             } else {
