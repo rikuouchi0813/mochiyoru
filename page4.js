@@ -290,7 +290,7 @@ async deleteItemFromServer(name) {
     if (this.items.length === 0) {
       this.noMsg.style.display = "block";
       // ヘッダーも非表示にする
-      const existingHeader = this.listWrap.querySelector(".speech-bubbles-header");
+      const existingHeader = this.listWrap.querySelector(".column-headers");
       if (existingHeader) {
         existingHeader.style.display = "none";
       }
@@ -298,14 +298,14 @@ async deleteItemFromServer(name) {
     }
     this.noMsg.style.display = "none";
 
-    // ヘッダーが無ければ作る
-    let header = this.listWrap.querySelector(".speech-bubbles-header");
+    // ヘッダーが無ければ作る（一度だけ）
+    let header = this.listWrap.querySelector(".column-headers");
     if (!header) {
       header = this.createHeader();
       this.listWrap.prepend(header);
     }
     // ヘッダーを表示状態にする
-    header.style.display = "grid";
+    header.style.display = "flex";
 
     // 既存行を再利用 or 追加
     this.assignments.forEach((a, idx) => {
@@ -334,7 +334,7 @@ createHeader() {
     const headerContent = document.createElement("div");
     headerContent.className = "column-headers-content";
     
-    ["何を？", "誰が？", "どれくらい？"].forEach((t) => {
+    ["持ち物", "担当者", "数量"].forEach((t) => {
       const d = document.createElement("div");
       d.className = "column-header";
       d.textContent = t;
@@ -451,7 +451,7 @@ createHeader() {
           // アイテムが0個になった場合の処理
           if (this.items.length === 0) {
             this.noMsg.style.display = "block";
-            const header = this.listWrap.querySelector(".speech-bubbles-header");
+            const header = this.listWrap.querySelector(".column-headers");
             if (header) {
               header.style.display = "none";
             }
@@ -543,7 +543,3 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
-
-
-
-
