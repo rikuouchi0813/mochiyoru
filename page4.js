@@ -328,16 +328,27 @@ async deleteItemFromServer(name) {
   }
 
 createHeader() {
-    const h = document.createElement("div");
-    h.className = "column-headers";
+    const headerContainer = document.createElement("div");
+    headerContainer.className = "column-headers";
+    
+    const headerContent = document.createElement("div");
+    headerContent.className = "column-headers-content";
+    
     ["持ち物", "担当者", "数量"].forEach((t) => {
-        const d = document.createElement("div");
-        d.className = "column-header";
-        d.textContent = t;
-        h.appendChild(d);
+      const d = document.createElement("div");
+      d.className = "column-header";
+      d.textContent = t;
+      headerContent.appendChild(d);
     });
-    return h;
-}
+    
+    const spacer = document.createElement("div");
+    spacer.className = "header-spacer";
+    
+    headerContainer.appendChild(headerContent);
+    headerContainer.appendChild(spacer);
+    
+    return headerContainer;
+  }
 
   createRow(a, idx) {
     const row = document.createElement("div");
@@ -532,5 +543,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
+
 
 
