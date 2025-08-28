@@ -217,7 +217,7 @@ h2 {
 }
 
 .header-spacer {
-    width: 44px; /* 削除ボタン(32px) + gap(12px) の合計幅に調整 */
+    width: 32px; /* 削除ボタンと同じ幅 */
     flex-shrink: 0;
 }
 
@@ -523,7 +523,7 @@ footer p {
     }
     
     .header-spacer {
-        width: 36px; /* 削除ボタン(28px) + gap(8px) の合計幅 */
+        width: 28px; /* 削除ボタンと同じ幅 */
     }
     
     .item-content {
@@ -650,7 +650,7 @@ footer p {
     }
     
     .header-spacer {
-        width: 30px; /* 削除ボタン(24px) + gap(6px) の合計幅 */
+        width: 24px; /* 削除ボタンと同じ幅 */
     }
     
     .item-content {
