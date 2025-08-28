@@ -411,7 +411,7 @@ footer p {
     
     .url-box input[type="text"] {
         padding: 12px 18px;
-        font-size: 15px;
+        font-size: 16px;
     }
     
     .copy-btn {
@@ -490,7 +490,7 @@ footer p {
     
     .url-box input[type="text"] {
         padding: 10px 15px;
-        font-size: 14px;
+        font-size: 16px;
     }
     
     .url-input-wrapper {
@@ -538,4 +538,5 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
