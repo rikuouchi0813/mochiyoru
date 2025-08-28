@@ -20,6 +20,8 @@ class GroupManager {
     let membersParam = urlParams.get("members");
     let groupId = urlParams.get("groupId");
 
+    console.log("URL parameters:", { groupName, membersParam, groupId });
+
     // URLパラメータがない場合はセッションストレージから取得
     if (!groupName && !membersParam) {
       console.log(
@@ -33,7 +35,7 @@ class GroupManager {
           membersParam = JSON.stringify(
             data.members.map((name) => ({ name: name }))
           );
-          groupId = data.id;
+          groupId = data.groupId; // 既存のIDを保持
           console.log("セッションストレージからデータを復元:", data);
         }
       } catch (error) {
@@ -68,9 +70,13 @@ class GroupManager {
       }
     }
 
-    // グループIDの生成または取得
+    // ★重要な修正★ groupIdの処理
+    // URLパラメータまたはsessionStorageから既存のIDを取得できない場合のみ新規生成
     if (!groupId) {
+      console.log("既存のgroupIdが見つからないため、新規生成します");
       groupId = this.generateGroupId();
+    } else {
+      console.log("既存のgroupIdを使用します:", groupId);
     }
 
     console.log("読み込まれたグループデータ:", { groupName, members, groupId });
@@ -86,7 +92,9 @@ class GroupManager {
   generateGroupId() {
     const timestamp = Date.now().toString(36);
     const randomStr = Math.random().toString(36).substring(2, 8);
-    return `${timestamp}${randomStr}`;
+    const newId = `${timestamp}${randomStr}`;
+    console.log("新しいgroupIdを生成しました:", newId);
+    return newId;
   }
 
   // グループURLを生成
@@ -312,6 +320,15 @@ class GroupManager {
       );
       sessionStorage.setItem("currentGroupId", this.groupData.groupId);
 
+      // ★重要★ groupDataも更新（page4とpage2での整合性確保）
+      sessionStorage.setItem("groupData", JSON.stringify({
+        groupId: this.groupData.groupId,
+        groupName: this.groupData.groupName,
+        members: this.groupData.members.map(member => 
+          typeof member === 'string' ? member : member.name
+        )
+      }));
+
       console.log("Group data saved to SessionStorage:", dataToSave);
     } catch (err) {
       console.error("グループデータの保存に失敗しました:", err);
@@ -396,8 +413,8 @@ window.debugGroupData = () => {
 
   for (let i = 0; i < sessionStorage.length; i++) {
     const key = sessionStorage.key(i);
-    if (key && key.startsWith("group_")) {
-      console.log(`  ${key}:`, JSON.parse(sessionStorage.getItem(key)));
+    if (key && (key.startsWith("group_") || key === "groupData" || key === "currentGroupId")) {
+      console.log(`  ${key}:`, JSON.parse(sessionStorage.getItem(key) || 'null'));
     }
   }
 
@@ -413,13 +430,19 @@ function validateUrlParameters() {
   const urlParams = new URLSearchParams(window.location.search);
   const groupName = urlParams.get("groupName");
   const members = urlParams.get("members");
+  const groupId = urlParams.get("groupId");
 
   console.log("=== URL Parameter Validation ===");
   console.log("Group Name:", groupName);
+  console.log("Group ID:", groupId);
   console.log("Members param:", members);
 
   if (!groupName) {
     console.warn("Warning: groupName parameter is missing");
+  }
+
+  if (!groupId) {
+    console.warn("Warning: groupId parameter is missing");
   }
 
   if (!members) {
