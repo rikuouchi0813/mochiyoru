@@ -187,16 +187,26 @@ baseUrl(path = "") {
     }
   }
 
-  /* ---------- アイテム保存 ---------- */
+/* ---------- アイテム保存 ---------- */
 async saveItemToServer(payload) {
   console.log('=== アイテム保存開始 ===');
-  console.log('送信データ:', payload);
+  console.log('送信データ（変換前）:', payload);
+  
+  const processedPayload = {
+    name: payload.name || "",
+    assignee: payload.assignee || "",
+    quantity: payload.quantity === "" || payload.quantity === null || payload.quantity === undefined 
+             ? null 
+             : parseInt(payload.quantity, 10)
+  };
+  
+  console.log('送信データ（変換後）:', processedPayload);
   console.log('URL:', this.baseUrl("/items"));
   
   const res = await fetch(this.baseUrl("/items"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(processedPayload),
   });
   
   console.log('レスポンス status:', res.status);
@@ -211,15 +221,29 @@ async saveItemToServer(payload) {
   console.log('保存成功:', result);
 }
 
-  /* ---------- アイテム削除 ---------- */
-  async deleteItemFromServer(name) {
-    const res = await fetch(this.baseUrl("/items"), {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
-    });
-    if (!res.ok) throw new Error("削除失敗");
+/* ---------- アイテム削除 ---------- */
+async deleteItemFromServer(name) {
+  console.log('=== アイテム削除開始 ===');
+  console.log('削除対象:', name);
+  console.log('URL:', this.baseUrl("/items"));
+  
+  const res = await fetch(this.baseUrl("/items"), {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name }),
+  });
+  
+  console.log('削除レスポンス status:', res.status);
+  
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error('削除エラー詳細:', errorText);
+    throw new Error(`削除失敗: ${res.status} - ${errorText}`);
   }
+  
+  const result = await res.json();
+  console.log('削除成功:', result);
+}
 
   /* ---------- イベント ---------- */
   attachEventListeners() {
@@ -438,16 +462,6 @@ async saveItemToServer(payload) {
   }
 }
 
-/* ===== 起動 ===== */
-// ItemAssignmentManagerインスタンスをグローバルに保存するため、
-// 先に宣言してから初期化
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-    window.itemManager = new ItemAssignmentManager();
-  }
-);
-
 // ヘッダークリックでindex.htmlに戻る処理
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
@@ -518,3 +532,4 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
+
