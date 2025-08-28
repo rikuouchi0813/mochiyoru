@@ -274,10 +274,12 @@ class GroupManager {
             console.log('グループ更新リクエスト:', {
                 groupId: this.editingGroupId,
                 groupName,
-                members: this.members
+                members: this.members,
+                requestUrl: `/api/groups/${this.editingGroupId}`
             });
             
-            const response = await fetch(`/api/groups/${this.editingGroupId}`, {
+            // まずPUTメソッドを試す
+            let response = await fetch(`/api/groups/${this.editingGroupId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -288,8 +290,38 @@ class GroupManager {
                 })
             });
 
+            console.log('PUT Response status:', response.status);
+
+            // PUTが失敗した場合の詳細なエラーハンドリング
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                const errorText = await response.text();
+                console.error('PUT failed:', response.status, errorText);
+                
+                if (response.status === 404 || response.status === 405) {
+                    console.log('PUT メソッドが利用できないため、POST メソッドで更新を試行します');
+                    
+                    // POSTメソッドで更新を試す
+                    response = await fetch('/api/groups', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            groupId: this.editingGroupId,
+                            groupName,
+                            members: this.members,
+                            isUpdate: true
+                        })
+                    });
+                    
+                    console.log('POST Response status:', response.status);
+                }
+                
+                if (!response.ok) {
+                    const postErrorText = await response.text();
+                    console.error('POST also failed:', response.status, postErrorText);
+                    throw new Error(`Both PUT and POST failed. Last status: ${response.status}`);
+                }
             }
 
             const data = await response.json();
@@ -315,7 +347,18 @@ class GroupManager {
 
         } catch (error) {
             console.error('グループ更新エラー:', error);
-            alert('メンバーの更新に失敗しました。ネットワーク接続を確認して、もう一度お試しください。');
+            
+            // より詳細なエラー情報を提供
+            let errorMessage = 'メンバーの更新に失敗しました。';
+            if (error.message.includes('404')) {
+                errorMessage += ' グループが見つかりません。';
+            } else if (error.message.includes('500')) {
+                errorMessage += ' サーバーエラーが発生しました。';
+            } else {
+                errorMessage += ' ネットワーク接続を確認してください。';
+            }
+            
+            alert(errorMessage);
         } finally {
             this.setLoading(false);
         }
