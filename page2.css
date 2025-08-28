@@ -218,8 +218,31 @@ input[type="text"]:-webkit-autofill:focus {
     font-weight: 700;
     font-family: "M PLUS 1p", sans-serif;
     gap: 10px;
+    animation: fadeIn 0.3s ease-out;
 }
 
+.member-tag .remove-member {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    line-height: 1;
+}
+
+.member-tag .remove-member:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 古いクラス名も残す（互換性維持） */
 .member-name {
     margin: 0;
 }
@@ -284,6 +307,11 @@ input[type="text"]:-webkit-autofill:focus {
     opacity: 0.9;
     color: white;
     text-decoration: none;
+}
+
+/* ローディング状態 */
+.start-button.loading {
+    cursor: not-allowed;
 }
 
 /* ===== フッター ===== */
@@ -351,6 +379,18 @@ footer p {
 
 .footer-lists a:hover {
     color: #00E1A9;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 /* ===== タブレット対応（768px以下） ===== */
@@ -471,6 +511,12 @@ footer p {
         padding: 6px 12px;
         font-size: 12px;
         gap: 8px;
+    }
+    
+    .member-tag .remove-member {
+        width: 20px;
+        height: 20px;
+        font-size: 16px;
     }
     
     .remove-btn {
