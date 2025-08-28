@@ -128,6 +128,8 @@ class GroupManager {
         }
 
         const name = this.memberInput.value.trim();
+        console.log('addMember() called with:', name);
+        
         if (!name) {
             alert('メンバー名を入力してください。');
             return;
@@ -141,9 +143,11 @@ class GroupManager {
 
         this.members.push(name);
         this.memberInput.value = '';
+        console.log('メンバー追加後の配列:', this.members);
+        
         this.renderMembers();
         
-        console.log('メンバー追加:', name, '現在のメンバー:', this.members);
+        console.log('メンバー追加完了:', name, '現在のメンバー:', this.members);
     }
 
     removeMember(name) {
@@ -164,18 +168,23 @@ class GroupManager {
         this.members.forEach(member => {
             const li = document.createElement('li');
             li.className = 'member-tag';
-            li.innerHTML = `
-                ${member}
-                <button type="button" class="remove-member">×</button>
-            `;
             
-            const removeBtn = li.querySelector('.remove-member');
-            if (removeBtn) {
-                removeBtn.addEventListener('click', () => this.removeMember(member));
-            }
+            // メンバー名のテキスト部分を作成
+            const memberText = document.createTextNode(member);
+            li.appendChild(memberText);
             
+            // 削除ボタンを作成
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.className = 'remove-member';
+            removeBtn.textContent = '×';
+            removeBtn.addEventListener('click', () => this.removeMember(member));
+            
+            li.appendChild(removeBtn);
             this.memberList.appendChild(li);
         });
+        
+        console.log('メンバーリストを更新:', this.members);
     }
 
     async createGroup() {
