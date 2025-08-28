@@ -493,7 +493,7 @@ footer p {
     #itemInput {
         height: 50px;
         padding: 0 18px;
-        font-size: 15px;
+        font-size: 16px;
     }
     
     #addButton {
@@ -620,7 +620,7 @@ footer p {
     #itemInput {
         height: 46px;
         padding: 0 15px;
-        font-size: 14px;
+        font-size: 16px;
     }
     
     #addButton {
@@ -727,3 +727,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
