@@ -271,15 +271,13 @@ class GroupManager {
         this.setLoading(true);
 
         try {
-            console.log('グループ更新リクエスト:', {
-                groupId: this.editingGroupId,
-                groupName,
-                members: this.members,
-                requestUrl: `/api/groups/${this.editingGroupId}`
-            });
+            console.log('=== グループ更新処理開始 ===');
+            console.log('更新対象groupId:', this.editingGroupId);
+            console.log('新しいグループ名:', groupName);
+            console.log('新しいメンバー:', this.members);
             
-            // まずPUTメソッドを試す
-            let response = await fetch(`/api/groups/${this.editingGroupId}`, {
+            // Supabase用のPUTリクエストを送信
+            const response = await fetch(`/api/groups/${this.editingGroupId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -290,62 +288,75 @@ class GroupManager {
                 })
             });
 
-            console.log('PUT Response status:', response.status);
+            console.log('API Response status:', response.status);
 
-            // PUTが失敗した場合の詳細なエラーハンドリング
             if (!response.ok) {
+                // レスポンスの詳細を取得
                 const errorText = await response.text();
-                console.error('PUT failed:', response.status, errorText);
+                console.error('API Error Details:', {
+                    status: response.status,
+                    statusText: response.statusText,
+                    body: errorText
+                });
                 
+                // 404の場合は、APIエンドポイントが実装されていない可能性
                 if (response.status === 404 || response.status === 405) {
-                    console.log('PUT メソッドが利用できないため、POST メソッドで更新を試行します');
-                    
-                    // POSTメソッドで更新を試す
-                    response = await fetch('/api/groups', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            groupId: this.editingGroupId,
-                            groupName,
-                            members: this.members,
-                            isUpdate: true
-                        })
-                    });
-                    
-                    console.log('POST Response status:', response.status);
-                }
-                
-                if (!response.ok) {
-                    const postErrorText = await response.text();
-                    console.error('POST also failed:', response.status, postErrorText);
-                    throw new Error(`Both PUT and POST failed. Last status: ${response.status}`);
+                    throw new Error('UPDATE_ENDPOINT_NOT_IMPLEMENTED');
+                } else {
+                    throw new Error(`HTTP ${response.status}: ${errorText}`);
                 }
             }
 
             const data = await response.json();
             console.log('グループ更新成功:', data);
 
-            // sessionStorageを更新
+            // sessionStorageを更新（既存のgroupIdを保持）
             const updatedGroupData = {
-                groupId: this.editingGroupId,
+                groupId: this.editingGroupId, // ★重要：既存のIDを保持★
                 groupName: groupName,
                 members: this.members
             };
             
+            console.log('SessionStorageを更新:', updatedGroupData);
             sessionStorage.setItem('groupData', JSON.stringify(updatedGroupData));
 
-            // page4.htmlに戻る
+            // page4.htmlに戻る（既存のgroupIdを使用）
             const params = new URLSearchParams({
-                groupId: this.editingGroupId,
+                groupId: this.editingGroupId, // ★重要：既存のIDを使用★
                 groupName: encodeURIComponent(groupName),
                 members: JSON.stringify(this.members)
             });
 
-            window.location.href = `/page4.html?${params.toString()}`;
+            const redirectUrl = `/page4.html?${params.toString()}`;
+            console.log('Redirecting to:', redirectUrl);
+            window.location.href = redirectUrl;
 
         } catch (error) {
+            console.error('グループ更新エラー:', error);
+            
+            if (error.message === 'UPDATE_ENDPOINT_NOT_IMPLEMENTED') {
+                alert('申し訳ございません。現在、メンバー更新機能を実装中です。\n\n一時的に新しいグループとして作成してください。');
+                
+                // 一時的な回避策：新しいグループとして作成
+                this.createGroup();
+                return;
+            }
+            
+            // その他のエラー
+            let errorMessage = 'メンバーの更新に失敗しました。\n\n';
+            if (error.message.includes('500')) {
+                errorMessage += 'サーバーでエラーが発生しました。少し時間をおいてからお試しください。';
+            } else if (error.message.includes('Network')) {
+                errorMessage += 'ネットワーク接続を確認してください。';
+            } else {
+                errorMessage += '詳細: ' + error.message;
+            }
+            
+            alert(errorMessage);
+        } finally {
+            this.setLoading(false);
+        }
+    }
             console.error('グループ更新エラー:', error);
             
             // より詳細なエラー情報を提供
