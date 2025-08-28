@@ -20,7 +20,21 @@ class GroupManager {
         this.pageDescription = document.getElementById('pageDescription');
         this.buttonText = document.getElementById('buttonText');
         
+        // デバッグ: 要素が正しく取得できているかチェック
+        console.log('=== DOM Elements Check ===');
+        console.log('memberInput:', this.memberInput);
+        console.log('addMemberBtn:', this.addMemberBtn);
+        console.log('memberList:', this.memberList);
+        console.log('groupNameInput:', this.groupNameInput);
+        console.log('createBtn:', this.createBtn);
+        
         // 要素が見つからない場合のエラーハンドリング
+        if (!this.memberInput) console.error('❌ memberName input not found');
+        if (!this.addMemberBtn) console.error('❌ addMember button not found');
+        if (!this.memberList) console.error('❌ memberList ul not found');
+        if (!this.groupNameInput) console.error('❌ groupName input not found');
+        if (!this.createBtn) console.error('❌ createGroupBtn not found');
+        
         if (!this.pageTitle || !this.pageDescription || !this.buttonText) {
             console.warn('一部の要素が見つかりません。デフォルトの動作を使用します。');
         }
@@ -96,21 +110,35 @@ class GroupManager {
     }
 
     attachEventListeners() {
+        console.log('=== Setting up Event Listeners ===');
+        
         if (this.addMemberBtn) {
-            this.addMemberBtn.addEventListener('click', () => this.addMember());
+            this.addMemberBtn.addEventListener('click', (e) => {
+                console.log('🖱️ Add member button clicked');
+                e.preventDefault();
+                this.addMember();
+            });
+            console.log('✅ Add member button event listener set');
+        } else {
+            console.error('❌ Cannot set click listener - addMemberBtn is null');
         }
         
         if (this.memberInput) {
             this.memberInput.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
+                    console.log('⌨️ Enter key pressed in member input');
                     e.preventDefault();
                     this.addMember();
                 }
             });
+            console.log('✅ Member input keydown listener set');
+        } else {
+            console.error('❌ Cannot set keydown listener - memberInput is null');
         }
 
         if (this.createBtn) {
             this.createBtn.addEventListener('click', (e) => {
+                console.log('🖱️ Create/Update button clicked');
                 e.preventDefault();
                 if (this.isEditMode) {
                     this.updateGroup();
@@ -118,7 +146,12 @@ class GroupManager {
                     this.createGroup();
                 }
             });
+            console.log('✅ Create/Update button event listener set');
+        } else {
+            console.error('❌ Cannot set click listener - createBtn is null');
         }
+        
+        console.log('=== Event Listeners Setup Complete ===');
     }
 
     addMember() {
@@ -321,7 +354,7 @@ class GroupManager {
 
             // sessionStorageを更新（既存のgroupIdを保持）
             const updatedGroupData = {
-                groupId: this.editingGroupId, // ★重要：既存のIDを保持★
+                groupId: this.editingGroupId, // 既存のIDを保持
                 groupName: groupName,
                 members: this.members
             };
@@ -331,7 +364,7 @@ class GroupManager {
 
             // page4.htmlに戻る（既存のgroupIdを使用）
             const params = new URLSearchParams({
-                groupId: this.editingGroupId, // ★重要：既存のIDを使用★
+                groupId: this.editingGroupId, // 既存のIDを使用
                 groupName: encodeURIComponent(groupName),
                 members: JSON.stringify(this.members)
             });
@@ -359,23 +392,6 @@ class GroupManager {
                 errorMessage += 'ネットワーク接続を確認してください。';
             } else {
                 errorMessage += '詳細: ' + error.message;
-            }
-            
-            alert(errorMessage);
-        } finally {
-            this.setLoading(false);
-        }
-    }
-            console.error('グループ更新エラー:', error);
-            
-            // より詳細なエラー情報を提供
-            let errorMessage = 'メンバーの更新に失敗しました。';
-            if (error.message.includes('404')) {
-                errorMessage += ' グループが見つかりません。';
-            } else if (error.message.includes('500')) {
-                errorMessage += ' サーバーエラーが発生しました。';
-            } else {
-                errorMessage += ' ネットワーク接続を確認してください。';
             }
             
             alert(errorMessage);
