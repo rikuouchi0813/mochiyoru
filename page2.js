@@ -19,6 +19,11 @@ class GroupManager {
         this.pageTitle = document.getElementById('pageTitle');
         this.pageDescription = document.getElementById('pageDescription');
         this.buttonText = document.getElementById('buttonText');
+        
+        // 要素が見つからない場合のエラーハンドリング
+        if (!this.pageTitle || !this.pageDescription || !this.buttonText) {
+            console.warn('一部の要素が見つかりません。デフォルトの動作を使用します。');
+        }
     }
 
     initialize() {
@@ -45,13 +50,21 @@ class GroupManager {
         this.editingGroupId = groupData.groupId;
         this.originalGroupData = { ...groupData };
         
-        // UI更新
-        this.pageTitle.textContent = 'メンバーを編集しよう';
-        this.pageDescription.textContent = 'メンバーを追加・削除して更新しましょう👇';
-        this.buttonText.textContent = 'メンバーを更新';
+        // UI更新（要素が存在する場合のみ）
+        if (this.pageTitle) {
+            this.pageTitle.textContent = 'メンバーを編集しよう';
+        }
+        if (this.pageDescription) {
+            this.pageDescription.textContent = 'メンバーを追加・削除して更新しましょう👇';
+        }
+        if (this.buttonText) {
+            this.buttonText.textContent = 'メンバーを更新';
+        }
         
         // フォームにデータ設定
-        this.groupNameInput.value = groupData.groupName || '';
+        if (this.groupNameInput) {
+            this.groupNameInput.value = groupData.groupName || '';
+        }
         this.members = [...(groupData.members || [])];
         
         this.renderMembers();
@@ -67,35 +80,53 @@ class GroupManager {
         this.editingGroupId = null;
         this.originalGroupData = null;
         
-        // UI更新（デフォルト状態）
-        this.pageTitle.textContent = 'グループを作成しよう';
-        this.pageDescription.textContent = 'グループ名を決めてメンバー全員の名前を追加しましょう👇';
-        this.buttonText.textContent = 'グループを作成';
+        // UI更新（デフォルト状態）- 要素が存在する場合のみ
+        if (this.pageTitle) {
+            this.pageTitle.textContent = 'グループを作成しよう';
+        }
+        if (this.pageDescription) {
+            this.pageDescription.textContent = 'グループ名を決めてメンバー全員の名前を追加しましょう👇';
+        }
+        if (this.buttonText) {
+            this.buttonText.textContent = 'グループを作成';
+        }
         
         this.members = [];
         this.renderMembers();
     }
 
     attachEventListeners() {
-        this.addMemberBtn.addEventListener('click', () => this.addMember());
-        this.memberInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                this.addMember();
-            }
-        });
+        if (this.addMemberBtn) {
+            this.addMemberBtn.addEventListener('click', () => this.addMember());
+        }
+        
+        if (this.memberInput) {
+            this.memberInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.addMember();
+                }
+            });
+        }
 
-        this.createBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (this.isEditMode) {
-                this.updateGroup();
-            } else {
-                this.createGroup();
-            }
-        });
+        if (this.createBtn) {
+            this.createBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (this.isEditMode) {
+                    this.updateGroup();
+                } else {
+                    this.createGroup();
+                }
+            });
+        }
     }
 
     addMember() {
+        if (!this.memberInput) {
+            console.error('メンバー入力フィールドが見つかりません');
+            return;
+        }
+
         const name = this.memberInput.value.trim();
         if (!name) {
             alert('メンバー名を入力してください。');
@@ -123,6 +154,11 @@ class GroupManager {
     }
 
     renderMembers() {
+        if (!this.memberList) {
+            console.error('メンバーリストが見つかりません');
+            return;
+        }
+
         this.memberList.innerHTML = '';
         
         this.members.forEach(member => {
@@ -134,13 +170,20 @@ class GroupManager {
             `;
             
             const removeBtn = li.querySelector('.remove-member');
-            removeBtn.addEventListener('click', () => this.removeMember(member));
+            if (removeBtn) {
+                removeBtn.addEventListener('click', () => this.removeMember(member));
+            }
             
             this.memberList.appendChild(li);
         });
     }
 
     async createGroup() {
+        if (!this.groupNameInput) {
+            console.error('グループ名入力フィールドが見つかりません');
+            return;
+        }
+
         const groupName = this.groupNameInput.value.trim();
         
         if (!groupName) {
@@ -203,6 +246,11 @@ class GroupManager {
     }
 
     async updateGroup() {
+        if (!this.groupNameInput) {
+            console.error('グループ名入力フィールドが見つかりません');
+            return;
+        }
+
         const groupName = this.groupNameInput.value.trim();
         
         if (!groupName) {
@@ -274,6 +322,11 @@ class GroupManager {
     }
 
     setLoading(loading) {
+        if (!this.createBtn || !this.buttonText) {
+            console.warn('ボタン要素が見つかりません');
+            return;
+        }
+
         if (loading) {
             this.createBtn.classList.add('loading');
             this.buttonText.textContent = this.isEditMode ? '更新中...' : '作成中...';
