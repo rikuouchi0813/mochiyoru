@@ -158,7 +158,7 @@ class ItemAssignmentManager {
   }
 
   /* ---------- API ベース URL ---------- */
-  baseUrl(path = "") {
+baseUrl(path = "") {
   if (path === "/items") {
     return `/.netlify/functions/items?groupId=${this.groupData.groupId}`;
   }
@@ -187,7 +187,7 @@ class ItemAssignmentManager {
     }
   }
 
-/* ---------- アイテム保存 ---------- */
+  /* ---------- アイテム保存 ---------- */
 async saveItemToServer(payload) {
   console.log('=== アイテム保存開始 ===');
   console.log('送信データ:', payload);
@@ -211,29 +211,15 @@ async saveItemToServer(payload) {
   console.log('保存成功:', result);
 }
 
- /* ---------- アイテム削除 ---------- */
-async deleteItemFromServer(name) {
-  console.log('=== アイテム削除開始 ===');
-  console.log('削除対象:', name);
-  console.log('URL:', this.baseUrl("/items"));
-  
-  const res = await fetch(this.baseUrl("/items"), {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name }),
-  });
-  
-  console.log('削除レスポンス status:', res.status);
-  
-  if (!res.ok) {
-    const errorText = await res.text();
-    console.error('削除エラー詳細:', errorText);
-    throw new Error(`削除失敗: ${res.status} - ${errorText}`);
+  /* ---------- アイテム削除 ---------- */
+  async deleteItemFromServer(name) {
+    const res = await fetch(this.baseUrl("/items"), {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }),
+    });
+    if (!res.ok) throw new Error("削除失敗");
   }
-  
-  const result = await res.json();
-  console.log('削除成功:', result);
-}
 
   /* ---------- イベント ---------- */
   attachEventListeners() {
@@ -452,6 +438,16 @@ async deleteItemFromServer(name) {
   }
 }
 
+/* ===== 起動 ===== */
+// ItemAssignmentManagerインスタンスをグローバルに保存するため、
+// 先に宣言してから初期化
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    window.itemManager = new ItemAssignmentManager();
+  }
+);
+
 // ヘッダークリックでindex.htmlに戻る処理
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
@@ -522,6 +518,3 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
-
-
-
