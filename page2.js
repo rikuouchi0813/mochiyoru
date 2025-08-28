@@ -228,14 +228,14 @@ class GroupManager {
             
             sessionStorage.setItem('groupData', JSON.stringify(groupData));
 
-            // page4.htmlに遷移
+            // page3.htmlに遷移
             const params = new URLSearchParams({
                 groupId: data.groupId,
                 groupName: encodeURIComponent(groupName),
                 members: JSON.stringify(this.members)
             });
 
-            window.location.href = `/page4.html?${params.toString()}`;
+            window.location.href = `/page3.html?${params.toString()}`;
 
         } catch (error) {
             console.error('グループ作成エラー:', error);
