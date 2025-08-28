@@ -187,15 +187,29 @@ class ItemAssignmentManager {
     }
   }
 
-  /* ---------- アイテム保存 ---------- */
-  async saveItemToServer(payload) {
-    const res = await fetch(this.baseUrl("/items"), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error("保存失敗");
+/* ---------- アイテム保存 ---------- */
+async saveItemToServer(payload) {
+  console.log('=== アイテム保存開始 ===');
+  console.log('送信データ:', payload);
+  console.log('URL:', this.baseUrl("/items"));
+  
+  const res = await fetch(this.baseUrl("/items"), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  
+  console.log('レスポンス status:', res.status);
+  
+  if (!res.ok) {
+    const errorText = await res.text();
+    console.error('サーバーエラー詳細:', errorText);
+    throw new Error(`保存失敗: ${res.status} - ${errorText}`);
   }
+  
+  const result = await res.json();
+  console.log('保存成功:', result);
+}
 
   /* ---------- アイテム削除 ---------- */
   async deleteItemFromServer(name) {
@@ -504,4 +518,5 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
+
 
