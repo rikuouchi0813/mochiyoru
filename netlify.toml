@@ -23,5 +23,6 @@
 
 [[redirects]]
   from = "/group/*"
-  to = "/page4.html"
+  to = "/page4.html?groupId=:splat"
   status = 200
+  force = true
