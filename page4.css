@@ -200,7 +200,7 @@ h2 {
 .column-headers-content {
     flex: 1;
     display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr;
+    grid-template-columns: 1.5fr 1.5fr 1.5fr;
     gap: 12px;
     align-items: center;
     min-width: 0;
@@ -225,7 +225,7 @@ h2 {
 .item-content {
     flex: 1;
     display: grid;
-    grid-template-columns: 2fr 1.5fr 1fr;
+    grid-template-columns: 1.5fr 1.5fr 1.5fr;
     gap: 12px;
     align-items: center;
     min-width: 0;
@@ -727,4 +727,5 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
