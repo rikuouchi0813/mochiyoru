@@ -1,21 +1,7 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+/* CSS Reset - 実際に使用される要素のみ */
+html, body, div, span,
+h1, h2, h3, p, a, img,
+header, footer, section, article, main, ul, li, ol {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,28 +9,18 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+
+/* HTML5 display-role reset */
+article, footer, header, main, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
+
 ol, ul {
 	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
 }
 
 /* ===== ベーススタイル（デスクトップ） ===== */
@@ -70,7 +46,6 @@ header {
     padding: 40px 0 0 0;
 }
 
-/* h1タグを透明にしてレイアウトを維持 */
 header h1 {
     margin: 0;
     padding: 0;
@@ -125,7 +100,6 @@ header h1 {
     margin: 0 auto;
 }
 
-/* h3→h2に変更されたため、h2のスタイルを定義 */
 .intro h2 {
     font-family: 'Mochiy Pop P One', sans-serif;
     font-weight: 400;
@@ -199,7 +173,6 @@ header h1 {
     padding: 0 40px;
 }
 
-/* h3→h2に変更 */
 .features h2.section-title {
     font-family: "Mochiy Pop P One", sans-serif;
     font-weight: 400;
@@ -248,7 +221,6 @@ header h1 {
     border-radius: 12px;
 }
 
-/* h4→h3に変更 */
 .feature-content h3 {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-size: 20px;
@@ -273,13 +245,10 @@ header h1 {
     padding: 0 40px;
 }
 
-/* h3→h2に変更 */
 .how-to-use h2.section-title {
     font-family: "Mochiy Pop P One", sans-serif;
     font-weight: 400;
     text-align: center;
-    font-size: 32px;
-    color: #242424;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -317,7 +286,6 @@ header h1 {
     text-align: center;
 }
 
-/* h4→h3に変更 */
 .step h3 {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-size: 24px;
