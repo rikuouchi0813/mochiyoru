@@ -70,6 +70,14 @@ header {
     padding: 40px 0 0 0;
 }
 
+/* h1タグを透明にしてレイアウトを維持 */
+header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
 /* ===== ロゴボックス ===== */
 .logo-box {
     width: 500px;
@@ -117,7 +125,8 @@ header {
     margin: 0 auto;
 }
 
-.intro h3 {
+/* h3→h2に変更されたため、h2のスタイルを定義 */
+.intro h2 {
     font-family: 'Mochiy Pop P One', sans-serif;
     font-weight: 400;
     font-size: 32px;
@@ -190,7 +199,8 @@ header {
     padding: 0 40px;
 }
 
-.features h3.section-title {
+/* h3→h2に変更 */
+.features h2.section-title {
     font-family: "Mochiy Pop P One", sans-serif;
     font-weight: 400;
     text-align: center;
@@ -238,7 +248,8 @@ header {
     border-radius: 12px;
 }
 
-.feature-content h4 {
+/* h4→h3に変更 */
+.feature-content h3 {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-size: 20px;
     font-weight: 900;
@@ -262,7 +273,8 @@ header {
     padding: 0 40px;
 }
 
-.how-to-use h3.section-title {
+/* h3→h2に変更 */
+.how-to-use h2.section-title {
     font-family: "Mochiy Pop P One", sans-serif;
     font-weight: 400;
     text-align: center;
@@ -305,7 +317,8 @@ header {
     text-align: center;
 }
 
-.step h4 {
+/* h4→h3に変更 */
+.step h3 {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-size: 24px;
     font-weight: 900;
@@ -335,14 +348,6 @@ header {
     line-height: 1.7;
     margin: 25px 0 0 0;
 }
-
-/* .step-content {
-    width: 380px;
-    min-height: 140px;
-    background: #f6fff8;
-    border-radius: 8px;
-    margin: 0 auto 12px;
-} */
 
 .step-content img {
     max-width: 100%;
@@ -460,7 +465,7 @@ footer p {
         max-width: 600px;
     }
     
-    .intro h3 {
+    .intro h2 {
         font-size: 28px;
         margin-top: 15px;
         margin-bottom: 20px;
@@ -498,7 +503,7 @@ footer p {
         margin: 0 auto 60px;
     }
     
-    .features h3.section-title {
+    .features h2.section-title {
         font-size: 24px;
         padding-bottom: 40px;
     }
@@ -519,7 +524,7 @@ footer p {
         max-height: 250px;
     }
     
-    .feature-content h4 {
+    .feature-content h3 {
         font-size: 18px;
         margin: 0 0 12px 0;
     }
@@ -532,7 +537,7 @@ footer p {
         padding: 0 30px;
     }
     
-    .how-to-use h3.section-title {
+    .how-to-use h2.section-title {
         font-size: 24px;
         padding-bottom: 40px;
     }
@@ -553,7 +558,7 @@ footer p {
         padding: 32px 24px 28px 24px;
     }
     
-    .step h4 {
+    .step h3 {
         font-size: 21px;
         margin: 0 0 20px 0;
     }
@@ -621,7 +626,7 @@ footer p {
         max-width: 500px;
     }
     
-    .intro h3 {
+    .intro h2 {
         font-size: 22px;
         margin-bottom: 15px;
     }
@@ -652,7 +657,7 @@ footer p {
         margin: 0 auto 40px;
     }
     
-    .features h3.section-title {
+    .features h2.section-title {
         font-size: 20px;
         padding-bottom: 30px;
     }
@@ -673,7 +678,7 @@ footer p {
         max-height: 200px;
     }
     
-    .feature-content h4 {
+    .feature-content h3 {
         font-size: 17px;
         margin: 0 0 10px 0;
     }
@@ -687,7 +692,7 @@ footer p {
         padding: 0 20px;
     }
     
-    .how-to-use h3.section-title {
+    .how-to-use h2.section-title {
         font-size: 20px;
         padding-bottom: 30px;
     }
@@ -708,7 +713,7 @@ footer p {
         padding: 28px 18px 24px 18px;
     }
     
-    .step h4 {
+    .step h3 {
         font-size: 19px;
         margin: 0 0 18px 0;
     }
@@ -755,4 +760,3 @@ footer p {
         margin-bottom: 30px;
     }
 }
-
