@@ -4,8 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- index.html=page1.html -> Vercelでデプロイするため -->
-    <title>モチヨル - トップページ</title>
+    <title>モチヨル - 持ち物分担で安心と楽しさを</title>
+    <!-- SEO必須：meta description -->
+    <meta name="description" content="モチヨルは、イベントの持ち物分担をリアルタイムで共有できる無料ツール。BBQやキャンプ、パーティーの準備を簡単に。会員登録不要で今すぐ使えます。">
+    <meta name="keywords" content="持ち物分担,イベント準備,持ち物リスト,BBQ準備,キャンプ持ち物,パーティー準備,無料ツール,リアルタイム共有">
+
+    <!-- canonical URL（重複コンテンツ対策） -->
+    <link rel="canonical" href="https://mochiyoru.jp/">
+
     <link rel="stylesheet" href="page1.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,6 +51,30 @@
     <meta name="twitter:title" content="モチヨル - 持ち物分担を簡単に">
     <meta name="twitter:description" content="イベントの持ち物分担をリアルタイムで共有。会員登録不要で今すぐ使える無料ツール">
     <meta name="twitter:image" content="https://mochiyoru.jp/img/ogp.png">
+
+    <!-- 構造化データ（JSON-LD）でGoogleにアプリの詳細を伝える -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "モチヨル",
+      "url": "https://mochiyoru.jp",
+      "description": "イベントの持ち物分担をリアルタイムで共有できる無料ツール",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "JPY"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "りっくん"
+      },
+      "datePublished": "2025-07-07",
+      "dateModified": "2025-08-30"
+    }
+    </script>
 </head>
 
 <body>
@@ -52,12 +82,12 @@
         <header>
             <div class="logo-box">
                 <img src="img/tagline.svg" alt="何を・誰が・どれだけ持ち寄る？" class="subtitle-image">
-                <img src="img/title.svg" alt="モチヨル" class="h1-image">
+                <h1><img src="img/title.svg" alt="モチヨル" class="h1-image"></h1>
             </div>
         </header>
 
         <section class="intro">
-            <h3>持ち物をシェアして<br>イベントをもっと楽しく！</h3>
+            <h2>持ち物をシェアして<br>イベントをもっと楽しく！</h2>
             <p>「モチヨル」は、誰が・何を・どれくらい持ってくるのかをひと目でわかるようにする無料サービスです。<br>
                 みんなで持ち寄るアイテムをシェアして、準備から当日まで、イベントをもっと楽しく、もっと笑顔に！</p>
             <a href="page2.html" class="start-button">はじめる
@@ -66,84 +96,87 @@
         </section>
     </div>
 
-    <section class="emoji-bar">
-        <span>🎫</span>
-        <span>👜</span>
-        <span>📱</span>
-        <span>😄</span>
-        <span>❤️</span>
-        <span>📷</span>
-        <span>🚙</span>
+    <section class="emoji-bar" aria-label="対応イベントアイコン">
+        <span role="img" aria-label="チケット">🎫</span>
+        <span role="img" aria-label="バッグ">👜</span>
+        <span role="img" aria-label="スマートフォン">📱</span>
+        <span role="img" aria-label="笑顔">😄</span>
+        <span role="img" aria-label="ハート">❤️</span>
+        <span role="img" aria-label="カメラ">📷</span>
+        <span role="img" aria-label="車">🚙</span>
     </section>
 
-    <!-- モチヨルの特徴セクション -->
-    <section class="features">
-        <h3 class="section-title">モチヨルの特徴</h3>
-        <ul class="feature-list">
-            <li class="feature-item">
-                <div class="feature-content">
-                    <div class="feature-image">
-                        <img src="img/feature-01.svg" alt="会員登録なし・URLだけで即共有">
-                    </div>
-                    <h4>会員登録なし・URLだけで共有可能</h4>
-                    <p>アプリのダウンロードも会員登録も一切不要！<br>URLを共有するだけで、全員が同じリストを見ることができます。</p>
-                </div>
-            </li>
-            <li class="feature-item">
-                <div class="feature-content">
-                    <div class="feature-image">
-                        <img src="img/feature-02.svg" alt="リアルタイム同期で『大丈夫かな』の不安をゼロに">
-                    </div>
-                    <h4>リアルタイム同期で安心</h4>
-                    <p>誰かが持ち物を変更した瞬間、全員の画面に反映。<br>常に最新の情報を全員で共有できるので、混乱や不安がありません。</p>
-                </div>
-            </li>
-            <li class="feature-item">
-                <div class="feature-content">
-                    <div class="feature-image">
-                        <img src="img/feature-03.svg" alt="持ち物管理に特化した直感的な操作">
-                    </div>
-                    <h4>持ち物管理に特化した直感的な操作</h4>
-                    <p>「持ち物」「担当者」「数量」の3つを選ぶだけ。<br>持ち物分担に特化した設計で、スマホでも簡単に操作できます。</p>
-                </div>
-            </li>
-        </ul>
-    </section>
+    <!-- メインコンテンツをmainタグで囲む（セマンティックHTML） -->
+    <main>
+        <!-- モチヨルの特徴セクション -->
+        <section class="features">
+            <h2 class="section-title">モチヨルの特徴</h2>
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <article class="feature-content">
+                        <div class="feature-image">
+                            <img src="img/feature-01.svg" alt="会員登録不要でURLを共有するだけで使える機能の説明図">
+                        </div>
+                        <h3>会員登録なし・URLだけで共有可能</h3>
+                        <p>アプリのダウンロードも会員登録も一切不要！<br>URLを共有するだけで、全員が同じリストを見ることができます。</p>
+                    </article>
+                </li>
+                <li class="feature-item">
+                    <article class="feature-content">
+                        <div class="feature-image">
+                            <img src="img/feature-02.svg" alt="リアルタイム同期機能で全員の画面が自動更新される様子">
+                        </div>
+                        <h3>リアルタイム同期で安心</h3>
+                        <p>誰かが持ち物を変更した瞬間、全員の画面に反映。<br>常に最新の情報を全員で共有できるので、混乱や不安がありません。</p>
+                    </article>
+                </li>
+                <li class="feature-item">
+                    <article class="feature-content">
+                        <div class="feature-image">
+                            <img src="img/feature-03.svg" alt="持ち物・担当者・数量の3つを選ぶだけの簡単操作画面">
+                        </div>
+                        <h3>持ち物管理に特化した直感的な操作</h3>
+                        <p>「持ち物」「担当者」「数量」の3つを選ぶだけ。<br>持ち物分担に特化した設計で、スマホでも簡単に操作できます。</p>
+                    </article>
+                </li>
+            </ul>
+        </section>
 
-    <section class="how-to-use">
-        <h3 class="section-title">モチヨルの使い方</h3>
-        <ul class="steps">
-            <li class="step">
-                <span class="step-badge">01</span>
-                <h4>グループを作成</h4>
-                <div class="step-content">
-                    <img src="img/how-to-use-01.png" alt="グループを作成">
-                </div>
-                <p>みんなで使うためのグループを作成します。<br>作成したら、メンバー全員の名前を追加しましょう！</p>
-            </li>
-            <div class="step-arrow"></div>
-            <li class="step">
-                <span class="step-badge">02</span>
-                <h4>メンバーにURLをシェア</h4>
-                <div class="step-content">
-                    <img src="img/how-to-use-02.png" alt="メンバーにURLをシェア">
-                </div>
-                <p>URLをコピーしてLINEなどでメンバーに共有しましょう！</p>
-            </li>
-            <div class="step-arrow"></div>
-            <li class="step">
-                <span class="step-badge">03</span>
-                <h4>持ち物を分担</h4>
-                <div class="step-content">
-                    <img src="img/how-to-use-03.png" alt="持ち物を分担">
-                </div>
-                <p>持っていきたい物を追加してリストアップ。<br>誰がいくつ持ち寄るか選んでいきましょう！</p>
-            </li>
-        </ul>
-        <a href="page2.html" class="start-button">はじめる
-            <span class="arrow"></span>
-        </a>
-    </section>
+        <section class="how-to-use">
+            <h2 class="section-title">モチヨルの使い方</h2>
+            <ol class="steps">
+                <li class="step">
+                    <span class="step-badge">01</span>
+                    <h3>グループを作成</h3>
+                    <div class="step-content">
+                        <img src="img/how-to-use-01.png" alt="グループ作成画面のスクリーンショット">
+                    </div>
+                    <p>みんなで使うためのグループを作成します。<br>作成したら、メンバー全員の名前を追加しましょう！</p>
+                </li>
+                <div class="step-arrow" aria-hidden="true"></div>
+                <li class="step">
+                    <span class="step-badge">02</span>
+                    <h3>メンバーにURLをシェア</h3>
+                    <div class="step-content">
+                        <img src="img/how-to-use-02.png" alt="URL共有画面のスクリーンショット">
+                    </div>
+                    <p>URLをコピーしてLINEなどでメンバーに共有しましょう！</p>
+                </li>
+                <div class="step-arrow" aria-hidden="true"></div>
+                <li class="step">
+                    <span class="step-badge">03</span>
+                    <h3>持ち物を分担</h3>
+                    <div class="step-content">
+                        <img src="img/how-to-use-03.png" alt="持ち物分担画面のスクリーンショット">
+                    </div>
+                    <p>持っていきたい物を追加してリストアップ。<br>誰がいくつ持ち寄るか選んでいきましょう！</p>
+                </li>
+            </ol>
+            <a href="page2.html" class="start-button">はじめる
+                <span class="arrow"></span>
+            </a>
+        </section>
+    </main>
 
     <footer>
         <div class="footer-lists">
@@ -167,6 +200,3 @@
 </body>
 
 </html>
-
-
-
