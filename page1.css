@@ -32,7 +32,7 @@ ol, ul {
     font-weight: 400;
     font-display: swap;
     src: local('Bevan Italic'),
-         url('./fonts/bevan-v25-latin-italic.woff2') format('woff2');
+         url('/fonts/bevan-v25-latin-italic.woff2') format('woff2');
 }
 
 /* M PLUS 1p */
@@ -42,7 +42,7 @@ ol, ul {
     font-weight: 500;
     font-display: swap;
     src: local('M PLUS 1p Medium'),
-         url('./fonts/m-plus-1p-v31-latin-500.woff2') format('woff2');
+         url('/fonts/m-plus-1p-v31-latin-500.woff2') format('woff2');
 }
 
 /* Mochiy Pop P One */
@@ -52,7 +52,7 @@ ol, ul {
     font-weight: 400;
     font-display: swap;
     src: local('Mochiy Pop P One'),
-         url('./fonts/mochiy-pop-p-one-v11-latin-regular.woff2') format('woff2');
+         url('/fonts/mochiy-pop-p-one-v11-latin-regular.woff2') format('woff2');
 }
 
 /* Zen Kaku Gothic New 900 */
@@ -62,7 +62,7 @@ ol, ul {
     font-weight: 900;
     font-display: swap;
     src: local('Zen Kaku Gothic New Black'),
-         url('./fonts/zen-kaku-gothic-new-v17-latin-900.woff2') format('woff2');
+         url('/fonts/zen-kaku-gothic-new-v17-latin-900.woff2') format('woff2');
 }
 
 /* Zen Kaku Gothic New 500 */
@@ -72,7 +72,7 @@ ol, ul {
     font-weight: 500;
     font-display: swap;
     src: local('Zen Kaku Gothic New Medium'),
-         url('./fonts/zen-kaku-gothic-new-v17-latin-500.woff2') format('woff2');
+         url('/fonts/zen-kaku-gothic-new-v17-latin-500.woff2') format('woff2');
 }
 
 /* ===== ベーススタイル（デスクトップ） ===== */
@@ -780,5 +780,6 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
