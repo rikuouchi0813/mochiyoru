@@ -4,30 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>モチヨル - 持ち物の追加・分担</title>
-    <link rel="stylesheet" href="/page4.css">
-
+    
+    <!-- SEO必須：meta description -->
+    <meta name="description" content="モチヨルで持ち物を追加して分担。誰が何をどれくらい持ってくるか簡単に管理。リアルタイムで全員と共有できます。">
+    <meta name="keywords" content="モチヨル,持ち物分担,持ち物追加,イベント準備,リアルタイム共有,BBQ,キャンプ">
+    
+    <!-- canonical URL（重複コンテンツ対策） -->
+    <link rel="canonical" href="https://mochiyoru.jp/page4.html">
+    
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
     
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WN64QR07F9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-WN64QR07F9');
-</script>
-
-    <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4388621219050188"
-     crossorigin="anonymous"></script> 
+    <!-- DNS Prefetch で接続を高速化 -->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+    
+    <!-- CSSを最優先で読み込み -->
+    <link rel="preload" href="/page4.css" as="style">
+    <link rel="stylesheet" href="/page4.css">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content="モチヨル - 持ち物の追加・分担">
+    <meta property="og:description" content="持ち物を追加して分担。誰が何をどれくらい持ってくるか簡単に管理できます。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mochiyoru.jp/page4.html">
+    <meta property="og:image" content="https://mochiyoru.jp/img/ogp.png">
+    <meta property="og:site_name" content="モチヨル">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="モチヨル - 持ち物の追加・分担">
+    <meta name="twitter:description" content="持ち物を追加して分担。リアルタイムで全員と共有">
+    <meta name="twitter:image" content="https://mochiyoru.jp/img/ogp.png">
+    
+    <!-- 構造化データ（JSON-LD） -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://mochiyoru.jp/page4.html",
+      "name": "持ち物の追加・分担 - モチヨル",
+      "description": "持ち物を追加して、誰が何をどれくらい持ってくるか分担できます。",
+      "url": "https://mochiyoru.jp/page4.html",
+      "isPartOf": {
+        "@type": "WebApplication",
+        "name": "モチヨル",
+        "url": "https://mochiyoru.jp",
+        "applicationCategory": "UtilitiesApplication"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ホーム",
+          "item": "https://mochiyoru.jp"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "グループ作成",
+          "item": "https://mochiyoru.jp/page2.html"
+        },{
+          "@type": "ListItem",
+          "position": 3,
+          "name": "URL共有",
+          "item": "https://mochiyoru.jp/page3.html"
+        },{
+          "@type": "ListItem",
+          "position": 4,
+          "name": "持ち物分担",
+          "item": "https://mochiyoru.jp/page4.html"
+        }]
+      }
+    }
+    </script>
 </head>
     
 <body>
     <div class="content-wrapper">
         <header onclick="location.href='index.html'">
-            <img src="/img/title.svg" alt="モチヨル" class="h1-image">
+            <img src="/img/title.svg" alt="モチヨル" class="h1-image" width="120" height="27" loading="eager">
         </header>
         <main>
             <section class="form-section">
@@ -69,11 +126,44 @@
         <hr>
         <p>&copy; 2025 モチヨル</p>
     </footer>
-    <script src="/page4.js"></script>
+    
+    <!-- JavaScriptファイルをdefer属性で非ブロッキング化 -->
+    <script src="/page4.js" defer></script>
+    
+    <!-- Google Analytics と AdSense をページ読み込み後に遅延実行 -->
+    <script>
+        // ページのアイドル時またはロード後にGoogleスクリプトを読み込む
+        function loadGoogleScripts() {
+            // Google Analytics
+            const gtagScript = document.createElement('script');
+            gtagScript.async = true;
+            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-WN64QR07F9';
+            document.head.appendChild(gtagScript);
+            
+            gtagScript.onload = function() {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-WN64QR07F9');
+            };
+            
+            // Google AdSense
+            const adsenseScript = document.createElement('script');
+            adsenseScript.async = true;
+            adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4388621219050188';
+            adsenseScript.crossOrigin = 'anonymous';
+            document.head.appendChild(adsenseScript);
+        }
+        
+        // requestIdleCallbackが使えるブラウザでは優先的に使用
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadGoogleScripts);
+        } else {
+            // 対応していない場合は、ページ読み込み完了後に実行
+            window.addEventListener('load', function() {
+                setTimeout(loadGoogleScripts, 1);
+            });
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
