@@ -1,21 +1,8 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+/* CSS Reset - 実際に使用される要素のみ */
+html, body, div, span,
+h2, p, a, img,
+header, footer, section, main, ul, li,
+input, button, select, option {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,80 +10,61 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+
+/* HTML5 display-role reset */
+footer, header, main, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
-ol, ul {
+
+ul {
 	list-style: none;
 }
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
 
-/* ローカルフォントの定義 */
-/* bevan-italic - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Bevan';
-  font-style: italic;
-  font-weight: 400;
-  src: url('../fonts/bevan-v25-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
+/* ローカルフォントの定義（使用するフォントのみ） */
 /* m-plus-1p-500 - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'M PLUS 1p';
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/m-plus-1p-v31-japanese_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/m-plus-1p-v31-japanese_latin-500.woff2') format('woff2');
+}
+
+/* m-plus-1p-700 - japanese_latin */
+@font-face {
+  font-display: swap;
+  font-family: 'M PLUS 1p';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/m-plus-1p-v31-japanese_latin-700.woff2') format('woff2');
 }
 
 /* mochiy-pop-p-one-regular - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'Mochiy Pop P One';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/mochiy-pop-p-one-v11-japanese_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/mochiy-pop-p-one-v11-japanese_latin-regular.woff2') format('woff2');
 }
 
 /* zen-kaku-gothic-new-500 - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'Zen Kaku Gothic New';
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-500.woff2') format('woff2');
 }
 
-/* zen-kaku-gothic-new-900 - japanese_latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Zen Kaku Gothic New';
-  font-style: normal;
-  font-weight: 900;
-  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
-/* ===== ベーススタイル（デスクトップ） ===== */
+/* Critical CSS - Above the fold styles */
 html {
     box-sizing: border-box;
-    font-family: 'M PLUS 1p', sans-serif;
+    font-family: 'M PLUS 1p', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     margin: 0 auto;
     overflow-x: hidden;
 }
@@ -117,7 +85,7 @@ body {
     flex-direction: column;
 }
 
-/* ===== ヘッダー ===== */
+/* ===== ヘッダー（Critical） ===== */
 header {
     text-align: center;
     padding: 30px 0;
@@ -131,7 +99,7 @@ header {
     height: auto;
 }
 
-/* ===== メインコンテンツ ===== */
+/* ===== メインコンテンツ（Critical） ===== */
 main {
     flex: 1;
     display: flex;
@@ -145,7 +113,7 @@ main {
     text-align: center;
 }
 
-/* ===== 見出し ===== */
+/* ===== 見出し（Critical） ===== */
 h2 {
     font-family: "Mochiy Pop P One", sans-serif;
     font-weight: 400;
@@ -156,7 +124,7 @@ h2 {
     text-align: center;
 }
 
-/* ===== 入力セクション ===== */
+/* ===== 入力セクション（Critical） ===== */
 .input-section {
     display: flex;
     gap: 12px;
@@ -176,20 +144,21 @@ h2 {
     font-family: "M PLUS 1p", sans-serif;
     font-size: 16px;
     outline: none;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.2s ease;
     box-sizing: border-box;
     min-width: 0;
+    background-color: #fff;
 }
 
 #itemInput:focus {
-    border-color: #4DD5DA;
+    border-color: #00E1A9;
 }
 
 #addButton {
     width: 80px;
     height: 54px;
     padding: 0;
-    background-color: #4DD5DA;
+    background-color: #00E1A9;
     border: none;
     border-radius: 8px;
     color: white;
@@ -197,14 +166,14 @@ h2 {
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
     white-space: nowrap;
     box-sizing: border-box;
     flex-shrink: 0;
 }
 
 #addButton:hover {
-    background-color: #45b7b8;
+    background-color: #00c995;
 }
 
 /* Items List */
@@ -215,25 +184,7 @@ h2 {
     margin-right: auto;
 }
 
-.item-row {
-    background: rgba(232, 248, 245, 0.8);
-    padding: 12px 16px;
-    margin-bottom: 16px;
-    border-radius: 8px;
-    border-left: 4px solid #1dd1a1;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-sizing: border-box;
-    animation: fadeIn 0.5s ease-out;
-}
-
-.item-row:nth-child(even) {
-    animation-delay: 0.1s;
-}
-
-/* シンプルなカラムヘッダー */
+/* Column Headers（最適化） */
 .column-headers {
     display: flex;
     align-items: center;
@@ -263,8 +214,23 @@ h2 {
 }
 
 .header-spacer {
-    width: 32px; /* 削除ボタンと同じ幅 */
+    width: 32px;
     flex-shrink: 0;
+}
+
+/* Item Row（最適化） */
+.item-row {
+    background: rgba(232, 248, 245, 0.8);
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border-left: 4px solid #00E1A9;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-sizing: border-box;
+    will-change: transform, opacity;
 }
 
 /* Item Content */
@@ -308,7 +274,7 @@ h2 {
     font-size: 14px;
     color: #666;
     cursor: pointer;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.2s ease;
     min-width: 0;
     height: 44px;
     display: flex;
@@ -317,11 +283,17 @@ h2 {
     width: 100%;
     text-align: center;
     min-width: 80px;
+    font-family: "M PLUS 1p", sans-serif;
 }
 
 .item-select:focus {
     outline: none;
-    border-color: #1dd1a1;
+    border-color: #00E1A9;
+}
+
+.item-select option[value="全員"] {
+    font-weight: bold;
+    color: #00E1A9;
 }
 
 /* No Items Message */
@@ -350,13 +322,13 @@ h2 {
     font-size: 18px;
 }
 
-/* Delete Button */
+/* Delete Button（最適化） */
 .delete-btn {
     width: 32px;
     height: 32px;
     border: none;
     border-radius: 50%;
-    background-color: #4DD5DA;
+    background-color: #00E1A9;
     color: white;
     font-size: 16px;
     font-weight: bold;
@@ -364,7 +336,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     flex-shrink: 0;
     line-height: 1;
     position: relative;
@@ -373,14 +345,21 @@ h2 {
     max-width: 32px;
     padding: 0;
     box-sizing: border-box;
+    will-change: transform, background-color;
 }
 
 .delete-btn:hover {
-    background-color: #45b7b8;
-    transform: scale(1.1);
+    background-color: #00c995;
+    transform: scale(1.05);
 }
 
-/* Edit Button */
+.delete-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Edit Button（最適化） */
 .edit-button-wrapper {
     display: flex;
     align-items: center;
@@ -400,11 +379,12 @@ h2 {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     position: relative;
     overflow: hidden;
     padding: 0;
     flex-shrink: 0;
+    will-change: transform, background-color;
 }
 
 .edit-btn:hover {
@@ -427,7 +407,7 @@ h2 {
     font-weight: 700;
 }
 
-/* ===== フッター ===== */
+/* ===== フッター（非Critical - 遅延読み込み可能） ===== */
 footer {
     background-color: #404040;
     color: #fff;
@@ -488,23 +468,27 @@ footer p {
 .footer-lists a {
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
 .footer-lists a:hover {
     color: #00E1A9;
 }
 
-/* Animation */
+/* Animation（GPU最適化） */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translate3d(0, 20px, 0);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate3d(0, 0, 0);
     }
+}
+
+.item-row {
+    animation: fadeIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 /* ===== タブレット対応（768px以下） ===== */
@@ -569,7 +553,7 @@ footer p {
     }
     
     .header-spacer {
-        width: 28px; /* 削除ボタンと同じ幅 */
+        width: 28px;
     }
     
     .item-content {
@@ -696,7 +680,7 @@ footer p {
     }
     
     .header-spacer {
-        width: 24px; /* 削除ボタンと同じ幅 */
+        width: 24px;
     }
     
     .item-content {
@@ -774,5 +758,24 @@ footer p {
     }
 }
 
+/* Preload hint for critical resources */
+.h1-image {
+    content-visibility: auto;
+}
 
+/* Performance optimizations */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
 
+input, select, button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Reduce layout shifts */
+.item-row,
+.column-headers {
+    contain: layout style paint;
+}
