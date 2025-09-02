@@ -1,0 +1,573 @@
+/* use-cases.css - 活用事例ページ用スタイル */
+
+/* リセットCSS（既存ページと共通） */
+html, body {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	height: 100%;
+}
+
+div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* ローカルフォントの定義 */
+/* bevan-italic - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Bevan';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/bevan-v25-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  
+  /* m-plus-1p-500 - japanese_latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'M PLUS 1p';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/m-plus-1p-v31-japanese_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  
+  /* mochiy-pop-p-one-regular - japanese_latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Mochiy Pop P One';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/mochiy-pop-p-one-v11-japanese_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  
+  /* zen-kaku-gothic-new-500 - japanese_latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Zen Kaku Gothic New';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+  
+  /* zen-kaku-gothic-new-900 - japanese_latin */
+  @font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Zen Kaku Gothic New';
+    font-style: normal;
+    font-weight: 900;
+    src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  } 
+
+/* ===== ベーススタイル ===== */
+html {
+    box-sizing: border-box;
+    font-family: 'M PLUS 1p', sans-serif;
+    max-width: 100vw;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #f2fff1;
+    min-height: 100vh;
+    height: 100%;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+}
+
+/* ===== ヘッダー ===== */
+header {
+    text-align: center;
+    padding: 12px 0;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto 30px auto;
+    cursor: pointer;
+}
+
+.h1-image {
+    font-family: "Mochiy Pop P One", sans-serif;
+    font-size: 24px;
+    color: #00E1A9;
+    margin: 0;
+}
+
+/* ===== メインコンテンツ ===== */
+main {
+    max-width: calc(100vw - 40px);
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* ===== タイトル ===== */
+h1 {
+    font-family: "Mochiy Pop P One", sans-serif;
+    color: #00E1A9;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 400;
+}
+
+/* ===== 見出し ===== */
+h2 {
+    color: #242424;
+    border-bottom: 2px solid #00E1A9;
+    padding-bottom: 8px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+h3 {
+    color: #404040;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+h4 {
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ===== テキスト ===== */
+p {
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.intro {
+    font-size: 15px;
+    font-weight: 500;
+    color: #242424;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #00E1A9;
+}
+
+/* ===== 活用事例セクション ===== */
+.use-case-section {
+    margin: 50px 0;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.use-case-section:last-of-type {
+    border-bottom: none;
+}
+
+/* シナリオボックス */
+.scenario-box {
+    background: linear-gradient(135deg, #f0fdfc 0%, #f0f9ff 100%);
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid #e0f2fe;
+}
+
+.scenario-box h3 {
+    margin-top: 0;
+    color: #00E1A9;
+}
+
+/* アイテムリスト例 */
+.item-list-example {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    margin: 25px 0;
+}
+
+.item-list-example h3 {
+    margin-top: 0;
+    color: #242424;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 10px;
+}
+
+.item-category {
+    margin: 20px 0;
+    padding-left: 10px;
+}
+
+.item-category h4 {
+    color: #00E1A9;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.item-category ul {
+    padding-left: 25px;
+}
+
+.item-category li {
+    list-style-type: disc;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* ヒントボックス */
+.tips-box {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.tips-box h3 {
+    margin-top: 0;
+    color: #856404;
+}
+
+.tips-box p {
+    margin-bottom: 0;
+    color: #856404;
+}
+
+/* その他のシナリオ */
+.other-scenarios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.scenario-card {
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.scenario-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.scenario-card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #00E1A9;
+    font-size: 15px;
+}
+
+.scenario-card p {
+    margin-bottom: 0;
+    font-size: 13px;
+    color: #666;
+}
+
+/* ===== CTA セクション ===== */
+.cta-section {
+    background: linear-gradient(135deg, rgba(180, 255, 205, 0.2), rgba(87, 231, 247, 0.2));
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    margin: 40px 0;
+}
+
+.cta-section h2 {
+    border-bottom: none;
+    color: #00E1A9;
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    font-size: 15px;
+    color: #242424;
+    margin-bottom: 25px;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* ===== ボタン ===== */
+.group-button {
+    width: 240px;
+    min-width: 240px;
+    height: 49px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #35E4A1 0%, #08DBF3 100%);
+    color: white;
+    padding: 10px 25px 10px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
+}
+
+.group-button.secondary {
+    background: #fff;
+    color: #00E1A9;
+    border: 2px solid #00E1A9;
+}
+
+.group-button .arrow {
+    width: 36px;
+    height: 13px;
+    background-color: white;
+    clip-path: polygon(0 40%, 50% 40%, 50% 15%, 100% 50%, 50% 85%, 50% 60%, 0 60%);
+    margin-left: auto;
+}
+
+.group-button.secondary .arrow {
+    background-color: #00E1A9;
+}
+
+.group-button:hover {
+    opacity: 0.9;
+    color: white;
+    text-decoration: none;
+}
+
+.group-button.secondary:hover {
+    background: #f0fdfc;
+    color: #00E1A9;
+}
+
+/* ===== フッター ===== */
+footer {
+    background-color: #404040;
+    color: #fff;
+    padding: 30px 16px 0 16px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+    margin-bottom: 0;
+}
+
+footer hr {
+    border: none;
+    border-top: 1px solid #888;
+    margin: 14px 0 8px 0;
+    width: 100%;
+    max-width: 600px;
+    opacity: 0.4;
+}
+
+footer p {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    max-width: 600px;
+}
+
+.footer-lists {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 8px;
+    gap: 16px;
+}
+
+.footer-lists ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+
+.footer-lists li {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    margin-bottom: 8px;
+    opacity: 0.95;
+    list-style-type: none;
+}
+
+.footer-lists a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-lists a:hover {
+    color: #00E1A9;
+}
+
+/* ===== レスポンシブ対応 ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+        border-radius: 8px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    h2 {
+        font-size: 18px;
+    }
+    
+    h3 {
+        font-size: 15px;
+    }
+    
+    main {
+        max-width: calc(100vw - 20px);
+        padding: 15px;
+    }
+    
+    .other-scenarios {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-section {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 15px;
+    }
+    
+    h1 {
+        font-size: 22px;
+        margin-bottom: 25px;
+    }
+    
+    h2 {
+        font-size: 16px;
+        margin-top: 30px;
+    }
+    
+    .scenario-box,
+    .item-list-example,
+    .tips-box {
+        padding: 15px;
+    }
+    
+    .item-category {
+        padding-left: 5px;
+    }
+    
+    .scenario-card {
+        padding: 15px;
+    }
+    
+    .cta-section {
+        padding: 25px 15px;
+    }
+    
+    .group-button {
+        width: 200px;
+        min-width: 200px;
+        font-size: 14px;
+    }
+    
+    footer {
+        padding: 24px 12px 0 12px;
+    }
+    
+    footer p {
+        font-size: 11px;
+    }
+    
+    .footer-lists {
+        gap: 12px;
+        margin-bottom: 6px;
+    }
+    
+    .footer-lists li {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+    
+    footer hr {
+        margin: 12px 0 6px 0;
+    }
+}
