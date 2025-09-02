@@ -20,13 +20,8 @@ class GroupManager {
     let membersParam = urlParams.get("members");
     let groupId = urlParams.get("groupId");
 
-    console.log("URL parameters:", { groupName, membersParam, groupId });
-
     // URLパラメータがない場合はセッションストレージから取得
     if (!groupName && !membersParam) {
-      console.log(
-        "URLパラメータが見つからないため、セッションストレージから読み込みます"
-      );
       try {
         const sessionData = sessionStorage.getItem("groupData");
         if (sessionData) {
@@ -35,11 +30,10 @@ class GroupManager {
           membersParam = JSON.stringify(
             data.members.map((name) => ({ name: name }))
           );
-          groupId = data.groupId; // 既存のIDを保持
-          console.log("セッションストレージからデータを復元:", data);
+          groupId = data.groupId;
         }
       } catch (error) {
-        console.error("セッションストレージからの読み込みエラー:", error);
+        // エラーは無視
       }
     }
 
@@ -65,21 +59,14 @@ class GroupManager {
           }
         }
       } catch (error) {
-        console.error("メンバーデータの解析に失敗しました:", error);
         members = [];
       }
     }
 
-    // ★重要な修正★ groupIdの処理
-    // URLパラメータまたはsessionStorageから既存のIDを取得できない場合のみ新規生成
+    // groupIdの処理
     if (!groupId) {
-      console.log("既存のgroupIdが見つからないため、新規生成します");
       groupId = this.generateGroupId();
-    } else {
-      console.log("既存のgroupIdを使用します:", groupId);
     }
-
-    console.log("読み込まれたグループデータ:", { groupName, members, groupId });
 
     return {
       groupName: groupName,
@@ -92,9 +79,7 @@ class GroupManager {
   generateGroupId() {
     const timestamp = Date.now().toString(36);
     const randomStr = Math.random().toString(36).substring(2, 8);
-    const newId = `${timestamp}${randomStr}`;
-    console.log("新しいgroupIdを生成しました:", newId);
-    return newId;
+    return `${timestamp}${randomStr}`;
   }
 
   // グループURLを生成
@@ -104,10 +89,6 @@ class GroupManager {
 
   // 初期化処理
   init() {
-    // デバッグ情報をコンソールに出力
-    console.log("GroupManager initialized with data:", this.groupData);
-    console.log("Base URL:", this.baseUrl);
-
     this.updateUI();
     this.setupEventListeners();
     this.saveGroupDataToSessionStorage();
@@ -119,9 +100,6 @@ class GroupManager {
     const urlElement = document.getElementById("groupUrl");
     if (urlElement) {
       urlElement.value = groupUrl;
-      console.log("URL updated:", groupUrl);
-    } else {
-      console.error("URL input element not found");
     }
 
     // 次のステップボタンにもグループ情報を含める
@@ -133,23 +111,7 @@ class GroupManager {
         members: JSON.stringify(this.groupData.members),
       });
       nextStepBtn.href = `page4.html?${params.toString()}`;
-      console.log("Next step button updated:", nextStepBtn.href);
-    } else {
-      console.error("Next step button not found");
     }
-
-    // グループ情報を表示（デバッグ用）
-    this.displayGroupInfo();
-  }
-
-  // グループ情報を表示（デバッグ用）
-  displayGroupInfo() {
-    console.log("=== グループ情報 ===");
-    console.log("グループ名:", this.groupData.groupName);
-    console.log("メンバー数:", this.groupData.members.length);
-    console.log("メンバー:", this.groupData.members);
-    console.log("グループID:", this.groupData.groupId);
-    console.log("グループURL:", this.generateGroupUrl());
   }
 
   // イベントリスナーの設定
@@ -158,9 +120,6 @@ class GroupManager {
     const copyBtn = document.getElementById("copyBtn");
     if (copyBtn) {
       copyBtn.addEventListener("click", () => this.copyUrl());
-      console.log("Copy button event listener added");
-    } else {
-      console.error("Copy button not found");
     }
 
     // URL入力欄の設定
@@ -171,7 +130,6 @@ class GroupManager {
   setupUrlInput() {
     const urlInput = document.getElementById("groupUrl");
     if (!urlInput) {
-      console.error("URL input not found");
       return;
     }
 
@@ -234,8 +192,6 @@ class GroupManager {
       ? urlToCopy
       : `https://${urlToCopy}`;
 
-    console.log("Copying URL:", fullUrl);
-
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(fullUrl);
@@ -244,7 +200,6 @@ class GroupManager {
         this.fallbackCopyUrl(fullUrl);
       }
     } catch (err) {
-      console.error("コピーに失敗しました:", err);
       this.fallbackCopyUrl(fullUrl);
     }
   }
@@ -269,7 +224,6 @@ class GroupManager {
         this.showCopyError();
       }
     } catch (err) {
-      console.error("フォールバックコピーに失敗しました:", err);
       this.showCopyError();
     }
 
@@ -278,7 +232,6 @@ class GroupManager {
 
   // コピー成功メッセージを表示
   showCopySuccess() {
-    console.log("Copy successful");
     const successMessage = document.getElementById("copySuccessMessage");
     if (successMessage) {
       successMessage.textContent = "コピーしました！";
@@ -292,7 +245,6 @@ class GroupManager {
 
   // コピーエラーメッセージを表示
   showCopyError() {
-    console.log("Copy failed");
     const successMessage = document.getElementById("copySuccessMessage");
     if (successMessage) {
       successMessage.textContent = "コピーに失敗しました";
@@ -320,7 +272,7 @@ class GroupManager {
       );
       sessionStorage.setItem("currentGroupId", this.groupData.groupId);
 
-      // ★重要★ groupDataも更新（page4とpage2での整合性確保）
+      // groupDataも更新（page4とpage2での整合性確保）
       sessionStorage.setItem("groupData", JSON.stringify({
         groupId: this.groupData.groupId,
         groupName: this.groupData.groupName,
@@ -329,9 +281,8 @@ class GroupManager {
         )
       }));
 
-      console.log("Group data saved to SessionStorage:", dataToSave);
     } catch (err) {
-      console.error("グループデータの保存に失敗しました:", err);
+      // エラーは無視
     }
   }
 
@@ -341,7 +292,6 @@ class GroupManager {
       const data = sessionStorage.getItem(`group_${groupId}`);
       return data ? JSON.parse(data) : null;
     } catch (err) {
-      console.error("グループデータの読み込みに失敗しました:", err);
       return null;
     }
   }
@@ -351,111 +301,16 @@ class GroupManager {
     try {
       return sessionStorage.getItem("currentGroupId");
     } catch (err) {
-      console.error("現在のグループIDの取得に失敗しました:", err);
       return null;
     }
   }
 }
 
-// エラーハンドリング関数
-function handleError(error, context) {
-  console.error(`Error in ${context}:`, error);
-
-  // ユーザーに分かりやすいエラーメッセージを表示
-  const errorMessage = document.createElement("div");
-  errorMessage.style.cssText = `
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ff4444;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 14px;
-    z-index: 1000;
-  `;
-  errorMessage.textContent = `エラーが発生しました: ${context}`;
-  document.body.appendChild(errorMessage);
-
-  setTimeout(() => {
-    if (errorMessage.parentNode) {
-      errorMessage.parentNode.removeChild(errorMessage);
-    }
-  }, 5000);
-}
-
 // ページ読み込み時の処理
 document.addEventListener("DOMContentLoaded", () => {
   try {
-    console.log("Page loaded, initializing GroupManager...");
-    console.log("Current URL:", window.location.href);
-    console.log("URL Parameters:", window.location.search);
-
-    const groupManager = new GroupManager();
-
-    // グローバルからアクセス可能にする（デバッグ用）
-    window.groupManager = groupManager;
+    new GroupManager();
   } catch (error) {
-    handleError(error, "GroupManager initialization");
+    // エラーが発生してもページは正常に表示される
   }
 });
-
-// デバッグ用関数
-window.debugGroupData = () => {
-  console.log("=== デバッグ情報 ===");
-  console.log("Current URL:", window.location.href);
-  console.log(
-    "URL Parameters:",
-    Object.fromEntries(new URLSearchParams(window.location.search))
-  );
-  console.log("SessionStorage data:");
-
-  for (let i = 0; i < sessionStorage.length; i++) {
-    const key = sessionStorage.key(i);
-    if (key && (key.startsWith("group_") || key === "groupData" || key === "currentGroupId")) {
-      console.log(`  ${key}:`, JSON.parse(sessionStorage.getItem(key) || 'null'));
-    }
-  }
-
-  console.log("Current Group ID:", GroupManager.getCurrentGroupId());
-
-  if (window.groupManager) {
-    console.log("GroupManager instance:", window.groupManager.groupData);
-  }
-};
-
-// URLパラメータの検証関数
-function validateUrlParameters() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const groupName = urlParams.get("groupName");
-  const members = urlParams.get("members");
-  const groupId = urlParams.get("groupId");
-
-  console.log("=== URL Parameter Validation ===");
-  console.log("Group Name:", groupName);
-  console.log("Group ID:", groupId);
-  console.log("Members param:", members);
-
-  if (!groupName) {
-    console.warn("Warning: groupName parameter is missing");
-  }
-
-  if (!groupId) {
-    console.warn("Warning: groupId parameter is missing");
-  }
-
-  if (!members) {
-    console.warn("Warning: members parameter is missing");
-  } else {
-    try {
-      const parsedMembers = JSON.parse(decodeURIComponent(members));
-      console.log("Parsed members:", parsedMembers);
-    } catch (error) {
-      console.error("Error parsing members parameter:", error);
-    }
-  }
-}
-
-// ページ読み込み後にパラメータを検証
-window.addEventListener("load", validateUrlParameters);
