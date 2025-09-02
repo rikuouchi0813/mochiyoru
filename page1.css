@@ -23,6 +23,63 @@ ol, ul {
 	list-style: none;
 }
 
+/* ローカルフォントの定義 */
+
+/* Bevan Italic */
+@font-face {
+    font-family: 'Bevan';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Bevan Italic'),
+         url('./fonts/bevan-italic.woff2') format('woff2'),
+         url('./fonts/bevan-italic.woff') format('woff');
+}
+
+/* M PLUS 1p */
+@font-face {
+    font-family: 'M PLUS 1p';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local('M PLUS 1p Medium'),
+         url('./fonts/mplus1p-500.woff2') format('woff2'),
+         url('./fonts/mplus1p-500.woff') format('woff');
+}
+
+/* Mochiy Pop P One */
+@font-face {
+    font-family: 'Mochiy Pop P One';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Mochiy Pop P One'),
+         url('./fonts/mochiy-pop.woff2') format('woff2'),
+         url('./fonts/mochiy-pop.woff') format('woff');
+}
+
+/* Zen Kaku Gothic New 900 */
+@font-face {
+    font-family: 'Zen Kaku Gothic New';
+    font-style: normal;
+    font-weight: 900;
+    font-display: swap;
+    src: local('Zen Kaku Gothic New Black'),
+         url('./fonts/zen-kaku-900.woff2') format('woff2'),
+         url('./fonts/zen-kaku-900.woff') format('woff');
+}
+
+/* Zen Kaku Gothic New 500 */
+@font-face {
+    font-family: 'Zen Kaku Gothic New';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: local('Zen Kaku Gothic New Medium'),
+         url('./fonts/zen-kaku-500.woff2') format('woff2'),
+         url('./fonts/zen-kaku-500.woff') format('woff');
+}
+
 /* ===== ベーススタイル（デスクトップ） ===== */
 html {
     box-sizing: border-box;
@@ -728,3 +785,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
