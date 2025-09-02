@@ -4,30 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>モチヨル - グループ作成</title>
-    <link rel="stylesheet" href="/page2.css">
-
+    
+    <!-- SEO必須：meta description -->
+    <meta name="description" content="モチヨルでグループを作成。メンバーを追加して、イベントの持ち物分担を簡単に管理。会員登録不要で今すぐ使えます。">
+    <meta name="keywords" content="モチヨル,グループ作成,メンバー追加,持ち物分担,イベント準備,BBQ,キャンプ,パーティー">
+    
+    <!-- canonical URL（重複コンテンツ対策） -->
+    <link rel="canonical" href="https://mochiyoru.jp/page2.html">
+    
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WN64QR07F9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-WN64QR07F9');
-</script>
-
-    <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4388621219050188"
-     crossorigin="anonymous"></script> 
+    
+    <!-- DNS Prefetch で接続を高速化 -->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+    
+    <!-- CSSを最優先で読み込み -->
+    <link rel="preload" href="/page2.css" as="style">
+    <link rel="stylesheet" href="/page2.css">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content="モチヨル - グループ作成">
+    <meta property="og:description" content="メンバーを追加してグループを作成。持ち物分担を簡単に管理できます。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mochiyoru.jp/page2.html">
+    <meta property="og:image" content="https://mochiyoru.jp/img/ogp.png">
+    <meta property="og:site_name" content="モチヨル">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="モチヨル - グループ作成">
+    <meta name="twitter:description" content="メンバーを追加してグループを作成。持ち物分担を簡単に管理">
+    <meta name="twitter:image" content="https://mochiyoru.jp/img/ogp.png">
+    
+    <!-- 構造化データ（JSON-LD）でページの詳細を伝える -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://mochiyoru.jp/page2.html",
+      "name": "グループ作成 - モチヨル",
+      "description": "グループを作成してメンバーを追加。イベントの持ち物分担を簡単に管理できます。",
+      "url": "https://mochiyoru.jp/page2.html",
+      "isPartOf": {
+        "@type": "WebApplication",
+        "name": "モチヨル",
+        "url": "https://mochiyoru.jp",
+        "description": "イベントの持ち物分担をリアルタイムで共有できる無料ツール",
+        "applicationCategory": "UtilitiesApplication"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ホーム",
+          "item": "https://mochiyoru.jp"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "グループ作成",
+          "item": "https://mochiyoru.jp/page2.html"
+        }]
+      }
+    }
+    </script>
 </head>
     
 <body>
     <div class="content-wrapper">
         <header onclick="location.href='index.html'">
-            <img src="img/title.svg" alt="モチヨル" class="h1-image">
+            <img src="img/title.svg" alt="モチヨル" class="h1-image" width="120" height="27" loading="eager">
         </header>
         <main>
             <section class="form-section">
@@ -76,14 +124,44 @@
         <hr>
         <p>&copy; 2025 モチヨル</p>
     </footer>
-    <!-- 外部JavaScriptファイルを読み込み -->
-    <script src="/page2.js"></script>
+    
+    <!-- JavaScriptファイルをdefer属性で非ブロッキング化 -->
+    <script src="/page2.js" defer></script>
+    
+    <!-- Google Analytics と AdSense をページ読み込み後に遅延実行 -->
+    <script>
+        // ページのアイドル時またはロード後にGoogleスクリプトを読み込む
+        function loadGoogleScripts() {
+            // Google Analytics
+            const gtagScript = document.createElement('script');
+            gtagScript.async = true;
+            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-WN64QR07F9';
+            document.head.appendChild(gtagScript);
+            
+            gtagScript.onload = function() {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-WN64QR07F9');
+            };
+            
+            // Google AdSense
+            const adsenseScript = document.createElement('script');
+            adsenseScript.async = true;
+            adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4388621219050188';
+            adsenseScript.crossOrigin = 'anonymous';
+            document.head.appendChild(adsenseScript);
+        }
+        
+        // requestIdleCallbackが使えるブラウザでは優先的に使用
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadGoogleScripts);
+        } else {
+            // 対応していない場合は、ページ読み込み完了後に実行
+            window.addEventListener('load', function() {
+                setTimeout(loadGoogleScripts, 1);
+            });
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
