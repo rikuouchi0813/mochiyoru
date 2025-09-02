@@ -41,12 +41,13 @@ ol, ul {
   src: url('../fonts/m-plus-1p-v31-latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+/* mochiy-pop-p-one-regular - japanese */
 @font-face {
-    font-family: 'Mochiy Pop P One';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('fonts/mochiy-pop-p-one-v11-latin-regular.woff2') format('woff2');
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Mochiy Pop P One';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/mochiy-pop-p-one-v11-japanese-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 @font-face {
@@ -770,6 +771,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
