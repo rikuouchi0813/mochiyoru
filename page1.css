@@ -24,13 +24,13 @@ ol, ul {
 }
 
 /* ローカルフォントの定義 */
-/* @font-face {
+@font-face {
     font-family: 'Bevan';
     font-style: italic;
     font-weight: 400;
     font-display: swap;
     src: url('fonts/bevan-v25-latin-italic.woff2') format('woff2');
-} */
+}
 
 @font-face {
     font-family: 'M PLUS 1p';
@@ -769,6 +769,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
