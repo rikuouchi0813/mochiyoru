@@ -116,15 +116,6 @@ main {
     padding: 40px 20px;
 }
 
-.form-section {
-    width: 100%;
-    max-width: 500px;
-    background: #fff;
-    border-radius: 16px;
-    padding: 50px;
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
-}
-
 /* ===== 見出し ===== */
 h2 {
     font-family: "Mochiy Pop P One", sans-serif;
@@ -553,3 +544,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
