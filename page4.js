@@ -560,7 +560,11 @@ class ItemAssignmentManager {
       select.appendChild(option);
     });
     
+    // デフォルト値を設定（重要: 初期状態で空文字列）
     select.value = "";
+    
+    console.log(`セレクト作成: type=${type}, index=${index}, options=`, options);
+    
     return select;
   }
 
