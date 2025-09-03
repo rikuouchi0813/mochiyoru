@@ -1,31 +1,7 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
-html, body {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-	height: 100%;
-}
-
-div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+/* CSS Reset - 実際に使用される要素のみ */
+html, body, div, span,
+h1, h2, p, a, img,
+header, footer, section, article, main, ul, li, ol, nav {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -34,9 +10,8 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+/* HTML5 display-role reset */
+article, footer, header, main, section, nav {
 	display: block;
 }
 
@@ -44,75 +19,60 @@ body {
 	line-height: 1;
 }
 
-ol, ul {
+ul, ol {
 	list-style: none;
 }
 
-blockquote, q {
-	quotes: none;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-
-/* ローカルフォントの定義 */
-/* bevan-italic - latin */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Bevan';
-  font-style: italic;
-  font-weight: 400;
-  src: url('../fonts/bevan-v25-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-
+/* ローカルフォントの定義（使用するフォントのみ） */
 /* m-plus-1p-500 - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'M PLUS 1p';
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/m-plus-1p-v31-japanese_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/m-plus-1p-v31-japanese_latin-500.woff2') format('woff2');
+}
+
+/* m-plus-1p-700 - japanese_latin */
+@font-face {
+  font-display: swap;
+  font-family: 'M PLUS 1p';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../fonts/m-plus-1p-v31-japanese_latin-700.woff2') format('woff2');
 }
 
 /* mochiy-pop-p-one-regular - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'Mochiy Pop P One';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/mochiy-pop-p-one-v11-japanese_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/mochiy-pop-p-one-v11-japanese_latin-regular.woff2') format('woff2');
 }
 
 /* zen-kaku-gothic-new-500 - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'Zen Kaku Gothic New';
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-500.woff2') format('woff2');
 }
 
 /* zen-kaku-gothic-new-900 - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'Zen Kaku Gothic New';
   font-style: normal;
   font-weight: 900;
-  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-900.woff2') format('woff2');
 }
 
-/* ===== ベーススタイル ===== */
+/* ===== ベーススタイル（Critical CSS） ===== */
 html {
     box-sizing: border-box;
-    font-family: 'M PLUS 1p', sans-serif;
+    font-family: 'M PLUS 1p', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     max-width: 100vw;
     margin: 0 auto;
     overflow-x: hidden;
@@ -121,7 +81,6 @@ html {
 body {
     background-color: #f2fff1;
     min-height: 100vh;
-    height: 100%;
     color: #333;
     display: flex;
     flex-direction: column;
@@ -130,10 +89,10 @@ body {
     line-height: 1.8;
 }
 
-/* ===== ヘッダー ===== */
+/* ===== ヘッダー（Critical） ===== */
 header {
     text-align: center;
-    padding: 12px 0;
+    padding: 30px 0;
     background: #fff;
     display: flex;
     justify-content: center;
@@ -142,22 +101,15 @@ header {
     max-width: 100vw;
     margin: 0 auto 30px auto;
     cursor: pointer;
-}
-
-.h1-image-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
 }
 
 .h1-image {
-    font-family: "Mochiy Pop P One", sans-serif;
-    font-size: 24px;
-    color: #00E1A9;
-    margin: 0;
+    width: 120px;
+    height: auto;
 }
 
-/* ===== メインコンテンツ ===== */
+/* ===== メインコンテンツ（Critical） ===== */
 main {
     max-width: calc(100vw - 40px);
     margin: 0 auto;
@@ -171,17 +123,18 @@ main {
     background: white;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 
-/* ===== タイトル ===== */
+/* ===== タイトル（Critical） ===== */
 h1 {
     font-family: "Mochiy Pop P One", sans-serif;
-    color: #00E1A9;
+    color: #242424;
     text-align: center;
     margin-bottom: 30px;
     font-size: 28px;
     font-weight: 400;
+    line-height: 1.4;
 }
 
 /* ===== 見出し ===== */
@@ -193,56 +146,58 @@ h2 {
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: 700;
-}
-
-h3 {
-    color: #404040;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    font-weight: 700;
+    font-family: "Zen Kaku Gothic New", sans-serif;
 }
 
 /* ===== テキスト ===== */
 p {
     margin-bottom: 16px;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.8;
+    color: #404040;
 }
 
 .intro {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     color: #242424;
-    background: #f8f9fa;
-    padding: 20px;
+    background: rgba(232, 248, 245, 0.5);
+    padding: 25px;
     border-radius: 8px;
     border-left: 4px solid #00E1A9;
+    margin-bottom: 30px;
+}
+
+/* ===== 利用規約セクション ===== */
+.terms-section {
+    margin: 40px 0;
+    padding: 0;
+}
+
+.terms-section:first-of-type {
+    margin-top: 30px;
 }
 
 /* ===== リスト ===== */
-ul {
-    padding-left: 25px;
+ul, ol {
+    padding-left: 20px;
     margin-bottom: 20px;
-}
-
-ol {
-    padding-left: 25px;
-    margin-bottom: 20px;
-}
-
-li {
-    margin-bottom: 8px;
-    font-size: 14px;
-    line-height: 1.6;
 }
 
 ul li {
+    margin-bottom: 8px;
+    font-size: 15px;
+    line-height: 1.7;
     list-style-type: disc;
+    color: #404040;
 }
 
 ol li {
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.7;
     list-style-type: decimal;
+    color: #404040;
 }
 
 /* ===== 強調 ===== */
@@ -259,13 +214,13 @@ a {
 }
 
 a:hover {
-    color: #35E4A1;
+    color: #00c995;
     text-decoration: underline;
 }
 
 /* ===== 連絡先情報 ===== */
 .contact-info {
-    background: #f8f9fa;
+    background: rgba(248, 249, 250, 0.8);
     padding: 20px;
     border-radius: 8px;
     margin: 20px 0;
@@ -275,6 +230,8 @@ a:hover {
 .contact-info p {
     margin-bottom: 0;
     line-height: 1.8;
+    font-size: 15px;
+    color: #404040;
 }
 
 /* ===== 日付情報 ===== */
@@ -287,6 +244,12 @@ a:hover {
     padding-top: 20px;
 }
 
+.date-info p {
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #666;
+}
+
 /* ===== 戻るボタン ===== */
 .back-link {
     text-align: center;
@@ -294,9 +257,9 @@ a:hover {
 }
 
 .group-button {
-    width: 240px;
-    min-width: 240px;
-    height: 49px;
+    width: 280px;
+    min-width: 280px;
+    height: 56px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -307,7 +270,7 @@ a:hover {
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 18px;
     box-sizing: border-box;
     transition: opacity 0.3s ease;
 }
@@ -330,20 +293,19 @@ a:hover {
 footer {
     background-color: #404040;
     color: #fff;
-    padding: 30px 16px 0 16px;
+    padding: 50px 40px 25px 40px;
     width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: auto;
-    margin-bottom: 0;
+    margin-top: 80px;
 }
 
 footer hr {
     border: none;
     border-top: 1px solid #888;
-    margin: 14px 0 8px 0;
+    margin: 18px 0 10px 0;
     width: 100%;
     max-width: 600px;
     opacity: 0.4;
@@ -357,6 +319,7 @@ footer p {
     text-align: left;
     width: 100%;
     max-width: 600px;
+    color: #fff;
 }
 
 .footer-lists {
@@ -365,7 +328,7 @@ footer p {
     align-items: flex-start;
     width: 100%;
     max-width: 600px;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     gap: 16px;
 }
 
@@ -379,8 +342,8 @@ footer p {
 .footer-lists li {
     font-family: "Zen Kaku Gothic New", sans-serif;
     font-weight: 500;
-    font-size: 13px;
-    margin-bottom: 8px;
+    font-size: 15px;
+    margin-bottom: 35px;
     opacity: 0.95;
     list-style-type: none;
 }
@@ -395,8 +358,16 @@ footer p {
     color: #00E1A9;
 }
 
-/* ===== レスポンシブ対応 ===== */
+/* ===== タブレット対応（768px以下） ===== */
 @media (max-width: 768px) {
+    header {
+        padding: 25px 0;
+    }
+    
+    .h1-image {
+        width: 100px;
+    }
+    
     .container {
         padding: 30px 20px;
         border-radius: 8px;
@@ -408,41 +379,136 @@ footer p {
     
     h2 {
         font-size: 18px;
+        margin-top: 30px;
     }
     
-    h3 {
+    .terms-section {
+        margin: 30px 0;
+    }
+    
+    .intro {
+        padding: 20px;
         font-size: 15px;
+    }
+    
+    ul, ol {
+        padding-left: 18px;
+    }
+    
+    ul li, ol li {
+        font-size: 14px;
+    }
+    
+    .contact-info {
+        padding: 18px;
+    }
+    
+    .group-button {
+        width: 240px;
+        min-width: 240px;
+        height: 49px;
+        font-size: 16px;
+    }
+    
+    .group-button .arrow {
+        width: 32px;
+        height: 11px;
     }
     
     main {
         max-width: calc(100vw - 20px);
         padding: 15px;
     }
+    
+    footer {
+        padding: 36px 24px 18px 24px;
+        margin-top: 50px;
+    }
+    
+    .footer-lists li {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
 }
 
+/* ===== スマートフォン対応（480px以下） ===== */
 @media (max-width: 480px) {
+    header {
+        padding: 20px 0;
+    }
+    
     .container {
         padding: 20px 15px;
     }
     
     h1 {
-        font-size: 22px;
+        font-size: 20px;
         margin-bottom: 25px;
     }
     
     h2 {
         font-size: 16px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+    
+    .intro {
+        padding: 18px;
+        font-size: 14px;
+    }
+    
+    .terms-section {
+        margin: 25px 0;
+    }
+    
+    p {
+        font-size: 14px;
+        margin-bottom: 14px;
+    }
+    
+    ul, ol {
+        padding-left: 16px;
+        margin-bottom: 18px;
+    }
+    
+    ul li, ol li {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+    
+    .contact-info {
+        padding: 15px;
+    }
+    
+    .contact-info p {
+        font-size: 13px;
+    }
+    
+    .date-info {
         margin-top: 30px;
+        padding-top: 15px;
+        font-size: 12px;
+    }
+    
+    .date-info p {
+        margin-bottom: 3px;
+        font-size: 12px;
     }
     
     .group-button {
         width: 200px;
         min-width: 200px;
+        height: 46px;
         font-size: 14px;
     }
     
+    .group-button .arrow {
+        width: 28px;
+        height: 9px;
+    }
+    
     footer {
-        padding: 24px 12px 0 12px;
+        padding: 36px 24px 18px 24px;
     }
     
     footer p {
@@ -451,15 +517,22 @@ footer p {
     
     .footer-lists {
         gap: 12px;
-        margin-bottom: 6px;
+        margin-bottom: 12px;
     }
     
     .footer-lists li {
-        font-size: 12px;
-        margin-bottom: 6px;
+        font-size: 14px;
+        margin-bottom: 30px;
     }
-    
-    footer hr {
-        margin: 12px 0 6px 0;
-    }
+}
+
+/* Performance optimizations */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Reduce layout shifts */
+.container,
+.terms-section {
+    contain: layout style paint;
 }
