@@ -1,59 +1,108 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>活用事例 | モチヨル</title>
+    
+    <!-- SEO必須：meta description -->
     <meta name="description" content="モチヨルの活用事例をご紹介。BBQ、キャンプ、ホームパーティーなど、様々なシーンでの使い方と実際の持ち物リスト例を掲載しています。">
     <meta name="keywords" content="モチヨル,活用事例,BBQ持ち物,キャンプ持ち物,パーティー準備,持ち物リスト,イベント準備">
+    
+    <!-- canonical URL（重複コンテンツ対策） -->
     <link rel="canonical" href="https://mochiyoru.jp/use-cases.html">
-    <link rel="stylesheet" href="use-cases.css">
-
+    
     <!-- favicon -->
     <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WN64QR07F9"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-WN64QR07F9');
+    
+    <!-- DNS Prefetch で接続を高速化 -->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+    
+    <!-- CSSを最優先で読み込み -->
+    <link rel="preload" href="/use-cases.css" as="style">
+    <link rel="stylesheet" href="/use-cases.css">
+    
+    <!-- 画像の事前読み込み -->
+    <link rel="preload" href="/img/title.svg" as="image">
+    
+    <!-- OGP設定 -->
+    <meta property="og:title" content="活用事例 | モチヨル">
+    <meta property="og:description" content="モチヨルの活用事例をご紹介。BBQ、キャンプ、ホームパーティーなど、様々なシーンでの使い方と実際の持ち物リスト例を掲載しています。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mochiyoru.jp/use-cases.html">
+    <meta property="og:image" content="https://mochiyoru.jp/img/ogp.png">
+    <meta property="og:site_name" content="モチヨル">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="活用事例 | モチヨル">
+    <meta name="twitter:description" content="モチヨルの活用事例をご紹介。BBQ、キャンプ、ホームパーティーなど、様々なシーンでの使い方と実際の持ち物リスト例を掲載しています。">
+    <meta name="twitter:image" content="https://mochiyoru.jp/img/ogp.png">
+    
+    <!-- 構造化データ（JSON-LD） -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://mochiyoru.jp/use-cases.html",
+      "name": "活用事例 - モチヨル",
+      "description": "モチヨルの活用事例をご紹介。BBQ、キャンプ、ホームパーティーなど、様々なシーンでの使い方と実際の持ち物リスト例を掲載しています。",
+      "url": "https://mochiyoru.jp/use-cases.html",
+      "isPartOf": {
+        "@type": "WebApplication",
+        "name": "モチヨル",
+        "url": "https://mochiyoru.jp"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Riku"
+      },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ホーム",
+          "item": "https://mochiyoru.jp"
+        },{
+          "@type": "ListItem",
+          "position": 2,
+          "name": "活用事例",
+          "item": "https://mochiyoru.jp/use-cases.html"
+        }]
+      }
+    }
     </script>
-
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4388621219050188"
-        crossorigin="anonymous"></script>
 </head>
 
 <body>
     <!-- ヘッダー -->
     <header onclick="location.href='index.html'">
-        <img src="/img/title.svg" alt="モチヨル" class="h1-image">
+        <img src="/img/title.svg" alt="モチヨル" class="h1-image" width="120" height="27" loading="eager">
     </header>
 
     <!-- メインコンテンツ -->
     <main>
-        <div class="container">
+        <article class="container">
             <h1>活用事例</h1>
 
             <p class="intro">モチヨルは様々なイベントや集まりで活用できます。実際の使用シーンと、それぞれのイベントでよく使われる持ち物リストの例をご紹介します。</p>
 
             <!-- BBQの活用事例 -->
             <section class="use-case-section">
-                <h2>🍖 BBQ（バーベキュー）での活用</h2>
+                <h2>BBQ（バーベキュー）での活用</h2>
 
                 <div class="scenario-box">
                     <h3>こんなシーンで便利！</h3>
-                    <p>友達10人でBBQを計画。「誰が何を持ってくるか」をLINEで話し合うと、メッセージが流れて分からなくなりがち。モチヨルなら、リアルタイムで全員が同じリストを見られるので、買い物の重複や忘れ物を防げます。
-                    </p>
+                    <p>友達10人でBBQを計画。「誰が何を持ってくるか」をLINEで話し合うと、メッセージが流れて分からなくなりがち。モチヨルなら、リアルタイムで全員が同じリストを見られるので、買い物の重複や忘れ物を防げます。</p>
                 </div>
 
                 <div class="item-list-example">
                     <h3>BBQの持ち物リスト例</h3>
                     <div class="item-category">
-                        <h4>🥩 食材関連</h4>
+                        <h4>食材関連</h4>
                         <ul>
                             <li>肉（牛肉・豚肉・鶏肉）</li>
                             <li>野菜（玉ねぎ・ピーマン・なす・とうもろこし）</li>
@@ -64,7 +113,7 @@
                     </div>
 
                     <div class="item-category">
-                        <h4>🍺 飲み物</h4>
+                        <h4>飲み物</h4>
                         <ul>
                             <li>ビール - 1ケース</li>
                             <li>ソフトドリンク各種</li>
@@ -75,7 +124,7 @@
                     </div>
 
                     <div class="item-category">
-                        <h4>🔥 調理器具・備品</h4>
+                        <h4>調理器具・備品</h4>
                         <ul>
                             <li>BBQコンロ・網</li>
                             <li>炭・着火剤</li>
@@ -90,14 +139,14 @@
                 </div>
 
                 <div class="tips-box">
-                    <h3>💡 活用のコツ</h3>
+                    <h3>活用のコツ</h3>
                     <p>「食材担当」「飲み物担当」「備品担当」など、カテゴリーごとに担当者を決めましょう。前日にリストを最終確認して、買い忘れがないかチェックしましょう。</p>
                 </div>
             </section>
 
             <!-- キャンプの活用事例 -->
             <section class="use-case-section">
-                <h2>⛺ キャンプでの活用</h2>
+                <h2>キャンプでの活用</h2>
 
                 <div class="scenario-box">
                     <h3>こんなシーンで便利！</h3>
@@ -107,7 +156,7 @@
                 <div class="item-list-example">
                     <h3>キャンプの持ち物リスト例</h3>
                     <div class="item-category">
-                        <h4>🏕️ 宿泊関連</h4>
+                        <h4>宿泊関連</h4>
                         <ul>
                             <li>テント（4人用）</li>
                             <li>タープ</li>
@@ -119,7 +168,7 @@
                     </div>
 
                     <div class="item-category">
-                        <h4>🍳 調理・食事関連</h4>
+                        <h4>調理・食事関連</h4>
                         <ul>
                             <li>ガスバーナー・ガスボンベ</li>
                             <li>クッカーセット・フライパン</li>
@@ -132,7 +181,7 @@
                     </div>
 
                     <div class="item-category">
-                        <h4>🎒 その他の必需品</h4>
+                        <h4>その他の必需品</h4>
                         <ul>
                             <li>テーブル・チェア</li>
                             <li>焚き火台・薪</li>
@@ -147,14 +196,14 @@
                 </div>
 
                 <div class="tips-box">
-                    <h3>💡 活用のコツ</h3>
+                    <h3>活用のコツ</h3>
                     <p>キャンプ場到着後も、モチヨルのリストを見ながら荷物の確認ができます。撤収時のチェックリストとしても活用でき、忘れ物防止に役立ちます。</p>
                 </div>
             </section>
 
             <!-- ホームパーティーの活用事例 -->
             <section class="use-case-section">
-                <h2>🎉 ホームパーティーでの活用</h2>
+                <h2>ホームパーティーでの活用</h2>
 
                 <div class="scenario-box">
                     <h3>こんなシーンで便利！</h3>
@@ -164,7 +213,7 @@
                 <div class="item-list-example">
                     <h3>ホームパーティーの持ち物リスト例</h3>
                     <div class="item-category">
-                        <h4>🍽️ 料理・飲み物</h4>
+                        <h4>料理・飲み物</h4>
                         <ul>
                             <li>メイン料理（ピザ・パスタ・肉料理）</li>
                             <li>サラダ・前菜</li>
@@ -176,7 +225,7 @@
                     </div>
 
                     <div class="item-category">
-                        <h4>🎊 パーティーグッズ</h4>
+                        <h4>パーティーグッズ</h4>
                         <ul>
                             <li>飾り付け（バルーン・ガーランド）</li>
                             <li>テーブルクロス・紙ナプキン</li>
@@ -188,7 +237,7 @@
                     </div>
 
                     <div class="item-category">
-                        <h4>🎮 エンタメ・ゲーム</h4>
+                        <h4>エンタメ・ゲーム</h4>
                         <ul>
                             <li>ボードゲーム・カードゲーム</li>
                             <li>ゲーム機・ソフト</li>
@@ -200,50 +249,50 @@
                 </div>
 
                 <div class="tips-box">
-                    <h3>💡 活用のコツ</h3>
+                    <h3>活用のコツ</h3>
                     <p>料理の重複を避けるため、「前菜担当」「メイン担当」「デザート担当」など役割分担を明確に。アレルギー情報も把握しておくと安心です。</p>
                 </div>
             </section>
 
             <!-- その他の活用シーン -->
             <section class="use-case-section">
-                <h2>🌟 その他の活用シーン</h2>
+                <h2>その他の活用シーン</h2>
 
                 <div class="other-scenarios">
-                    <div class="scenario-card">
-                        <h3>🏫 学校行事・PTA活動</h3>
+                    <article class="scenario-card">
+                        <h3>学校行事・PTA活動</h3>
                         <p>運動会、文化祭、バザーなどの準備に。保護者間での備品分担や、当日の持ち物管理に活用できます。</p>
-                    </div>
+                    </article>
 
-                    <div class="scenario-card">
-                        <h3>🏖️ 海水浴・プール</h3>
+                    <article class="scenario-card">
+                        <h3>海水浴・プール</h3>
                         <p>日焼け止め、浮き輪、パラソル、クーラーボックスなど、大人数で行く際の持ち物分担に便利です。</p>
-                    </div>
+                    </article>
 
-                    <div class="scenario-card">
-                        <h3>🎃 季節のイベント</h3>
+                    <article class="scenario-card">
+                        <h3>季節のイベント</h3>
                         <p>ハロウィン、クリスマス、お花見など、季節ごとのイベント準備。衣装や飾り付けの分担にも使えます。</p>
-                    </div>
+                    </article>
 
-                    <div class="scenario-card">
-                        <h3>🚗 旅行・合宿</h3>
+                    <article class="scenario-card">
+                        <h3>旅行・合宿</h3>
                         <p>グループ旅行や部活の合宿で、共同で使うものの分担に。レンタカーの手配や宿泊先への持ち込み品の管理にも。</p>
-                    </div>
+                    </article>
 
-                    <div class="scenario-card">
-                        <h3>💼 オフィスイベント</h3>
+                    <article class="scenario-card">
+                        <h3>オフィスイベント</h3>
                         <p>歓送迎会、忘年会、社内イベントの準備。幹事の負担を減らし、みんなで協力して準備できます。</p>
-                    </div>
+                    </article>
 
-                    <div class="scenario-card">
-                        <h3>🎪 地域のイベント</h3>
+                    <article class="scenario-card">
+                        <h3>地域のイベント</h3>
                         <p>町内会の祭り、フリーマーケット、地域清掃など、近所の人たちとの活動にも活用できます。</p>
-                    </div>
+                    </article>
                 </div>
             </section>
 
             <!-- CTA -->
-            <div class="cta-section">
+            <section class="cta-section">
                 <h2>モチヨルを使ってみよう！</h2>
                 <p>イベントの準備をもっと楽しく、もっと簡単に。<br>会員登録不要で、今すぐ無料で使えます。</p>
                 <div class="cta-buttons">
@@ -252,21 +301,26 @@
                         <div class="arrow"></div>
                     </a>
                 </div>
-            </div>
+            </section>
 
-        </div>
+            <nav class="back-link">
+                <a href="/" class="group-button">
+                    <span>モチヨルに戻る</span>
+                    <div class="arrow"></div>
+                </a>
+            </nav>
+        </article>
     </main>
 
     <!-- フッター -->
     <footer>
         <div class="footer-lists">
-            <ul>
+            <ul class="left-list">
                 <li><a href="/contact.html">お問い合わせ</a></li>
-                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeG2ZQuE-VzHRKGg05T2WjYQQWnBd7c_hSxGFm9DF7P9cLpPA/viewform?usp=header"
-                        target="_blank" rel="noopener">アンケート</a></li>
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeG2ZQuE-VzHRKGg05T2WjYQQWnBd7c_hSxGFm9DF7P9cLpPA/viewform?usp=header" target="_blank" rel="noopener">アンケート</a></li>
                 <li><a href="/terms.html">利用規約</a></li>
             </ul>
-            <ul>
+            <ul class="right-list">
                 <li><a href="/use-cases.html">活用事例</a></li>
                 <li><a href="/privacy-policy.html">プライバシーポリシー</a></li>
                 <li><a href="/company-info.html">運営元情報</a></li>
@@ -275,7 +329,41 @@
         <hr>
         <p>&copy; 2025 モチヨル</p>
     </footer>
+    
+    <!-- Google Analytics と AdSense をページ読み込み後に遅延実行 -->
+    <script>
+        // ページのアイドル時またはロード後にGoogleスクリプトを読み込む
+        function loadGoogleScripts() {
+            // Google Analytics
+            const gtagScript = document.createElement('script');
+            gtagScript.async = true;
+            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-WN64QR07F9';
+            document.head.appendChild(gtagScript);
+            
+            gtagScript.onload = function() {
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-WN64QR07F9');
+            };
+            
+            // Google AdSense
+            const adsenseScript = document.createElement('script');
+            adsenseScript.async = true;
+            adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4388621219050188';
+            adsenseScript.crossOrigin = 'anonymous';
+            document.head.appendChild(adsenseScript);
+        }
+        
+        // requestIdleCallbackが使えるブラウザでは優先的に使用
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadGoogleScripts);
+        } else {
+            // 対応していない場合は、ページ読み込み完了後に実行
+            window.addEventListener('load', function() {
+                setTimeout(loadGoogleScripts, 1);
+            });
+        }
+    </script>
 </body>
-
-
 </html>
