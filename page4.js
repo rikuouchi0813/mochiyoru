@@ -1,602 +1,439 @@
-/**
- * 最適化されたItemAssignmentManager
- * パフォーマンス改善とメモリ効率化を実装
- */
 class ItemAssignmentManager {
+  // ===== コンストラクタ =====
   constructor() {
-    // 状態管理
-    this.groupData = {};
-    this.members = [];
-    this.items = [];
-    this.assignments = [];
-    this.newItems = new Set();
-    
-    // パフォーマンス最適化用
-    this.pendingSaves = new Map();
-    this.isInitialized = false;
-    this.renderScheduled = false;
-    
-    // DOM要素のキャッシュ
-    this.dom = {};
-    
-    // 初期化を非同期で実行
-    this.initializeAsync();
-  }
+    // 状態
+    this.groupData = {}; // { groupId, groupName, members[] }
+    this.members = []; // ["太郎", "花子" ...]
+    this.items = []; // ["カメラ", ...]
+    this.assignments = []; // [{name, assignee, quantity}]
+    this.newItems = new Set(); // 画面上で演出する用
 
-  /**
-   * 非同期初期化（エラーハンドリング強化）
-   */
-  async initializeAsync() {
-    try {
-      this.bindElements();
-      await this.loadOrCreateGroup();
-      await this.fetchItemsFromServer();
-      this.attachEventListeners();
-      this.scheduleRender();
-      this.isInitialized = true;
-    } catch (error) {
-      console.error("初期化エラー:", error);
-      this.showErrorMessage("初期化に失敗しました。ページを更新してください。");
-    }
-  }
+    // DOM
+    this.bindElements();
 
-  /**
-   * DOM要素の効率的な取得とキャッシュ
-   */
-  bindElements() {
-    const elements = {
-      input: "itemInput",
-      addBtn: "addButton",
-      listWrap: "itemsList",
-      noMsg: "noItemsMessage"
-    };
-    
-    Object.entries(elements).forEach(([key, id]) => {
-      this.dom[key] = document.getElementById(id);
-      if (!this.dom[key]) {
-        console.warn(`要素が見つかりません: ${id}`);
-      }
+    // 非同期初期化
+    this.initialize().catch((err) => {
+      console.error(err);
+      alert("初期化に失敗しました。もう一度やり直してください。");
     });
   }
 
-  /**
-   * グループ情報の効率的な読み込み
-   */
+  /* ---------- DOM 取得 ---------- */
+  bindElements() {
+    this.input = document.getElementById("itemInput");
+    this.addBtn = document.getElementById("addButton");
+    this.listWrap = document.getElementById("itemsList");
+    this.noMsg = document.getElementById("noItemsMessage");
+  }
+
+  /* ---------- ここがメイン初期化 ---------- */
+  async initialize() {
+    await this.loadOrCreateGroup(); // groupId を必ず確保
+    await this.fetchItemsFromServer(); // 既存アイテム取得（無ければ空）
+    this.attachEventListeners(); // イベント設定
+    this.renderItems(); // 画面描画
+  }
+
+  /* ---------- グループ情報を取得 or 新規作成 ---------- */
   async loadOrCreateGroup() {
     console.log("=== loadOrCreateGroup 開始 ===");
 
-    // パスからgroupIdを抽出（最優先）
+    // 1. URLパスからgroupIdを取得（/group/xxxxx形式）
     const path = window.location.pathname;
-    const groupIdMatch = path.match(/\/group\/([^\/\?#]+)/);
-    
-    // URLパラメータから取得
+    console.log("現在のパス:", path);
+
+    // より厳密な正規表現を使用
+    const groupIdFromPath = path.match(/\/group\/([^\/\?#]+)/);
+    console.log("パスからの抽出結果:", groupIdFromPath);
+    console.log(
+      "抽出されたgroupId:",
+      groupIdFromPath ? groupIdFromPath[1] : "なし"
+    );
+
+    // 2. URL パラメータからも取得（従来の方式も維持）
     const params = new URLSearchParams(window.location.search);
     const urlGroupId = params.get("groupId");
     const urlGroupName = params.get("groupName");
-    const urlMembers = params.get("members");
+    const urlMembers = params.get("members"); // JSON 文字列
 
-    // sessionStorageから復元
-    try {
-      const saved = sessionStorage.getItem("groupData");
-      if (saved) {
-        this.groupData = JSON.parse(saved);
-      }
-    } catch (error) {
-      console.warn("sessionStorage読み込みエラー:", error);
-      this.groupData = {};
+    console.log("URLパラメータ:", { urlGroupId, urlGroupName, urlMembers });
+
+    // 3. sessionStorage
+    const saved = sessionStorage.getItem("groupData");
+    if (saved) {
+      this.groupData = JSON.parse(saved);
+      console.log("sessionStorageから復元:", this.groupData);
     }
 
-    // groupIDの優先順位設定
-    if (groupIdMatch?.[1]) {
-      this.groupData.groupId = groupIdMatch[1];
+    // 4. groupIdの優先順位：パス > URLパラメータ > sessionStorage
+    if (groupIdFromPath && groupIdFromPath[1]) {
+      this.groupData.groupId = groupIdFromPath[1];
+      console.log("パスからgroupIdを設定:", groupIdFromPath[1]);
     } else if (urlGroupId) {
       this.groupData.groupId = urlGroupId;
+      console.log("URLパラメータからgroupIdを設定:", urlGroupId);
     }
 
-    // その他のパラメータ処理
+    // 5. その他のパラメータ処理（従来通り）
     if (urlGroupName) {
       this.groupData.groupName = decodeURIComponent(urlGroupName);
     }
-    
     if (urlMembers) {
       try {
-        const memberArray = JSON.parse(urlMembers);
-        this.groupData.members = Array.isArray(memberArray) 
-          ? memberArray.map(m => typeof m === 'string' ? m : m.name)
-          : [];
-      } catch (error) {
-        console.warn("メンバー情報の解析に失敗:", error);
-        this.groupData.members = this.groupData.members || [];
+        const arr = JSON.parse(urlMembers);
+        // ["名前"] or [{name:"名前"}] のどちらでも OK にする
+        this.groupData.members = arr.map((m) => (m.name ? m.name : m));
+      } catch {
+        /* ignore */
       }
     }
 
     this.members = this.groupData.members || [];
+    console.log("現在のメンバー:", this.members);
+    console.log("最終的なgroupId:", this.groupData.groupId);
 
-    // groupIdが無い場合は新規作成
+    // 6. groupId が無ければサーバーで新規作成（従来通り）
     if (!this.groupData.groupId) {
-      await this.createNewGroup();
-    } else if (this.shouldFetchGroupInfo()) {
-      console.log("グループ情報を最新に更新します...");
-      await this.fetchGroupInfo();
+      console.log("groupIdが無いため、新規作成します");
+      const res = await fetch("/api/groups", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          groupName: this.groupData.groupName || "新グループ",
+          members: this.members,
+        }),
+      });
+
+      if (!res.ok) throw new Error("グループ作成 API 失敗");
+
+      const { groupId } = await res.json();
+      this.groupData.groupId = groupId;
+
+      // 取得した id を URL に反映（リロード無し）
+      params.set("groupId", groupId);
+      history.replaceState(
+        null,
+        "",
+        `${location.pathname}?${params.toString()}`
+      );
     }
 
-    // データを保存
-    this.saveGroupDataToSession();
-    console.log("=== loadOrCreateGroup 完了 ===", {
-      groupData: this.groupData,
-      members: this.members
-    });
-  }
+    // 6-2. groupIdがあるがメンバー情報がない場合、Supabaseから取得
+    if (
+      this.groupData.groupId &&
+      (!this.groupData.groupName ||
+        !this.groupData.members ||
+        this.members.length === 0)
+    ) {
+      console.log("メンバー情報が不足しているため、Supabaseから取得します");
+      console.log("リクエストURL:", `/api/groups/${this.groupData.groupId}`);
 
-  /**
-   * グループ情報取得の必要性チェック
-   */
-  shouldFetchGroupInfo() {
-    return !this.groupData.groupName || !this.members.length;
-  }
-
-  /**
-   * 新規グループの作成
-   */
-  async createNewGroup() {
-    const response = await this.fetchWithRetry("/api/groups", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        groupName: this.groupData.groupName || "新グループ",
-        members: this.members,
-      }),
-    });
-
-    if (!response.ok) throw new Error("グループ作成失敗");
-
-    const { groupId } = await response.json();
-    this.groupData.groupId = groupId;
-
-    // URLを更新（リロードなし）
-    const params = new URLSearchParams(window.location.search);
-    params.set("groupId", groupId);
-    history.replaceState(null, "", `${location.pathname}?${params.toString()}`);
-  }
-
-  /**
-   * 既存グループ情報の取得
-   */
-  async fetchGroupInfo() {
-    try {
-      const response = await this.fetchWithRetry(`/api/groups/${this.groupData.groupId}`);
-      
-      if (response.ok) {
-        const groupInfo = await response.json();
-        
-        if (!this.groupData.groupName) {
-          this.groupData.groupName = groupInfo.groupName;
-        }
-        if (!this.members.length) {
-          this.groupData.members = groupInfo.members;
-          this.members = groupInfo.members || [];
-        }
-      }
-    } catch (error) {
-      console.warn("グループ情報取得失敗:", error);
-    }
-  }
-
-  /**
-   * リトライ機能付きfetch
-   */
-  async fetchWithRetry(url, options = {}, maxRetries = 2) {
-    for (let i = 0; i <= maxRetries; i++) {
       try {
-        const response = await fetch(url, options);
-        return response;
-      } catch (error) {
-        if (i === maxRetries) throw error;
-        await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+        const res = await fetch(`/api/groups/${this.groupData.groupId}`);
+        console.log("API Response status:", res.status);
+
+        if (res.ok) {
+          const groupInfo = await res.json();
+          console.log("Supabaseから取得したグループ情報:", groupInfo);
+
+          // Supabaseから取得した情報で補完
+          if (!this.groupData.groupName) {
+            this.groupData.groupName = groupInfo.groupName;
+          }
+          if (!this.groupData.members || this.members.length === 0) {
+            this.groupData.members = groupInfo.members;
+            this.members = groupInfo.members || [];
+            console.log("メンバー情報を更新:", this.members);
+          }
+        } else {
+          console.error("API レスポンスエラー:", res.status, await res.text());
+        }
+      } catch (err) {
+        console.error("グループ情報の取得に失敗:", err);
       }
     }
+
+    // 7. 最終データを保存
+    sessionStorage.setItem("groupData", JSON.stringify(this.groupData));
+    console.log("最終的なgroupData:", this.groupData);
+    console.log("最終的なmembers:", this.members);
+    console.log("=== loadOrCreateGroup 完了 ===");
   }
 
-  /**
-   * APIベースURL（最適化）
-   */
-  getBaseUrl(path = "") {
+  /* ---------- API ベース URL ---------- */
+  baseUrl(path = "") {
     if (path === "/items") {
       return `/.netlify/functions/items?groupId=${this.groupData.groupId}`;
     }
     return `/api/groups/${this.groupData.groupId}${path}`;
   }
 
-  /**
-   * 既存アイテムの効率的な取得
-   */
+  /* ---------- 既存アイテム取得 ---------- */
   async fetchItemsFromServer() {
-    if (!this.groupData.groupId) return;
-
     try {
-      const response = await this.fetchWithRetry(this.getBaseUrl("/items"));
-      
-      if (response.status === 404) return; // アイテム無し
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const res = await fetch(this.baseUrl("/items"));
+      if (res.status === 404) return; // まだ何も無い
+      if (!res.ok) throw new Error();
 
-      const items = await response.json();
-      
-      // データ正規化とバッチ処理
-      this.assignments = items.map(item => ({
-        name: item.name || "",
-        assignee: item.assignee || "",
-        quantity: item.quantity === null || item.quantity === undefined ? "" : item.quantity
+      const items = await res.json(); // [{name,quantity,assignee}]
+
+      // データを正規化（空文字に統一）
+      this.assignments = items.map((it) => ({
+        name: it.name || "",
+        assignee: it.assignee || "",
+        quantity: it.quantity || "",
       }));
-      
-      this.items = items.map(item => item.name);
-      
-    } catch (error) {
-      console.warn("アイテム取得をスキップ:", error.message);
+
+      this.items = items.map((it) => it.name);
+    } catch (err) {
+      console.warn("アイテム取得スキップ（404 or ネットワーク）");
     }
   }
 
-  /**
-   * アイテム保存（デバウンス機能付き）
-   */
+  /* ---------- アイテム保存 ---------- */
   async saveItemToServer(payload) {
-    const key = payload.name;
-    
-    // 既存の保存処理をキャンセル
-    if (this.pendingSaves.has(key)) {
-      clearTimeout(this.pendingSaves.get(key));
-    }
-    
-    // デバウンス処理（500ms遅延）
-    return new Promise((resolve, reject) => {
-      const timeoutId = setTimeout(async () => {
-        try {
-          const processedPayload = {
-            name: payload.name || "",
-            assignee: payload.assignee || "",
-            quantity: payload.quantity === "" || payload.quantity === null || payload.quantity === undefined 
-                     ? null 
-                     : parseInt(payload.quantity, 10)
-          };
-          
-          const response = await this.fetchWithRetry(this.getBaseUrl("/items"), {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(processedPayload),
-          });
-          
-          if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`保存失敗: ${response.status} - ${errorText}`);
-          }
-          
-          this.pendingSaves.delete(key);
-          resolve(await response.json());
-          
-        } catch (error) {
-          this.pendingSaves.delete(key);
-          console.error('保存エラー:', error);
-          reject(error);
-        }
-      }, 500);
-      
-      this.pendingSaves.set(key, timeoutId);
+    console.log("=== アイテム保存開始 ===");
+    console.log("送信データ（変換前）:", payload);
+
+    const processedPayload = {
+      name: payload.name || "",
+      assignee: payload.assignee || "",
+      quantity:
+        payload.quantity === "" ||
+        payload.quantity === null ||
+        payload.quantity === undefined
+          ? null
+          : parseInt(payload.quantity, 10),
+    };
+
+    console.log("送信データ（変換後）:", processedPayload);
+    console.log("URL:", this.baseUrl("/items"));
+
+    const res = await fetch(this.baseUrl("/items"), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(processedPayload),
     });
+
+    console.log("レスポンス status:", res.status);
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("サーバーエラー詳細:", errorText);
+      throw new Error(`保存失敗: ${res.status} - ${errorText}`);
+    }
+
+    const result = await res.json();
+    console.log("保存成功:", result);
   }
 
-  /**
-   * アイテム削除（最適化済み）
-   */
+  /* ---------- アイテム削除 ---------- */
   async deleteItemFromServer(name) {
-    const response = await this.fetchWithRetry(this.getBaseUrl("/items"), {
+    console.log("=== アイテム削除開始 ===");
+    console.log("削除対象:", name);
+    console.log("URL:", this.baseUrl("/items"));
+
+    const res = await fetch(this.baseUrl("/items"), {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name }),
     });
-    
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`削除失敗: ${response.status} - ${errorText}`);
+
+    console.log("削除レスポンス status:", res.status);
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error("削除エラー詳細:", errorText);
+      throw new Error(`削除失敗: ${res.status} - ${errorText}`);
     }
-    
-    return response.json();
+
+    const result = await res.json();
+    console.log("削除成功:", result);
   }
 
-  /**
-   * イベントリスナーの効率的な設定
-   */
+  /* ---------- イベント ---------- */
   attachEventListeners() {
-    if (!this.dom.addBtn || !this.dom.input) return;
-
-    // イベントデリゲーションを使用
-    this.dom.addBtn.addEventListener("click", this.handleAdd.bind(this), { passive: true });
-    
-    this.dom.input.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        this.handleAdd();
-      }
+    this.addBtn.addEventListener("click", () => this.handleAdd());
+    this.input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") this.handleAdd();
     });
-
-    // リストコンテナでイベントデリゲーション
-    if (this.dom.listWrap) {
-      this.dom.listWrap.addEventListener("change", this.handleSelectChange.bind(this));
-      this.dom.listWrap.addEventListener("click", this.handleListClick.bind(this));
-    }
   }
 
-  /**
-   * リストクリックのハンドリング（イベントデリゲーション）
-   */
-  handleListClick(e) {
-    if (e.target.classList.contains('delete-btn')) {
-      const row = e.target.closest('.item-row');
-      if (row) {
-        const itemName = row.dataset.name;
-        this.handleDelete(itemName);
-      }
-    }
-  }
-
-  /**
-   * アイテム追加処理（最適化済み）
-   */
+  /*  アイテム追加  */
   async handleAdd() {
-    if (!this.dom.input) return;
-
-    const name = this.dom.input.value.trim();
+    const name = this.input.value.trim();
     if (!name) return;
 
-    // 重複チェック
-    if (this.items.includes(name)) {
-      this.showErrorMessage("既に存在するアイテムです");
-      return;
-    }
-
-    // UI先行更新
+    // UI 先行反映
     this.items.push(name);
     this.assignments.push({ name, assignee: "", quantity: "" });
     this.newItems.add(name);
-    this.dom.input.value = "";
-    
-    // レンダリングをスケジュール
-    this.scheduleRender();
+    this.input.value = "";
+    this.renderItems();
 
-    // サーバー保存（非同期）
+    // サーバー保存
     try {
       await this.saveItemToServer({ name });
-    } catch (error) {
-      this.showErrorMessage("保存に失敗しました");
-      // エラー時はUIを元に戻す
-      this.items = this.items.filter(item => item !== name);
-      this.assignments = this.assignments.filter(a => a.name !== name);
-      this.newItems.delete(name);
-      this.scheduleRender();
+    } catch (err) {
+      console.error(err);
+      alert("保存に失敗しました（オフライン？）");
     }
   }
 
-  /**
-   * セレクト変更処理（デバウンス付き）
-   */
+  /*  セレクト変更  */
   handleSelectChange(e) {
-    if (!e.target.classList.contains('item-select')) return;
+    const el = e.target;
+    const idx = +el.dataset.index;
+    const type = el.dataset.type; // "assignee" or "quantity"
+    this.assignments[idx][type] = el.value;
 
-    const index = parseInt(e.target.dataset.index, 10);
-    const type = e.target.dataset.type;
-    
-    if (!this.assignments[index]) return;
-
-    this.assignments[index][type] = e.target.value;
-    const { name, quantity, assignee } = this.assignments[index];
-    
-    // 自動保存（デバウンス付き）
-    this.saveItemToServer({ name, quantity, assignee }).catch(error => {
-      console.error("自動保存エラー:", error);
-    });
+    const { name, quantity, assignee } = this.assignments[idx];
+    this.saveItemToServer({ name, quantity, assignee }).catch(console.error);
   }
 
-  /**
-   * 効率的なレンダリング（RequestAnimationFrame使用）
-   */
-  scheduleRender() {
-    if (this.renderScheduled) return;
-    
-    this.renderScheduled = true;
-    requestAnimationFrame(() => {
-      this.renderItems();
-      this.renderScheduled = false;
-    });
-  }
-
-  /**
-   * アイテムリスト描画（最適化済み）
-   */
+  /* ---------- UI 描画 ---------- */
   renderItems() {
-    if (!this.dom.listWrap || !this.dom.noMsg) return;
-
     if (this.items.length === 0) {
-      this.dom.noMsg.style.display = "block";
-      this.hideHeaders();
+      this.noMsg.style.display = "block";
+      // ヘッダーも非表示にする
+      const existingHeader = this.listWrap.querySelector(".column-headers");
+      if (existingHeader) {
+        existingHeader.style.display = "none";
+      }
       return;
     }
+    this.noMsg.style.display = "none";
 
-    this.dom.noMsg.style.display = "none";
-    this.showHeaders();
-
-    // DocumentFragmentで効率的なDOM操作
-    const fragment = document.createDocumentFragment();
-    
-    this.assignments.forEach((assignment, index) => {
-      let row = this.dom.listWrap.querySelector(`[data-name="${assignment.name}"]`);
-      
-      if (!row) {
-        row = this.createRow(assignment, index);
-        fragment.appendChild(row);
-      } else {
-        this.updateRow(row, assignment);
-      }
-
-      // 新規アイテムアニメーション
-      if (this.newItems.has(assignment.name)) {
-        this.animateRow(row);
-        this.newItems.delete(assignment.name);
-      }
-    });
-
-    if (fragment.hasChildNodes()) {
-      this.dom.listWrap.appendChild(fragment);
-    }
-  }
-
-  /**
-   * ヘッダー表示/非表示の最適化
-   */
-  showHeaders() {
-    let header = this.dom.listWrap.querySelector(".column-headers");
+    // ヘッダーが無ければ作る（一度だけ）
+    let header = this.listWrap.querySelector(".column-headers");
     if (!header) {
       header = this.createHeader();
-      this.dom.listWrap.prepend(header);
+      this.listWrap.prepend(header);
     }
+    // ヘッダーを表示状態にする
     header.style.display = "flex";
+
+    // 既存行を再利用 or 追加
+    this.assignments.forEach((a, idx) => {
+      let row = this.listWrap.querySelector(`[data-name="${a.name}"]`);
+      if (!row) {
+        row = this.createRow(a, idx);
+        this.listWrap.appendChild(row);
+      }
+
+      // 値同期
+      row.querySelector('select[data-type="assignee"]').value = a.assignee;
+      row.querySelector('select[data-type="quantity"]').value = a.quantity;
+
+      // 追加アニメーション
+      if (this.newItems.has(a.name)) {
+        this.animateRow(row);
+        this.newItems.delete(a.name);
+      }
+    });
   }
 
-  hideHeaders() {
-    const header = this.dom.listWrap.querySelector(".column-headers");
-    if (header) {
-      header.style.display = "none";
-    }
-  }
-
-  /**
-   * ヘッダー作成（最適化済み）
-   */
   createHeader() {
     const headerContainer = document.createElement("div");
     headerContainer.className = "column-headers";
-    
+
     const headerContent = document.createElement("div");
     headerContent.className = "column-headers-content";
-    
-    const headers = ["何を？", "誰が？", "どれくらい？"];
-    headers.forEach(text => {
-      const headerDiv = document.createElement("div");
-      headerDiv.className = "column-header";
-      headerDiv.textContent = text;
-      headerContent.appendChild(headerDiv);
+
+    ["何を？", "誰が？", "どれくらい？"].forEach((t) => {
+      const d = document.createElement("div");
+      d.className = "column-header";
+      d.textContent = t;
+      headerContent.appendChild(d);
     });
-    
+
     const spacer = document.createElement("div");
     spacer.className = "header-spacer";
-    
+
     headerContainer.appendChild(headerContent);
     headerContainer.appendChild(spacer);
-    
+
     return headerContainer;
   }
 
-  /**
-   * 行作成（最適化済み）
-   */
-  createRow(assignment, index) {
+  createRow(a, idx) {
     const row = document.createElement("div");
     row.className = "item-row";
-    row.dataset.name = assignment.name;
+    row.dataset.name = a.name;
 
-    const content = document.createElement("div");
-    content.className = "item-content";
+    const wrap = document.createElement("div");
+    wrap.className = "item-content";
 
-    // アイテム名
-    const nameDiv = document.createElement("div");
-    nameDiv.className = "item-name";
-    nameDiv.textContent = assignment.name;
+    const nameBox = document.createElement("div");
+    nameBox.className = "item-name";
+    nameBox.textContent = a.name;
 
-    // セレクトボックス
-    const assigneeSelect = this.createSelect(index, "assignee", [
-      "", "全員", ...this.members
+    const selWho = this.createSelect(idx, "assignee", [
+      "",
+      "全員",
+      ...this.members,
     ]);
-    const quantitySelect = this.createSelect(index, "quantity", [
-      "", ...Array.from({ length: 10 }, (_, i) => i + 1)
+    const selQty = this.createSelect(idx, "quantity", [
+      "",
+      ...Array.from({ length: 10 }, (_, i) => i + 1),
     ]);
 
-    content.append(nameDiv, assigneeSelect, quantitySelect);
+    wrap.append(nameBox, selWho, selQty);
+    row.appendChild(wrap);
 
-    // 削除ボタン
-    const deleteBtn = document.createElement("button");
-    deleteBtn.className = "delete-btn";
-    deleteBtn.textContent = "×";
-    deleteBtn.setAttribute('aria-label', `${assignment.name}を削除`);
-
-    row.appendChild(content);
-    row.appendChild(deleteBtn);
+    const del = document.createElement("button");
+    del.className = "delete-btn";
+    del.textContent = "×";
+    del.onclick = () => this.handleDelete(a.name);
+    row.appendChild(del);
 
     return row;
   }
 
-  /**
-   * 行の更新（既存行の値同期）
-   */
-  updateRow(row, assignment) {
-    const assigneeSelect = row.querySelector('select[data-type="assignee"]');
-    const quantitySelect = row.querySelector('select[data-type="quantity"]');
-    
-    if (assigneeSelect) assigneeSelect.value = assignment.assignee;
-    if (quantitySelect) quantitySelect.value = assignment.quantity;
-  }
-
-  /**
-   * セレクトボックス作成（最適化済み）
-   */
-  createSelect(index, type, options) {
-    const select = document.createElement("select");
-    select.className = "item-select";
-    select.dataset.index = index;
-    select.dataset.type = type;
-    
-    options.forEach(value => {
-      const option = document.createElement("option");
-      option.value = value === "" ? "" : String(value);
-      option.textContent = value === "" ? "選択してください" : String(value);
-      
-      if (value === "全員") {
-        option.style.fontWeight = "bold";
-        option.style.color = "#00E1A9";
+  createSelect(idx, type, opts) {
+    const s = document.createElement("select");
+    s.className = "item-select";
+    s.dataset.index = idx;
+    s.dataset.type = type;
+    opts.forEach((v) => {
+      const o = document.createElement("option");
+      o.value = v === "" ? "" : String(v);
+      o.textContent = v === "" ? "選択してください" : String(v);
+      if (v === "全員") {
+        o.style.fontWeight = "bold";
+        o.style.color = "#1dd1a1";
       }
-      
-      select.appendChild(option);
+      s.appendChild(o);
     });
-    
-    // デフォルト値を設定（重要: 初期状態で空文字列）
-    select.value = "";
-    
-    console.log(`セレクト作成: type=${type}, index=${index}, options=`, options);
-    
-    return select;
+
+    // デフォルトで「選択してください」を選択状態にする
+    s.value = "";
+
+    s.onchange = (e) => this.handleSelectChange(e);
+    return s;
   }
 
-  /**
-   * 行のアニメーション（GPU最適化）
-   */
   animateRow(row) {
     row.style.opacity = "0";
     row.style.transform = "translateY(20px)";
-    
-    // 次のフレームでアニメーション開始
     requestAnimationFrame(() => {
-      row.style.transition = "opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+      row.style.transition = "all .5s ease-out";
       row.style.opacity = "1";
       row.style.transform = "translateY(0)";
     });
   }
 
-  /**
-   * 削除処理（UI最適化済み）
-   */
+  /* ---------- 削除処理（実装済み） ---------- */
   async handleDelete(name) {
-    if (!confirm(`「${name}」を削除しますか？`)) return;
+    // 確認ダイアログを表示
+    if (!confirm(`「${name}」を削除しますか？`)) {
+      return;
+    }
 
-    const row = this.dom.listWrap.querySelector(`[data-name="${name}"]`);
-    const deleteBtn = row?.querySelector('.delete-btn');
-    
-    // ボタン無効化
+    // 削除ボタンを一時的に無効化（連続クリック防止）
+    const deleteBtn = this.listWrap.querySelector(
+      `[data-name="${name}"] .delete-btn`
+    );
     if (deleteBtn) {
       deleteBtn.disabled = true;
       deleteBtn.textContent = "...";
@@ -606,26 +443,35 @@ class ItemAssignmentManager {
       // サーバーから削除
       await this.deleteItemFromServer(name);
 
-      // ローカル状態更新
-      this.assignments = this.assignments.filter(a => a.name !== name);
-      this.items = this.items.filter(item => item !== name);
+      // UIから削除
+      this.assignments = this.assignments.filter((a) => a.name !== name);
+      this.items = this.items.filter((n) => n !== name);
+      const el = this.listWrap.querySelector(`[data-name="${name}"]`);
+      if (el) {
+        // フェードアウトアニメーション
+        el.style.transition = "all 0.3s ease-out";
+        el.style.opacity = "0";
+        el.style.transform = "translateX(-20px)";
 
-      // アニメーション付きで削除
-      if (row) {
-        row.style.transition = "all 0.3s ease-out";
-        row.style.opacity = "0";
-        row.style.transform = "translateX(-20px)";
-        
         setTimeout(() => {
-          row.remove();
-          this.checkEmptyState();
+          el.remove();
+
+          // アイテムが0個になった場合の処理
+          if (this.items.length === 0) {
+            this.noMsg.style.display = "block";
+            const header = this.listWrap.querySelector(".column-headers");
+            if (header) {
+              header.style.display = "none";
+            }
+          }
         }, 300);
       }
 
-    } catch (error) {
-      console.error("削除エラー:", error);
-      this.showErrorMessage("削除に失敗しました");
-      
+      console.log(`アイテム「${name}」を削除しました`);
+    } catch (err) {
+      console.error("削除エラー:", err);
+      alert("削除に失敗しました。ネットワーク接続を確認してください。");
+
       // エラー時はボタンを元に戻す
       if (deleteBtn) {
         deleteBtn.disabled = false;
@@ -633,132 +479,81 @@ class ItemAssignmentManager {
       }
     }
   }
-
-  /**
-   * 空の状態チェック
-   */
-  checkEmptyState() {
-    if (this.items.length === 0) {
-      this.dom.noMsg.style.display = "block";
-      this.hideHeaders();
-    }
-  }
-
-  /**
-   * エラーメッセージ表示
-   */
-  showErrorMessage(message) {
-    // 簡単なトースト風メッセージ
-    const toast = document.createElement('div');
-    toast.style.cssText = `
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff4444;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      z-index: 1000;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    `;
-    toast.textContent = message;
-    
-    document.body.appendChild(toast);
-    
-    // フェードイン
-    requestAnimationFrame(() => {
-      toast.style.opacity = '1';
-    });
-    
-    // 3秒後に削除
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      setTimeout(() => {
-        document.body.removeChild(toast);
-      }, 300);
-    }, 3000);
-  }
-
-  /**
-   * グループデータをセッションに保存
-   */
-  saveGroupDataToSession() {
-    try {
-      sessionStorage.setItem("groupData", JSON.stringify(this.groupData));
-    } catch (error) {
-      console.warn("sessionStorage保存エラー:", error);
-    }
-  }
 }
 
-/**
- * ヘッダークリック処理（最適化済み）
- */
-function initializeHeaderClick() {
+// ヘッダークリックでindex.htmlに戻る処理
+document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
-  if (!header) return;
+  if (header) {
+    // 既存のonclickを上書きしてindex.htmlに戻る
+    header.onclick = () => {
+      window.location.href = "/index.html";
+    };
 
-  header.addEventListener('click', () => {
-    window.location.href = "/index.html";
-  }, { passive: true });
-  
-  header.style.cursor = "pointer";
-}
+    // カーソルスタイルを確実にpointerに設定
+    header.style.cursor = "pointer";
 
-/**
- * 編集ボタン処理（最適化済み）
- */
-async function initializeEditButton() {
+    console.log("ヘッダークリックイベントを設定しました");
+  }
+});
+
+// 編集ボタンが押されたら page2.html に戻る処理
+document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.querySelector(".edit-btn[data-type='members']");
   if (!editBtn) return;
 
-  editBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
-    
+  editBtn.addEventListener("click", async () => {
     try {
+      // メンバー編集のためのフラグを sessionStorage に設定
       sessionStorage.setItem("editMode", "members");
 
+      // 現在のグループデータを確実に sessionStorage に保存
       const currentGroupData = {
         groupId: window.itemManager?.groupData?.groupId,
         groupName: window.itemManager?.groupData?.groupName,
-        members: window.itemManager?.members || []
+        members: window.itemManager?.members || [],
       };
 
-      // サーバーから最新情報を取得
+      // グループIDが存在する場合は、最新情報をサーバーから取得
       if (currentGroupData.groupId) {
+        console.log("編集ボタン：サーバーから最新のグループ情報を取得中...");
+
         try {
-          const response = await fetch(`/api/groups/${currentGroupData.groupId}`);
+          const response = await fetch(
+            `/api/groups/${currentGroupData.groupId}`
+          );
           if (response.ok) {
-            const serverData = await response.json();
-            currentGroupData.groupName = serverData.groupName || currentGroupData.groupName;
-            currentGroupData.members = serverData.members || currentGroupData.members;
+            const serverGroupData = await response.json();
+            console.log("サーバーから取得した最新データ:", serverGroupData);
+
+            // サーバーの最新データで更新
+            currentGroupData.groupName =
+              serverGroupData.groupName || currentGroupData.groupName;
+            currentGroupData.members =
+              serverGroupData.members || currentGroupData.members;
           }
         } catch (err) {
-          console.warn("サーバー情報取得失敗:", err);
+          console.warn(
+            "サーバーからの情報取得に失敗、ローカルデータを使用:",
+            err
+          );
         }
       }
 
+      // sessionStorageに保存
       sessionStorage.setItem("groupData", JSON.stringify(currentGroupData));
-      window.location.href = "page2.html";
-      
-    } catch (error) {
-      console.error("編集ボタンエラー:", error);
-      alert("編集画面への移動に失敗しました。");
-    }
-  }, { passive: false });
-}
+      console.log("編集用にsessionStorageに保存:", currentGroupData);
 
-/**
- * DOMContentLoaded時の初期化
- */
+      // page2.htmlに遷移
+      window.location.href = "page2.html";
+    } catch (err) {
+      console.error("編集ボタンエラー:", err);
+      alert("編集画面への移動に失敗しました。もう一度お試しください。");
+    }
+  });
+});
+
+// ItemAssignmentManagerインスタンスをグローバルに保存
 document.addEventListener("DOMContentLoaded", () => {
-  // メインクラスのインスタンス化
   window.itemManager = new ItemAssignmentManager();
-  
-  // その他の初期化
-  initializeHeaderClick();
-  initializeEditButton();
-}, { passive: true });
+});
