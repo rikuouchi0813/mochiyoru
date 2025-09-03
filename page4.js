@@ -116,12 +116,16 @@ class ItemAssignmentManager {
     if (!this.groupData.groupId) {
       await this.createNewGroup();
     } else if (this.shouldFetchGroupInfo()) {
+      console.log("グループ情報を最新に更新します...");
       await this.fetchGroupInfo();
     }
 
     // データを保存
     this.saveGroupDataToSession();
-    console.log("=== loadOrCreateGroup 完了 ===", this.groupData);
+    console.log("=== loadOrCreateGroup 完了 ===", {
+      groupData: this.groupData,
+      members: this.members
+    });
   }
 
   /**
