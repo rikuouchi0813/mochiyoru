@@ -182,60 +182,25 @@
         <p>&copy; 2025 モチヨル</p>
     </footer>
 
+    <!-- スティッキー広告 -->
+    <div class="sticky-ad" id="stickyAd">
+        <button class="ad-close" onclick="closeAd()" aria-label="広告を閉じる">×</button>
+        
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4388621219050188" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block; width:100%; height:60px;"
+             data-ad-client="ca-pub-4388621219050188"
+             data-ad-slot="7674670688"
+             data-ad-format="rectangle"
+             data-full-width-responsive="false"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <!-- JavaScriptファイルをdefer属性で非ブロッキング化 -->
     <script src="page1.js" defer></script>
-    
-    <!-- Google Analytics と AdSense をページ読み込み後に遅延実行 -->
-    <script>
-        // ページのアイドル時またはロード後にGoogleスクリプトを読み込む
-        function loadGoogleScripts() {
-            // Google Analytics
-            const gtagScript = document.createElement('script');
-            gtagScript.async = true;
-            gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-WN64QR07F9';
-            document.head.appendChild(gtagScript);
-            
-            gtagScript.onload = function() {
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-WN64QR07F9');
-            };
-            
-            // Google AdSense
-            const adsenseScript = document.createElement('script');
-            adsenseScript.async = true;
-            adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4388621219050188';
-            adsenseScript.crossOrigin = 'anonymous';
-            document.head.appendChild(adsenseScript);
-        }
-        
-        // requestIdleCallbackが使えるブラウザでは優先的に使用
-        if ('requestIdleCallback' in window) {
-            requestIdleCallback(loadGoogleScripts);
-        } else {
-            // 対応していない場合は、ページ読み込み完了後に実行
-            window.addEventListener('load', function() {
-                setTimeout(loadGoogleScripts, 1);
-            });
-        }
-    </script>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4388621219050188"
-     crossorigin="anonymous"></script>
-<!-- モチヨルの広告 -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-4388621219050188"
-     data-ad-slot="7674670688"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
     
 </body>
 
 </html>
-
-
