@@ -359,7 +359,7 @@ h2 {
     transform: none;
 }
 
-/* Edit Button（最適化＋スマホ対応強化） */
+/* Edit Button（最適化） */
 .edit-button-wrapper {
     display: flex;
     align-items: center;
@@ -385,22 +385,11 @@ h2 {
     padding: 0;
     flex-shrink: 0;
     will-change: transform, background-color;
-    /* スマホ対応強化 */
-    -webkit-tap-highlight-color: rgba(0, 225, 169, 0.3);
-    touch-action: manipulation;
-    user-select: none;
 }
 
-.edit-btn:hover,
-.edit-btn:active {
+.edit-btn:hover {
     background: #404040;
     transform: scale(1.05);
-}
-
-/* スマホ専用のタップスタイル */
-.edit-btn:active {
-    background: #404040 !important;
-    transform: scale(0.95) !important;
 }
 
 .edit-btn .icon {
@@ -409,7 +398,6 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    pointer-events: none;
 }
 
 .edit-label {
@@ -417,7 +405,6 @@ h2 {
     font-family: "M PLUS 1p", sans-serif;
     color: #404040;
     font-weight: 700;
-    pointer-events: none;
 }
 
 /* ===== フッター（非Critical - 遅延読み込み可能） ===== */
@@ -785,16 +772,13 @@ footer p {
 
 /* Performance optimizations */
 * {
-    /* スマホ対応：タップハイライトを復活 */
-    -webkit-tap-highlight-color: rgba(0, 225, 169, 0.2);
+    -webkit-tap-highlight-color: transparent;
 }
 
 input, select, button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    /* スマホ対応：タッチ操作最適化 */
-    touch-action: manipulation;
 }
 
 /* Reduce layout shifts */
