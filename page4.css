@@ -602,9 +602,6 @@ footer p {
     .edit-btn {
         width: 36px;
         height: 36px;
-        /* タブレット用タップ領域拡大 */
-        min-height: 44px;
-        min-width: 44px;
     }
     
     .edit-btn .icon {
@@ -732,10 +729,6 @@ footer p {
     .edit-btn {
         width: 32px;
         height: 32px;
-        /* スマホ用タップ領域拡大 */
-        min-height: 48px;
-        min-width: 48px;
-        padding: 8px;
     }
     
     .edit-btn .icon {
