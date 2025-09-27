@@ -481,28 +481,29 @@ class ItemAssignmentManager {
   }
 }
 
-// ===== スマホ対応強化：編集ボタンのイベント処理関数 =====
-function setupEditButtonEvents() {
-  const editBtn = document.getElementById("editMembersBtn");
-  if (!editBtn) {
-    console.warn("編集ボタンが見つかりません");
-    return;
+// ヘッダークリックでindex.htmlに戻る処理
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector("header");
+  if (header) {
+    // 既存のonclickを上書きしてindex.htmlに戻る
+    header.onclick = () => {
+      window.location.href = "/index.html";
+    };
+
+    // カーソルスタイルを確実にpointerに設定
+    header.style.cursor = "pointer";
+
+    console.log("ヘッダークリックイベントを設定しました");
   }
+});
 
-  console.log("編集ボタンにイベントを設定中...");
+// 編集ボタンが押されたら page2.html に戻る処理
+document.addEventListener("DOMContentLoaded", () => {
+  const editBtn = document.querySelector(".edit-btn[data-type='members']");
+  if (!editBtn) return;
 
-  // イベントハンドラー関数
-  const handleEditClick = async (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    
-    console.log("編集ボタンがクリックされました");
-
+  editBtn.addEventListener("click", async () => {
     try {
-      // ボタンを一時的に無効化（連続クリック防止）
-      editBtn.style.pointerEvents = "none";
-      editBtn.style.opacity = "0.6";
-
       // メンバー編集のためのフラグを sessionStorage に設定
       sessionStorage.setItem("editMode", "members");
 
@@ -544,83 +545,15 @@ function setupEditButtonEvents() {
       console.log("編集用にsessionStorageに保存:", currentGroupData);
 
       // page2.htmlに遷移
-      console.log("page2.htmlに遷移します");
       window.location.href = "page2.html";
-
     } catch (err) {
       console.error("編集ボタンエラー:", err);
       alert("編集画面への移動に失敗しました。もう一度お試しください。");
-      
-      // エラー時はボタンを元に戻す
-      editBtn.style.pointerEvents = "auto";
-      editBtn.style.opacity = "1";
     }
-  };
+  });
+});
 
-  // 既存のイベントリスナーを削除（重複防止）
-  editBtn.removeEventListener("click", handleEditClick);
-  editBtn.removeEventListener("touchstart", handleEditClick);
-  editBtn.removeEventListener("touchend", handleEditClick);
-
-  // PC用：clickイベント
-  editBtn.addEventListener("click", handleEditClick, { passive: false });
-
-  // スマホ用：touchstartイベント（より確実）
-  editBtn.addEventListener("touchstart", (event) => {
-    console.log("touchstart detected");
-    event.preventDefault();
-    // タッチ開始時の視覚的フィードバック
-    editBtn.style.transform = "scale(0.95)";
-    editBtn.style.background = "#404040";
-  }, { passive: false });
-
-  // スマホ用：touchendイベントで実際の処理を実行
-  editBtn.addEventListener("touchend", (event) => {
-    console.log("touchend detected");
-    event.preventDefault();
-    // 視覚的フィードバックをリセット
-    editBtn.style.transform = "scale(1.05)";
-    editBtn.style.background = "#242424";
-    
-    // 少し遅延してから処理を実行（タッチフィードバックを見せるため）
-    setTimeout(() => {
-      handleEditClick(event);
-    }, 100);
-  }, { passive: false });
-
-  console.log("編集ボタンのイベント設定完了");
-}
-
-// ===== ヘッダークリック処理（従来通り） =====
-function setupHeaderClick() {
-  const header = document.querySelector("header");
-  if (header) {
-    // 既存のonclickを上書きしてindex.htmlに戻る
-    header.onclick = () => {
-      window.location.href = "/index.html";
-    };
-
-    // カーソルスタイルを確実にpointerに設定
-    header.style.cursor = "pointer";
-
-    console.log("ヘッダークリックイベントを設定しました");
-  }
-}
-
-// ===== 初期化処理 =====
+// ItemAssignmentManagerインスタンスをグローバルに保存
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOMContentLoaded - 初期化開始");
-  
-  // ヘッダークリック設定
-  setupHeaderClick();
-  
-  // ItemAssignmentManagerインスタンスをグローバルに保存
   window.itemManager = new ItemAssignmentManager();
-  
-  // 編集ボタンのイベント設定（ItemAssignmentManagerの初期化後に実行）
-  setTimeout(() => {
-    setupEditButtonEvents();
-  }, 100);
-  
-  console.log("初期化完了");
 });
