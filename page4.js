@@ -545,10 +545,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 編集ボタンが押されたら page2.html に戻る処理（修正版）
 document.addEventListener("DOMContentLoaded", () => {
-  const editBtn = document.querySelector(".edit-btn[data-type='members']");
-  if (!editBtn) return;
+  // より具体的なセレクターを使用
+  const editBtn = document.getElementById("editMembersBtn") || document.querySelector(".edit-btn[data-type='members']");
+  if (!editBtn) {
+    console.warn("編集ボタンが見つかりません");
+    return;
+  }
 
-  editBtn.addEventListener("click", async () => {
+  console.log("編集ボタンのイベントリスナーを設定しました", editBtn);
+
+  editBtn.addEventListener("click", async (event) => {
+    // デフォルトの動作を防止（フォーム送信やページリロードを防ぐ）
+    event.preventDefault();
+    event.stopPropagation();
     try {
       console.log("編集ボタンがクリックされました");
       
