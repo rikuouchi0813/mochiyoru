@@ -160,6 +160,52 @@ class ItemAssignmentManager {
     console.log("=== loadOrCreateGroup 完了 ===");
   }
 
+  /* ---------- グループデータを取得する静的メソッド ---------- */
+  static getCurrentGroupData() {
+    // 1. URLパスからgroupIdを取得
+    const path = window.location.pathname;
+    const groupIdFromPath = path.match(/\/group\/([^\/\?#]+)/);
+    
+    // 2. URLパラメータからも取得
+    const params = new URLSearchParams(window.location.search);
+    const urlGroupId = params.get("groupId");
+    const urlGroupName = params.get("groupName");
+    const urlMembers = params.get("members");
+    
+    // 3. sessionStorageから取得
+    let groupData = {};
+    try {
+      const saved = sessionStorage.getItem("groupData");
+      if (saved) {
+        groupData = JSON.parse(saved);
+      }
+    } catch (err) {
+      console.warn("sessionStorageの読み込みに失敗:", err);
+    }
+    
+    // 4. groupIdの優先順位：パス > URLパラメータ > sessionStorage
+    if (groupIdFromPath && groupIdFromPath[1]) {
+      groupData.groupId = groupIdFromPath[1];
+    } else if (urlGroupId) {
+      groupData.groupId = urlGroupId;
+    }
+    
+    // 5. その他の情報も取得
+    if (urlGroupName) {
+      groupData.groupName = decodeURIComponent(urlGroupName);
+    }
+    if (urlMembers) {
+      try {
+        const arr = JSON.parse(urlMembers);
+        groupData.members = arr.map((m) => (m.name ? m.name : m));
+      } catch (err) {
+        console.warn("メンバー情報の解析に失敗:", err);
+      }
+    }
+    
+    return groupData;
+  }
+
   /* ---------- API ベース URL ---------- */
   baseUrl(path = "") {
     if (path === "/items") {
@@ -497,47 +543,52 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// 編集ボタンが押されたら page2.html に戻る処理
+// 編集ボタンが押されたら page2.html に戻る処理（修正版）
 document.addEventListener("DOMContentLoaded", () => {
   const editBtn = document.querySelector(".edit-btn[data-type='members']");
   if (!editBtn) return;
 
   editBtn.addEventListener("click", async () => {
     try {
+      console.log("編集ボタンがクリックされました");
+      
       // メンバー編集のためのフラグを sessionStorage に設定
       sessionStorage.setItem("editMode", "members");
 
-      // 現在のグループデータを確実に sessionStorage に保存
-      const currentGroupData = {
-        groupId: window.itemManager?.groupData?.groupId,
-        groupName: window.itemManager?.groupData?.groupName,
-        members: window.itemManager?.members || [],
-      };
+      // 現在のグループデータを取得（静的メソッドを使用）
+      let currentGroupData = ItemAssignmentManager.getCurrentGroupData();
+      
+      console.log("取得したグループデータ:", currentGroupData);
 
       // グループIDが存在する場合は、最新情報をサーバーから取得
       if (currentGroupData.groupId) {
         console.log("編集ボタン：サーバーから最新のグループ情報を取得中...");
 
         try {
-          const response = await fetch(
-            `/api/groups/${currentGroupData.groupId}`
-          );
+          const response = await fetch(`/api/groups/${currentGroupData.groupId}`);
           if (response.ok) {
             const serverGroupData = await response.json();
             console.log("サーバーから取得した最新データ:", serverGroupData);
 
             // サーバーの最新データで更新
-            currentGroupData.groupName =
-              serverGroupData.groupName || currentGroupData.groupName;
-            currentGroupData.members =
-              serverGroupData.members || currentGroupData.members;
+            currentGroupData.groupName = serverGroupData.groupName || currentGroupData.groupName;
+            currentGroupData.members = serverGroupData.members || currentGroupData.members;
+          } else {
+            console.warn("サーバーからの情報取得に失敗（ステータス:", response.status, "）");
           }
         } catch (err) {
-          console.warn(
-            "サーバーからの情報取得に失敗、ローカルデータを使用:",
-            err
-          );
+          console.warn("サーバーからの情報取得に失敗、ローカルデータを使用:", err);
         }
+      }
+
+      // データが不完全な場合のフォールバック
+      if (!currentGroupData.groupId) {
+        console.warn("グループIDが見つかりません。デフォルト値を使用します。");
+        currentGroupData = {
+          groupId: "temp-id",
+          groupName: "新グループ", 
+          members: []
+        };
       }
 
       // sessionStorageに保存
