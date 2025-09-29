@@ -155,7 +155,7 @@ p {
     margin-bottom: 16px;
     font-size: 15px;
     line-height: 1.8;
-    color: #fff;
+    color: #404040;
 }
 
 .intro {
@@ -290,6 +290,7 @@ a:hover {
 .date-info p {
     margin-bottom: 5px;
     font-size: 13px;
+	color: #666;
 }
 
 /* ===== 戻るボタン ===== */
