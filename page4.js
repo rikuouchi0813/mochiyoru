@@ -554,6 +554,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("編集ボタンのイベントリスナーを設定しました", editBtn);
 
+  // テスト用の簡単なクリックハンドラーを追加
+  editBtn.onclick = function(event) {
+    console.log("onclick イベントが発生しました");
+    event.preventDefault();
+    event.stopPropagation();
+    
+    // 一旦シンプルにページ遷移をテスト（絶対パスを使用）
+    sessionStorage.setItem("editMode", "members");
+    window.location.href = "/page2.html";  // 先頭にスラッシュを追加
+    return false;
+  };
+
   editBtn.addEventListener("click", async (event) => {
     // デフォルトの動作を防止（フォーム送信やページリロードを防ぐ）
     event.preventDefault();
@@ -604,8 +616,8 @@ document.addEventListener("DOMContentLoaded", () => {
       sessionStorage.setItem("groupData", JSON.stringify(currentGroupData));
       console.log("編集用にsessionStorageに保存:", currentGroupData);
 
-      // page2.htmlに遷移
-      window.location.href = "page2.html";
+      // page2.htmlに遷移（絶対パスを使用）
+      window.location.href = "/page2.html";
     } catch (err) {
       console.error("編集ボタンエラー:", err);
       alert("編集画面への移動に失敗しました。もう一度お試しください。");
