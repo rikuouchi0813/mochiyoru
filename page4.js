@@ -354,6 +354,9 @@ class ItemAssignmentManager {
       el.classList.remove('quantity-error');
       el.placeholder = '例: 5個';
       
+      // assignments配列も更新
+      this.assignments[idx].quantity = '';
+      
       // サーバー保存（空文字列として保存）
       const { name, assignee } = this.assignments[idx];
       await this.saveItemToServer({ name, quantity: "", assignee }).catch((err) => {
@@ -368,14 +371,20 @@ class ItemAssignmentManager {
       // エラー状態にする
       el.classList.add('quantity-error');
       el.value = ''; // 入力内容を消す
-      el.placeholder = '数字を含めてください！'; // エラーメッセージを表示
+      el.placeholder = '数字を含めてください'; // エラーメッセージを表示
+      
+      // assignments配列も空にする（重要！）
       this.assignments[idx].quantity = '';
+      
       return;
     }
 
     // バリデーションOK
     el.classList.remove('quantity-error');
     el.placeholder = '例: 5個';
+
+    // assignments配列を更新
+    this.assignments[idx].quantity = value;
 
     // サーバー保存（文字列として保存）
     const { name, assignee } = this.assignments[idx];
@@ -703,5 +712,34 @@ document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
 
-
-
+// URLコピー機能
+document.addEventListener("DOMContentLoaded", () => {
+  const copyUrlBtn = document.getElementById("copyUrlBtn");
+  
+  if (copyUrlBtn) {
+    copyUrlBtn.addEventListener("click", async () => {
+      try {
+        // 現在のURLを取得
+        const currentUrl = window.location.href;
+        
+        // クリップボードにコピー
+        await navigator.clipboard.writeText(currentUrl);
+        
+        // フィードバック表示
+        const icon = copyUrlBtn.querySelector('.icon');
+        const originalIcon = icon.textContent;
+        icon.textContent = '✅';
+        
+        // 2秒後に元に戻す
+        setTimeout(() => {
+          icon.textContent = originalIcon;
+        }, 2000);
+        
+        console.log("URLをコピーしました:", currentUrl);
+      } catch (err) {
+        console.error("URLのコピーに失敗しました:", err);
+        alert("URLのコピーに失敗しました。手動でコピーしてください。");
+      }
+    });
+  }
+});
