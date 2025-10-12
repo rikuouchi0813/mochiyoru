@@ -239,20 +239,15 @@ class ItemAssignmentManager {
   /* ---------- アイテム保存 ---------- */
   async saveItemToServer(payload) {
     console.log("=== アイテム保存開始 ===");
-    console.log("送信データ（変換前）:", payload);
+    console.log("送信データ:", payload);
 
     const processedPayload = {
       name: payload.name || "",
       assignee: payload.assignee || "",
-      quantity:
-        payload.quantity === "" ||
-        payload.quantity === null ||
-        payload.quantity === undefined
-          ? null
-          : parseInt(payload.quantity, 10),
+      quantity: payload.quantity || "",
     };
 
-    console.log("送信データ（変換後）:", processedPayload);
+    console.log("送信データ（処理後）:", processedPayload);
     console.log("URL:", this.baseUrl("/items"));
 
     const res = await fetch(this.baseUrl("/items"), {
@@ -326,15 +321,56 @@ class ItemAssignmentManager {
     }
   }
 
-  /*  セレクト変更  */
+  /*  セレクト変更（担当者用）  */
   handleSelectChange(e) {
     const el = e.target;
     const idx = +el.dataset.index;
-    const type = el.dataset.type; // "assignee" or "quantity"
+    const type = el.dataset.type; // "assignee"
     this.assignments[idx][type] = el.value;
 
     const { name, quantity, assignee } = this.assignments[idx];
     this.saveItemToServer({ name, quantity, assignee }).catch(console.error);
+  }
+
+  /*  数量入力変更（新規）  */
+  handleQuantityInput(e) {
+    const el = e.target;
+    const idx = +el.dataset.index;
+    this.assignments[idx].quantity = el.value;
+  }
+
+  /*  数量バリデーション（blur時）  */
+  async handleQuantityBlur(e) {
+    const el = e.target;
+    const idx = +el.dataset.index;
+    const value = el.value.trim();
+    const warningEl = el.parentElement.querySelector('.quantity-warning');
+
+    // 空欄はOK
+    if (!value) {
+      if (warningEl) warningEl.style.display = 'none';
+      
+      // サーバー保存
+      const { name, quantity, assignee } = this.assignments[idx];
+      await this.saveItemToServer({ name, quantity, assignee }).catch(console.error);
+      return;
+    }
+
+    // 半角・全角数字チェック
+    if (!/[0-9０-９]/.test(value)) {
+      if (warningEl) {
+        warningEl.textContent = '数字を含めてください';
+        warningEl.style.display = 'block';
+      }
+      return;
+    }
+
+    // バリデーションOK
+    if (warningEl) warningEl.style.display = 'none';
+
+    // サーバー保存
+    const { name, quantity, assignee } = this.assignments[idx];
+    await this.saveItemToServer({ name, quantity, assignee }).catch(console.error);
   }
 
   /* ---------- UI 描画 ---------- */
@@ -369,7 +405,7 @@ class ItemAssignmentManager {
 
       // 値同期
       row.querySelector('select[data-type="assignee"]').value = a.assignee;
-      row.querySelector('select[data-type="quantity"]').value = a.quantity;
+      row.querySelector('input[data-type="quantity"]').value = a.quantity;
 
       // 追加アニメーション
       if (this.newItems.has(a.name)) {
@@ -419,12 +455,11 @@ class ItemAssignmentManager {
       "全員",
       ...this.members,
     ]);
-    const selQty = this.createSelect(idx, "quantity", [
-      "",
-      ...Array.from({ length: 10 }, (_, i) => i + 1),
-    ]);
+    
+    // 数量は入力フィールドに変更
+    const qtyInput = this.createQuantityInput(idx, a.quantity);
 
-    wrap.append(nameBox, selWho, selQty);
+    wrap.append(nameBox, selWho, qtyInput);
     row.appendChild(wrap);
 
     const del = document.createElement("button");
@@ -457,6 +492,33 @@ class ItemAssignmentManager {
 
     s.onchange = (e) => this.handleSelectChange(e);
     return s;
+  }
+
+  createQuantityInput(idx, value = "") {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'quantity-input-wrapper';
+    
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'item-select quantity-input';
+    input.dataset.index = idx;
+    input.dataset.type = 'quantity';
+    input.placeholder = '例: 5個';
+    input.maxLength = 30;
+    input.value = value;
+    
+    // イベント設定
+    input.addEventListener('input', (e) => this.handleQuantityInput(e));
+    input.addEventListener('blur', (e) => this.handleQuantityBlur(e));
+    
+    const warning = document.createElement('div');
+    warning.className = 'quantity-warning';
+    warning.style.display = 'none';
+    
+    wrapper.appendChild(input);
+    wrapper.appendChild(warning);
+    
+    return wrapper;
   }
 
   animateRow(row) {
