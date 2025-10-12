@@ -379,55 +379,52 @@ h2 {
 /* Button Container */
 .button-container {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
     margin-top: 30px;
     flex-wrap: wrap;
 }
 
-/* Edit Button Wrapper - カード型 */
+/* Edit Button Wrapper - 横長ボタン型 */
 .edit-button-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    padding: 20px 24px;
-    background: white;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
+    gap: 10px;
+    padding: 0 24px;
+    background: #00E1A9;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 180px;
+    transition: all 0.2s ease;
+    height: 54px;
+    min-width: 200px;
     box-sizing: border-box;
 }
 
 .edit-button-wrapper:hover {
-    border-color: #00E1A9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 225, 169, 0.15);
+    background: #00c995;
 }
 
 /* Edit Button - アイコン部分 */
 .edit-btn {
-    width: 48px;
-    height: 48px;
+    width: auto;
+    height: auto;
     background: transparent;
-    color: #00E1A9;
+    color: white;
     border: none;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
     padding: 0;
     pointer-events: none;
 }
 
 .edit-btn .icon {
-    font-size: 24px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -435,13 +432,14 @@ h2 {
 
 /* Edit Label - テキスト部分 */
 .edit-label {
-    font-size: 15px;
+    font-size: 14px;
     font-family: "M PLUS 1p", sans-serif;
-    color: #404040;
+    color: white;
     font-weight: 700;
     text-align: center;
-    line-height: 1.4;
+    line-height: 1;
     pointer-events: none;
+    white-space: nowrap;
 }
 
 /* ===== フッター（非Critical - 遅延読み込み可能） ===== */
@@ -633,27 +631,23 @@ footer p {
     }
     
     .button-container {
-        gap: 16px;
+        gap: 12px;
         margin-top: 25px;
     }
     
     .edit-button-wrapper {
-        gap: 10px;
-        padding: 18px 20px;
-        min-width: 160px;
-    }
-    
-    .edit-btn {
-        width: 44px;
-        height: 44px;
+        gap: 8px;
+        padding: 0 20px;
+        height: 50px;
+        min-width: 180px;
     }
     
     .edit-btn .icon {
-        font-size: 22px;
+        font-size: 16px;
     }
     
     .edit-label {
-        font-size: 14px;
+        font-size: 13px;
     }
     
     footer {
@@ -767,27 +761,23 @@ footer p {
     }
     
     .button-container {
-        gap: 12px;
+        gap: 10px;
         margin-top: 20px;
     }
     
     .edit-button-wrapper {
-        gap: 8px;
-        padding: 16px 18px;
-        min-width: 140px;
-    }
-    
-    .edit-btn {
-        width: 40px;
-        height: 40px;
+        gap: 6px;
+        padding: 0 16px;
+        height: 46px;
+        min-width: 150px;
     }
     
     .edit-btn .icon {
-        font-size: 20px;
+        font-size: 14px;
     }
     
     .edit-label {
-        font-size: 13px;
+        font-size: 12px;
     }
     
     footer {
