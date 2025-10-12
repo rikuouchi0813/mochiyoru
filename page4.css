@@ -442,6 +442,31 @@ h2 {
     white-space: nowrap;
 }
 
+/* ===== コピー成功メッセージ ===== */
+.copy-success-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, -20px);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1000;
+    font-family: "M PLUS 1p", sans-serif;
+}
+
+.copy-success-message.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translate(-50%, 0);
+}
+
 /* ===== フッター（非Critical - 遅延読み込み可能） ===== */
 footer {
     background-color: #404040;
@@ -778,6 +803,12 @@ footer p {
     
     .edit-label {
         font-size: 12px;
+    }
+    
+    .copy-success-message {
+        top: 15px;
+        font-size: 13px;
+        padding: 10px 20px;
     }
     
     footer {
