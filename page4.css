@@ -282,6 +282,7 @@ h2 {
     box-sizing: border-box;
     width: 100%;
     text-align: center;
+	text-align-last: center;
     min-width: 80px;
     font-family: "M PLUS 1p", sans-serif;
 }
@@ -795,3 +796,4 @@ input, select, button {
 .column-headers {
     contain: layout style paint;
 }
+
