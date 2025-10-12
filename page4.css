@@ -589,6 +589,7 @@ footer p {
         font-size: 16px;
         padding: 0 6px;
         min-width: 70px;
+		text-align-last: center;
     }
     
     .delete-btn {
@@ -716,6 +717,7 @@ footer p {
         font-size: 16px;
         padding: 0 4px;
         min-width: 60px;
+		text-align-last: center;
     }
     
     .delete-btn {
@@ -796,5 +798,6 @@ input, select, button {
 .column-headers {
     contain: layout style paint;
 }
+
 
 
