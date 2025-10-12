@@ -272,7 +272,7 @@ h2 {
     border-radius: 6px;
     background: white;
     font-size: 16px;
-    color: #666;
+    color: #333;
     cursor: pointer;
     transition: border-color 0.2s ease;
     min-width: 0;
@@ -796,4 +796,5 @@ input, select, button {
 .column-headers {
     contain: layout style paint;
 }
+
 
