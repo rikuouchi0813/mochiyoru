@@ -368,7 +368,7 @@ class ItemAssignmentManager {
       // エラー状態にする
       el.classList.add('quantity-error');
       el.value = ''; // 入力内容を消す
-      el.placeholder = '⚠️数字を含めてください'; // エラーメッセージを表示
+      el.placeholder = '数字を含めてください！'; // エラーメッセージを表示
       this.assignments[idx].quantity = '';
       return;
     }
@@ -702,5 +702,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
 });
+
 
 
