@@ -201,7 +201,7 @@ h2 {
     gap: 12px;
     align-items: center;
     min-width: 0;
-    justify-items: stretch;
+    justify-items: center;
 }
 
 .column-header {
@@ -241,7 +241,7 @@ h2 {
     gap: 12px;
     align-items: center;
     min-width: 0;
-    justify-items: stretch;
+    justify-items: center;
 }
 
 .item-name {
@@ -267,7 +267,7 @@ h2 {
 }
 
 .item-select {
-    padding: 0 12px;
+    padding: 0 8px;
     border: 2px solid #e0e0e0;
     border-radius: 6px;
     background: white;
@@ -798,6 +798,7 @@ input, select, button {
 .column-headers {
     contain: layout style paint;
 }
+
 
 
 
