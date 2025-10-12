@@ -627,31 +627,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // 編集ボタンが押されたら page2.html に戻る処理（修正版）
 document.addEventListener("DOMContentLoaded", () => {
-  // より具体的なセレクターを使用
+  // カード全体とボタンの両方を取得
+  const editBtnWrappers = document.querySelectorAll(".edit-button-wrapper");
+  const editBtnWrapper = editBtnWrappers[0]; // 1番目のカード（メンバー編集）
   const editBtn = document.getElementById("editMembersBtn") || document.querySelector(".edit-btn[data-type='members']");
-  if (!editBtn) {
+  
+  if (!editBtnWrapper && !editBtn) {
     console.warn("編集ボタンが見つかりません");
     return;
   }
 
-  console.log("編集ボタンのイベントリスナーを設定しました", editBtn);
+  console.log("編集ボタンのイベントリスナーを設定しました");
 
-  // テスト用の簡単なクリックハンドラーを追加
-  editBtn.onclick = function(event) {
-    console.log("onclick イベントが発生しました");
+  // カード全体のクリックイベント
+  const handleEditClick = async (event) => {
     event.preventDefault();
     event.stopPropagation();
     
-    // 一旦シンプルにページ遷移をテスト（絶対パスを使用）
-    sessionStorage.setItem("editMode", "members");
-    window.location.href = "/page2.html";  // 先頭にスラッシュを追加
-    return false;
-  };
-
-  editBtn.addEventListener("click", async (event) => {
-    // デフォルトの動作を防止（フォーム送信やページリロードを防ぐ）
-    event.preventDefault();
-    event.stopPropagation();
     try {
       console.log("編集ボタンがクリックされました");
       
@@ -704,7 +696,18 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("編集ボタンエラー:", err);
       alert("編集画面への移動に失敗しました。もう一度お試しください。");
     }
-  });
+  };
+
+  // カード全体にクリックイベントを設定
+  if (editBtnWrapper) {
+    editBtnWrapper.style.cursor = "pointer";
+    editBtnWrapper.addEventListener("click", handleEditClick);
+  }
+  
+  // 念のため、ボタン自体にもイベントを設定（後方互換性）
+  if (editBtn) {
+    editBtn.addEventListener("click", handleEditClick);
+  }
 });
 
 // ItemAssignmentManagerインスタンスをグローバルに保存
@@ -714,32 +717,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // URLコピー機能
 document.addEventListener("DOMContentLoaded", () => {
+  // カード全体とボタンの両方を取得
+  const copyUrlBtnWrapper = document.querySelectorAll(".edit-button-wrapper")[1]; // 2番目のカード
   const copyUrlBtn = document.getElementById("copyUrlBtn");
   
-  if (copyUrlBtn) {
-    copyUrlBtn.addEventListener("click", async () => {
-      try {
-        // page3と同じ形式でURLを生成
-        const protocol = window.location.protocol;
-        const currentDomain = window.location.hostname;
-        const baseUrl = `${protocol}//${currentDomain}/group/`;
-        
-        // groupIdを取得
-        const groupData = ItemAssignmentManager.getCurrentGroupData();
-        const groupId = groupData.groupId;
-        
-        if (!groupId) {
-          alert("グループIDが見つかりません");
-          return;
-        }
-        
-        // page3と同じ形式のURLを生成
-        const groupUrl = `${baseUrl}${groupId}`;
-        
-        // クリップボードにコピー
-        await navigator.clipboard.writeText(groupUrl);
-        
-        // フィードバック表示
+  const handleCopyClick = async () => {
+    try {
+      // page3と同じ形式でURLを生成
+      const protocol = window.location.protocol;
+      const currentDomain = window.location.hostname;
+      const baseUrl = `${protocol}//${currentDomain}/group/`;
+      
+      // groupIdを取得
+      const groupData = ItemAssignmentManager.getCurrentGroupData();
+      const groupId = groupData.groupId;
+      
+      if (!groupId) {
+        alert("グループIDが見つかりません");
+        return;
+      }
+      
+      // page3と同じ形式のURLを生成
+      const groupUrl = `${baseUrl}${groupId}`;
+      
+      // クリップボードにコピー
+      await navigator.clipboard.writeText(groupUrl);
+      
+      // フィードバック表示
+      if (copyUrlBtn) {
         const icon = copyUrlBtn.querySelector('.icon');
         const originalIcon = icon.textContent;
         icon.textContent = '✅';
@@ -748,12 +753,23 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
           icon.textContent = originalIcon;
         }, 2000);
-        
-        console.log("URLをコピーしました:", groupUrl);
-      } catch (err) {
-        console.error("URLのコピーに失敗しました:", err);
-        alert("URLのコピーに失敗しました。手動でコピーしてください。");
       }
-    });
+      
+      console.log("URLをコピーしました:", groupUrl);
+    } catch (err) {
+      console.error("URLのコピーに失敗しました:", err);
+      alert("URLのコピーに失敗しました。手動でコピーしてください。");
+    }
+  };
+  
+  // カード全体にクリックイベントを設定
+  if (copyUrlBtnWrapper) {
+    copyUrlBtnWrapper.style.cursor = "pointer";
+    copyUrlBtnWrapper.addEventListener("click", handleCopyClick);
+  }
+  
+  // 念のため、ボタン自体にもイベントを設定（後方互換性）
+  if (copyUrlBtn) {
+    copyUrlBtn.addEventListener("click", handleCopyClick);
   }
 });
