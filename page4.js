@@ -329,7 +329,10 @@ class ItemAssignmentManager {
     this.assignments[idx][type] = el.value;
 
     const { name, quantity, assignee } = this.assignments[idx];
-    this.saveItemToServer({ name, quantity, assignee }).catch(console.error);
+    this.saveItemToServer({ name, quantity, assignee }).catch((err) => {
+      console.error(err);
+      alert("保存に失敗しました（オフライン？）");
+    });
   }
 
   /*  数量入力変更（新規）  */
@@ -344,33 +347,31 @@ class ItemAssignmentManager {
     const el = e.target;
     const idx = +el.dataset.index;
     const value = el.value.trim();
-    const warningEl = el.parentElement.querySelector('.quantity-warning');
 
     // 空欄はOK
     if (!value) {
-      if (warningEl) warningEl.style.display = 'none';
-      
       // サーバー保存
       const { name, quantity, assignee } = this.assignments[idx];
-      await this.saveItemToServer({ name, quantity, assignee }).catch(console.error);
+      await this.saveItemToServer({ name, quantity, assignee }).catch((err) => {
+        console.error(err);
+        alert("保存に失敗しました（オフライン？）");
+      });
       return;
     }
 
     // 半角・全角数字チェック
     if (!/[0-9０-９]/.test(value)) {
-      if (warningEl) {
-        warningEl.textContent = '数字を含めてください';
-        warningEl.style.display = 'block';
-      }
+      alert('数字を含めてください');
+      el.focus();
       return;
     }
 
-    // バリデーションOK
-    if (warningEl) warningEl.style.display = 'none';
-
-    // サーバー保存
+    // バリデーションOK - サーバー保存
     const { name, quantity, assignee } = this.assignments[idx];
-    await this.saveItemToServer({ name, quantity, assignee }).catch(console.error);
+    await this.saveItemToServer({ name, quantity, assignee }).catch((err) => {
+      console.error(err);
+      alert("保存に失敗しました（オフライン？）");
+    });
   }
 
   /* ---------- UI 描画 ---------- */
@@ -495,9 +496,6 @@ class ItemAssignmentManager {
   }
 
   createQuantityInput(idx, value = "") {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'quantity-input-wrapper';
-    
     const input = document.createElement('input');
     input.type = 'text';
     input.className = 'item-select quantity-input';
@@ -511,14 +509,7 @@ class ItemAssignmentManager {
     input.addEventListener('input', (e) => this.handleQuantityInput(e));
     input.addEventListener('blur', (e) => this.handleQuantityBlur(e));
     
-    const warning = document.createElement('div');
-    warning.className = 'quantity-warning';
-    warning.style.display = 'none';
-    
-    wrapper.appendChild(input);
-    wrapper.appendChild(warning);
-    
-    return wrapper;
+    return input;
   }
 
   animateRow(row) {
