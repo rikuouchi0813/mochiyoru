@@ -1,0 +1,7 @@
+# .netlify.app から .jp へ恒久的リダイレクト（301）
+https://mochiyoru.netlify.app/*  https://mochiyoru.jp/:splat  301!
+http://mochiyoru.netlify.app/*   https://mochiyoru.jp/:splat  301!
+
+# wwwありからwwwなしへリダイレクト（念のため）
+https://www.mochiyoru.jp/*  https://mochiyoru.jp/:splat  301!
+http://www.mochiyoru.jp/*   https://mochiyoru.jp/:splat  301!
