@@ -347,11 +347,12 @@ class ItemAssignmentManager {
     const el = e.target;
     const idx = +el.dataset.index;
     const value = el.value.trim();
-    const warningEl = el.parentElement.querySelector('.quantity-warning');
 
     // 空欄はOK
     if (!value) {
-      if (warningEl) warningEl.style.display = 'none';
+      // エラー状態を解除
+      el.classList.remove('quantity-error');
+      el.placeholder = '例: 5個';
       
       // サーバー保存（空文字列として保存）
       const { name, assignee } = this.assignments[idx];
@@ -364,15 +365,16 @@ class ItemAssignmentManager {
 
     // 半角・全角数字チェック
     if (!/[0-9０-９]/.test(value)) {
-      if (warningEl) {
-        warningEl.textContent = '数字を含めてください';
-        warningEl.style.display = 'block';
-      }
+      // エラー状態にする
+      el.classList.add('quantity-error');
+      el.value = ''; // 入力内容を消す
+      el.placeholder = '数字を含めてください'; // エラーメッセージを表示
       return;
     }
 
     // バリデーションOK
-    if (warningEl) warningEl.style.display = 'none';
+    el.classList.remove('quantity-error');
+    el.placeholder = '例: 5個';
 
     // サーバー保存（文字列として保存）
     const { name, assignee } = this.assignments[idx];
@@ -380,6 +382,14 @@ class ItemAssignmentManager {
       console.error(err);
       alert("保存に失敗しました（オフライン？）");
     });
+  }
+
+  /*  数量入力フォーカス時（エラー状態解除）  */
+  handleQuantityFocus(e) {
+    const el = e.target;
+    // フォーカス時にエラー状態を解除
+    el.classList.remove('quantity-error');
+    el.placeholder = '例: 5個';
   }
 
   /* ---------- UI 描画 ---------- */
@@ -504,9 +514,6 @@ class ItemAssignmentManager {
   }
 
   createQuantityInput(idx, value = "") {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'quantity-input-wrapper';
-    
     const input = document.createElement('input');
     input.type = 'text';
     input.className = 'item-select quantity-input';
@@ -519,15 +526,9 @@ class ItemAssignmentManager {
     // イベント設定
     input.addEventListener('input', (e) => this.handleQuantityInput(e));
     input.addEventListener('blur', (e) => this.handleQuantityBlur(e));
+    input.addEventListener('focus', (e) => this.handleQuantityFocus(e));
     
-    const warning = document.createElement('div');
-    warning.className = 'quantity-warning';
-    warning.style.display = 'none';
-    
-    wrapper.appendChild(input);
-    wrapper.appendChild(warning);
-    
-    return wrapper;
+    return input;
   }
 
   animateRow(row) {
