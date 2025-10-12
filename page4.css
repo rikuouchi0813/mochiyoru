@@ -296,9 +296,34 @@ h2 {
     color: #00E1A9;
 }
 
+/* Quantity Input Wrapper */
+.quantity-input-wrapper {
+    position: relative;
+    width: 100%;
+    min-width: 80px;
+}
+
 /* Quantity Input Field */
 .quantity-input {
     font-family: "M PLUS 1p", sans-serif;
+}
+
+/* Quantity Warning Message */
+.quantity-warning {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    padding: 4px 8px;
+    background-color: #ff6b6b;
+    color: white;
+    font-size: 11px;
+    border-radius: 4px;
+    z-index: 10;
+    white-space: nowrap;
+    font-family: "M PLUS 1p", sans-serif;
+    font-weight: 500;
 }
 
 /* No Items Message */
@@ -579,6 +604,16 @@ footer p {
         min-width: 70px;
     }
     
+    .quantity-input-wrapper {
+        min-width: 70px;
+    }
+    
+    .quantity-warning {
+        font-size: 10px;
+        padding: 3px 6px;
+        margin-top: 3px;
+    }
+    
     .delete-btn {
         width: 28px;
         height: 28px;
@@ -704,6 +739,16 @@ footer p {
         font-size: 12px;
         padding: 0 4px;
         min-width: 60px;
+    }
+    
+    .quantity-input-wrapper {
+        min-width: 60px;
+    }
+    
+    .quantity-warning {
+        font-size: 9px;
+        padding: 2px 4px;
+        margin-top: 2px;
     }
     
     .delete-btn {
