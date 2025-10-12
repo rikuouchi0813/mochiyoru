@@ -746,7 +746,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // コピー成功メッセージを表示（page3と同じ）
       const successMessage = document.getElementById("copySuccessMessage");
       if (successMessage) {
-        successMessage.textContent = "URLをコピーしました！";
+        successMessage.textContent = "コピーしました！";
         successMessage.classList.add("show");
 
         setTimeout(() => {
