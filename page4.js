@@ -743,15 +743,14 @@ document.addEventListener("DOMContentLoaded", () => {
       // クリップボードにコピー
       await navigator.clipboard.writeText(groupUrl);
       
-      // フィードバック表示
-      if (copyUrlBtn) {
-        const icon = copyUrlBtn.querySelector('.icon');
-        const originalIcon = icon.textContent;
-        icon.textContent = '✅';
-        
-        // 2秒後に元に戻す
+      // コピー成功メッセージを表示（page3と同じ）
+      const successMessage = document.getElementById("copySuccessMessage");
+      if (successMessage) {
+        successMessage.textContent = "URLをコピーしました！";
+        successMessage.classList.add("show");
+
         setTimeout(() => {
-          icon.textContent = originalIcon;
+          successMessage.classList.remove("show");
         }, 2000);
       }
       
