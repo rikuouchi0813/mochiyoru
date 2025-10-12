@@ -719,11 +719,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if (copyUrlBtn) {
     copyUrlBtn.addEventListener("click", async () => {
       try {
-        // 現在のURLを取得
-        const currentUrl = window.location.href;
+        // page3と同じ形式でURLを生成
+        const protocol = window.location.protocol;
+        const currentDomain = window.location.hostname;
+        const baseUrl = `${protocol}//${currentDomain}/group/`;
+        
+        // groupIdを取得
+        const groupData = ItemAssignmentManager.getCurrentGroupData();
+        const groupId = groupData.groupId;
+        
+        if (!groupId) {
+          alert("グループIDが見つかりません");
+          return;
+        }
+        
+        // page3と同じ形式のURLを生成
+        const groupUrl = `${baseUrl}${groupId}`;
         
         // クリップボードにコピー
-        await navigator.clipboard.writeText(currentUrl);
+        await navigator.clipboard.writeText(groupUrl);
         
         // フィードバック表示
         const icon = copyUrlBtn.querySelector('.icon');
@@ -735,7 +749,7 @@ document.addEventListener("DOMContentLoaded", () => {
           icon.textContent = originalIcon;
         }, 2000);
         
-        console.log("URLをコピーしました:", currentUrl);
+        console.log("URLをコピーしました:", groupUrl);
       } catch (err) {
         console.error("URLのコピーに失敗しました:", err);
         alert("URLのコピーに失敗しました。手動でコピーしてください。");
