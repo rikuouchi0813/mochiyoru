@@ -164,7 +164,7 @@ h2 {
     color: white;
     font-family: "M PLUS 1p", sans-serif;
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.2s ease;
     white-space: nowrap;
@@ -432,7 +432,7 @@ h2 {
 
 /* Edit Label - テキスト部分 */
 .edit-label {
-    font-size: 14px;
+    font-size: 16px;
     font-family: "M PLUS 1p", sans-serif;
     color: white;
     font-weight: 700;
@@ -589,7 +589,7 @@ footer p {
     #addButton {
         width: 75px;
         height: 50px;
-        font-size: 13px;
+        font-size: 16px;
     }
     
     .item-row {
@@ -672,7 +672,7 @@ footer p {
     }
     
     .edit-label {
-        font-size: 13px;
+        font-size: 16px;
     }
     
     footer {
@@ -719,7 +719,7 @@ footer p {
     #addButton {
         width: 70px;
         height: 46px;
-        font-size: 12px;
+        font-size: 16px;
     }
     
     .item-row {
@@ -802,7 +802,7 @@ footer p {
     }
     
     .edit-label {
-        font-size: 12px;
+        font-size: 16px;
     }
     
     .copy-success-message {
@@ -851,3 +851,4 @@ input, select, button {
 .column-headers {
     contain: layout style paint;
 }
+
