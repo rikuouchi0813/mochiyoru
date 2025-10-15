@@ -352,7 +352,7 @@ class ItemAssignmentManager {
     if (!value) {
       // エラー状態を解除
       el.classList.remove('quantity-error');
-      el.placeholder = '例: 5個';
+      el.placeholder = '例: 5本, 各1個';
       
       // assignments配列も更新
       this.assignments[idx].quantity = '';
@@ -772,3 +772,4 @@ document.addEventListener("DOMContentLoaded", () => {
     copyUrlBtn.addEventListener("click", handleCopyClick);
   }
 });
+
