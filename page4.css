@@ -287,6 +287,16 @@ h2 {
     font-family: "M PLUS 1p", sans-serif;
 }
 
+/* 初期状態（選択してください）の色をグレーに */
+.item-select[data-type="assignee"]:has(option[value=""]:checked) {
+    color: #999;  /* placeholderと同じグレー */
+}
+
+/* 何か選択されたら通常の色に戻す */
+.item-select[data-type="assignee"]:not(:has(option[value=""]:checked)) {
+    color: #333;
+}
+
 .item-select:focus {
     outline: none;
     border-color: #00E1A9;
@@ -851,6 +861,7 @@ input, select, button {
 .column-headers {
     contain: layout style paint;
 }
+
 
 
 
