@@ -289,7 +289,7 @@ h2 {
 
 /* 初期状態（選択してください）の色をグレーに */
 .item-select[data-type="assignee"]:has(option[value=""]:checked) {
-    color: #999;  /* placeholderと同じグレー */
+    color: #777;  /* placeholderと同じグレー */
 }
 
 /* 何か選択されたら通常の色に戻す */
@@ -861,6 +861,7 @@ input, select, button {
 .column-headers {
     contain: layout style paint;
 }
+
 
 
 
