@@ -381,7 +381,7 @@ class ItemAssignmentManager {
 
     // バリデーションOK
     el.classList.remove('quantity-error');
-    el.placeholder = '例: 5個';
+    el.placeholder = '例: 5本, 各1個';
 
     // assignments配列を更新
     this.assignments[idx].quantity = value;
@@ -399,7 +399,7 @@ class ItemAssignmentManager {
     const el = e.target;
     // フォーカス時にエラー状態を解除
     el.classList.remove('quantity-error');
-    el.placeholder = '例: 5個';
+    el.placeholder = '例: 5本, 各1個';
   }
 
   /* ---------- UI 描画 ---------- */
@@ -529,7 +529,7 @@ class ItemAssignmentManager {
     input.className = 'item-select quantity-input';
     input.dataset.index = idx;
     input.dataset.type = 'quantity';
-    input.placeholder = '例: 5個';
+    input.placeholder = '例: 5本, 各1個';
     input.maxLength = 30;
     input.value = value;
     
@@ -772,4 +772,5 @@ document.addEventListener("DOMContentLoaded", () => {
     copyUrlBtn.addEventListener("click", handleCopyClick);
   }
 });
+
 
