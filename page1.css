@@ -26,47 +26,47 @@ ol, ul {
 /* ローカルフォントの定義 */
 /* bevan-italic - latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'Bevan';
   font-style: italic;
   font-weight: 400;
-  src: url('../fonts/bevan-v25-latin-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/bevan-v25-latin-italic.woff2') format('woff2');
 }
 
 /* m-plus-1p-500 - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'M PLUS 1p';
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/m-plus-1p-v31-japanese_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/m-plus-1p-v31-japanese_latin-500.woff2') format('woff2');
 }
 
 /* mochiy-pop-p-one-regular - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'Mochiy Pop P One';
   font-style: normal;
   font-weight: 400;
-  src: url('../fonts/mochiy-pop-p-one-v11-japanese_latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/mochiy-pop-p-one-v11-japanese_latin-regular.woff2') format('woff2');
 }
 
 /* zen-kaku-gothic-new-500 - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'Zen Kaku Gothic New';
   font-style: normal;
   font-weight: 500;
-  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-500.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-500.woff2') format('woff2');
 }
 
 /* zen-kaku-gothic-new-900 - japanese_latin */
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: 'Zen Kaku Gothic New';
   font-style: normal;
   font-weight: 900;
-  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-900.woff2') format('woff2');
 }
 
 /* ===== ベーススタイル（デスクトップ） ===== */
@@ -286,7 +286,7 @@ header h1 {
 
 /* ===== 使い方セクション ===== */
 .how-to-use {
-    max-width: 1000px;
+    max-width: 800px;  /* 1000px → 800px に変更 */
     margin: 0 auto;
     padding: 0 40px;
 }
@@ -313,9 +313,9 @@ header h1 {
 }
 
 .steps {
-    max-width: 500px;
+    /* max-width: 500px; */ /* 削除 - 親の幅に従う */
     margin: 0 auto;
-    padding: 0px 50px 60px 50px;
+    padding: 0 0 60px 0;  /* 左右のpaddingを削除 */
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -563,8 +563,8 @@ footer p {
     }
     
     .steps {
-        max-width: 400px;
-        padding: 0px 40px 50px 40px;
+        /* max-width: 400px; */ /* 削除 */
+        padding: 0 0 50px 0;  /* 左右のpaddingを削除 */
         gap: 30px;
     }
     
@@ -588,11 +588,6 @@ footer p {
     .step p {
         font-size: 14px;
         margin: 20px 0 0 0;
-    }
-    
-    .step-content {
-        width: 300px;
-        min-height: 120px;
     }
     
     .step-arrow {
@@ -718,8 +713,8 @@ footer p {
     }
     
     .steps {
-        max-width: 325px;
-        padding: 0px 20px 40px 20px;
+        /* max-width: 325px; */ /* 削除 */
+        padding: 0 0 40px 0;  /* 左右のpaddingを削除 */
         gap: 24px;
     }
     
@@ -743,11 +738,6 @@ footer p {
     .step p {
         font-size: 12px;
         margin: 18px 0 0 0;
-    }
-    
-    .step-content {
-        width: 255px;
-        min-height: 110px;
     }
     
     .step-arrow {
