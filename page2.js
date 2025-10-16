@@ -71,7 +71,7 @@ class GroupManager {
             this.pageTitle.textContent = 'グループを作成しよう';
         }
         if (this.pageDescription) {
-            this.pageDescription.textContent = 'グループ名を決めてメンバー全員の名前を追加しましょう👇';
+            this.pageDescription.textContent = 'グループ名を決めてメンバーの名前を追加しましょう👇';
         }
         if (this.buttonText) {
             this.buttonText.textContent = 'グループを作成';
@@ -336,3 +336,4 @@ class GroupManager {
 document.addEventListener('DOMContentLoaded', () => {
     new GroupManager();
 });
+
