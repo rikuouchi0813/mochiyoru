@@ -218,21 +218,26 @@ class ItemAssignmentManager {
   async fetchItemsFromServer() {
     try {
       const res = await fetch(this.baseUrl("/items"));
-      if (res.status === 404) return; // まだ何も無い
-      if (!res.ok) throw new Error();
+      if (res.status === 404) {
+        console.log("アイテムがまだ存在しません (404)");
+        return;
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      const items = await res.json(); // [{name,quantity,assignee}]
+      const items = await res.json();
+      console.log("サーバーから取得したアイテム:", items);
 
-      // データを正規化（空文字に統一）
+      // データを正規化（重要：空文字列を保持）
       this.assignments = items.map((it) => ({
         name: it.name || "",
-        assignee: it.assignee || "",
-        quantity: it.quantity || "",
+        assignee: it.assignee !== null && it.assignee !== undefined ? it.assignee : "",
+        quantity: it.quantity !== null && it.quantity !== undefined ? it.quantity : "",
       }));
 
       this.items = items.map((it) => it.name);
+      console.log("正規化後のassignments:", this.assignments);
     } catch (err) {
-      console.warn("アイテム取得スキップ（404 or ネットワーク）");
+      console.warn("アイテム取得エラー:", err);
     }
   }
 
@@ -244,11 +249,10 @@ class ItemAssignmentManager {
     const processedPayload = {
       name: payload.name || "",
       assignee: payload.assignee || "",
-      quantity: payload.quantity || "", // 文字列として送る（"5個"など）
+      quantity: payload.quantity || "",
     };
 
     console.log("送信データ（処理後）:", processedPayload);
-    console.log("URL:", this.baseUrl("/items"));
 
     const res = await fetch(this.baseUrl("/items"), {
       method: "POST",
@@ -272,7 +276,6 @@ class ItemAssignmentManager {
   async deleteItemFromServer(name) {
     console.log("=== アイテム削除開始 ===");
     console.log("削除対象:", name);
-    console.log("URL:", this.baseUrl("/items"));
 
     const res = await fetch(this.baseUrl("/items"), {
       method: "DELETE",
@@ -305,6 +308,12 @@ class ItemAssignmentManager {
     const name = this.input.value.trim();
     if (!name) return;
 
+    // 重複チェック
+    if (this.items.includes(name)) {
+      alert("この持ち物は既に追加されています。");
+      return;
+    }
+
     // UI 先行反映
     this.items.push(name);
     this.assignments.push({ name, assignee: "", quantity: "" });
@@ -314,10 +323,15 @@ class ItemAssignmentManager {
 
     // サーバー保存
     try {
-      await this.saveItemToServer({ name });
+      await this.saveItemToServer({ name, assignee: "", quantity: "" });
     } catch (err) {
       console.error(err);
-      alert("保存に失敗しました（オフライン？）");
+      alert("保存に失敗しました。ネットワーク接続を確認してください。");
+      // 失敗時はUIから削除
+      this.items = this.items.filter(n => n !== name);
+      this.assignments = this.assignments.filter(a => a.name !== name);
+      this.newItems.delete(name);
+      this.renderItems();
     }
   }
 
@@ -325,13 +339,13 @@ class ItemAssignmentManager {
   handleSelectChange(e) {
     const el = e.target;
     const idx = +el.dataset.index;
-    const type = el.dataset.type; // "assignee"
+    const type = el.dataset.type;
     this.assignments[idx][type] = el.value;
 
     const { name, quantity, assignee } = this.assignments[idx];
     this.saveItemToServer({ name, quantity, assignee }).catch((err) => {
       console.error(err);
-      alert("保存に失敗しました（オフライン？）");
+      alert("保存に失敗しました。ネットワーク接続を確認してください。");
     });
   }
 
@@ -350,63 +364,50 @@ class ItemAssignmentManager {
 
     // 空欄はOK
     if (!value) {
-      // エラー状態を解除
       el.classList.remove('quantity-error');
       el.placeholder = '例: 5本, 各1個';
-      
-      // assignments配列も更新
       this.assignments[idx].quantity = '';
       
-      // サーバー保存（空文字列として保存）
       const { name, assignee } = this.assignments[idx];
       await this.saveItemToServer({ name, quantity: "", assignee }).catch((err) => {
         console.error(err);
-        alert("保存に失敗しました（オフライン？）");
+        alert("保存に失敗しました。ネットワーク接続を確認してください。");
       });
       return;
     }
 
     // 半角・全角数字チェック
     if (!/[0-9０-９]/.test(value)) {
-      // エラー状態にする
       el.classList.add('quantity-error');
-      el.value = ''; // 入力内容を消す
-      el.placeholder = '数字を含めてください'; // エラーメッセージを表示
-      
-      // assignments配列も空にする（重要！）
+      el.value = '';
+      el.placeholder = '数字を含めてください';
       this.assignments[idx].quantity = '';
-      
       return;
     }
 
     // バリデーションOK
     el.classList.remove('quantity-error');
     el.placeholder = '例: 5本, 各1個';
-
-    // assignments配列を更新
     this.assignments[idx].quantity = value;
 
-    // サーバー保存（文字列として保存）
     const { name, assignee } = this.assignments[idx];
     await this.saveItemToServer({ name, quantity: value, assignee }).catch((err) => {
       console.error(err);
-      alert("保存に失敗しました（オフライン？）");
+      alert("保存に失敗しました。ネットワーク接続を確認してください。");
     });
   }
 
   /*  数量入力フォーカス時（エラー状態解除）  */
   handleQuantityFocus(e) {
     const el = e.target;
-    // フォーカス時にエラー状態を解除
     el.classList.remove('quantity-error');
     el.placeholder = '例: 5本, 各1個';
   }
 
-  /* ---------- UI 描画 ---------- */
+  /* ---------- UI 描画（修正版） ---------- */
   renderItems() {
     if (this.items.length === 0) {
       this.noMsg.style.display = "block";
-      // ヘッダーも非表示にする
       const existingHeader = this.listWrap.querySelector(".column-headers");
       if (existingHeader) {
         existingHeader.style.display = "none";
@@ -415,26 +416,22 @@ class ItemAssignmentManager {
     }
     this.noMsg.style.display = "none";
 
-    // ヘッダーが無ければ作る（一度だけ）
+    // ヘッダーが無ければ作る
     let header = this.listWrap.querySelector(".column-headers");
     if (!header) {
       header = this.createHeader();
       this.listWrap.prepend(header);
     }
-    // ヘッダーを表示状態にする
     header.style.display = "flex";
 
-    // 既存行を再利用 or 追加
-    this.assignments.forEach((a, idx) => {
-      let row = this.listWrap.querySelector(`[data-name="${a.name}"]`);
-      if (!row) {
-        row = this.createRow(a, idx);
-        this.listWrap.appendChild(row);
-      }
+    // 既存の行をすべて削除（重要：古いデータが残らないように）
+    const existingRows = this.listWrap.querySelectorAll('.item-row');
+    existingRows.forEach(row => row.remove());
 
-      // 値同期
-      row.querySelector('select[data-type="assignee"]').value = a.assignee;
-      row.querySelector('input[data-type="quantity"]').value = a.quantity;
+    // 行を新規作成
+    this.assignments.forEach((a, idx) => {
+      const row = this.createRow(a, idx);
+      this.listWrap.appendChild(row);
 
       // 追加アニメーション
       if (this.newItems.has(a.name)) {
@@ -479,13 +476,14 @@ class ItemAssignmentManager {
     nameBox.className = "item-name";
     nameBox.textContent = a.name;
 
+    // セレクトボックスを作成（初期値付き）
     const selWho = this.createSelect(idx, "assignee", [
       "",
       "全員",
       ...this.members,
-    ]);
+    ], a.assignee);
     
-    // 数量は入力フィールドに変更
+    // 数量入力フィールドを作成（初期値付き）
     const qtyInput = this.createQuantityInput(idx, a.quantity);
 
     wrap.append(nameBox, selWho, qtyInput);
@@ -500,11 +498,12 @@ class ItemAssignmentManager {
     return row;
   }
 
-  createSelect(idx, type, opts) {
+  createSelect(idx, type, opts, initialValue = "") {
     const s = document.createElement("select");
     s.className = "item-select";
     s.dataset.index = idx;
     s.dataset.type = type;
+    
     opts.forEach((v) => {
       const o = document.createElement("option");
       o.value = v === "" ? "" : String(v);
@@ -516,8 +515,9 @@ class ItemAssignmentManager {
       s.appendChild(o);
     });
 
-    // デフォルトで「選択してください」を選択状態にする
-    s.value = "";
+    // 初期値を設定（重要：空文字列でも明示的に設定）
+    s.value = initialValue || "";
+    console.log(`セレクト初期値設定: ${type} = "${initialValue}"`);
 
     s.onchange = (e) => this.handleSelectChange(e);
     return s;
@@ -531,7 +531,7 @@ class ItemAssignmentManager {
     input.dataset.type = 'quantity';
     input.placeholder = '例: 5本, 各1個';
     input.maxLength = 30;
-    input.value = value;
+    input.value = value || "";  // 初期値を確実に設定
     
     // イベント設定
     input.addEventListener('input', (e) => this.handleQuantityInput(e));
@@ -551,14 +551,12 @@ class ItemAssignmentManager {
     });
   }
 
-  /* ---------- 削除処理（実装済み） ---------- */
+  /* ---------- 削除処理 ---------- */
   async handleDelete(name) {
-    // 確認ダイアログを表示
     if (!confirm(`「${name}」を削除しますか？`)) {
       return;
     }
 
-    // 削除ボタンを一時的に無効化（連続クリック防止）
     const deleteBtn = this.listWrap.querySelector(
       `[data-name="${name}"] .delete-btn`
     );
@@ -568,23 +566,18 @@ class ItemAssignmentManager {
     }
 
     try {
-      // サーバーから削除
       await this.deleteItemFromServer(name);
 
-      // UIから削除
       this.assignments = this.assignments.filter((a) => a.name !== name);
       this.items = this.items.filter((n) => n !== name);
       const el = this.listWrap.querySelector(`[data-name="${name}"]`);
       if (el) {
-        // フェードアウトアニメーション
         el.style.transition = "all 0.3s ease-out";
         el.style.opacity = "0";
         el.style.transform = "translateX(-20px)";
 
         setTimeout(() => {
           el.remove();
-
-          // アイテムが0個になった場合の処理
           if (this.items.length === 0) {
             this.noMsg.style.display = "block";
             const header = this.listWrap.querySelector(".column-headers");
@@ -600,7 +593,6 @@ class ItemAssignmentManager {
       console.error("削除エラー:", err);
       alert("削除に失敗しました。ネットワーク接続を確認してください。");
 
-      // エラー時はボタンを元に戻す
       if (deleteBtn) {
         deleteBtn.disabled = false;
         deleteBtn.textContent = "×";
@@ -613,23 +605,18 @@ class ItemAssignmentManager {
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.querySelector("header");
   if (header) {
-    // 既存のonclickを上書きしてindex.htmlに戻る
     header.onclick = () => {
       window.location.href = "/index.html";
     };
-
-    // カーソルスタイルを確実にpointerに設定
     header.style.cursor = "pointer";
-
     console.log("ヘッダークリックイベントを設定しました");
   }
 });
 
-// 編集ボタンが押されたら page2.html に戻る処理（修正版）
+// 編集ボタンが押されたら page2.html に戻る処理
 document.addEventListener("DOMContentLoaded", () => {
-  // カード全体とボタンの両方を取得
   const editBtnWrappers = document.querySelectorAll(".edit-button-wrapper");
-  const editBtnWrapper = editBtnWrappers[0]; // 1番目のカード（メンバー編集）
+  const editBtnWrapper = editBtnWrappers[0];
   const editBtn = document.getElementById("editMembersBtn") || document.querySelector(".edit-btn[data-type='members']");
   
   if (!editBtnWrapper && !editBtn) {
@@ -639,7 +626,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   console.log("編集ボタンのイベントリスナーを設定しました");
 
-  // カード全体のクリックイベント
   const handleEditClick = async (event) => {
     event.preventDefault();
     event.stopPropagation();
@@ -647,15 +633,12 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       console.log("編集ボタンがクリックされました");
       
-      // メンバー編集のためのフラグを sessionStorage に設定
       sessionStorage.setItem("editMode", "members");
 
-      // 現在のグループデータを取得（静的メソッドを使用）
       let currentGroupData = ItemAssignmentManager.getCurrentGroupData();
       
       console.log("取得したグループデータ:", currentGroupData);
 
-      // グループIDが存在する場合は、最新情報をサーバーから取得
       if (currentGroupData.groupId) {
         console.log("編集ボタン：サーバーから最新のグループ情報を取得中...");
 
@@ -665,7 +648,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const serverGroupData = await response.json();
             console.log("サーバーから取得した最新データ:", serverGroupData);
 
-            // サーバーの最新データで更新
             currentGroupData.groupName = serverGroupData.groupName || currentGroupData.groupName;
             currentGroupData.members = serverGroupData.members || currentGroupData.members;
           } else {
@@ -676,7 +658,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // データが不完全な場合のフォールバック
       if (!currentGroupData.groupId) {
         console.warn("グループIDが見つかりません。デフォルト値を使用します。");
         currentGroupData = {
@@ -686,11 +667,9 @@ document.addEventListener("DOMContentLoaded", () => {
         };
       }
 
-      // sessionStorageに保存
       sessionStorage.setItem("groupData", JSON.stringify(currentGroupData));
       console.log("編集用にsessionStorageに保存:", currentGroupData);
 
-      // page2.htmlに遷移（絶対パスを使用）
       window.location.href = "/page2.html";
     } catch (err) {
       console.error("編集ボタンエラー:", err);
@@ -698,13 +677,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // カード全体にクリックイベントを設定
   if (editBtnWrapper) {
     editBtnWrapper.style.cursor = "pointer";
     editBtnWrapper.addEventListener("click", handleEditClick);
   }
   
-  // 念のため、ボタン自体にもイベントを設定（後方互換性）
   if (editBtn) {
     editBtn.addEventListener("click", handleEditClick);
   }
@@ -717,18 +694,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // URLコピー機能
 document.addEventListener("DOMContentLoaded", () => {
-  // カード全体とボタンの両方を取得
-  const copyUrlBtnWrapper = document.querySelectorAll(".edit-button-wrapper")[1]; // 2番目のカード
+  const copyUrlBtnWrapper = document.querySelectorAll(".edit-button-wrapper")[1];
   const copyUrlBtn = document.getElementById("copyUrlBtn");
   
   const handleCopyClick = async () => {
     try {
-      // page3と同じ形式でURLを生成
       const protocol = window.location.protocol;
       const currentDomain = window.location.hostname;
       const baseUrl = `${protocol}//${currentDomain}/group/`;
       
-      // groupIdを取得
       const groupData = ItemAssignmentManager.getCurrentGroupData();
       const groupId = groupData.groupId;
       
@@ -737,13 +711,10 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
       
-      // page3と同じ形式のURLを生成
       const groupUrl = `${baseUrl}${groupId}`;
       
-      // クリップボードにコピー
       await navigator.clipboard.writeText(groupUrl);
       
-      // コピー成功メッセージを表示（page3と同じ）
       const successMessage = document.getElementById("copySuccessMessage");
       if (successMessage) {
         successMessage.textContent = "コピーしました！";
@@ -761,16 +732,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
   
-  // カード全体にクリックイベントを設定
   if (copyUrlBtnWrapper) {
     copyUrlBtnWrapper.style.cursor = "pointer";
     copyUrlBtnWrapper.addEventListener("click", handleCopyClick);
   }
   
-  // 念のため、ボタン自体にもイベントを設定（後方互換性）
   if (copyUrlBtn) {
     copyUrlBtn.addEventListener("click", handleCopyClick);
   }
 });
-
-
