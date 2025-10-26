@@ -7,6 +7,7 @@ class ItemAssignmentManager {
     this.items = []; // ["カメラ", ...]
     this.assignments = []; // [{name, assignee, quantity}]
     this.newItems = new Set(); // 画面上で演出する用
+    this.sortByAssignee = false; // ソート状態フラグ
 
     // DOM
     this.bindElements();
@@ -428,9 +429,14 @@ class ItemAssignmentManager {
     const existingRows = this.listWrap.querySelectorAll('.item-row');
     existingRows.forEach(row => row.remove());
 
+    // ソート処理を適用
+    const sortedAssignments = this.sortAssignments(this.assignments);
+
     // 行を新規作成
-    this.assignments.forEach((a, idx) => {
-      const row = this.createRow(a, idx);
+    sortedAssignments.forEach((a, idx) => {
+      // 元のインデックスを取得（データ更新時に必要）
+      const originalIdx = this.assignments.findIndex(item => item.name === a.name);
+      const row = this.createRow(a, originalIdx);
       this.listWrap.appendChild(row);
 
       // 追加アニメーション
@@ -549,6 +555,58 @@ class ItemAssignmentManager {
       row.style.opacity = "1";
       row.style.transform = "translateY(0)";
     });
+  }
+
+  /* ---------- ソート処理 ---------- */
+  sortAssignments(assignments) {
+    if (!this.sortByAssignee) {
+      // ソートしない場合は元の配列をそのまま返す
+      return assignments;
+    }
+
+    // ソートする場合
+    return [...assignments].sort((a, b) => {
+      const assigneeA = a.assignee || "";
+      const assigneeB = b.assignee || "";
+
+      // 「全員」を最優先
+      if (assigneeA === "全員" && assigneeB !== "全員") return -1;
+      if (assigneeA !== "全員" && assigneeB === "全員") return 1;
+
+      // 未選択（空文字列）を最後
+      if (assigneeA === "" && assigneeB !== "") return 1;
+      if (assigneeA !== "" && assigneeB === "") return -1;
+
+      // 両方とも「全員」または両方とも空の場合は順序を保持
+      if (assigneeA === assigneeB) return 0;
+
+      // それ以外は50音順
+      return assigneeA.localeCompare(assigneeB, 'ja');
+    });
+  }
+
+  /* ---------- ソートトグル処理 ---------- */
+  toggleSort() {
+    this.sortByAssignee = !this.sortByAssignee;
+
+    // ボタンのラベルを更新
+    const sortLabel = document.getElementById("sortLabel");
+    if (sortLabel) {
+      sortLabel.textContent = this.sortByAssignee ? "元の順序に戻す" : "50音順で並べ替え";
+    }
+
+    // ボタンのスタイルを更新（アクティブ状態を示す）
+    const sortBtn = document.getElementById("sortToggleBtn");
+    if (sortBtn) {
+      if (this.sortByAssignee) {
+        sortBtn.classList.add("active");
+      } else {
+        sortBtn.classList.remove("active");
+      }
+    }
+
+    // 再描画
+    this.renderItems();
   }
 
   /* ---------- 削除処理 ---------- */
@@ -696,25 +754,25 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const copyUrlBtnWrapper = document.querySelectorAll(".edit-button-wrapper")[1];
   const copyUrlBtn = document.getElementById("copyUrlBtn");
-  
+
   const handleCopyClick = async () => {
     try {
       const protocol = window.location.protocol;
       const currentDomain = window.location.hostname;
       const baseUrl = `${protocol}//${currentDomain}/group/`;
-      
+
       const groupData = ItemAssignmentManager.getCurrentGroupData();
       const groupId = groupData.groupId;
-      
+
       if (!groupId) {
         alert("グループIDが見つかりません");
         return;
       }
-      
+
       const groupUrl = `${baseUrl}${groupId}`;
-      
+
       await navigator.clipboard.writeText(groupUrl);
-      
+
       const successMessage = document.getElementById("copySuccessMessage");
       if (successMessage) {
         successMessage.textContent = "コピーしました！";
@@ -724,20 +782,41 @@ document.addEventListener("DOMContentLoaded", () => {
           successMessage.classList.remove("show");
         }, 2000);
       }
-      
+
       console.log("URLをコピーしました:", groupUrl);
     } catch (err) {
       console.error("URLのコピーに失敗しました:", err);
       alert("URLのコピーに失敗しました。手動でコピーしてください。");
     }
   };
-  
+
   if (copyUrlBtnWrapper) {
     copyUrlBtnWrapper.style.cursor = "pointer";
     copyUrlBtnWrapper.addEventListener("click", handleCopyClick);
   }
-  
+
   if (copyUrlBtn) {
     copyUrlBtn.addEventListener("click", handleCopyClick);
+  }
+});
+
+// ソート機能
+document.addEventListener("DOMContentLoaded", () => {
+  const sortBtnWrapper = document.querySelectorAll(".edit-button-wrapper")[2];
+  const sortBtn = document.getElementById("sortToggleBtn");
+
+  const handleSortClick = () => {
+    if (window.itemManager) {
+      window.itemManager.toggleSort();
+    }
+  };
+
+  if (sortBtnWrapper) {
+    sortBtnWrapper.style.cursor = "pointer";
+    sortBtnWrapper.addEventListener("click", handleSortClick);
+  }
+
+  if (sortBtn) {
+    sortBtn.addEventListener("click", handleSortClick);
   }
 });

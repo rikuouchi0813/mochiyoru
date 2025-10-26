@@ -418,6 +418,12 @@ h2 {
     background: #00c995;
 }
 
+/* ソートボタンのアクティブ状態 */
+.edit-button-wrapper:has(.sort-btn.active) {
+    background: #00c995;
+    box-shadow: 0 0 0 3px rgba(0, 225, 169, 0.3);
+}
+
 /* Edit Button - アイコン部分 */
 .edit-btn {
     width: auto;
