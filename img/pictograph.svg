@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 323 53">
+  <defs>
+    <style>
+      .cls-1, .cls-2, .cls-3 {
+        fill: none;
+      }
+
+      .cls-4 {
+        fill: url(#_名称未設定グラデーション_47-2);
+      }
+
+      .cls-5 {
+        fill: url(#_名称未設定グラデーション_47-3);
+      }
+
+      .cls-6 {
+        fill: url(#_名称未設定グラデーション_46-2);
+      }
+
+      .cls-7 {
+        fill: url(#_名称未設定グラデーション_67-5);
+      }
+
+      .cls-8 {
+        fill: url(#_名称未設定グラデーション_67-4);
+      }
+
+      .cls-9 {
+        fill: url(#_名称未設定グラデーション_67-3);
+      }
+
+      .cls-10 {
+        fill: url(#_名称未設定グラデーション_67-2);
+      }
+
+      .cls-11 {
+        fill: url(#_名称未設定グラデーション_67-6);
+      }
+
+      .cls-12 {
+        fill: url(#_名称未設定グラデーション_18-2);
+      }
+
+      .cls-13 {
+        fill: url(#_名称未設定グラデーション_16-3);
+      }
+
+      .cls-14 {
+        fill: url(#_名称未設定グラデーション_16-2);
+      }
+
+      .cls-15 {
+        fill: url(#_名称未設定グラデーション_16-5);
+      }
+
+      .cls-16 {
+        fill: url(#_名称未設定グラデーション_16-4);
+      }
+
+      .cls-17 {
+        fill: url(#_名称未設定グラデーション_16-9);
+      }
+
+      .cls-18 {
+        fill: url(#_名称未設定グラデーション_16-8);
+      }
+
+      .cls-19 {
+        fill: url(#_名称未設定グラデーション_16-7);
+      }
+
+      .cls-20 {
+        fill: url(#_名称未設定グラデーション_16-6);
+      }
+
+      .cls-21 {
+        fill: url(#_名称未設定グラデーション_13-2);
+      }
+
+      .cls-22 {
+        fill: url(#_名称未設定グラデーション_39-2);
+      }
+
+      .cls-23 {
+        fill: url(#_名称未設定グラデーション_56-9);
+      }
+
+      .cls-24 {
+        fill: url(#_名称未設定グラデーション_56-3);
+      }
+
+      .cls-25 {
+        fill: url(#_名称未設定グラデーション_56-8);
+      }
+
+      .cls-26 {
+        fill: url(#_名称未設定グラデーション_56-6);
+      }
+
+      .cls-27 {
+        fill: url(#_名称未設定グラデーション_56-7);
+      }
+
+      .cls-28 {
+        fill: url(#_名称未設定グラデーション_56-5);
+      }
+
+      .cls-29 {
+        fill: url(#_名称未設定グラデーション_56-4);
+      }
+
+      .cls-30 {
+        fill: url(#_名称未設定グラデーション_56-2);
+      }
+
+      .cls-31 {
+        fill: url(#_名称未設定グラデーション_58-5);
+      }
+
+      .cls-32 {
+        fill: url(#_名称未設定グラデーション_58-3);
+      }
+
+      .cls-33 {
+        fill: url(#_名称未設定グラデーション_58-4);
+      }
+
+      .cls-34 {
+        fill: url(#_名称未設定グラデーション_58-2);
+      }
+
+      .cls-35 {
+        fill: url(#_名称未設定グラデーション_73-2);
+      }
+
+      .cls-36 {
+        fill: url(#_名称未設定グラデーション_73-3);
+      }
+
+      .cls-37 {
+        fill: url(#_名称未設定グラデーション_73-4);
+      }
+
+      .cls-38 {
+        fill: url(#_名称未設定グラデーション_73-5);
+      }
+
+      .cls-39 {
+        fill: url(#_名称未設定グラデーション_73-6);
+      }
+
+      .cls-40 {
+        fill: url(#_名称未設定グラデーション_75-2);
+      }
+
+      .cls-41 {
+        fill: url(#_名称未設定グラデーション_75-3);
+      }
+
+      .cls-42 {
+        fill: url(#_名称未設定グラデーション_79-2);
+      }
+
+      .cls-43 {
+        fill: url(#_名称未設定グラデーション_79-3);
+      }
+
+      .cls-44 {
+        fill: url(#_名称未設定グラデーション_79-4);
+      }
+
+      .cls-45 {
+        fill: url(#_名称未設定グラデーション_82-2);
+      }
+
+      .cls-46 {
+        fill: url(#_名称未設定グラデーション_80-2);
+      }
+
+      .cls-47 {
+        fill: url(#_名称未設定グラデーション_86-2);
+      }
+
+      .cls-48 {
+        fill: #d8cca8;
+      }
+
+      .cls-49 {
+        fill: url(#_名称未設定グラデーション_105-13);
+      }
+
+      .cls-50 {
+        fill: url(#_名称未設定グラデーション_105-16);
+      }
+
+      .cls-51 {
+        fill: url(#_名称未設定グラデーション_105-15);
+      }
+
+      .cls-52 {
+        fill: url(#_名称未設定グラデーション_105-12);
+      }
+
+      .cls-53 {
+        fill: url(#_名称未設定グラデーション_105-14);
+      }
+
+      .cls-54 {
+        fill: url(#_名称未設定グラデーション_105-11);
+      }
+
+      .cls-55 {
+        fill: url(#_名称未設定グラデーション_105-10);
+      }
+
+      .cls-2 {
+        stroke: #991b00;
+        stroke-width: .75px;
+      }
+
+      .cls-2, .cls-3 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-56 {
+        fill: url(#_名称未設定グラデーション_56-20);
+      }
+
+      .cls-57 {
+        fill: url(#_名称未設定グラデーション_56-21);
+      }
+
+      .cls-58 {
+        fill: url(#_名称未設定グラデーション_56-15);
+      }
+
+      .cls-59 {
+        fill: url(#_名称未設定グラデーション_56-18);
+      }
+
+      .cls-60 {
+        fill: url(#_名称未設定グラデーション_56-12);
+      }
+
+      .cls-61 {
+        fill: url(#_名称未設定グラデーション_56-10);
+      }
+
+      .cls-62 {
+        fill: url(#_名称未設定グラデーション_56-11);
+      }
+
+      .cls-63 {
+        fill: url(#_名称未設定グラデーション_56-17);
+      }
+
+      .cls-64 {
+        fill: url(#_名称未設定グラデーション_56-19);
+      }
+
+      .cls-65 {
+        fill: url(#_名称未設定グラデーション_56-16);
+      }
+
+      .cls-66 {
+        fill: url(#_名称未設定グラデーション_56-14);
+      }
+
+      .cls-67 {
+        fill: url(#_名称未設定グラデーション_56-13);
+      }
+
+      .cls-68 {
+        fill: url(#_名称未設定グラデーション_105-8);
+      }
+
+      .cls-69 {
+        fill: url(#_名称未設定グラデーション_105-7);
+      }
+
+      .cls-70 {
+        fill: url(#_名称未設定グラデーション_105-6);
+      }
+
+      .cls-71 {
+        fill: url(#_名称未設定グラデーション_105-5);
+      }
+
+      .cls-72 {
+        fill: url(#_名称未設定グラデーション_105-4);
+      }
+
+      .cls-73 {
+        fill: url(#_名称未設定グラデーション_105-3);
+      }
+
+      .cls-74 {
+        fill: url(#_名称未設定グラデーション_105-2);
+      }
+
+      .cls-75 {
+        fill: url(#_名称未設定グラデーション_105-9);
+      }
+
+      .cls-76 {
+        fill: url(#_名称未設定グラデーション_16-10);
+      }
+
+      .cls-77 {
+        fill: url(#_名称未設定グラデーション_16-11);
+      }
+
+      .cls-78 {
+        fill: url(#_名称未設定グラデーション_16-12);
+      }
+
+      .cls-79 {
+        clip-path: url(#clippath-1);
+      }
+
+      .cls-80 {
+        clip-path: url(#clippath-3);
+      }
+
+      .cls-81 {
+        clip-path: url(#clippath-4);
+      }
+
+      .cls-82 {
+        clip-path: url(#clippath-2);
+      }
+
+      .cls-83 {
+        clip-path: url(#clippath-7);
+      }
+
+      .cls-84 {
+        clip-path: url(#clippath-6);
+      }
+
+      .cls-85 {
+        clip-path: url(#clippath-8);
+      }
+
+      .cls-86 {
+        clip-path: url(#clippath-5);
+      }
+
+      .cls-87 {
+        fill: #fff;
+      }
+
+      .cls-88 {
+        fill: url(#_名称未設定グラデーション_105);
+      }
+
+      .cls-89 {
+        fill: #991b00;
+      }
+
+      .cls-90 {
+        fill: #f0dfae;
+      }
+
+      .cls-91 {
+        fill: #e7ce99;
+      }
+
+      .cls-3 {
+        stroke: #6bd9ff;
+        stroke-linecap: round;
+        stroke-width: .5px;
+      }
+
+      .cls-92 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-93 {
+        fill: url(#_名称未設定グラデーション_92);
+      }
+
+      .cls-94 {
+        fill: url(#_名称未設定グラデーション_93);
+      }
+
+      .cls-95 {
+        fill: url(#_名称未設定グラデーション_39);
+      }
+
+      .cls-96 {
+        fill: url(#_名称未設定グラデーション_60);
+      }
+
+      .cls-97 {
+        fill: url(#_名称未設定グラデーション_67);
+      }
+
+      .cls-98 {
+        fill: url(#_名称未設定グラデーション_61);
+      }
+
+      .cls-99 {
+        fill: url(#_名称未設定グラデーション_75);
+      }
+
+      .cls-100 {
+        fill: url(#_名称未設定グラデーション_79);
+      }
+
+      .cls-101 {
+        fill: url(#_名称未設定グラデーション_73);
+      }
+
+      .cls-102 {
+        fill: url(#_名称未設定グラデーション_14);
+      }
+
+      .cls-103 {
+        fill: url(#_名称未設定グラデーション_12);
+      }
+
+      .cls-104 {
+        fill: url(#_名称未設定グラデーション_13);
+      }
+
+      .cls-105 {
+        fill: url(#_名称未設定グラデーション_18);
+      }
+
+      .cls-106 {
+        fill: url(#_名称未設定グラデーション_19);
+      }
+
+      .cls-107 {
+        fill: url(#_名称未設定グラデーション_16);
+      }
+
+      .cls-108 {
+        fill: url(#_名称未設定グラデーション_46);
+      }
+
+      .cls-109 {
+        fill: url(#_名称未設定グラデーション_47);
+      }
+
+      .cls-110 {
+        fill: url(#_名称未設定グラデーション_48);
+      }
+
+      .cls-111 {
+        fill: url(#_名称未設定グラデーション_56);
+      }
+
+      .cls-112 {
+        fill: url(#_名称未設定グラデーション_57);
+      }
+
+      .cls-113 {
+        fill: url(#_名称未設定グラデーション_58);
+      }
+
+      .cls-114 {
+        fill: url(#_名称未設定グラデーション_59);
+      }
+
+      .cls-115 {
+        fill: url(#_名称未設定グラデーション_50);
+      }
+
+      .cls-116 {
+        fill: url(#_名称未設定グラデーション_51);
+      }
+
+      .cls-117 {
+        fill: url(#_名称未設定グラデーション_84);
+      }
+
+      .cls-118 {
+        fill: url(#_名称未設定グラデーション_86);
+      }
+
+      .cls-119 {
+        fill: url(#_名称未設定グラデーション_87);
+      }
+
+      .cls-120 {
+        fill: url(#_名称未設定グラデーション_80);
+      }
+
+      .cls-121 {
+        fill: url(#_名称未設定グラデーション_82);
+      }
+
+      .cls-122 {
+        fill: url(#_名称未設定グラデーション_83);
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-1" x="256" y="26" width="28" height="27"/>
+    </clipPath>
+    <linearGradient id="_名称未設定グラデーション_16" data-name="名称未設定グラデーション 16" x1="-273.81" y1="746.85" x2="-265.72" y2="760.16" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff4942"/>
+      <stop offset="1" stop-color="#ff725c"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_16-2" data-name="名称未設定グラデーション 16" x1="-264.18" y1="746.86" x2="-272.27" y2="760.18" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_16-3" data-name="名称未設定グラデーション 16" x1="-259.41" y1="751.52" x2="-262.72" y2="756.97" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_16-4" data-name="名称未設定グラデーション 16" x1="-278.59" y1="751.53" x2="-275.29" y2="756.98" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_16-5" data-name="名称未設定グラデーション 16" x1="-275.23" y1="749.88" x2="-276.73" y2="751.62" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_16-6" data-name="名称未設定グラデーション 16" x1="-262.76" y1="749.88" x2="-261.28" y2="751.62" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_12" data-name="名称未設定グラデーション 12" x1="-279.87" y1="760.3" x2="-282.14" y2="762.63" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e0b868"/>
+      <stop offset="1" stop-color="#e0b657"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_16-7" data-name="名称未設定グラデーション 16" x1="-277.79" y1="759.01" x2="-280.38" y2="763.26" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_16-8" data-name="名称未設定グラデーション 16" x1="-275.64" y1="762.83" x2="-277.69" y2="766.21" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_13" data-name="名称未設定グラデーション 13" x1="-278.18" y1="762.19" x2="-280.05" y2="765.28" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd276"/>
+      <stop offset="1" stop-color="#ffd063"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_16-9" data-name="名称未設定グラデーション 16" x1="-260.19" y1="759" x2="-257.62" y2="763.26" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_16-10" data-name="名称未設定グラデーション 16" x1="-262.35" y1="762.82" x2="-260.3" y2="766.2" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_13-2" data-name="名称未設定グラデーション 13" x1="-259.81" y1="762.2" x2="-257.94" y2="765.29" xlink:href="#_名称未設定グラデーション_13"/>
+    <linearGradient id="_名称未設定グラデーション_14" data-name="名称未設定グラデーション 14" x1="-280.17" y1="762.3" x2="-281.09" y2="763.79" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#c98c27"/>
+      <stop offset="1" stop-color="#c9a053"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_16-11" data-name="名称未設定グラデーション 16" x1="-272.49" y1="765.05" x2="-277.64" y2="771.09" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_16-12" data-name="名称未設定グラデーション 16" x1="-265.53" y1="764.81" x2="-260.24" y2="771.03" xlink:href="#_名称未設定グラデーション_16"/>
+    <linearGradient id="_名称未設定グラデーション_18" data-name="名称未設定グラデーション 18" x1="-263.81" y1="769.34" x2="-272.47" y2="779.5" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffd276"/>
+      <stop offset="1" stop-color="#ffc645"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_18-2" data-name="名称未設定グラデーション 18" x1="-269.01" y1="757.22" x2="-269.01" y2="763.17" xlink:href="#_名称未設定グラデーション_18"/>
+    <linearGradient id="_名称未設定グラデーション_19" data-name="名称未設定グラデーション 19" x1="-269.01" y1="772.59" x2="-269.3" y2="763.84" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f7c360"/>
+      <stop offset="1" stop-color="#f7b730"/>
+    </linearGradient>
+    <clipPath id="clippath-1">
+      <rect class="cls-1" x="298" y="2" width="25" height="28"/>
+    </clipPath>
+    <linearGradient id="_名称未設定グラデーション_56" data-name="名称未設定グラデーション 56" x1="-238.74" y1="787.63" x2="-239.92" y2="788.99" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5bdaff"/>
+      <stop offset="1" stop-color="#61b2ff"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_56-2" data-name="名称未設定グラデーション 56" x1="-231.94" y1="787.63" x2="-230.78" y2="788.99" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-3" data-name="名称未設定グラデーション 56" x1="-234.84" y1="794.06" x2="-237.67" y2="797.37" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-4" data-name="名称未設定グラデーション 56" x1="-235.85" y1="794.06" x2="-233.02" y2="797.37" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-5" data-name="名称未設定グラデーション 56" x1="-231.01" y1="787.29" x2="-238.31" y2="795.8" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-6" data-name="名称未設定グラデーション 56" x1="-228.34" y1="772.6" x2="-240.13" y2="786.35" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-7" data-name="名称未設定グラデーション 56" x1="-235.53" y1="797.72" x2="-236.54" y2="798.89" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-8" data-name="名称未設定グラデーション 56" x1="-235.16" y1="797.73" x2="-234.14" y2="798.9" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_39" data-name="名称未設定グラデーション 39" x1="-233.97" y1="798.24" x2="-236.3" y2="800.95" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e18fff"/>
+      <stop offset="1" stop-color="#e67cff"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_56-9" data-name="名称未設定グラデーション 56" x1="-240.42" y1="792.47" x2="-230.28" y2="792.47" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-10" data-name="名称未設定グラデーション 56" x1="-237.33" y1="792.46" x2="-233.37" y2="792.46" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-11" data-name="名称未設定グラデーション 56" x1="-225.03" y1="788.64" x2="-226.22" y2="788.64" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-12" data-name="名称未設定グラデーション 56" x1="-218.24" y1="787.63" x2="-217.09" y2="788.99" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-13" data-name="名称未設定グラデーション 56" x1="-221.15" y1="794.05" x2="-223.98" y2="797.37" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-14" data-name="名称未設定グラデーション 56" x1="-222.14" y1="794.06" x2="-219.31" y2="797.37" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-15" data-name="名称未設定グラデーション 56" x1="-217.31" y1="787.29" x2="-224.61" y2="795.8" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-16" data-name="名称未設定グラデーション 56" x1="-214.65" y1="772.59" x2="-226.43" y2="786.35" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-17" data-name="名称未設定グラデーション 56" x1="-221.84" y1="797.72" x2="-222.85" y2="798.89" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-18" data-name="名称未設定グラデーション 56" x1="-221.45" y1="797.72" x2="-220.44" y2="798.9" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_39-2" data-name="名称未設定グラデーション 39" x1="-220.27" y1="798.24" x2="-222.58" y2="800.96" xlink:href="#_名称未設定グラデーション_39"/>
+    <linearGradient id="_名称未設定グラデーション_56-19" data-name="名称未設定グラデーション 56" x1="-226.72" y1="792.47" x2="-216.58" y2="792.47" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_56-20" data-name="名称未設定グラデーション 56" x1="-223.63" y1="792.46" x2="-219.67" y2="792.46" xlink:href="#_名称未設定グラデーション_56"/>
+    <clipPath id="clippath-2">
+      <rect class="cls-1" x="145" y="3" width="34" height="24"/>
+    </clipPath>
+    <linearGradient id="_名称未設定グラデーション_46" data-name="名称未設定グラデーション 46" x1="-389.81" y1="789.69" x2="-364.22" y2="789.69" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f95101"/>
+      <stop offset="1" stop-color="#f97626"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_47" data-name="名称未設定グラデーション 47" x1="-389.81" y1="788.99" x2="-364.22" y2="788.99" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e04400"/>
+      <stop offset="1" stop-color="#e05702"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_75" data-name="名称未設定グラデーション 75" x1="-389.81" y1="787.56" x2="-364.22" y2="787.56" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff6535"/>
+      <stop offset="1" stop-color="#ff9155"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_47-2" data-name="名称未設定グラデーション 47" x1="-377.01" y1="782.82" x2="-372.48" y2="782.82" xlink:href="#_名称未設定グラデーション_47"/>
+    <linearGradient id="_名称未設定グラデーション_46-2" data-name="名称未設定グラデーション 46" x1="-381.45" y1="782.82" x2="-374.74" y2="782.82" xlink:href="#_名称未設定グラデーション_46"/>
+    <linearGradient id="_名称未設定グラデーション_47-3" data-name="名称未設定グラデーション 47" x1="-384.34" y1="784.78" x2="-377.01" y2="784.78" xlink:href="#_名称未設定グラデーション_47"/>
+    <linearGradient id="_名称未設定グラデーション_48" data-name="名称未設定グラデーション 48" x1="-383.56" y1="782.84" x2="-377.01" y2="782.84" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffa990"/>
+      <stop offset="1" stop-color="#ffcbb0"/>
+    </linearGradient>
+    <clipPath id="clippath-3">
+      <rect class="cls-1" x="222" width="19" height="27"/>
+    </clipPath>
+    <linearGradient id="_名称未設定グラデーション_80" data-name="名称未設定グラデーション 80" x1="-317" y1="789.51" x2="-298" y2="789.51" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f54f33"/>
+      <stop offset="1" stop-color="#f57c52"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_50" data-name="名称未設定グラデーション 50" x1="-303.05" y1="785.19" x2="-287.04" y2="784.65" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff8359"/>
+      <stop offset="1" stop-color="#ffa275"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_51" data-name="名称未設定グラデーション 51" x1="-310.41" y1="782.18" x2="-304.3" y2="781.96" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffca45"/>
+      <stop offset="1" stop-color="#ffe861"/>
+    </linearGradient>
+    <clipPath id="clippath-4">
+      <rect class="cls-1" x="68" y="4" width="35" height="20"/>
+    </clipPath>
+    <linearGradient id="_名称未設定グラデーション_58" data-name="名称未設定グラデーション 58" x1="-436.98" y1="787.97" x2="-439.94" y2="791.26" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5b91ff"/>
+      <stop offset="1" stop-color="#7589ff"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_58-2" data-name="名称未設定グラデーション 58" x1="-436.98" y1="788.24" x2="-439.94" y2="784.95" xlink:href="#_名称未設定グラデーション_58"/>
+    <linearGradient id="_名称未設定グラデーション_58-3" data-name="名称未設定グラデーション 58" x1="-451.5" y1="791.82" x2="-457.78" y2="798.83" xlink:href="#_名称未設定グラデーション_58"/>
+    <linearGradient id="_名称未設定グラデーション_58-4" data-name="名称未設定グラデーション 58" x1="-453.04" y1="778.26" x2="-457.01" y2="782.69" xlink:href="#_名称未設定グラデーション_58"/>
+    <linearGradient id="_名称未設定グラデーション_56-21" data-name="名称未設定グラデーション 56" x1="-447.97" y1="778.52" x2="-462.9" y2="795.15" xlink:href="#_名称未設定グラデーション_56"/>
+    <linearGradient id="_名称未設定グラデーション_57" data-name="名称未設定グラデーション 57" x1="-464.58" y1="789.41" x2="-465.59" y2="790.54" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#3c60a8"/>
+      <stop offset="1" stop-color="#4d5aa8"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_58-5" data-name="名称未設定グラデーション 58" x1="-455.73" y1="786.44" x2="-458.91" y2="790" xlink:href="#_名称未設定グラデーション_58"/>
+    <clipPath id="clippath-5">
+      <rect class="cls-1" x="186" y="33" width="29" height="20"/>
+    </clipPath>
+    <linearGradient id="_名称未設定グラデーション_59" data-name="名称未設定グラデーション 59" x1="-338.63" y1="749.95" x2="-350.29" y2="763.11" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#feaca3"/>
+      <stop offset="1" stop-color="#f8ccc7"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_60" data-name="名称未設定グラデーション 60" x1="-340.94" y1="766.17" x2="-335.76" y2="755.94" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#eb7167"/>
+      <stop offset="1" stop-color="#b02a1c"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_61" data-name="名称未設定グラデーション 61" x1="-349.74" y1="763.03" x2="-341.61" y2="752.7" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fc9d94"/>
+      <stop offset="1" stop-color="#ea726a"/>
+    </linearGradient>
+    <clipPath id="clippath-6">
+      <rect class="cls-1" x="34" y="15" width="17" height="38"/>
+    </clipPath>
+    <linearGradient id="_名称未設定グラデーション_67" data-name="名称未設定グラデーション 67" x1="-493.01" y1="777.05" x2="-497.75" y2="778.9" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#57e368"/>
+      <stop offset="1" stop-color="#39e6a4"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_67-2" data-name="名称未設定グラデーション 67" x1="-495.73" y1="781.85" x2="-499.81" y2="783.43" xlink:href="#_名称未設定グラデーション_67"/>
+    <linearGradient id="_名称未設定グラデーション_67-3" data-name="名称未設定グラデーション 67" x1="-493.44" y1="784.5" x2="-498.18" y2="786.35" xlink:href="#_名称未設定グラデーション_67"/>
+    <linearGradient id="_名称未設定グラデーション_67-4" data-name="名称未設定グラデーション 67" x1="-491.41" y1="780.54" x2="-497.02" y2="782.73" xlink:href="#_名称未設定グラデーション_67"/>
+    <linearGradient id="_名称未設定グラデーション_67-5" data-name="名称未設定グラデーション 67" x1="-494.99" y1="778.74" x2="-499.39" y2="780.44" xlink:href="#_名称未設定グラデーション_67"/>
+    <linearGradient id="_名称未設定グラデーション_67-6" data-name="名称未設定グラデーション 67" x1="-493.34" y1="774.58" x2="-497.36" y2="776.13" xlink:href="#_名称未設定グラデーション_67"/>
+    <linearGradient id="_名称未設定グラデーション_73" data-name="名称未設定グラデーション 73" x1="-496.57" y1="777.98" x2="-500.85" y2="777.67" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4bef63"/>
+      <stop offset="1" stop-color="#2bf2ab"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_73-2" data-name="名称未設定グラデーション 73" x1="-497.83" y1="780.28" x2="-501.51" y2="780.02" xlink:href="#_名称未設定グラデーション_73"/>
+    <linearGradient id="_名称未設定グラデーション_73-3" data-name="名称未設定グラデーション 73" x1="-500.34" y1="781.64" x2="-504.63" y2="781.34" xlink:href="#_名称未設定グラデーション_73"/>
+    <linearGradient id="_名称未設定グラデーション_73-4" data-name="名称未設定グラデーション 73" x1="-499.26" y1="778.73" x2="-504.34" y2="778.37" xlink:href="#_名称未設定グラデーション_73"/>
+    <linearGradient id="_名称未設定グラデーション_73-5" data-name="名称未設定グラデーション 73" x1="-498.15" y1="776.14" x2="-502.13" y2="775.86" xlink:href="#_名称未設定グラデーション_73"/>
+    <linearGradient id="_名称未設定グラデーション_73-6" data-name="名称未設定グラデーション 73" x1="-496.04" y1="774.33" x2="-499.94" y2="774.05" xlink:href="#_名称未設定グラデーション_73"/>
+    <linearGradient id="_名称未設定グラデーション_75-2" data-name="名称未設定グラデーション 75" x1="-482.6" y1="756.06" x2="-498.8" y2="766.81" xlink:href="#_名称未設定グラデーション_75"/>
+    <linearGradient id="_名称未設定グラデーション_75-3" data-name="名称未設定グラデーション 75" x1="-498.49" y1="751.68" x2="-490.95" y2="768.93" xlink:href="#_名称未設定グラデーション_75"/>
+    <linearGradient id="_名称未設定グラデーション_79" data-name="名称未設定グラデーション 79" x1="-490.99" y1="767.67" x2="-493.95" y2="769.65" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff9e88"/>
+      <stop offset="1" stop-color="#ffc2a8"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_79-2" data-name="名称未設定グラデーション 79" x1="-493.81" y1="763.14" x2="-496.36" y2="764.83" xlink:href="#_名称未設定グラデーション_79"/>
+    <linearGradient id="_名称未設定グラデーション_79-3" data-name="名称未設定グラデーション 79" x1="-490.07" y1="761.46" x2="-492.62" y2="763.15" xlink:href="#_名称未設定グラデーション_79"/>
+    <linearGradient id="_名称未設定グラデーション_79-4" data-name="名称未設定グラデーション 79" x1="-491.04" y1="757.2" x2="-493.59" y2="758.89" xlink:href="#_名称未設定グラデーション_79"/>
+    <clipPath id="clippath-7">
+      <rect class="cls-1" y="5" width="22" height="23"/>
+    </clipPath>
+    <linearGradient id="_名称未設定グラデーション_80-2" data-name="名称未設定グラデーション 80" x1="-522.84" y1="796.57" x2="-520.9" y2="795.89" xlink:href="#_名称未設定グラデーション_80"/>
+    <linearGradient id="_名称未設定グラデーション_82" data-name="名称未設定グラデーション 82" x1="-530.42" y1="791.83" x2="-525" y2="789.94" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fb412d"/>
+      <stop offset="1" stop-color="#fb714c"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_82-2" data-name="名称未設定グラデーション 82" x1="-518.56" y1="787.48" x2="-523.97" y2="789.37" xlink:href="#_名称未設定グラデーション_82"/>
+    <linearGradient id="_名称未設定グラデーション_83" data-name="名称未設定グラデーション 83" x1="-528.08" y1="790.7" x2="-521.04" y2="788.23" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff5133"/>
+      <stop offset="1" stop-color="#ff8155"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_84" data-name="名称未設定グラデーション 84" x1="-534.78" y1="789.61" x2="-533.03" y2="790.18" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f58d21"/>
+      <stop offset="1" stop-color="#f5af40"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_86" data-name="名称未設定グラデーション 86" x1="-537.55" y1="780.91" x2="-532.11" y2="782.69" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fb821b"/>
+      <stop offset="1" stop-color="#fba93a"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_86-2" data-name="名称未設定グラデーション 86" x1="-525.61" y1="785.01" x2="-531.07" y2="783.23" xlink:href="#_名称未設定グラデーション_86"/>
+    <linearGradient id="_名称未設定グラデーション_87" data-name="名称未設定グラデーション 87" x1="-535.05" y1="781.6" x2="-527.99" y2="783.92" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff9220"/>
+      <stop offset="1" stop-color="#ffb642"/>
+    </linearGradient>
+    <clipPath id="clippath-8">
+      <rect class="cls-1" x="108" y="24" width="23" height="29"/>
+    </clipPath>
+    <linearGradient id="_名称未設定グラデーション_105" data-name="名称未設定グラデーション 105" x1="-408" y1="763.93" x2="-416.25" y2="763.93" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#cb93ff"/>
+      <stop offset="1" stop-color="#9a16ff"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_105-2" data-name="名称未設定グラデーション 105" x1="-423.9" y1="753.84" x2="-415.07" y2="753.84" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-3" data-name="名称未設定グラデーション 105" x1="-423.02" y1="755.32" x2="-415.98" y2="755.32" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-4" data-name="名称未設定グラデーション 105" x1="-431" y1="763.96" x2="-422.75" y2="763.96" xlink:href="#_名称未設定グラデーション_105"/>
+    <radialGradient id="_名称未設定グラデーション_92" data-name="名称未設定グラデーション 92" cx="-290.15" cy="818.34" fx="-290.15" fy="818.34" r="1" gradientTransform="translate(2804.83 7487.71) scale(9.25 -9.1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fae54e"/>
+      <stop offset="1" stop-color="#fae2ab"/>
+    </radialGradient>
+    <linearGradient id="_名称未設定グラデーション_93" data-name="名称未設定グラデーション 93" x1="-419.51" y1="756.88" x2="-419.51" y2="762.45" gradientTransform="translate(539 802.98) scale(1 -1)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffc313"/>
+      <stop offset="1" stop-color="#ffe72f"/>
+    </linearGradient>
+    <linearGradient id="_名称未設定グラデーション_105-5" data-name="名称未設定グラデーション 105" x1="-427.03" y1="769.87" x2="-411.95" y2="769.87" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-6" data-name="名称未設定グラデーション 105" x1="-425.83" y1="770.83" x2="-413.17" y2="770.83" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-7" data-name="名称未設定グラデーション 105" x1="-426.03" y1="753.02" x2="-412.97" y2="753.02" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-8" data-name="名称未設定グラデーション 105" x1="-426.82" y1="750.99" x2="-412.18" y2="750.99" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-9" data-name="名称未設定グラデーション 105" x1="-425.08" y1="773.94" x2="-413.9" y2="773.94" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-10" data-name="名称未設定グラデーション 105" x1="-425.08" y1="775.45" x2="-413.9" y2="775.45" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-11" data-name="名称未設定グラデーション 105" x1="-423.9" y1="776.56" x2="-415.07" y2="776.56" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-12" data-name="名称未設定グラデーション 105" x1="-426.41" y1="760.21" x2="-414.13" y2="760.21" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-13" data-name="名称未設定グラデーション 105" x1="-412.58" y1="760.21" x2="-424.86" y2="760.21" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-14" data-name="名称未設定グラデーション 105" x1="-430.19" y1="758.18" x2="-419.01" y2="758.18" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-15" data-name="名称未設定グラデーション 105" x1="-408.81" y1="758.18" x2="-419.99" y2="758.18" xlink:href="#_名称未設定グラデーション_105"/>
+    <linearGradient id="_名称未設定グラデーション_105-16" data-name="名称未設定グラデーション 105" x1="-427.03" y1="777.65" x2="-411.95" y2="777.65" xlink:href="#_名称未設定グラデーション_105"/>
+  </defs>
+  <g id="_レイヤー_1-2" data-name="レイヤー_1">
+    <g>
+      <g class="cls-92">
+        <g>
+          <path class="cls-107" d="M262.28,51.95l.51.85,14.94-8.33-.51-.85-14.94,8.33Z"/>
+          <path class="cls-14" d="M262.79,43.61l-.51.85,14.94,8.33.51-.85-14.94-8.33Z"/>
+          <path class="cls-13" d="M278.52,44.52l-.72-.1-1.09,7.46.72.1,1.09-7.46Z"/>
+          <path class="cls-16" d="M262.55,52l.72-.1-1.09-7.46-.72.1,1.09,7.46Z"/>
+          <path class="cls-15" d="M263.53,51.13h-1.3v1.87h1.3v-1.87Z"/>
+          <path class="cls-20" d="M276.47,53h1.3v-1.87h-1.3v1.87Z"/>
+          <path class="cls-103" d="M257.3,39.89c-.15,0-.09-.03-.29,0-.6.56-.13,1.55-.2,2.28-.22.94,1.57,1.08,1.76.65.71-1.65,1.21-3.22-1.25-2.93"/>
+          <path class="cls-19" d="M258.51,39.28l-.79.62,3.11,3.7.79-.62-3.11-3.7Z"/>
+          <path class="cls-18" d="M261.22,36.43l-.62.49,2.46,2.94.62-.49-2.46-2.94Z"/>
+          <path class="cls-104" d="M258.59,41.69c-.19.06-2.59-1.52-2.59-1.79s4.91-3.91,5.23-3.95c.32-.04,1.57.87,1.59,1.04.02.17-4.02,4.61-4.22,4.68h0Z"/>
+          <path class="cls-17" d="M278.38,43l.79.62,3.11-3.7-.79-.62-3.11,3.7Z"/>
+          <path class="cls-76" d="M276.32,39.39l.62.49,2.46-2.94-.62-.49-2.47,2.94Z"/>
+          <path class="cls-21" d="M281.41,41.69c.19.06,2.59-1.52,2.59-1.77s-4.91-3.91-5.23-3.95c-.32-.04-1.57.87-1.59,1.04-.02.17,4.02,4.61,4.22,4.68Z"/>
+          <path class="cls-102" d="M258.55,40.6c.54-.17.85-.66.7-1.1-.15-.44-.7-.67-1.24-.5-.54.17-.85.66-.71,1.1.15.44.7.67,1.24.5Z"/>
+          <path class="cls-77" d="M263.96,29.64h-1.02v9.41h1.02v-9.41Z"/>
+          <path class="cls-78" d="M276.11,39.32h1.02v-9.69h-1.02v9.69Z"/>
+          <path class="cls-105" d="M276.49,30.3c-4.33.51-8.65.51-12.96,0-.99-.11-1.72-.91-1.72-1.84v-2.46c5.46.66,10.93.66,16.39,0v2.46c0,.93-.73,1.72-1.72,1.84Z"/>
+          <path class="cls-12" d="M276.3,38.11c-4.28-.76-2.2-.94-6.3.56-4.11-1.49-2.02-1.32-6.31-.56l-4.19,6.2c6.06,1.58,10.48,1.58,10.48,1.58,0,0,4.43,0,10.5-1.58l-4.19-6.2h.02Z"/>
+          <path class="cls-106" d="M270.01,30.25l-7.63-.51c.68.93,1.32,8.34,1.32,8.34l6.3.63,6.31-.63s.65-7.41,1.32-8.34l-7.63.51Z"/>
+        </g>
+      </g>
+      <g class="cls-79">
+        <g>
+          <path class="cls-111" d="M298.98,13.88c.28.58-.4.92-.4.92h2.03l-.23-.69-1.4-.23Z"/>
+          <path class="cls-30" d="M308.32,13.88c-.28.58.4.92.4.92h-2.03l.23-.69,1.4-.23Z"/>
+          <path class="cls-24" d="M299.3,7.1c1.23-1.42,2.43-2.65,4.36-2.65v4.31l-4.36-1.66Z"/>
+          <path class="cls-29" d="M308.01,7.1c-1.23-1.42-2.43-2.65-4.36-2.65v4.31l4.36-1.65v-.02Z"/>
+          <path class="cls-28" d="M307.11,6.84h-6.92c-.89,0-1.61.7-1.61,1.57v4.44c0,.86.72,1.57,1.61,1.57h6.92c.89,0,1.61-.7,1.61-1.57v-4.44c0-.86-.72-1.57-1.61-1.57Z"/>
+          <path class="cls-26" d="M307.64,14.41h-7.98c-.92,0-1.66.72-1.66,1.61v12.36c0,.89.74,1.61,1.66,1.61h7.98c.92,0,1.66-.72,1.66-1.61v-12.36c0-.89-.74-1.61-1.66-1.61Z"/>
+          <path class="cls-27" d="M301.82,4.89c.52-.37.35-.74.35-.74l1.5-.19v.94h-1.85Z"/>
+          <path class="cls-25" d="M305.48,4.89c-.52-.37-.35-.74-.35-.74l-1.5-.19v.94h1.85Z"/>
+          <path class="cls-95" d="M304.83,2h-2.38c-.3,0-.55.24-.55.53v1.18c0,.29.25.53.55.53h2.38c.3,0,.55-.24.55-.53v-1.18c0-.29-.24-.53-.55-.53Z"/>
+          <path class="cls-23" d="M298.58,8.41v4.44c0,.16.03.31.08.45h9.99c.05-.15.08-.29.08-.45v-4.44c0-.24-.07-.47-.17-.68h-9.82c-.1.21-.17.44-.17.68Z"/>
+          <path class="cls-87" d="M303.65,12.28c1.68,0,3.04-.79,3.04-1.76s-1.36-1.76-3.04-1.76-3.04.79-3.04,1.76,1.36,1.76,3.04,1.76Z"/>
+          <path class="cls-61" d="M302.19,11.28c-.15,0-.48-.08-.5-.44-.03-.37.51-1.08.51-1.08,0,0,.53.71.52,1.08-.02.36-.35.44-.5.44h-.03ZM304.17,10.84c.03-.37-.52-1.08-.52-1.08,0,0-.53.71-.52,1.08.02.36.35.44.5.44s.48-.08.5-.44h.03ZM305.63,10.84c.03-.37-.51-1.08-.51-1.08,0,0-.53.71-.52,1.08.02.36.35.44.5.44s.48-.08.5-.44h.03Z"/>
+          <path class="cls-3" d="M301.08,17.35v9.18"/>
+          <path class="cls-3" d="M303.65,17.35v9.18"/>
+          <path class="cls-3" d="M306.23,17.35v9.18"/>
+          <path class="cls-62" d="M312.69,13.88c.28.58-.4.92-.4.92h2.03l-.23-.69-1.4-.23Z"/>
+          <path class="cls-60" d="M322.02,13.88c-.28.58.4.92.4.92h-2.03l.23-.69,1.4-.23Z"/>
+          <path class="cls-67" d="M312.99,7.1c1.23-1.42,2.43-2.65,4.35-2.65v4.31l-4.35-1.65v-.02Z"/>
+          <path class="cls-66" d="M321.72,7.1c-1.23-1.42-2.43-2.65-4.36-2.65v4.31l4.36-1.65v-.02Z"/>
+          <path class="cls-58" d="M320.81,6.84h-6.92c-.89,0-1.61.7-1.61,1.57v4.44c0,.86.72,1.57,1.61,1.57h6.92c.89,0,1.61-.7,1.61-1.57v-4.44c0-.86-.72-1.57-1.61-1.57Z"/>
+          <path class="cls-65" d="M321.34,14.41h-7.98c-.92,0-1.66.72-1.66,1.61v12.36c0,.89.74,1.61,1.66,1.61h7.98c.92,0,1.66-.72,1.66-1.61v-12.36c0-.89-.74-1.61-1.66-1.61Z"/>
+          <path class="cls-63" d="M315.52,4.89c.52-.37.35-.74.35-.74l1.5-.19v.94h-1.85Z"/>
+          <path class="cls-59" d="M319.19,4.89c-.51-.37-.35-.74-.35-.74l-1.5-.19v.94h1.85Z"/>
+          <path class="cls-22" d="M318.55,2h-2.38c-.3,0-.55.24-.55.53v1.18c0,.29.24.53.55.53h2.38c.3,0,.55-.24.55-.53v-1.18c0-.29-.25-.53-.55-.53Z"/>
+          <path class="cls-64" d="M312.28,8.41v4.44c0,.16.03.31.08.45h9.99c.05-.15.08-.29.08-.45v-4.44c0-.24-.07-.47-.17-.68h-9.81c-.1.21-.17.44-.17.68h-.02Z"/>
+          <path class="cls-87" d="M317.35,12.28c1.68,0,3.04-.79,3.04-1.76s-1.36-1.76-3.04-1.76-3.04.79-3.04,1.76,1.36,1.76,3.04,1.76Z"/>
+          <path class="cls-56" d="M315.9,11.28c-.15,0-.48-.08-.5-.44-.03-.37.52-1.08.52-1.08,0,0,.53.71.51,1.08-.02.36-.35.44-.5.44h-.03ZM317.86,10.84c.03-.37-.52-1.08-.52-1.08,0,0-.53.71-.52,1.08.02.36.35.44.5.44s.48-.08.5-.44h.03ZM319.33,10.84c.03-.37-.52-1.08-.52-1.08,0,0-.53.71-.52,1.08.02.36.35.44.5.44s.48-.08.5-.44h.03Z"/>
+          <path class="cls-3" d="M314.77,17.35v9.18"/>
+          <path class="cls-3" d="M317.35,17.35v9.18"/>
+          <path class="cls-3" d="M319.92,17.35v9.18"/>
+        </g>
+      </g>
+      <g class="cls-82">
+        <g>
+          <path class="cls-2" d="M174.24,21.26l4.03,3.86"/>
+          <path class="cls-89" d="M177.36,26.73l.71.27.93-3.12-.71-.26-.93,3.1Z"/>
+          <path class="cls-2" d="M149.76,21.26l-4.03,3.86"/>
+          <path class="cls-108" d="M161.99,3c-3.5,7.15-7.66,12.61-12.8,18.05v2.52h25.6v-2.52c-5.13-5.42-9.3-10.9-12.81-18.05h.01Z"/>
+          <path class="cls-109" d="M161.99,3.8c-3.5,7.15-7.66,12.44-12.8,17.86v2.52h25.6v-2.52c-5.13-5.42-9.3-10.71-12.81-17.86h.01Z"/>
+          <path class="cls-99" d="M161.99,5.23c-3.5,7.15-7.66,11.14-12.8,16.56v3.82h25.6v-3.82c-5.13-5.42-9.3-9.41-12.81-16.56h.01Z"/>
+          <path class="cls-4" d="M161.99,14.7v10.91h4.51c-1.74-2.7-3.23-6.58-4.51-10.91Z"/>
+          <path class="cls-6" d="M161.99,14.7c-1.05,4.38-2.54,8.44-4.46,10.91h6.71c-.8-3.28-1.55-6.97-2.26-10.91h.01Z"/>
+          <path class="cls-89" d="M174.8,25.61h-25.6v1.37h25.6v-1.37Z"/>
+          <path class="cls-89" d="M146.62,26.73l-.7.27-.93-3.12.71-.26.91,3.1Z"/>
+          <path class="cls-5" d="M161.99,14.7s-3.6,5.26-7.35,6.57l.78.33s3.59,1.49,6.57-6.89Z"/>
+          <path class="cls-110" d="M161.99,14.7s-3.33,6.21-6.57,6.89c0,0,1.92,1.46,2.11,4,0,0,2.25-2.25,4.46-10.91h0Z"/>
+        </g>
+      </g>
+      <g class="cls-80">
+        <g>
+          <path class="cls-120" d="M229.06,0c3.36,2.47,5.62,6.34,6.28,10.4,1.33-.93,1.92-2.5,1.53-4.06,1.26,1.2,2.13,2.85,2.77,4.44,2.11,5.23,2.21,11.46-3.19,14.74-8.12,4.91-17.74-3.94-13.38-12.2,1.36-2.58,3.82-4.27,5.59-6.47,1.67-2.07,2.28-4.7.37-6.85h.01Z"/>
+          <path class="cls-115" d="M232.6,26.94c-.74.09-1.47.07-2.21-.03-4.89-.64-7.88-5.78-5.85-10.26,1.24-2.73,4.06-4.57,5.81-6.89.35-.48.6-.96.8-1.5,2.18,1.89,2.9,4.99,1.61,7.58,1.85-.72,3.82-1.57,5.03-3.19.66,1.83,1.17,3.76,1.32,5.71.14,1.83-.05,3.37-1,4.97-1.13,1.92-3.23,3.34-5.5,3.63h0Z"/>
+          <path class="cls-116" d="M230.27,19.37c.81-.9,1.2-2.13.89-3.3,0,0,3.72,2.62,3.63,6.05-.08,2.62-1.72,3.58-3.29,3.58-1.1,0-3.72-.99-2.9-3.93.49-1.71.81-2.56.41-3.51.51.06,1.15.93,1.27,1.09h-.02Z"/>
+        </g>
+      </g>
+      <g class="cls-81">
+        <g>
+          <path class="cls-113" d="M96.3,13.66c2.07-1.5,4.28-2.42,6.7-2.58-.95,1.35-1.53,2.63-1.5,3.78h-3.77l-1.42-1.21h0Z"/>
+          <path class="cls-34" d="M96.3,16.08c2.29,1.63,4.52,2.47,6.7,2.58-.82-1.24-1.38-2.49-1.5-3.78h-3.77l-1.42,1.21h0Z"/>
+          <path class="cls-32" d="M78.87,6.68l1.3-2.68s1.51,1.01,5.01,1c3.51-.01,3.12,4.16,3.12,4.16l-9.43-2.49h0Z"/>
+          <path class="cls-33" d="M79.42,21.91l.75,2.08s7.49.2,7.8-2.33c.32-2.53-8.55.25-8.55.25Z"/>
+          <path class="cls-57" d="M82.16,6.35c-8.23,0-14.16,6.18-14.16,6.18l2.96,2.35-2.51,2.05s5.48,5.41,13.7,5.41c6.89,0,13.56-5.24,15.55-6.94.33-.28.35-.79.04-1.1-1.95-1.91-8.66-7.95-15.59-7.95h.01Z"/>
+          <path class="cls-87" d="M73.81,14.25c.74,0,1.34-.61,1.34-1.36s-.6-1.36-1.34-1.36-1.34.61-1.34,1.36.6,1.36,1.34,1.36Z"/>
+          <path class="cls-112" d="M73.81,13.65c.41,0,.75-.34.75-.76s-.33-.76-.75-.76-.75.34-.75.76.33.76.75.76Z"/>
+          <path class="cls-31" d="M79.23,13.2s3.08-1.26,3.41-1.01c.33.25-.36,1.74,0,2.67.51,1.35.12,2.2-1.49,1.56-1.62-.65-2.21-1.07-2.21-1.07l.29-2.16h0Z"/>
+          <path class="cls-87" d="M77.85,10.91c2.31.65,2.22,6.24-.18,6.7-.11-.1.36-.59.43-.7,1.12-2.02.83-4.03-.23-6h-.01Z"/>
+        </g>
+      </g>
+      <g class="cls-86">
+        <g>
+          <path class="cls-114" d="M197.84,40.46c1.5,1.63,2.68,3.98,2.88,6.21.2,2.24-.46,4.45-2.46,5.74-8.01,3.5-17.3-9.79-9.03-14.89,3.19-1.03,6.46.59,8.6,2.93h.02Z"/>
+          <path class="cls-91" d="M214.71,36.65c-.07,1.06-1.13,1.7-2.13,1.54-.2-.13-.71-.37-.97-.51,0,0-.07-.13-.11-.15-.33-.04-2.54,1.43-3.08,1.5-.29-.68-.82-1.43-1.35-1.96.35-.27,2.94-1.39,2.97-1.61,0-.02-.15-.37-.15-.42-.02-.7.13-1.36.77-1.76,1.62-.99,3.56.9,2.35,2.46.8.06,1.29.17,1.71.92h-.02Z"/>
+          <path class="cls-48" d="M214.71,36.65c-.15,1.65-2.03,1.87-3.23.88-.26-.22-2.54,1.43-3.08,1.5.15.29.26.62.33.93.46-.18,2.41-1.45,2.92-1.19,1.37,1.54,4.25-.18,3.07-2.13Z"/>
+          <path class="cls-96" d="M208.76,40.37c-.02-.15,0-.28-.05-.42-.04-.15-.09-.37-.15-.51-.04-.13-.13-.29-.18-.42-.29-.68-.82-1.43-1.35-1.96-.44-.44-1.11-.97-1.68-1.26-4.45-2.33-11.99-.81-16.13,1.72,3.19-1.03,6.46.59,8.6,2.93,1.5,1.63,2.68,3.98,2.88,6.21.2,2.31-.46,4.45-2.46,5.74,3.96-1.72,11.15-7.13,10.51-12.04l.02.02Z"/>
+          <path class="cls-98" d="M191.02,38.5c6.64-.51,11.9,10.54,6.19,12.98-4.03,1.72-8.91-2.75-9.84-6.51-.71-2.86.33-6.21,3.65-6.47Z"/>
+          <path class="cls-90" d="M191.49,43.5c1.37-.24,3.92,1.47,3.47,2.97-.53,1.7-4.53-.31-4.23-2.24.05-.35.44-.66.77-.71v-.02Z"/>
+        </g>
+      </g>
+      <g class="cls-84">
+        <g>
+          <path class="cls-97" d="M43.17,27.2c1.39,0,2.52-1.06,2.52-2.38s-1.13-2.38-2.52-2.38-2.52,1.06-2.52,2.38,1.13,2.38,2.52,2.38Z"/>
+          <path class="cls-10" d="M40.85,22.24c1.2,0,2.17-.92,2.17-2.05s-.97-2.05-2.17-2.05-2.17.92-2.17,2.05.97,2.05,2.17,2.05Z"/>
+          <path class="cls-9" d="M42.74,19.75c1.39,0,2.52-1.06,2.52-2.38s-1.13-2.38-2.52-2.38-2.52,1.06-2.52,2.38,1.13,2.38,2.52,2.38Z"/>
+          <path class="cls-8" d="M44.26,23.95c1.65,0,2.99-1.26,2.99-2.81s-1.34-2.81-2.99-2.81-2.99,1.26-2.99,2.81,1.34,2.81,2.99,2.81Z"/>
+          <path class="cls-7" d="M41.4,25.44c1.3,0,2.35-.99,2.35-2.21s-1.05-2.21-2.35-2.21-2.35.99-2.35,2.21,1.05,2.21,2.35,2.21Z"/>
+          <path class="cls-11" d="M43.85,24.34l-1.67.13.53,6.15,1.67-.13-.53-6.15Z"/>
+          <path class="cls-101" d="M39.88,27.17c1.16,0,2.11-.89,2.11-1.99s-.94-1.99-2.11-1.99-2.11.89-2.11,1.99.94,1.99,2.11,1.99Z"/>
+          <path class="cls-35" d="M38.99,24.57c1.01,0,1.82-.77,1.82-1.72s-.82-1.71-1.82-1.71-1.82.77-1.82,1.71.82,1.72,1.82,1.72Z"/>
+          <path class="cls-36" d="M36.11,23.5c1.16,0,2.11-.89,2.11-1.99s-.94-1.99-2.11-1.99-2.11.89-2.11,1.99.94,1.99,2.11,1.99Z"/>
+          <path class="cls-37" d="M36.73,26.82c1.39,0,2.51-1.06,2.51-2.36s-1.12-2.36-2.51-2.36-2.51,1.06-2.51,2.36,1.12,2.36,2.51,2.36Z"/>
+          <path class="cls-38" d="M38.49,28.86c1.09,0,1.97-.83,1.97-1.85s-.88-1.85-1.97-1.85-1.97.83-1.97,1.85.88,1.85,1.97,1.85Z"/>
+          <path class="cls-39" d="M40.07,26.16l-1.49.76,2.62,4.55,1.49-.76-2.62-4.55Z"/>
+          <path class="cls-40" d="M42.4,29.8c7.21-2.02,7.86,5.7,8.18,10.65.32,4.95,1.1,11.96-.86,12.5-1.97.54-7.3-23.15-7.3-23.15h-.02Z"/>
+          <path class="cls-41" d="M42.4,29.8c-7.21,2.02-3.29,8.82-.67,13.13,2.62,4.32,6.01,10.58,7.99,10.03,1.98-.54-7.3-23.15-7.3-23.15h-.02Z"/>
+          <path class="cls-100" d="M47.97,33.16l-3.72,1.04c-.27.08-.43.34-.35.59.08.25.36.39.63.32l3.72-1.04c.27-.08.43-.34.35-.59-.08-.25-.36-.39-.63-.32Z"/>
+          <path class="cls-42" d="M45.01,37.97l-2.97.83c-.27.08-.43.34-.35.59s.36.39.63.32l2.97-.83c.27-.08.43-.34.35-.59-.08-.25-.36-.39-.63-.32Z"/>
+          <path class="cls-43" d="M48.75,39.63l-2.97.83c-.27.08-.43.34-.35.59.08.25.36.39.63.32l2.97-.83c.27-.08.43-.34.35-.59-.08-.25-.36-.39-.63-.32Z"/>
+          <path class="cls-44" d="M47.78,43.9l-2.97.83c-.27.08-.43.34-.35.59.08.25.36.39.63.32l2.97-.83c.27-.08.43-.34.35-.59-.08-.25-.36-.39-.63-.32Z"/>
+        </g>
+      </g>
+      <g class="cls-83">
+        <g>
+          <path class="cls-46" d="M17.14,5.06c-.9.65-.93,2-1.27,3.08l.53-.09.34.43c.44-.77.75-1.52,1.47-1.91,1.09-.59-.51-1.86-1.07-1.49v-.02Z"/>
+          <path class="cls-121" d="M13.51,5.22c-3.25-1.25-4.05,3.08-4.68,6.65-.57,3.26-1.5,6.42.49,7.19,1.99.77,2.96-2.37,4.28-5.36,1.44-3.26,3.16-7.22-.09-8.47v-.02Z"/>
+          <path class="cls-45" d="M20.28,7.82c3.25,1.25,1.19,5.08-.53,8.24-1.57,2.89-2.83,5.91-4.8,5.16-1.97-.75-.79-3.82.04-6.99.91-3.46,2.05-7.65,5.3-6.4h-.01Z"/>
+          <path class="cls-122" d="M16.89,6.51c-4.25-1.63-5.12,2.85-5.8,6.51-.62,3.34-1.66,6.51.88,7.5,2.55.99,3.71-2.16,5.3-5.13,1.75-3.26,3.86-7.27-.4-8.88h.01Z"/>
+          <path class="cls-117" d="M5.02,14.71l.5-.48.68.05c-.06-.91-.22-2.31-1.12-2.63-.72-.26-1.55.66-.91,1.2.46.38.71,1.45.85,1.85v.02Z"/>
+          <path class="cls-118" d="M1.77,14.39c-3.27,1.17-1.29,5.05.37,8.24,1.52,2.93,2.71,5.97,4.69,5.27,1.99-.71.88-3.8.1-6.99-.84-3.48-1.88-7.7-5.17-6.53v.02Z"/>
+          <path class="cls-47" d="M8.58,11.94c3.27-1.17,3.97,3.17,4.53,6.74.52,3.28,1.37,6.47-.63,7.17-2,.71-2.91-2.43-4.18-5.45-1.37-3.29-3-7.3.26-8.47h.01Z"/>
+          <path class="cls-119" d="M5.18,13.16c-4.28,1.54-2.27,5.59-.59,8.88,1.53,3,2.62,6.16,5.19,5.23,2.58-.92,1.59-4.11,1.04-7.47-.6-3.68-1.37-8.17-5.65-6.65Z"/>
+        </g>
+      </g>
+      <g class="cls-85">
+        <g>
+          <path class="cls-88" d="M124.02,50.02v-1.42c1.46,0,3.8-.11,4.42-.4.38-.17,1.12-.91,1.12-1.18-.02-.74-2.14-15.73-2.31-16.66-.02-.15-.19-.89-.67-.89h-3.82v-1.42h3.82c1.06,0,1.87.8,2.08,2.07.02.13,2.33,16.05,2.33,16.91,0,1.12-1.41,2.24-1.97,2.48-1.12.49-4.36.53-5.01.53l.02-.02Z"/>
+          <path class="cls-74" d="M123.42,51.12h-7.83c-.27,0-.5-.19-.5-.44v-3.09c0-.25.23-.44.5-.44,2.6.49,5.22.49,7.83,0,.27,0,.5.19.5.44v3.09c0,.25-.23.44-.5.44Z"/>
+          <path class="cls-73" d="M123.02,48.85h-7.04v-2.39c2.35.61,4.7.61,7.04,0v2.39Z"/>
+          <path class="cls-72" d="M114.98,50.02c-.64,0-3.88-.02-4.99-.53-.56-.25-1.99-1.35-1.99-2.48,0-.85,2.31-16.79,2.33-16.93.23-1.27,1.02-2.07,2.08-2.07h3.82v1.42h-3.82c-.48,0-.64.74-.68.89-.17.93-2.29,15.92-2.31,16.68,0,.27.75,1,1.12,1.18.62.27,2.95.4,4.42.4v1.42l.02.02Z"/>
+          <path class="cls-93" d="M125.54,40.22c0,4.55-1.85,6.79-6.03,6.79s-6.03-2.24-6.03-6.79,1.85-9.69,6.03-9.69,6.03,5.14,6.03,9.69Z"/>
+          <path class="cls-94" d="M121.65,43.22c0,1.97-.66,2.94-2.16,2.94s-2.16-.97-2.16-2.94.66-4.17,2.16-4.17,2.16,2.22,2.16,4.17Z"/>
+          <path class="cls-71" d="M127.05,34.25c0,.49-3.37.91-7.54.91s-7.54-.4-7.54-.91,3.37-3.2,7.54-3.2,7.54,2.71,7.54,3.2Z"/>
+          <path class="cls-70" d="M125.08,33.78c-3.72.36-7.44.36-11.16,0-.4,0-.75-.28-.75-.64v-2.24c0-.36.33-.64.75-.64,3.72.42,7.44.42,11.16,0,.4,0,.75.28.75.64v2.24c0,.36-.33.64-.75.64Z"/>
+          <path class="cls-69" d="M125.41,51.79c-3.93.4-7.87.4-11.82,0-.35,0-.62-.25-.62-.53v-2.9c0-.3.27-.53.62-.53,3.93.44,7.87.44,11.82,0,.35,0,.62.25.62.53v2.9c0,.3-.27.53-.62.53Z"/>
+          <path class="cls-68" d="M126.39,52.64c-4.59.47-9.2.47-13.78,0-.23,0-.42-.17-.42-.36v-.93c0-.21.19-.36.42-.36,4.59.34,9.2.34,13.78,0,.23,0,.42.17.42.36v.93c0,.21-.19.36-.42.36Z"/>
+          <path class="cls-75" d="M125.1,30.24c0,.42-11.18.42-11.18,0v-2.71c0,.61,11.18.61,11.18,0v2.71Z"/>
+          <path class="cls-55" d="M119.51,28.04c3.09,0,5.59-.23,5.59-.51s-2.5-.51-5.59-.51-5.59.23-5.59.51,2.5.51,5.59.51Z"/>
+          <path class="cls-54" d="M123.93,27.49c-2.95.74-5.9.74-8.83,0v-2.69h8.83v2.71-.02Z"/>
+          <path class="cls-52" d="M124.39,45.89c-.14,0-.25-.06-.35-.15-3.47-3.6-10.97-5.14-11.05-5.16-.27-.06-.42-.3-.37-.57.06-.27.31-.42.56-.36.33.06,7.87,1.63,11.55,5.44.19.19.17.49,0,.66-.1.09-.21.13-.33.13h-.02Z"/>
+          <path class="cls-49" d="M114.63,45.89c-.12,0-.23-.04-.33-.13-.19-.19-.19-.47,0-.66,3.68-3.81,11.24-5.36,11.55-5.44.25-.06.52.11.56.36.06.27-.12.51-.37.57-.08,0-7.58,1.57-11.05,5.16-.1.09-.23.15-.35.15h-.02Z"/>
+          <path class="cls-53" d="M119.51,47.5c-4.59-.09-7.69-3.56-8.41-4.45h-1.81c-.27,0-.48-.21-.48-.47s.21-.47.48-.47h2.04c.15,0,.31.08.39.19.04.04,3.12,4.15,7.79,4.26.27,0,.48.23.46.49,0,.27-.21.45-.48.45h.02Z"/>
+          <path class="cls-51" d="M119.51,47.5c-.27,0-.48-.21-.48-.45,0-.27.21-.47.46-.49,4.67-.09,7.77-4.21,7.79-4.26.1-.11.23-.19.39-.19h2.04c.27,0,.48.21.48.47s-.21.47-.48.47h-1.81c-.71.87-3.82,4.36-8.41,4.45h.02Z"/>
+          <path class="cls-50" d="M127.05,26.07c0,.32-3.37.59-7.54.59s-7.54-.27-7.54-.59,3.37-2.07,7.54-2.07,7.54,1.74,7.54,2.07Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
