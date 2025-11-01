@@ -114,6 +114,18 @@ header h1 {
     box-shadow: 0 0 30px 0 rgba(0, 206, 154, 0.2);
 }
 
+.logo-box::after {
+    content: "";
+    position: absolute;
+    top: 105px;
+    left: 158px;
+    width: 0;
+    height: 0;
+    border-left: 14.5px solid transparent;
+    border-right: 14.5px solid transparent;
+    border-top: 14px solid #fff;
+}
+
 .h1-image {
     width: 200px;
     height: 45.3px;
@@ -755,3 +767,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
