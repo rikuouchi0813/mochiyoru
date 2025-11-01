@@ -117,8 +117,9 @@ header h1 {
 .logo-box::after {
     content: "";
     position: absolute;
-    top: 105px;
-    left: 158px;
+    bottom: -14px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 0;
     height: 0;
     border-left: 14.5px solid transparent;
@@ -177,7 +178,7 @@ header h1 {
     margin-bottom: 50px;
 }
 
-/* ===== はじめるボタン（新デザイン） ===== */
+/* ===== はじめるボタン ===== */
 .start-button {
     width: 320px;
     min-width: 320px;
@@ -767,4 +768,5 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
