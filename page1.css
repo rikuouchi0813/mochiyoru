@@ -128,8 +128,8 @@ header h1 {
 }
 
 .h1-image {
-    width: 200px;
-    height: 45.3px;
+    width: 182px;
+    height: 42px;
     margin: 0 auto 0px;
 }
 
@@ -621,8 +621,8 @@ footer p {
     }
     
     .h1-image {
-        width: 135px;
-        height: 30.72px;
+        width: 139px;
+        height: 32px;
     }
     
     .subtitle-image {
@@ -768,6 +768,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
