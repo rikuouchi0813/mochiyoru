@@ -619,10 +619,10 @@ footer p {
 /* ===== スマートフォン対応（480px以下） ===== */
 @media (max-width: 480px) {
     .logo-box {
-        width: 300px;
+        width: 330px;
 		max-width: 90%;
 		height: 105px;
-        padding: 25px 30px;
+        padding: 25px;
 		box-sizing: border-box;
     	justify-content: center;
     	position: relative;
@@ -771,3 +771,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
