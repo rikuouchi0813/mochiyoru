@@ -69,7 +69,7 @@ ol, ul {
   src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-900.woff2') format('woff2');
 }
 
-/* ===== ベーススタイル（デスクトップ） ===== */
+/* ===== ベーススタイル(デスクトップ) ===== */
 html {
     box-sizing: border-box;
     font-family: 'M PLUS 1p', sans-serif;
@@ -466,12 +466,12 @@ footer p {
     
     .logo-box {
         width: 400px;
-		height: 139px; 
+        height: 139px; 
         padding: 30px 40px;
         margin: 30px auto 0;
-	    box-sizing: border-box;
-    	justify-content: center;
-    	position: relative;
+        box-sizing: border-box;
+        justify-content: center;
+        position: relative;
     }
     
     .h1-image {
@@ -620,22 +620,22 @@ footer p {
 @media (max-width: 480px) {
     .logo-box {
         width: 300px;
-		max-width: 90%;
-		height: 105px;
-        padding: 25px 30px;
-		box-sizing: border-box;
-    	justify-content: center;
-    	position: relative;
+        max-width: 90%;
+        height: 120px;
+        padding: 20px 25px;
+        box-sizing: border-box;
+        justify-content: center;
+        position: relative;
     }
     
     .h1-image {
-        width: 139px;
-        height: 32px;
+        width: 120px;
+        height: 27.6px;
     }
     
     .subtitle-image {
-        width: 242.45px;
-        height: 19.41px;
+        width: 210px;
+        height: 16.8px;
         margin: 0 auto 8px;
     }
     
@@ -666,7 +666,7 @@ footer p {
     }
     
     .pictograph-image {
-        width: 323px;
+        width: 280px;
     }
 
     .features {
@@ -771,15 +771,3 @@ footer p {
         margin-bottom: 30px;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
