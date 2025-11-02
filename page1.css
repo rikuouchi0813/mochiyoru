@@ -211,16 +211,17 @@ header h1 {
     margin-left: auto;
 }
 
-/* ===== 絵文字バー ===== */
+/* ===== ピクトグラム画像バー ===== */
 .emoji-bar {
     text-align: center;
-    font-size: 40px;
     margin: 50px 0;
     padding: 0 20px;
 }
 
-.emoji-bar span {
-    margin: 0 8px;
+.pictograph-image {
+    max-width: 100%;
+    height: auto;
+    width: 511px;
 }
 
 /* ===== モチヨルの特徴セクション ===== */
@@ -517,13 +518,8 @@ footer p {
         height: 13px;
     }
     
-    .emoji-bar {
-        font-size: 32px;
-        margin: 40px 0;
-    }
-    
-    .emoji-bar span {
-        margin: 0 6px;
+    .pictograph-image {
+        width: 320px;
     }
 
     .features {
@@ -669,13 +665,8 @@ footer p {
         font-size: 16px;
     }
     
-    .emoji-bar {
-        font-size: 22px;
-        margin: 30px 0;
-    }
-    
-    .emoji-bar span {
-        margin: 0 5px;
+    .pictograph-image {
+        width: 323px;
     }
 
     .features {
@@ -780,6 +771,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
