@@ -214,7 +214,7 @@ header h1 {
 /* ===== ピクトグラム画像バー ===== */
 .emoji-bar {
     text-align: center;
-    margin: 30px 0;
+    margin: 30px 0 40px;
     padding: 0 20px;
 }
 
@@ -771,6 +771,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
