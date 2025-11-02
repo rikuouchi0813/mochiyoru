@@ -465,8 +465,12 @@ footer p {
     
     .logo-box {
         width: 400px;
-        padding: 40px 0;
+		height: 139px; 
+        padding: 30px 40px;
         margin: 30px auto 0;
+	    box-sizing: border-box;
+    	justify-content: center;
+    	position: relative;
     }
     
     .h1-image {
@@ -620,9 +624,12 @@ footer p {
 @media (max-width: 480px) {
     .logo-box {
         width: 300px;
+		max-width: 90%;
 		height: 105px;
-        max-width: 90%;
-        padding: 0;
+        padding: 25px 30px;
+		box-sizing: border-box;
+    	justify-content: center;
+    	position: relative;
     }
     
     .h1-image {
@@ -633,7 +640,7 @@ footer p {
     .subtitle-image {
         width: 242.45px;
         height: 19.41px;
-        margin: 0 auto 5px;
+        margin: 0 auto 8px;
     }
     
     .logo-gradient-bg {
@@ -773,6 +780,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
