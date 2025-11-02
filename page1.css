@@ -140,7 +140,7 @@ header h1 {
 .subtitle-image {
     width: 300px;
     height: 24px;
-    margin: 0 auto 25px;
+    margin: 0 auto 10px;
 }
 
 /* ===== グラデーション背景 ===== */
@@ -477,7 +477,7 @@ footer p {
     .subtitle-image {
         width: 280px;
         height: 17.1px;
-        margin: 0 auto 20px;
+        margin: 0 auto 10px;
     }
     
     .logo-gradient-bg {
@@ -633,7 +633,7 @@ footer p {
     .subtitle-image {
         width: 242.45px;
         height: 19.41px;
-        margin: 0 auto 15px;
+        margin: 0 auto 5px;
     }
     
     .logo-gradient-bg {
@@ -773,6 +773,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
