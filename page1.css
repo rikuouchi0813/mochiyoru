@@ -526,7 +526,6 @@ footer p {
     }
     
     .intro p {
-        font-size: 15px;
         margin-bottom: 40px;
         text-align: center;
     }
@@ -696,7 +695,7 @@ footer p {
     }
     
     .intro p {
-        font-size: 11px;
+        font-size: 12px;
         line-height: 180%;
         margin-bottom: 25px;
         text-align: center;
@@ -821,3 +820,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
