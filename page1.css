@@ -200,9 +200,9 @@ header h1 {
     margin: 0;
 }
 
-/* PC・タブレット: pタグ内のbrを表示（3行表示） */
-.intro p br {
-    display: inline;
+/* PC・タブレット: スマホ専用のbrを非表示 */
+.sp-only {
+    display: none;
 }
 
 /* 女性のイラスト（左側） */
@@ -730,8 +730,8 @@ footer p {
         min-height: 157px;
     }
     
-    /* スマホのみ: pタグ内のbrを表示（変更なし） */
-    .intro p br {
+    /* スマホのみ: スマホ専用brを表示 */
+    .sp-only {
         display: inline;
     }
     
