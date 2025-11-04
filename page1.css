@@ -176,7 +176,7 @@ header h1 {
 }
 
 .intro p {
-    font-weight: 500;
+    font-weight: 700;
     font-size: 16px;
     color: #404040;
     line-height: 200%;
@@ -853,3 +853,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
