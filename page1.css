@@ -180,7 +180,7 @@ header h1 {
     font-size: 16px;
     color: #404040;
     line-height: 200%;
-    text-align: left;
+    text-align: center;
     margin-bottom: 0;
 }
 
@@ -679,65 +679,58 @@ footer p {
     }
     
     .intro {
-        padding: 0px 30px 30px 30px;
-        max-width: 500px;
+        padding: 0px 20px 30px 20px;
+        max-width: 100%;
     }
     
-    /* スマホ用：イラストとテキストを縦並びに */
+    /* スマホ用：テキストの両サイドにイラストを配置 */
     .intro-content-wrapper {
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 20px;
-    }
-    
-    /* スマホ用：イラストを横並びで上部に配置 */
-    .intro-content-wrapper::before {
-        content: '';
-        order: -1;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        width: 100%;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 0;
+        margin-bottom: 20px;
+        position: relative;
     }
     
     .kv-girl,
     .kv-boy {
         width: 63px;
         height: 157px;
-    }
-    
-    /* スマホでイラストを上部に配置するためのレイアウト調整 */
-    .intro-content-wrapper {
-        position: relative;
+        flex-shrink: 0;
     }
     
     .kv-girl {
-        position: absolute;
+        position: relative;
         left: 0;
-        top: 0;
     }
     
     .kv-boy {
-        position: absolute;
+        position: relative;
         right: 0;
-        top: 0;
     }
     
+    /* テキスト部分：イラストの間に収まるように */
     .intro-text {
-        padding-top: 50px;
-        max-width: 100%;
+        flex: 1;
+        padding: 0 5px;
+        min-width: 0;
+        max-width: calc(100% - 126px);
     }
     
     .intro h2 {
         font-size: 22px;
-        margin-top: 10px;
+        margin-top: 0;
         margin-bottom: 15px;
+        line-height: 150%;
     }
     
     .intro p {
         font-size: 13px;
         line-height: 180%;
+        text-align: center;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
     
     .start-button {
