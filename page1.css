@@ -854,6 +854,10 @@ footer p {
     .kv-boy {
         right: 0;
     }
+	
+    .cta-text {
+        margin-bottom: 15px;
+    }
        
     .cta-label {
         font-size: 15px;
@@ -998,6 +1002,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
