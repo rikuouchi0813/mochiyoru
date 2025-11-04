@@ -691,7 +691,7 @@ footer p {
     
     /* pタグとイラストのコンテナ */
     .intro p {
-        font-size: 13px;
+        font-size: 12px;
         line-height: 180%;
         text-align: center;
         word-wrap: break-word;
@@ -843,6 +843,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
