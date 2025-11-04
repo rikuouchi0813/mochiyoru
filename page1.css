@@ -224,7 +224,7 @@ header h1 {
 /* ===== 早速使ってみる（CTAテキスト） ===== */
 .cta-text {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     gap: 10px;
     margin-bottom: 15px;
@@ -244,17 +244,21 @@ header h1 {
 /* 左側の斜線（＼） */
 .cta-line-left {
     width: 24px;
-    height: 24px;
+    height: 0;
     border-top: 2px solid #242424;
     transform: rotate(45deg);
+    transform-origin: center;
+    min-width: 34px;
 }
 
 /* 右側の斜線（／） */
 .cta-line-right {
     width: 24px;
-    height: 24px;
+    height: 0;
     border-top: 2px solid #242424;
     transform: rotate(-45deg);
+    transform-origin: center;
+    min-width: 34px;
 }
 
 /* ===== はじめるボタン ===== */
@@ -638,7 +642,7 @@ footer p {
     .cta-line-left,
     .cta-line-right {
         width: 24px;
-        height: 24px;
+        min-width: 34px;
     }
     
     .start-button {
@@ -867,7 +871,7 @@ footer p {
     .cta-line-left,
     .cta-line-right {
         width: 14px;
-        height: 14px;
+        min-width: 20px;
     }
     
     .start-button {
