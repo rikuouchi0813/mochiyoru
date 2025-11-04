@@ -438,17 +438,32 @@ header h1 {
 
 .step-badge {    
     font-family: "Bevan", sans-serif;
-    font-style: italic;
+    font-style: normal;
     background: #00E1A9;
     color: #fff;
     font-weight: 400;
-    font-size: 18px;
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    line-height: 47px;
+    font-size: 17px;
+    border-radius: 50px;
+    width: 42px;
+    height: 25px;
+    line-height: 25px;
     text-align: center;
     margin: 0 0 15px 0;
+    position: relative;
+}
+
+/* 吹き出しの逆三角形 */
+.step-badge::after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 4.765px solid transparent;
+    border-right: 4.765px solid transparent;
+    border-top: 5px solid #00E1A9;
 }
 
 .step p {
@@ -667,10 +682,14 @@ footer p {
     
     .step-badge {
         width: 42px;
-        height: 42px;
+        height: 25px;
         font-size: 17px;
-        line-height: 44px;
+        line-height: 25px;
         margin: 0 0 12px 0;
+    }
+    
+    .step-badge::after {
+        top: 25px;
     }
     
     .step p {
@@ -877,11 +896,15 @@ footer p {
     }
     
     .step-badge {
-        width: 38px;
-        height: 38px;
-        font-size: 16px;
-        line-height: 40px;
+        width: 42px;
+        height: 25px;
+        font-size: 15px;
+        line-height: 25px;
         margin: 0 0 12px 0;
+    }
+    
+    .step-badge::after {
+        top: 25px;
     }
     
     .step p {
@@ -913,4 +936,3 @@ footer p {
         margin-bottom: 30px;
     }
 }
-
