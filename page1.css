@@ -224,7 +224,7 @@ header h1 {
 /* ===== 早速使ってみる（CTAテキスト） ===== */
 .cta-text {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     gap: 10px;
     margin-bottom: 15px;
@@ -858,11 +858,7 @@ footer p {
     .kv-boy {
         right: 0;
     }
-    
-    .cta-text {
-        margin-bottom: 10px;
-    }
-    
+       
     .cta-label {
         font-size: 15px;
         letter-spacing: 0%;
@@ -1006,3 +1002,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
