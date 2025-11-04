@@ -69,7 +69,7 @@ ol, ul {
   src: url('../fonts/zen-kaku-gothic-new-v17-japanese_latin-900.woff2') format('woff2');
 }
 
-/* ===== ベーススタイル（デスクトップ） ===== */
+/* ===== ベーススタイル(デスクトップ) ===== */
 html {
     box-sizing: border-box;
     font-family: 'M PLUS 1p', sans-serif;
@@ -210,6 +210,17 @@ header h1 {
 
 .emoji-bar span {
     margin: 0 8px;
+}
+
+/* ===== pictograph.svgのスタイル（PC・タブレット） ===== */
+.pictograph-image {
+    max-width: 511px;
+    max-height: 83px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    opacity: 1;
+    transform: rotate(0deg);
 }
 
 /* ===== モチヨルの特徴セクション ===== */
@@ -447,7 +458,7 @@ footer p {
     color: #00E1A9;
 }
 
-/* ===== タブレット対応（768px以下） ===== */
+/* ===== タブレット対応(768px以下) ===== */
 @media (max-width: 768px) {
     header {
         padding: 30px 0 0 0;
@@ -486,7 +497,7 @@ footer p {
     }
     
     .intro p {
-        font-size: 16px;
+        font-size: 15px;
         margin-bottom: 40px;
     }
     
@@ -607,7 +618,7 @@ footer p {
     }
 }
 
-/* ===== スマートフォン対応（480px以下） ===== */
+/* ===== スマートフォン対応(480px以下) ===== */
 @media (max-width: 480px) {
     .logo-box {
         width: 320px;
@@ -641,7 +652,7 @@ footer p {
     }
     
     .intro p {
-        font-size: 12px;
+        font-size: 13px;
         margin-bottom: 30px;
     }
     
@@ -659,6 +670,12 @@ footer p {
     
     .emoji-bar span {
         margin: 0 5px;
+    }
+
+    /* pictograph.svgのスタイル（スマートフォン） */
+    .pictograph-image {
+        max-width: 323px;
+        max-height: 53px;
     }
 
     .features {
