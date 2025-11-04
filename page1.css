@@ -241,7 +241,16 @@ header h1 {
     color: #242424;
 }
 
-.cta-line {
+/* 左側の斜線（＼） */
+.cta-line-left {
+    width: 14px;
+    height: 14px;
+    border-top: 2px solid #242424;
+    transform: rotate(-45deg);
+}
+
+/* 右側の斜線（／） */
+.cta-line-right {
     width: 14px;
     height: 14px;
     border-top: 2px solid #242424;
@@ -625,7 +634,8 @@ footer p {
         font-size: 14px;
     }
     
-    .cta-line {
+    .cta-line-left,
+    .cta-line-right {
         width: 12px;
         height: 12px;
     }
@@ -852,7 +862,8 @@ footer p {
         font-size: 13px;
     }
     
-    .cta-line {
+    .cta-line-left,
+    .cta-line-right {
         width: 10px;
         height: 10px;
     }
