@@ -24,13 +24,13 @@ ol, ul {
 }
 
 /* ローカルフォントの定義 */
-/* bevan-italic - latin */
+/* bevan-regular - latin */
 @font-face {
-  font-display: swap;
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
   font-family: 'Bevan';
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
-  src: url('../fonts/bevan-v25-latin-italic.woff2') format('woff2');
+  src: url('../fonts/bevan-v26-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 /* m-plus-1p-500 - japanese_latin */
@@ -227,7 +227,6 @@ header h1 {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 15px;
 }
 
 .cta-label {
@@ -629,11 +628,7 @@ footer p {
         gap: 15px;
         margin-bottom: 25px;
     }
-    
-    .cta-text {
-        margin-bottom: 12px;
-    }
-    
+      
     .cta-label {
         font-size: 23px;
         letter-spacing: 5%;
@@ -1002,4 +997,5 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
