@@ -129,7 +129,7 @@ header h1 {
 /* ===== グラデーション背景 ===== */
 .logo-gradient-bg {
     width: 100%;
-    background: linear-gradient(135deg, rgba(180, 255, 205, 0.2), rgba(87, 231, 247, 0.2));
+    background: linear-gradient(#DBFEE9 0%, #BAF7F2 100%);
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
@@ -843,6 +843,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
