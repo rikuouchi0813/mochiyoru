@@ -149,22 +149,7 @@ header h1 {
     align-items: center;
 }
 
-/* イントロのコンテンツラッパー（h2、p、イラストを含む） */
-.intro-content-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 30px;
-    width: 100%;
-}
-
-/* 中央のテキスト部分 */
-.intro-text {
-    flex: 0 1 auto;
-    max-width: 600px;
-}
-
+/* h2は単独で上部に配置 */
 .intro h2 {
     font-family: 'Mochiy Pop P One', sans-serif;
     font-weight: 400;
@@ -175,13 +160,26 @@ header h1 {
     line-height: 170%;
 }
 
+/* イントロのコンテンツラッパー（p、イラストを含む） */
+.intro-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+/* pタグ */
 .intro p {
     font-weight: 500;
     font-size: 16px;
     color: #404040;
     line-height: 200%;
     text-align: center;
-    margin-bottom: 0;
+    margin: 0;
+    flex: 0 1 auto;
+    max-width: 600px;
 }
 
 /* 女性のイラスト（左側） */
@@ -524,15 +522,15 @@ footer p {
         max-width: 700px;
     }
     
-    .intro-content-wrapper {
-        gap: 15px;
-        margin-bottom: 25px;
-    }
-    
     .intro h2 {
         font-size: 28px;
         margin-top: 15px;
         margin-bottom: 20px;
+    }
+    
+    .intro-content-wrapper {
+        gap: 15px;
+        margin-bottom: 25px;
     }
     
     .intro p {
@@ -683,7 +681,15 @@ footer p {
         max-width: 100%;
     }
     
-    /* スマホ用：テキストの両サイドにイラストを配置 */
+    /* h2は上部に単独配置、margin-topを15pxに */
+    .intro h2 {
+        font-size: 22px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        line-height: 150%;
+    }
+    
+    /* スマホ用：pタグの両サイドにイラストを配置 */
     .intro-content-wrapper {
         display: flex;
         align-items: flex-start;
@@ -710,22 +716,12 @@ footer p {
         right: 0;
     }
     
-    /* テキスト部分：イラストの間に収まるように */
-    .intro-text {
+    /* pタグ：イラストの間に収まるように */
+    .intro p {
         flex: 1;
         padding: 0 5px;
         min-width: 0;
         max-width: calc(100% - 126px);
-    }
-    
-    .intro h2 {
-        font-size: 22px;
-        margin-top: 0;
-        margin-bottom: 15px;
-        line-height: 150%;
-    }
-    
-    .intro p {
         font-size: 13px;
         line-height: 180%;
         text-align: center;
