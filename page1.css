@@ -341,8 +341,8 @@ header h1 {
 .checkmark {
     width: 9px;
     height: 5.4px;
-    border-left: 1.8px solid white;
-    border-bottom: 1.8px solid white;
+    border-left: 3px solid white;
+    border-bottom: 3px solid white;
     transform: rotate(-45deg);
     position: relative;
     top: -0.9px;
@@ -913,3 +913,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
