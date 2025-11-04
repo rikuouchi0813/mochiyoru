@@ -499,12 +499,6 @@ footer p {
         padding: 30px 0 0 0;
     }
     
-    .logo-box {
-        width: 400px;
-        padding: 40px 0;
-        margin: 30px auto 0;
-    }
-    
     .h1-image {
         width: 170px;
         height: 38.4px;
@@ -859,4 +853,5 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
