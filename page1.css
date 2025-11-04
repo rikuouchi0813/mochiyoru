@@ -24,13 +24,13 @@ ol, ul {
 }
 
 /* ローカルフォントの定義 */
-/* bevan-regular - latin */
+/* bevan-italic - latin */
 @font-face {
   font-display: swap;
   font-family: 'Bevan';
   font-style: italic;
   font-weight: 400;
-  src: url('../fonts/bevan-v26-latin-regular.woff2') format('woff2');
+  src: url('../fonts/bevan-v25-latin-italic.woff2') format('woff2');
 }
 
 /* m-plus-1p-500 - japanese_latin */
@@ -219,6 +219,33 @@ header h1 {
     height: 220px;
     flex-shrink: 0;
     object-fit: contain;
+}
+
+/* ===== 早速使ってみる（CTAテキスト） ===== */
+.cta-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.cta-label {
+    font-family: 'Mochiy Pop P One', sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 170%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: #242424;
+}
+
+.cta-line {
+    width: 14px;
+    height: 14px;
+    border-top: 2px solid #242424;
+    transform: rotate(45deg);
 }
 
 /* ===== はじめるボタン ===== */
@@ -590,6 +617,19 @@ footer p {
         margin-bottom: 25px;
     }
     
+    .cta-text {
+        margin-bottom: 12px;
+    }
+    
+    .cta-label {
+        font-size: 14px;
+    }
+    
+    .cta-line {
+        width: 12px;
+        height: 12px;
+    }
+    
     .start-button {
         width: 280px;
         min-width: 280px;
@@ -804,6 +844,19 @@ footer p {
         right: 0;
     }
     
+    .cta-text {
+        margin-bottom: 10px;
+    }
+    
+    .cta-label {
+        font-size: 13px;
+    }
+    
+    .cta-line {
+        width: 10px;
+        height: 10px;
+    }
+    
     .start-button {
         width: 240px;
         min-width: 240px;
@@ -936,4 +989,3 @@ footer p {
         margin-bottom: 30px;
     }
 }
-
