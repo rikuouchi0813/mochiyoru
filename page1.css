@@ -170,7 +170,7 @@ header h1 {
     font-weight: 400;
     font-size: 32px;
     margin-top: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
     color: #242424;
     line-height: 170%;
 }
@@ -857,3 +857,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
