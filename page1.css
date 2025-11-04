@@ -234,27 +234,27 @@ header h1 {
     font-family: 'Mochiy Pop P One', sans-serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 15px;
+    font-size: 23px;
     line-height: 170%;
-    letter-spacing: 0%;
+    letter-spacing: 5%;
     text-align: center;
     color: #242424;
 }
 
 /* 左側の斜線（＼） */
 .cta-line-left {
-    width: 14px;
-    height: 14px;
+    width: 24px;
+    height: 24px;
     border-top: 2px solid #242424;
-    transform: rotate(-45deg);
+    transform: rotate(45deg);
 }
 
 /* 右側の斜線（／） */
 .cta-line-right {
-    width: 14px;
-    height: 14px;
+    width: 24px;
+    height: 24px;
     border-top: 2px solid #242424;
-    transform: rotate(45deg);
+    transform: rotate(-45deg);
 }
 
 /* ===== はじめるボタン ===== */
@@ -631,13 +631,14 @@ footer p {
     }
     
     .cta-label {
-        font-size: 14px;
+        font-size: 23px;
+        letter-spacing: 5%;
     }
     
     .cta-line-left,
     .cta-line-right {
-        width: 12px;
-        height: 12px;
+        width: 24px;
+        height: 24px;
     }
     
     .start-button {
@@ -859,13 +860,14 @@ footer p {
     }
     
     .cta-label {
-        font-size: 13px;
+        font-size: 15px;
+        letter-spacing: 0%;
     }
     
     .cta-line-left,
     .cta-line-right {
-        width: 10px;
-        height: 10px;
+        width: 14px;
+        height: 14px;
     }
     
     .start-button {
