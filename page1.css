@@ -142,8 +142,27 @@ header h1 {
 .intro {
     text-align: center;
     padding: 0px 50px 50px 50px;
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* イントロのコンテンツラッパー（h2、p、イラストを含む） */
+.intro-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+/* 中央のテキスト部分 */
+.intro-text {
+    flex: 0 1 auto;
+    max-width: 600px;
 }
 
 .intro h2 {
@@ -162,7 +181,23 @@ header h1 {
     color: #404040;
     line-height: 200%;
     text-align: left;
-    margin-bottom: 50px;
+    margin-bottom: 0;
+}
+
+/* 女性のイラスト（左側） */
+.kv-girl {
+    width: 88px;
+    height: 220px;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+/* 男性のイラスト（右側） */
+.kv-boy {
+    width: 88px;
+    height: 220px;
+    flex-shrink: 0;
+    object-fit: contain;
 }
 
 /* ===== はじめるボタン ===== */
@@ -297,7 +332,7 @@ header h1 {
 
 /* ===== 使い方セクション ===== */
 .how-to-use {
-    max-width: 800px;  /* 1000px → 800px に変更 */
+    max-width: 800px;
     margin: 0 auto;
     padding: 0 40px;
 }
@@ -324,9 +359,8 @@ header h1 {
 }
 
 .steps {
-    /* max-width: 500px; */ /* 削除 - 親の幅に従う */
     margin: 0 auto;
-    padding: 0 0 60px 0;  /* 左右のpaddingを削除 */
+    padding: 0 0 60px 0;
     display: flex;
     flex-direction: column;
     gap: 35px;
@@ -487,7 +521,12 @@ footer p {
     
     .intro {
         padding: 0px 40px 40px 40px;
-        max-width: 600px;
+        max-width: 700px;
+    }
+    
+    .intro-content-wrapper {
+        gap: 15px;
+        margin-bottom: 25px;
     }
     
     .intro h2 {
@@ -498,7 +537,6 @@ footer p {
     
     .intro p {
         font-size: 15px;
-        margin-bottom: 40px;
     }
     
     .start-button {
@@ -574,8 +612,7 @@ footer p {
     }
     
     .steps {
-        /* max-width: 400px; */ /* 削除 */
-        padding: 0 0 50px 0;  /* 左右のpaddingを削除 */
+        padding: 0 0 50px 0;
         gap: 30px;
     }
     
@@ -646,14 +683,61 @@ footer p {
         max-width: 500px;
     }
     
+    /* スマホ用：イラストとテキストを縦並びに */
+    .intro-content-wrapper {
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+    
+    /* スマホ用：イラストを横並びで上部に配置 */
+    .intro-content-wrapper::before {
+        content: '';
+        order: -1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+    
+    .kv-girl,
+    .kv-boy {
+        width: 63px;
+        height: 157px;
+    }
+    
+    /* スマホでイラストを上部に配置するためのレイアウト調整 */
+    .intro-content-wrapper {
+        position: relative;
+    }
+    
+    .kv-girl {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    
+    .kv-boy {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .intro-text {
+        padding-top: 50px;
+        max-width: 100%;
+    }
+    
     .intro h2 {
         font-size: 22px;
+        margin-top: 10px;
         margin-bottom: 15px;
     }
     
     .intro p {
         font-size: 13px;
-        margin-bottom: 30px;
+        line-height: 180%;
     }
     
     .start-button {
@@ -730,8 +814,7 @@ footer p {
     }
     
     .steps {
-        /* max-width: 325px; */ /* 削除 */
-        padding: 0 0 40px 0;  /* 左右のpaddingを削除 */
+        padding: 0 0 40px 0;
         gap: 24px;
     }
     
@@ -781,5 +864,3 @@ footer p {
         margin-bottom: 30px;
     }
 }
-
-
