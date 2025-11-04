@@ -184,6 +184,11 @@ header h1 {
     margin: 0;
 }
 
+/* PC・タブレット: pタグ内のbrを非表示 */
+.intro p br {
+    display: none;
+}
+
 /* 女性のイラスト（左側） */
 .kv-girl {
     width: 88px;
@@ -645,7 +650,7 @@ footer p {
 @media (max-width: 480px) {
     .logo-box {
         width: 320px;
-		hight: 105px;
+        height: 105px;
         max-width: 90%;
         padding: 20px 0;
     }
@@ -700,6 +705,11 @@ footer p {
         margin: 0 auto;
         padding: 0 70px;
         min-height: 157px;
+    }
+    
+    /* スマホのみ: pタグ内のbrを表示 */
+    .intro p br {
+        display: inline;
     }
     
     /* スマホ用：pの両サイドにイラストを下揃えで配置 */
@@ -843,11 +853,3 @@ footer p {
         margin-bottom: 30px;
     }
 }
-
-
-
-
-
-
-
-
