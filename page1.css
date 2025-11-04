@@ -168,7 +168,7 @@ header h1 {
 .intro h2 {
     font-family: 'Mochiy Pop P One', sans-serif;
     font-weight: 400;
-    font-size: 32px;
+    font-size: 34px;
     margin-top: 15px;
     margin-bottom: 15px;
     color: #242424;
@@ -525,16 +525,6 @@ footer p {
         margin-bottom: 25px;
     }
     
-    .intro h2 {
-        font-size: 28px;
-        margin-top: 15px;
-        margin-bottom: 20px;
-    }
-    
-    .intro p {
-        font-size: 15px;
-    }
-    
     .start-button {
         width: 280px;
         min-width: 280px;
@@ -693,7 +683,7 @@ footer p {
     }
     
     .intro h2 {
-        font-size: 22px;
+        font-size: 24px;
         margin-top: 15px;
         margin-bottom: 15px;
         line-height: 150%;
@@ -853,6 +843,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
