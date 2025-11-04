@@ -169,7 +169,7 @@ header h1 {
     font-family: 'Mochiy Pop P One', sans-serif;
     font-weight: 400;
     font-size: 32px;
-    margin-top: 0;
+    margin-top: 15px;
     margin-bottom: 25px;
     color: #242424;
     line-height: 170%;
@@ -532,7 +532,7 @@ footer p {
     
     .intro h2 {
         font-size: 28px;
-        margin-top: 0;
+        margin-top: 15px;
         margin-bottom: 20px;
     }
     
@@ -713,15 +713,16 @@ footer p {
         position: relative;
         margin: 0 auto;
         padding: 0 70px;
+        min-height: 157px;
     }
     
-    /* スマホ用：pの両サイドにイラスト配置 */
+    /* スマホ用：pの両サイドにイラストを下揃えで配置 */
     .kv-girl,
     .kv-boy {
         width: 63px;
         height: 157px;
         position: absolute;
-        top: 0;
+        bottom: 0;
     }
     
     .kv-girl {
