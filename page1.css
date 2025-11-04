@@ -149,18 +149,7 @@ header h1 {
     align-items: center;
 }
 
-/* h2は単独で上部に配置 */
-.intro h2 {
-    font-family: 'Mochiy Pop P One', sans-serif;
-    font-weight: 400;
-    font-size: 32px;
-    margin-top: 20px;
-    margin-bottom: 25px;
-    color: #242424;
-    line-height: 170%;
-}
-
-/* イントロのコンテンツラッパー（p、イラストを含む） */
+/* PC・タブレット: h2とpの両方の横にイラスト配置 */
 .intro-content-wrapper {
     display: flex;
     align-items: center;
@@ -170,7 +159,22 @@ header h1 {
     width: 100%;
 }
 
-/* pタグ */
+/* 中央のテキスト部分（h2とpを含む） */
+.intro-text {
+    flex: 0 1 auto;
+    max-width: 600px;
+}
+
+.intro h2 {
+    font-family: 'Mochiy Pop P One', sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #242424;
+    line-height: 170%;
+}
+
 .intro p {
     font-weight: 500;
     font-size: 16px;
@@ -178,8 +182,6 @@ header h1 {
     line-height: 200%;
     text-align: center;
     margin: 0;
-    flex: 0 1 auto;
-    max-width: 600px;
 }
 
 /* 女性のイラスト（左側） */
@@ -522,15 +524,16 @@ footer p {
         max-width: 700px;
     }
     
-    .intro h2 {
-        font-size: 28px;
-        margin-top: 15px;
-        margin-bottom: 20px;
-    }
-    
+    /* タブレットでもh2とpの両方の横にイラスト */
     .intro-content-wrapper {
         gap: 15px;
         margin-bottom: 25px;
+    }
+    
+    .intro h2 {
+        font-size: 28px;
+        margin-top: 0;
+        margin-bottom: 20px;
     }
     
     .intro p {
@@ -681,7 +684,18 @@ footer p {
         max-width: 100%;
     }
     
+    /* スマホ用：レイアウトを変更 */
+    .intro-content-wrapper {
+        display: block;
+        margin-bottom: 20px;
+        position: relative;
+    }
+    
     /* h2は上部に単独配置、margin-topを15pxに */
+    .intro-text {
+        max-width: 100%;
+    }
+    
     .intro h2 {
         font-size: 22px;
         margin-top: 15px;
@@ -689,44 +703,33 @@ footer p {
         line-height: 150%;
     }
     
-    /* スマホ用：pタグの両サイドにイラストを配置 */
-    .intro-content-wrapper {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 0;
-        margin-bottom: 20px;
-        position: relative;
-    }
-    
-    .kv-girl,
-    .kv-boy {
-        width: 63px;
-        height: 157px;
-        flex-shrink: 0;
-    }
-    
-    .kv-girl {
-        position: relative;
-        left: 0;
-    }
-    
-    .kv-boy {
-        position: relative;
-        right: 0;
-    }
-    
-    /* pタグ：イラストの間に収まるように */
+    /* pタグとイラストのコンテナ */
     .intro p {
-        flex: 1;
-        padding: 0 5px;
-        min-width: 0;
-        max-width: calc(100% - 126px);
         font-size: 13px;
         line-height: 180%;
         text-align: center;
         word-wrap: break-word;
         overflow-wrap: break-word;
+        position: relative;
+        margin: 0 auto;
+        padding: 0 70px;
+    }
+    
+    /* スマホ用：pの両サイドにイラスト配置 */
+    .kv-girl,
+    .kv-boy {
+        width: 63px;
+        height: 157px;
+        position: absolute;
+        top: 0;
+    }
+    
+    .kv-girl {
+        left: 0;
+    }
+    
+    .kv-boy {
+        right: 0;
     }
     
     .start-button {
