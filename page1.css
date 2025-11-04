@@ -661,8 +661,9 @@ footer p {
 @media (max-width: 480px) {
     .logo-box {
         width: 320px;
+		hight: 105px;
         max-width: 90%;
-        padding: 30px 0;
+        padding: 20px 0;
     }
     
     .h1-image {
@@ -858,3 +859,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
