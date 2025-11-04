@@ -670,33 +670,49 @@ footer p {
     }
     
     .intro {
-        padding: 0px 30px 30px 30px;
+        padding: 0px 20px 30px 20px;
         max-width: 500px;
-        flex-direction: column;
-        gap: 0;
+        flex-direction: row;
+        gap: 10px;
+        align-items: flex-start;
     }
     
     .intro-girl,
     .intro-boy {
-        display: none;
+        display: block;
+        width: 70px;
+        margin-top: 20px;
+    }
+    
+    .intro-content {
+        flex: 1;
+        min-width: 0;
     }
     
     .intro h2 {
-        font-size: 22px;
+        font-size: 20px;
+        margin-top: 20px;
         margin-bottom: 15px;
     }
     
     .intro p {
-        font-size: 13px;
-        margin-bottom: 30px;
+        font-size: 11px;
+        line-height: 180%;
+        margin-bottom: 25px;
         text-align: center;
     }
     
     .start-button {
-        width: 240px;
-        min-width: 240px;
-        height: 49px;
-        font-size: 16px;
+        width: 200px;
+        min-width: 200px;
+        height: 45px;
+        font-size: 15px;
+        padding: 8px 20px 8px 25px;
+    }
+    
+    .start-button .arrow {
+        width: 32px;
+        height: 12px;
     }
     
     .pictograph-image {
