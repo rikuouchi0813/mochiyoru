@@ -268,6 +268,7 @@ input[type="text"]:-webkit-autofill:focus {
 }
 
 /* ===== グループ作成ボタン ===== */
+
 .start-button {
     width: 320px;
     min-width: 320px;
@@ -276,7 +277,7 @@ input[type="text"]:-webkit-autofill:focus {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background: linear-gradient(90deg, #35E4A1 0%, #08DBF3 100%);
+    background: linear-gradient(90deg, #00E28C 0%, #00BFFF 100%);
     color: white;
     padding: 12px 30px 12px 35px;
     border-radius: 8px;
@@ -285,8 +286,8 @@ input[type="text"]:-webkit-autofill:focus {
     font-size: 20px;
     margin: 0 auto;
     box-sizing: border-box;
+    box-shadow: 0px 4px 0px 0px #02877C;
     transition: opacity 0.3s ease;
-    font-family: "M PLUS 1p", sans-serif;
 }
 
 .start-button .arrow {
@@ -544,6 +545,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
