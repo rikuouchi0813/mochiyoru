@@ -177,8 +177,8 @@ header h1 {
 
 .intro-girl,
 .intro-boy {
-    width: 120px;
-    height: auto;
+    width: 88px;
+    height: 220px;
     flex-shrink: 0;
 }
 
@@ -516,7 +516,8 @@ footer p {
     
     .intro-girl,
     .intro-boy {
-        width: 100px;
+        width: 88px;
+        height: 220px;
     }
     
     .intro h2 {
@@ -681,9 +682,10 @@ footer p {
     .intro-girl,
     .intro-boy {
         display: block;
-        width: 65px;
+        width: 63px;
+        height: 157px;
         flex-shrink: 0;
-        margin-top: 20px;
+        margin-top: 5.7px;
     }
     
     .intro-content {
