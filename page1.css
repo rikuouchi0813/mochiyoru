@@ -122,8 +122,8 @@ header h1 {
 
 .subtitle-image {
     width: 330px;
-    height: 20.2px;
-    margin: 0 auto 25px;
+    height: 30px;
+    margin: 0 auto 10px;
 }
 
 /* ===== グラデーション背景 ===== */
@@ -781,3 +781,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
