@@ -24,13 +24,13 @@ ol, ul {
 }
 
 /* ローカルフォントの定義 */
-/* bevan-italic - latin */
+/* bevan-regular - latin */
 @font-face {
   font-display: swap;
   font-family: 'Bevan';
   font-style: italic;
   font-weight: 400;
-  src: url('../fonts/bevan-v25-latin-italic.woff2') format('woff2');
+  src: url('../fonts/bevan-v26-latin-regular.woff2') format('woff2');
 }
 
 /* m-plus-1p-500 - japanese_latin */
@@ -936,3 +936,4 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
