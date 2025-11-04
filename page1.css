@@ -671,11 +671,11 @@ footer p {
     }
     
     .intro {
-        padding: 0px 15px 30px 15px;
+        padding: 0px 10px 30px 10px;
         max-width: 500px;
         flex-direction: row;
-        gap: 8px;
-        align-items: flex-start;
+        gap: 5px;
+        align-items: center;
         justify-content: center;
     }
     
@@ -683,41 +683,43 @@ footer p {
     .intro-boy {
         display: block;
         width: 63px;
-        height: 157px;
+        height: auto;
         flex-shrink: 0;
-        margin-top: 5.7px;
+        align-self: flex-start;
+        margin-top: 40px;
     }
     
     .intro-content {
         flex: 0 1 auto;
         min-width: 0;
-        max-width: 220px;
+        max-width: 200px;
     }
     
     .intro h2 {
-        font-size: 19px;
-        margin-top: 20px;
-        margin-bottom: 15px;
+        font-size: 18px;
+        margin-top: 10px;
+        margin-bottom: 12px;
+        line-height: 1.5;
     }
     
     .intro p {
-        font-size: 10.5px;
-        line-height: 180%;
-        margin-bottom: 25px;
+        font-size: 10px;
+        line-height: 170%;
+        margin-bottom: 20px;
         text-align: center;
     }
     
     .start-button {
-        width: 180px;
-        min-width: 180px;
-        height: 44px;
+        width: 170px;
+        min-width: 170px;
+        height: 42px;
         font-size: 14px;
-        padding: 8px 18px 8px 22px;
+        padding: 8px 16px 8px 20px;
     }
     
     .start-button .arrow {
-        width: 30px;
-        height: 11px;
+        width: 28px;
+        height: 10px;
     }
     
     .pictograph-image {
