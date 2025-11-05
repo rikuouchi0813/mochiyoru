@@ -120,15 +120,18 @@ class ItemAssignmentManager {
   handleRemoteInsert(record) {
     console.log("リモート追加:", record);
     
+    // item_nameをnameに変換
+    const itemName = record.item_name || record.name || "";
+    
     // 既に存在する場合はスキップ
-    if (this.items.includes(record.name)) {
+    if (this.items.includes(itemName)) {
       return;
     }
     
     // ローカルデータに追加
-    this.items.push(record.name);
+    this.items.push(itemName);
     this.assignments.push({
-      name: record.name,
+      name: itemName,
       assignee: record.assignee || "",
       quantity: record.quantity || ""
     });
@@ -137,22 +140,25 @@ class ItemAssignmentManager {
     this.renderItems();
     
     // 追加されたことを視覚的に表示
-    this.showNotification(`「${record.name}」が追加されました`);
+    this.showNotification(`「${itemName}」が追加されました`);
   }
 
   /* ---------- リモートからのUPDATE処理 ---------- */
   handleRemoteUpdate(record) {
     console.log("リモート更新:", record);
     
-    const idx = this.assignments.findIndex(a => a.name === record.name);
+    // item_nameをnameに変換
+    const itemName = record.item_name || record.name || "";
+    
+    const idx = this.assignments.findIndex(a => a.name === itemName);
     if (idx === -1) {
-      console.warn("更新対象が見つかりません:", record.name);
+      console.warn("更新対象が見つかりません:", itemName);
       return;
     }
     
     // ローカルデータを更新
     this.assignments[idx] = {
-      name: record.name,
+      name: itemName,
       assignee: record.assignee || "",
       quantity: record.quantity || ""
     };
@@ -165,15 +171,18 @@ class ItemAssignmentManager {
   handleRemoteDelete(record) {
     console.log("リモート削除:", record);
     
+    // item_nameをnameに変換
+    const itemName = record.item_name || record.name || "";
+    
     // ローカルデータから削除
-    this.items = this.items.filter(n => n !== record.name);
-    this.assignments = this.assignments.filter(a => a.name !== record.name);
+    this.items = this.items.filter(n => n !== itemName);
+    this.assignments = this.assignments.filter(a => a.name !== itemName);
     
     // 画面を更新
     this.renderItems();
     
     // 削除されたことを視覚的に表示
-    this.showNotification(`「${record.name}」が削除されました`);
+    this.showNotification(`「${itemName}」が削除されました`);
   }
 
   /* ---------- 接続状態の表示更新 ---------- */
@@ -413,14 +422,14 @@ class ItemAssignmentManager {
       const items = await res.json();
       console.log("サーバーから取得したアイテム:", items);
 
-      // データを正規化（重要：空文字列を保持）
+      // データを正規化（データベースのカラム名に対応）
       this.assignments = items.map((it) => ({
-        name: it.name || "",
+        name: it.item_name || it.name || "",  // item_nameとnameの両方に対応
         assignee: it.assignee !== null && it.assignee !== undefined ? it.assignee : "",
         quantity: it.quantity !== null && it.quantity !== undefined ? it.quantity : "",
       }));
 
-      this.items = items.map((it) => it.name);
+      this.items = items.map((it) => it.item_name || it.name || "");  // item_nameとnameの両方に対応
       console.log("正規化後のassignments:", this.assignments);
     } catch (err) {
       console.warn("アイテム取得エラー:", err);
@@ -432,8 +441,9 @@ class ItemAssignmentManager {
     console.log("=== アイテム保存開始 ===");
     console.log("送信データ:", payload);
 
+    // データベースのカラム名に合わせて送信
     const processedPayload = {
-      name: payload.name || "",
+      item_name: payload.name || payload.item_name || "",  // nameをitem_nameに変換
       assignee: payload.assignee || "",
       quantity: payload.quantity || "",
     };
@@ -463,10 +473,11 @@ class ItemAssignmentManager {
     console.log("=== アイテム削除開始 ===");
     console.log("削除対象:", name);
 
+    // データベースのカラム名に合わせて送信
     const res = await fetch(this.baseUrl("/items"), {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({ item_name: name }),  // nameをitem_nameに変換
     });
 
     console.log("削除レスポンス status:", res.status);
@@ -946,4 +957,3 @@ document.addEventListener("DOMContentLoaded", () => {
     copyUrlBtn.addEventListener("click", handleCopyClick);
   }
 });
-
