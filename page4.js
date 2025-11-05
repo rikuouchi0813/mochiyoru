@@ -442,18 +442,24 @@ class ItemAssignmentManager {
     console.log("=== アイテム保存開始 ===");
     console.log("送信データ:", payload);
 
-    // データベースのカラム名に合わせて送信
+    // データベースのカラム名に合わせて送信（group_idも含める）
     const processedPayload = {
+      group_id: this.groupData.groupId,  // group_idを追加
       item_name: payload.name || payload.item_name || "",  // nameをitem_nameに変換
       assignee: payload.assignee || "",
       quantity: payload.quantity || "",
     };
 
     console.log("送信データ（処理後）:", processedPayload);
+    console.log("送信先URL:", this.baseUrl("/items"));
+    console.log("送信JSON:", JSON.stringify(processedPayload));
 
     const res = await fetch(this.baseUrl("/items"), {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
       body: JSON.stringify(processedPayload),
     });
 
@@ -462,6 +468,15 @@ class ItemAssignmentManager {
     if (!res.ok) {
       const errorText = await res.text();
       console.error("サーバーエラー詳細:", errorText);
+      
+      // エラーレスポンスをパース
+      try {
+        const errorJson = JSON.parse(errorText);
+        console.error("エラーJSON:", errorJson);
+      } catch (e) {
+        console.error("エラーテキスト:", errorText);
+      }
+      
       throw new Error(`保存失敗: ${res.status} - ${errorText}`);
     }
 
@@ -474,11 +489,18 @@ class ItemAssignmentManager {
     console.log("=== アイテム削除開始 ===");
     console.log("削除対象:", name);
 
-    // データベースのカラム名に合わせて送信
+    // データベースのカラム名に合わせて送信（group_idも含める）
+    const deletePayload = {
+      group_id: this.groupData.groupId,
+      item_name: name
+    };
+    
+    console.log("削除リクエストボディ:", deletePayload);
+
     const res = await fetch(this.baseUrl("/items"), {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ item_name: name }),  // nameをitem_nameに変換
+      body: JSON.stringify(deletePayload),
     });
 
     console.log("削除レスポンス status:", res.status);
