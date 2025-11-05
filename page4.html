@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>持ち物を分担｜モチヨル - BBQ・キャンプの準備を簡単に</title>
 
-    <!-- SEO必須：meta description -->
+    <!-- SEO必須:meta description -->
     <meta name="description" content="誰が・何を・どれくらい持ち寄る一目で管理。BBQやキャンプの持ち物をリアルタイムで分担。被りも忘れ物も防げます。完全無料で今すぐ使えます。">
     <meta name="keywords" content="持ち物分担,持ち物管理,BBQ準備,キャンプ準備,持ち物リスト,誰が持ってくる,イベント準備,アウトドア,モチヨル">
 
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="/page4.css">
 
     <!-- OGP設定 -->
-    <meta property="og:title" content="誰が・何を・どれくらい持ち寄る？モチヨルで一発解決">
+    <meta property="og:title" content="誰が・何を・どれくらい持ち寄る?モチヨルで一発解決">
     <meta property="og:description" content="BBQやキャンプの持ち物分担を一目で管理。被りも忘れ物も防げます。完全無料で今すぐ使えます。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mochiyoru.jp/page4.html">
@@ -35,7 +35,7 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="誰が・何を・どれくらい持ち寄る？モチヨルで一発解決">
+    <meta name="twitter:title" content="誰が・何を・どれくらい持ち寄る?モチヨルで一発解決">
     <meta name="twitter:description" content="BBQやキャンプの持ち物分担を一目で管理。被りも忘れ物も防げます。">
     <meta name="twitter:image" content="https://mochiyoru.jp/img/ogp.png">
 
@@ -90,6 +90,13 @@
         <main>
             <section class="form-section">
                 <h2>持ち物を追加・分担しよう</h2>
+                
+                <!-- リアルタイム接続状態表示 -->
+                <div class="connection-status" id="connectionStatus">
+                    <span class="status-indicator"></span>
+                    <span class="status-text">接続中...</span>
+                </div>
+                
                 <div class="input-section">
                     <input type="text" id="itemInput" placeholder="持ち物を入力してください">
                     <button id="addButton">追加</button>
@@ -141,6 +148,9 @@
         コピーしました！
     </div>
 
+    <!-- Supabase Client for Realtime -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <!-- JavaScriptファイルをdefer属性で非ブロッキング化 -->
     <script src="/page4.js" defer></script>
 
@@ -182,5 +192,3 @@
 </body>
 
 </html>
-
-
