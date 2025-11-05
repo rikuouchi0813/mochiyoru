@@ -235,7 +235,7 @@ class ItemAssignmentManager {
       case 'TIMED_OUT':
       case 'error':
         indicator.className = 'status-indicator error';
-        text.textContent = '接続エラー';
+        text.textContent = '接続エラー（リロードしてみてください）';
         this.connectionStatus.classList.add('error');
         break;
       default:
@@ -1033,4 +1033,5 @@ document.addEventListener("DOMContentLoaded", () => {
     copyUrlBtn.addEventListener("click", handleCopyClick);
   }
 });
+
 
