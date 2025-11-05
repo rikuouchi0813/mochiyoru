@@ -124,6 +124,68 @@ h2 {
     text-align: center;
 }
 
+/* ===== リアルタイム接続状態表示 ===== */
+.connection-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto 20px auto;
+    max-width: 200px;
+    font-family: "M PLUS 1p", sans-serif;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #999;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.status-indicator.connecting {
+    background: #ffa500;
+}
+
+.status-indicator.connected {
+    background: #00E1A9;
+}
+
+.status-indicator.error {
+    background: #ff6b6b;
+    animation: none;
+}
+
+.status-text {
+    font-weight: 500;
+    color: #666;
+}
+
+.connection-status.connected .status-text {
+    color: #00E1A9;
+}
+
+.connection-status.error .status-text {
+    color: #ff6b6b;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(0.8);
+    }
+}
+
 /* ===== 入力セクション（Critical） ===== */
 .input-section {
     display: flex;
@@ -477,6 +539,51 @@ h2 {
     transform: translate(-50%, 0);
 }
 
+/* ===== リアルタイム通知 ===== */
+.realtime-notification {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: rgba(0, 225, 169, 0.95);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: "M PLUS 1p", sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 225, 169, 0.3);
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: 1000;
+    max-width: 300px;
+    word-wrap: break-word;
+}
+
+.realtime-notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===== 編集中のインジケーター（オプション：将来的に追加可能） ===== */
+.item-row.editing {
+    background: rgba(255, 235, 59, 0.2);
+    border-left-color: #ffc107;
+}
+
+.item-row.remote-update {
+    animation: highlightUpdate 0.6s ease-out;
+}
+
+@keyframes highlightUpdate {
+    0% {
+        background: rgba(0, 225, 169, 0.3);
+    }
+    100% {
+        background: rgba(232, 248, 245, 0.8);
+    }
+}
+
 /* ===== フッター（非Critical - 遅延読み込み可能） ===== */
 footer {
     background-color: #404040;
@@ -584,6 +691,17 @@ footer p {
         margin-bottom: 25px;
     }
     
+    .connection-status {
+        font-size: 13px;
+        padding: 6px 12px;
+        margin-bottom: 15px;
+    }
+    
+    .status-indicator {
+        width: 8px;
+        height: 8px;
+    }
+    
     .input-section {
         gap: 10px;
         margin-bottom: 30px;
@@ -685,6 +803,14 @@ footer p {
         font-size: 15px;
     }
     
+    .realtime-notification {
+        top: 70px;
+        right: 15px;
+        font-size: 13px;
+        padding: 10px 16px;
+        max-width: 250px;
+    }
+    
     footer {
         padding: 36px 24px 18px 24px;
         margin-top: 50px;
@@ -713,6 +839,12 @@ footer p {
     h2 {
         font-size: 20px;
         margin-bottom: 20px;
+    }
+    
+    .connection-status {
+        font-size: 12px;
+        padding: 5px 10px;
+        margin-bottom: 12px;
     }
     
     .input-section {
@@ -821,6 +953,15 @@ footer p {
         padding: 10px 20px;
     }
     
+    .realtime-notification {
+        top: 60px;
+        right: 10px;
+        left: 10px;
+        font-size: 12px;
+        padding: 8px 12px;
+        max-width: none;
+    }
+    
     footer {
         padding: 36px 24px 18px 24px;
     }
@@ -861,10 +1002,3 @@ input, select, button {
 .column-headers {
     contain: layout style paint;
 }
-
-
-
-
-
-
-
