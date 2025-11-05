@@ -403,6 +403,7 @@ class ItemAssignmentManager {
 
   /* ---------- API ベース URL ---------- */
   baseUrl(path = "") {
+    // Netlify Functions形式でリクエスト
     if (path === "/items") {
       return `/.netlify/functions/items?groupId=${this.groupData.groupId}`;
     }
