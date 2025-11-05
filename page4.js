@@ -49,7 +49,7 @@ class ItemAssignmentManager {
       // Supabase環境変数を取得（本番環境では環境変数から読み込む）
       // 開発時は直接指定も可能ですが、本番では必ず環境変数を使用してください
       const supabaseUrl = 'https://vvpopjnyxbtqyetgmpgp.supabase.co';
-      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5c（以下略）'; // ⚠️ 実際の完全なキーに置き換えてください
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2cG9wam55eGJ0cXlldGdtcGdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwOTYwMjgsImV4cCI6MjA2NjY3MjAyOH0.EqyBZTAzv2a-I69P1AKNh2d8o4I4CXCem_ahnYo4KQU';
       
       // Supabaseクライアント作成
       this.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -946,3 +946,4 @@ document.addEventListener("DOMContentLoaded", () => {
     copyUrlBtn.addEventListener("click", handleCopyClick);
   }
 });
+
