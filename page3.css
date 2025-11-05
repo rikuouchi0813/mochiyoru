@@ -262,7 +262,7 @@ label {
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     font-family: "M PLUS 1p", sans-serif;
     cursor: pointer;
@@ -464,7 +464,7 @@ footer p {
     .copy-btn {
         width: 75px;
         height: 50px;
-        font-size: 15px;
+        font-size: 18px;
     }
     
     .start-button {
@@ -547,7 +547,7 @@ footer p {
     .copy-btn {
         width: 70px;
         height: 46px;
-        font-size: 13px;
+        font-size: 16px;
     }
     
     .start-button {
@@ -585,6 +585,7 @@ footer p {
         margin-bottom: 30px;
     }
 }
+
 
 
 
