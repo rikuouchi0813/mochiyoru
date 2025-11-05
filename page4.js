@@ -49,7 +49,7 @@ class ItemAssignmentManager {
       // Supabase環境変数を取得（本番環境では環境変数から読み込む）
       // 開発時は直接指定も可能ですが、本番では必ず環境変数を使用してください
       const supabaseUrl = 'https://vvpopjnyxbtqyetgmpgp.supabase.co';
-      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2cG9wam55eGJ0cXlldGdtcGdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwOTYwMjgsImV4cCI6MjA2NjY3MjAyOH0.EqyBZTAzv2a-I69P1AKNh2d8o4I4CXCem_ahnYo4KQU';
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5c（以下略）'; // ⚠️ 実際の完全なキーに置き換えてください
       
       // Supabaseクライアント作成
       this.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -85,6 +85,9 @@ class ItemAssignmentManager {
   /* ---------- リアルタイム変更のハンドラー ---------- */
   handleRealtimeChange(payload) {
     console.log("=== リアルタイム変更を受信 ===", payload);
+    console.log("イベントタイプ:", payload.eventType);
+    console.log("新しいレコード:", payload.new);
+    console.log("古いレコード:", payload.old);
     
     // 自分の変更による更新の場合はスキップ（無限ループ防止）
     if (this.isProcessingRemoteChange) {
@@ -105,7 +108,8 @@ class ItemAssignmentManager {
           this.handleRemoteUpdate(newRecord);
           break;
         case 'DELETE':
-          this.handleRemoteDelete(oldRecord);
+          console.log("DELETE イベント処理開始");
+          this.handleRemoteDelete(oldRecord);  // ✅ DELETEの場合はoldRecordを使用
           break;
       }
     } finally {
@@ -169,20 +173,49 @@ class ItemAssignmentManager {
 
   /* ---------- リモートからのDELETE処理 ---------- */
   handleRemoteDelete(record) {
-    console.log("リモート削除:", record);
+    console.log("=== リモート削除処理開始 ===");
+    console.log("削除レコード:", record);
+    
+    if (!record) {
+      console.error("削除レコードがnullまたはundefined");
+      return;
+    }
     
     // item_nameをnameに変換
     const itemName = record.item_name || record.name || "";
+    console.log("削除対象のアイテム名:", itemName);
+    
+    if (!itemName) {
+      console.error("アイテム名が取得できません");
+      return;
+    }
+    
+    console.log("削除前のitems:", this.items);
+    console.log("削除前のassignments:", this.assignments);
     
     // ローカルデータから削除
-    this.items = this.items.filter(n => n !== itemName);
-    this.assignments = this.assignments.filter(a => a.name !== itemName);
+    this.items = this.items.filter(n => {
+      const shouldKeep = n !== itemName;
+      console.log(`アイテム "${n}": ${shouldKeep ? "保持" : "削除"}`);
+      return shouldKeep;
+    });
+    
+    this.assignments = this.assignments.filter(a => {
+      const shouldKeep = a.name !== itemName;
+      console.log(`割り当て "${a.name}": ${shouldKeep ? "保持" : "削除"}`);
+      return shouldKeep;
+    });
+    
+    console.log("削除後のitems:", this.items);
+    console.log("削除後のassignments:", this.assignments);
     
     // 画面を更新
     this.renderItems();
     
     // 削除されたことを視覚的に表示
     this.showNotification(`「${itemName}」が削除されました`);
+    
+    console.log("=== リモート削除処理完了 ===");
   }
 
   /* ---------- 接続状態の表示更新 ---------- */
@@ -789,10 +822,20 @@ class ItemAssignmentManager {
     }
 
     try {
+      console.log("=== ローカル削除開始 ===");
+      console.log("削除対象:", name);
+      
+      // リアルタイム処理フラグを立てる（自分の削除を無視するため）
+      this.isProcessingRemoteChange = true;
+      
+      // サーバーから削除
       await this.deleteItemFromServer(name);
 
+      // ローカルデータから削除
       this.assignments = this.assignments.filter((a) => a.name !== name);
       this.items = this.items.filter((n) => n !== name);
+      
+      // DOM要素を削除
       const el = this.listWrap.querySelector(`[data-name="${name}"]`);
       if (el) {
         el.style.transition = "all 0.3s ease-out";
@@ -812,9 +855,19 @@ class ItemAssignmentManager {
       }
 
       console.log(`アイテム「${name}」を削除しました`);
+      
+      // フラグを少し遅延させて解除（Realtimeイベントが来る前に）
+      setTimeout(() => {
+        this.isProcessingRemoteChange = false;
+        console.log("削除のフラグを解除しました");
+      }, 1000);  // 1秒後に解除
+      
     } catch (err) {
       console.error("削除エラー:", err);
       alert("削除に失敗しました。ネットワーク接続を確認してください。");
+
+      // エラー時はすぐにフラグを解除
+      this.isProcessingRemoteChange = false;
 
       if (deleteBtn) {
         deleteBtn.disabled = false;
