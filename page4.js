@@ -7,6 +7,11 @@ class ItemAssignmentManager {
     this.items = []; // ["カメラ", ...]
     this.assignments = []; // [{name, assignee, quantity}]
     this.newItems = new Set(); // 画面上で演出する用
+    
+    // リアルタイム同期用
+    this.supabaseClient = null;
+    this.realtimeChannel = null;
+    this.isProcessingRemoteChange = false; // 無限ループ防止フラグ
 
     // DOM
     this.bindElements();
@@ -24,14 +29,195 @@ class ItemAssignmentManager {
     this.addBtn = document.getElementById("addButton");
     this.listWrap = document.getElementById("itemsList");
     this.noMsg = document.getElementById("noItemsMessage");
+    this.connectionStatus = document.getElementById("connectionStatus");
   }
 
   /* ---------- ここがメイン初期化 ---------- */
   async initialize() {
     await this.loadOrCreateGroup(); // groupId を必ず確保
+    await this.initializeSupabaseRealtime(); // Supabaseリアルタイム接続
     await this.fetchItemsFromServer(); // 既存アイテム取得（無ければ空）
     this.attachEventListeners(); // イベント設定
     this.renderItems(); // 画面描画
+  }
+
+  /* ---------- Supabaseリアルタイム機能の初期化 ---------- */
+  async initializeSupabaseRealtime() {
+    try {
+      console.log("=== Supabaseリアルタイム接続開始 ===");
+      
+      // Supabase環境変数を取得（本番環境では環境変数から読み込む）
+      // 開発時は直接指定も可能ですが、本番では必ず環境変数を使用してください
+      const supabaseUrl = 'https://vvpopjnyxbtqyetgmpgp.supabase.co';
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5c（以下略）'; // ⚠️ 実際の完全なキーに置き換えてください
+      
+      // Supabaseクライアント作成
+      this.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+      
+      // リアルタイムチャンネル作成（グループごとに専用チャンネル）
+      const channelName = `group:${this.groupData.groupId}`;
+      this.realtimeChannel = this.supabaseClient.channel(channelName);
+      
+      // データベースの変更を監視
+      this.realtimeChannel
+        .on(
+          'postgres_changes',
+          {
+            event: '*', // INSERT, UPDATE, DELETEすべて監視
+            schema: 'public',
+            table: 'items',
+            filter: `group_id=eq.${this.groupData.groupId}` // このグループのアイテムのみ
+          },
+          (payload) => this.handleRealtimeChange(payload)
+        )
+        .subscribe((status) => {
+          console.log('リアルタイム接続状態:', status);
+          this.updateConnectionStatus(status);
+        });
+      
+      console.log("=== Supabaseリアルタイム接続完了 ===");
+    } catch (err) {
+      console.error("リアルタイム接続エラー:", err);
+      this.updateConnectionStatus('error');
+    }
+  }
+
+  /* ---------- リアルタイム変更のハンドラー ---------- */
+  handleRealtimeChange(payload) {
+    console.log("=== リアルタイム変更を受信 ===", payload);
+    
+    // 自分の変更による更新の場合はスキップ（無限ループ防止）
+    if (this.isProcessingRemoteChange) {
+      console.log("自分の変更なのでスキップ");
+      return;
+    }
+    
+    this.isProcessingRemoteChange = true;
+    
+    try {
+      const { eventType, new: newRecord, old: oldRecord } = payload;
+      
+      switch (eventType) {
+        case 'INSERT':
+          this.handleRemoteInsert(newRecord);
+          break;
+        case 'UPDATE':
+          this.handleRemoteUpdate(newRecord);
+          break;
+        case 'DELETE':
+          this.handleRemoteDelete(oldRecord);
+          break;
+      }
+    } finally {
+      // 少し遅延させてから解除（連続変更の場合を考慮）
+      setTimeout(() => {
+        this.isProcessingRemoteChange = false;
+      }, 100);
+    }
+  }
+
+  /* ---------- リモートからのINSERT処理 ---------- */
+  handleRemoteInsert(record) {
+    console.log("リモート追加:", record);
+    
+    // 既に存在する場合はスキップ
+    if (this.items.includes(record.name)) {
+      return;
+    }
+    
+    // ローカルデータに追加
+    this.items.push(record.name);
+    this.assignments.push({
+      name: record.name,
+      assignee: record.assignee || "",
+      quantity: record.quantity || ""
+    });
+    
+    // 画面を更新
+    this.renderItems();
+    
+    // 追加されたことを視覚的に表示
+    this.showNotification(`「${record.name}」が追加されました`);
+  }
+
+  /* ---------- リモートからのUPDATE処理 ---------- */
+  handleRemoteUpdate(record) {
+    console.log("リモート更新:", record);
+    
+    const idx = this.assignments.findIndex(a => a.name === record.name);
+    if (idx === -1) {
+      console.warn("更新対象が見つかりません:", record.name);
+      return;
+    }
+    
+    // ローカルデータを更新
+    this.assignments[idx] = {
+      name: record.name,
+      assignee: record.assignee || "",
+      quantity: record.quantity || ""
+    };
+    
+    // 画面を更新（アニメーションなしで静かに更新）
+    this.renderItems();
+  }
+
+  /* ---------- リモートからのDELETE処理 ---------- */
+  handleRemoteDelete(record) {
+    console.log("リモート削除:", record);
+    
+    // ローカルデータから削除
+    this.items = this.items.filter(n => n !== record.name);
+    this.assignments = this.assignments.filter(a => a.name !== record.name);
+    
+    // 画面を更新
+    this.renderItems();
+    
+    // 削除されたことを視覚的に表示
+    this.showNotification(`「${record.name}」が削除されました`);
+  }
+
+  /* ---------- 接続状態の表示更新 ---------- */
+  updateConnectionStatus(status) {
+    if (!this.connectionStatus) return;
+    
+    const indicator = this.connectionStatus.querySelector('.status-indicator');
+    const text = this.connectionStatus.querySelector('.status-text');
+    
+    switch (status) {
+      case 'SUBSCRIBED':
+        indicator.className = 'status-indicator connected';
+        text.textContent = '同期中';
+        this.connectionStatus.classList.add('connected');
+        break;
+      case 'CHANNEL_ERROR':
+      case 'TIMED_OUT':
+      case 'error':
+        indicator.className = 'status-indicator error';
+        text.textContent = '接続エラー';
+        this.connectionStatus.classList.add('error');
+        break;
+      default:
+        indicator.className = 'status-indicator connecting';
+        text.textContent = '接続中...';
+        this.connectionStatus.classList.remove('connected', 'error');
+    }
+  }
+
+  /* ---------- 通知表示 ---------- */
+  showNotification(message) {
+    const notification = document.createElement('div');
+    notification.className = 'realtime-notification';
+    notification.textContent = message;
+    document.body.appendChild(notification);
+    
+    // アニメーション
+    setTimeout(() => notification.classList.add('show'), 10);
+    
+    // 3秒後に削除
+    setTimeout(() => {
+      notification.classList.remove('show');
+      setTimeout(() => notification.remove(), 300);
+    }, 3000);
   }
 
   /* ---------- グループ情報を取得 or 新規作成 ---------- */
@@ -321,7 +507,7 @@ class ItemAssignmentManager {
     this.input.value = "";
     this.renderItems();
 
-    // サーバー保存
+    // サーバー保存（Supabaseが自動的に他のユーザーに通知）
     try {
       await this.saveItemToServer({ name, assignee: "", quantity: "" });
     } catch (err) {
@@ -336,17 +522,20 @@ class ItemAssignmentManager {
   }
 
   /*  セレクト変更（担当者用）  */
-  handleSelectChange(e) {
+  async handleSelectChange(e) {
     const el = e.target;
     const idx = +el.dataset.index;
     const type = el.dataset.type;
     this.assignments[idx][type] = el.value;
 
     const { name, quantity, assignee } = this.assignments[idx];
-    this.saveItemToServer({ name, quantity, assignee }).catch((err) => {
+    
+    try {
+      await this.saveItemToServer({ name, quantity, assignee });
+    } catch (err) {
       console.error(err);
       alert("保存に失敗しました。ネットワーク接続を確認してください。");
-    });
+    }
   }
 
   /*  数量入力変更（新規）  */
@@ -599,6 +788,15 @@ class ItemAssignmentManager {
       }
     }
   }
+  
+  /* ---------- クリーンアップ ---------- */
+  destroy() {
+    // リアルタイムチャンネルを切断
+    if (this.realtimeChannel) {
+      this.supabaseClient.removeChannel(this.realtimeChannel);
+      console.log("リアルタイムチャンネルを切断しました");
+    }
+  }
 }
 
 // ヘッダークリックでindex.htmlに戻る処理
@@ -690,6 +888,13 @@ document.addEventListener("DOMContentLoaded", () => {
 // ItemAssignmentManagerインスタンスをグローバルに保存
 document.addEventListener("DOMContentLoaded", () => {
   window.itemManager = new ItemAssignmentManager();
+});
+
+// ページを閉じる時にクリーンアップ
+window.addEventListener('beforeunload', () => {
+  if (window.itemManager) {
+    window.itemManager.destroy();
+  }
 });
 
 // URLコピー機能
