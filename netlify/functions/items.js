@@ -85,8 +85,9 @@ exports.handler = async (event, context) => {
 
       console.log("Supabase data:", data);
 
+      // フロントエンドが期待する形式に変換
       const items = data.map((d) => ({
-        name: d.item_name,
+        item_name: d.item_name,  // ✅ item_name として返す
         quantity: d.quantity,
         assignee: d.assignee,
       }));
@@ -110,26 +111,41 @@ exports.handler = async (event, context) => {
   // 追加／更新（upsert）--------------------------------------
   if (event.httpMethod === "POST") {
     try {
-      const {
-        name: item_name,
-        quantity = null,
-        assignee = "",
-      } = JSON.parse(event.body);
+      const body = JSON.parse(event.body || '{}');
+      
+      // ✅ item_name という名前で受け取る（フロントエンドと一致）
+      const item_name = body.item_name || body.name;
+      const quantity = body.quantity || null;
+      const assignee = body.assignee || "";
+      const group_id_from_body = body.group_id;
 
-      console.log("POST request with item:", { item_name, quantity, assignee });
+      console.log("POST request with item:", { item_name, quantity, assignee, group_id_from_body });
+
+      // group_idの最終決定（ボディ > クエリパラメータ）
+      const finalGroupId = group_id_from_body || groupId;
 
       if (!item_name) {
+        console.error("item_name is missing");
         return {
           statusCode: 400,
           headers,
-          body: JSON.stringify({ error: "item name required" }),
+          body: JSON.stringify({ error: "item_name required" }),
+        };
+      }
+
+      if (!finalGroupId) {
+        console.error("group_id is missing");
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: "group_id required" }),
         };
       }
 
       const { error } = await supabase.from("items").upsert(
         [
           {
-            group_id: groupId,
+            group_id: finalGroupId,
             item_name,
             quantity,
             assignee,
@@ -151,14 +167,17 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ message: "saved" }),
+        body: JSON.stringify({ 
+          message: "saved",
+          item_name: item_name
+        }),
       };
     } catch (err) {
       console.error("POST items error:", err);
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ error: "Internal server error" }),
+        body: JSON.stringify({ error: "Internal server error: " + err.message }),
       };
     }
   }
@@ -166,22 +185,39 @@ exports.handler = async (event, context) => {
   // 削除 -----------------------------------------------------
   if (event.httpMethod === "DELETE") {
     try {
-      const { name: item_name } = JSON.parse(event.body);
+      const body = JSON.parse(event.body || '{}');
+      
+      // ✅ item_name という名前で受け取る（フロントエンドと一致）
+      const item_name = body.item_name || body.name;
+      const group_id_from_body = body.group_id;
 
-      console.log("DELETE request for item:", { item_name, groupId });
+      console.log("DELETE request for item:", { item_name, groupId: groupId, group_id_from_body });
+
+      // group_idの最終決定（ボディ > クエリパラメータ）
+      const finalGroupId = group_id_from_body || groupId;
 
       if (!item_name) {
+        console.error("item_name is missing");
         return {
           statusCode: 400,
           headers,
-          body: JSON.stringify({ error: "item name required" }),
+          body: JSON.stringify({ error: "item_name required" }),
+        };
+      }
+
+      if (!finalGroupId) {
+        console.error("group_id is missing");
+        return {
+          statusCode: 400,
+          headers,
+          body: JSON.stringify({ error: "group_id required" }),
         };
       }
 
       const { error } = await supabase
         .from("items")
         .delete()
-        .eq("group_id", groupId)
+        .eq("group_id", finalGroupId)
         .eq("item_name", item_name);
 
       if (error) {
@@ -197,14 +233,17 @@ exports.handler = async (event, context) => {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ message: "deleted" }),
+        body: JSON.stringify({ 
+          message: "deleted",
+          item_name: item_name
+        }),
       };
     } catch (err) {
       console.error("DELETE items error:", err);
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ error: "Internal server error" }),
+        body: JSON.stringify({ error: "Internal server error: " + err.message }),
       };
     }
   }
