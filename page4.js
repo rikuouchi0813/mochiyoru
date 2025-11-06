@@ -49,13 +49,15 @@ class ItemAssignmentManager {
       // Supabase環境変数を取得（本番環境では環境変数から読み込む）
       // 開発時は直接指定も可能ですが、本番では必ず環境変数を使用してください
       const supabaseUrl = 'https://vvpopjnyxbtqyetgmpgp.supabase.co';
-      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ2cG9wam55eGJ0cXlldGdtcGdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEwOTYwMjgsImV4cCI6MjA2NjY3MjAyOH0.EqyBZTAzv2a-I69P1AKNh2d8o4I4CXCem_ahnYo4KQU';
+      const supabaseKey = 'あなたの完全なanon keyをここに貼り付けてください'; // ⚠️ 実際の完全なキーに置き換えてください
       
       // Supabaseクライアント作成
       this.supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
       
       // リアルタイムチャンネル作成（グループごとに専用チャンネル）
       const channelName = `group:${this.groupData.groupId}`;
+      console.log("チャンネル名:", channelName);
+      
       this.realtimeChannel = this.supabaseClient.channel(channelName);
       
       // データベースの変更を監視
@@ -68,11 +70,19 @@ class ItemAssignmentManager {
             table: 'items',
             filter: `group_id=eq.${this.groupData.groupId}` // このグループのアイテムのみ
           },
-          (payload) => this.handleRealtimeChange(payload)
+          (payload) => {
+            console.log("🔔 Realtimeイベント受信:", payload);
+            this.handleRealtimeChange(payload);
+          }
         )
         .subscribe((status) => {
           console.log('リアルタイム接続状態:', status);
           this.updateConnectionStatus(status);
+          
+          if (status === 'SUBSCRIBED') {
+            console.log("✅ リアルタイム接続が確立されました");
+            console.log("グループID:", this.groupData.groupId);
+          }
         });
       
       console.log("=== Supabaseリアルタイム接続完了 ===");
@@ -225,23 +235,38 @@ class ItemAssignmentManager {
     const indicator = this.connectionStatus.querySelector('.status-indicator');
     const text = this.connectionStatus.querySelector('.status-text');
     
+    console.log('接続状態更新:', status);
+    
     switch (status) {
       case 'SUBSCRIBED':
-        indicator.className = 'status-indicator connected';
-        text.textContent = '同期中';
-        this.connectionStatus.classList.add('connected');
+        // 接続成功 - 表示を隠す
+        this.connectionStatus.style.display = 'none';
+        console.log('✅ リアルタイム接続成功 - 状態表示を非表示');
         break;
       case 'CHANNEL_ERROR':
       case 'TIMED_OUT':
+        // 一時的なエラーは無視（リトライ中）
+        console.log('一時的な接続エラー - リトライ中...');
+        break;
       case 'error':
+        // エラー時のみ表示 - 赤色
+        this.connectionStatus.style.display = 'flex';
         indicator.className = 'status-indicator error';
-        text.textContent = '接続エラー(リロードしてください)';
+        text.textContent = '接続エラー';
+        this.connectionStatus.classList.remove('connected', 'connecting');
         this.connectionStatus.classList.add('error');
         break;
-      default:
+      case 'CLOSED':
+        // 接続が閉じられた - 再接続試行中を表示
+        this.connectionStatus.style.display = 'flex';
         indicator.className = 'status-indicator connecting';
-        text.textContent = '接続中...';
+        text.textContent = '再接続中...';
         this.connectionStatus.classList.remove('connected', 'error');
+        this.connectionStatus.classList.add('connecting');
+        break;
+      default:
+        // 初回接続中は非表示（すぐに接続完了するため）
+        this.connectionStatus.style.display = 'none';
     }
   }
 
@@ -1033,6 +1058,3 @@ document.addEventListener("DOMContentLoaded", () => {
     copyUrlBtn.addEventListener("click", handleCopyClick);
   }
 });
-
-
-
