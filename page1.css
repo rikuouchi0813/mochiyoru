@@ -320,10 +320,63 @@ header h1 {
     transform: rotate(0deg);
 }
 
+/* ===== セクション背景バンド（色＋円弧の区切り） ===== */
+.band {
+    position: relative;
+    width: 100%;
+}
+
+/* 円弧の区切り（バンド下端から次のバンドへ膨らむ） */
+.band-features::after,
+.band-howto::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 45px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    pointer-events: none;
+}
+
+/* 特徴バンド：ライトグリーン */
+.band-features {
+    background: #F2FFF1;
+    padding: 40px 0 60px;
+    z-index: 3;
+}
+.band-features::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 375 41' preserveAspectRatio='none'%3E%3Cpath fill='%23F2FFF1' d='M0,0c57.07,26.26,120.57,40.9,187.49,40.9S317.91,26.26,374.98,0H0Z'/%3E%3C/svg%3E");
+}
+
+/* 使い方バンド：ライトアクア */
+.band-howto {
+    background: #E0FFF4;
+    padding: 95px 0 60px;
+    z-index: 2;
+}
+.band-howto::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 375 41' preserveAspectRatio='none'%3E%3Cpath fill='%23E0FFF4' d='M0,0c57.07,26.26,120.57,40.9,187.49,40.9S317.91,26.26,374.98,0H0Z'/%3E%3C/svg%3E");
+}
+
+/* 早速使ってみるバンド：ソフトグリーン */
+.band-cta {
+    background: #C7FFE8;
+    padding: 105px 0 80px;
+    z-index: 1;
+}
+
+.cta-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
 /* ===== モチヨルの特徴セクション ===== */
 .features {
     max-width: 1200px;
-    margin: 0 auto 80px;
+    margin: 0 auto;
     padding: 0 40px;
 }
 
@@ -549,7 +602,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 80px;
+    margin-top: 0;
 }
 
 footer hr {
