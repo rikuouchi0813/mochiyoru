@@ -54,22 +54,35 @@ function renderRecentGroups() {
     const li = document.createElement("li");
     li.className = "recent-group-item";
 
-    // グループへ移動するリンク
+    const groupName = group.groupName || "名称未設定のグループ";
+
+    // グループへ移動するリンク（白カード）
     const link = document.createElement("a");
     link.className = "recent-group-link";
     link.href = window.MochiyoruHistory.buildGroupUrl(group.groupId);
 
     const name = document.createElement("span");
     name.className = "recent-group-name";
-    name.textContent = group.groupName || "名称未設定のグループ";
+    name.textContent = groupName;
+
+    // 「編集する」ボタン（矢印を内包）
+    const editBtn = document.createElement("span");
+    editBtn.className = "recent-group-edit";
+
+    const editLabel = document.createElement("span");
+    editLabel.className = "recent-group-edit-label";
+    editLabel.textContent = "編集する";
 
     const arrow = document.createElement("span");
     arrow.className = "recent-group-arrow";
 
-    link.appendChild(name);
-    link.appendChild(arrow);
+    editBtn.appendChild(editLabel);
+    editBtn.appendChild(arrow);
 
-    // 履歴から削除するボタン
+    link.appendChild(name);
+    link.appendChild(editBtn);
+
+    // 履歴から削除するボタン（確認ポップアップ付き）
     const del = document.createElement("button");
     del.type = "button";
     del.className = "recent-group-remove";
@@ -78,6 +91,9 @@ function renderRecentGroups() {
     del.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
+      // 誤タップ防止の確認ポップアップ
+      const ok = window.confirm(`「${groupName}」を履歴から削除しますか？`);
+      if (!ok) return;
       window.MochiyoruHistory.remove(group.groupId);
       li.remove();
       // 全部消えたらセクションごと隠す
