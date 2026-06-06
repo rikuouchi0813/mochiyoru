@@ -300,6 +300,11 @@ header h1 {
 }
 
 /* ===== 最近見たグループ（URL控え忘れ対策の履歴） ===== */
+/* 履歴がないとき（hidden属性付き）は確実に非表示にする */
+.recent-groups[hidden] {
+    display: none;
+}
+
 .recent-groups {
     width: 100%;
     max-width: 360px;
