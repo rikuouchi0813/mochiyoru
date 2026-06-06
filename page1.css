@@ -305,19 +305,25 @@ header h1 {
     display: none;
 }
 
+/* 履歴セクション全体（白40%の区切り背景でカードを囲む） */
 .recent-groups {
     width: 100%;
-    max-width: 360px;
+    max-width: 597px;
     margin: 28px auto 0;
     text-align: center;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    padding: 24px;
+    box-sizing: border-box;
 }
 
-.recent-groups-title {
+.recent-groups .recent-groups-title {
     font-family: 'Mochiy Pop P One', sans-serif;
     font-weight: 400;
-    font-size: 15px;
+    font-size: 16px;
+    line-height: 1.4;
     color: #404040;
-    margin: 0 0 12px 0;
+    margin: 0 0 16px 0;
 }
 
 .recent-groups-list {
@@ -326,7 +332,7 @@ header h1 {
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .recent-group-item {
@@ -335,50 +341,79 @@ header h1 {
     gap: 8px;
 }
 
+/* 白背景カード */
 .recent-group-link {
     flex: 1;
+    min-width: 0;
+    height: 76px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     background: #fff;
     border-radius: 12px;
-    padding: 14px 16px;
+    padding: 12px 12px 12px 24px;
+    box-sizing: border-box;
     text-decoration: none;
-    box-shadow: 0 2px 8px 0 rgba(0, 206, 154, 0.15);
+    box-shadow: 0 2px 8px 0 rgba(0, 206, 154, 0.12);
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-    min-width: 0;
 }
 
 .recent-group-link:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px 0 rgba(0, 206, 154, 0.25);
+    box-shadow: 0 4px 12px 0 rgba(0, 206, 154, 0.22);
 }
 
+/* グループ名（M PLUS 1p） */
 .recent-group-name {
-    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-family: 'M PLUS 1p', sans-serif;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 16px;
     color: #242424;
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-right: 12px;
 }
 
+/* 「編集する」ボタン */
+.recent-group-edit {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    width: 133.5px;
+    height: 52px;
+    padding: 10px 16px 10px 20px;
+    box-sizing: border-box;
+    background: #4DD5DA;
+    border-radius: 12px;
+}
+
+.recent-group-edit-label {
+    font-family: 'M PLUS 1p', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    white-space: nowrap;
+}
+
+/* 矢印（右向き） */
 .recent-group-arrow {
     flex-shrink: 0;
-    width: 22px;
-    height: 12px;
-    margin-left: 12px;
-    background-color: #00E1A9;
-    clip-path: polygon(0 40%, 50% 40%, 50% 15%, 100% 50%, 50% 85%, 50% 60%, 0 60%);
+    width: 9px;
+    height: 13.5px;
+    background-color: #fff;
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
 }
 
+/* 履歴削除「×」ボタン */
 .recent-group-remove {
     flex-shrink: 0;
     width: 32px;
     border: none;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 10px;
     color: #888;
     font-size: 18px;
@@ -947,6 +982,51 @@ footer p {
 
 /* ===== スマートフォン対応(480px以下) ===== */
 @media (max-width: 480px) {
+    /* 履歴カード：スマホでは白カードを最大303pxにし、中央に配置（狭い端末では縮む） */
+    .recent-groups {
+        padding: 20px 12px;
+    }
+
+    .recent-group-link {
+        flex: 1 1 auto;
+        max-width: 303px;
+        height: 60px;
+        padding: 10px 10px 10px 16px;
+    }
+
+    .recent-group-item {
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .recent-group-remove {
+        width: 28px;
+    }
+
+    .recent-group-name {
+        font-family: 'M PLUS 1p', sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 150%;
+        margin-right: 8px;
+    }
+
+    .recent-group-edit {
+        width: 103px;
+        min-width: 0;
+        height: 40px;
+        padding: 10px 12px 10px 14px;
+        gap: 6px;
+    }
+
+    .recent-group-edit-label {
+        font-family: 'M PLUS 1p', sans-serif;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 150%;
+        text-align: center;
+    }
+
     .logo-box {
         width: 320px;
         max-width: 90%;
