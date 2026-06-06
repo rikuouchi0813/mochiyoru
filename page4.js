@@ -694,7 +694,7 @@ class ItemAssignmentManager {
     // 空欄はOK
     if (!value) {
       el.classList.remove('quantity-error');
-      el.placeholder = '例: 5本, 各1個';
+      el.placeholder = '例: 5本';
       this.assignments[idx].quantity = '';
       
       const { name, assignee } = this.assignments[idx];
@@ -705,18 +705,9 @@ class ItemAssignmentManager {
       return;
     }
 
-    // 半角・全角数字チェック
-    if (!/[0-9０-９]/.test(value)) {
-      el.classList.add('quantity-error');
-      el.value = '';
-      el.placeholder = '数字を含めてください';
-      this.assignments[idx].quantity = '';
-      return;
-    }
-
-    // バリデーションOK
+    // 数値必須の制約は解除（数字なしの自由入力もOK）
     el.classList.remove('quantity-error');
-    el.placeholder = '例: 5本, 各1個';
+    el.placeholder = '例: 5本';
     this.assignments[idx].quantity = value;
 
     const { name, assignee } = this.assignments[idx];
@@ -730,7 +721,7 @@ class ItemAssignmentManager {
   handleQuantityFocus(e) {
     const el = e.target;
     el.classList.remove('quantity-error');
-    el.placeholder = '例: 5本, 各1個';
+    el.placeholder = '例: 5本';
   }
 
   /* ---------- UI 描画（修正版） ---------- */
@@ -858,7 +849,7 @@ class ItemAssignmentManager {
     input.className = 'item-select quantity-input';
     input.dataset.index = idx;
     input.dataset.type = 'quantity';
-    input.placeholder = '例: 5本, 各1個';
+    input.placeholder = '例: 5本';
     input.maxLength = 30;
     input.value = value || "";  // 初期値を確実に設定
     
