@@ -75,6 +75,19 @@ class ItemAssignmentManager {
             this.handleRealtimeChange(payload);
           }
         )
+        .on(
+          'postgres_changes',
+          {
+            event: 'UPDATE', // メンバー更新を監視
+            schema: 'public',
+            table: 'groups',
+            filter: `group_id=eq.${this.groupData.groupId}` // このグループのみ
+          },
+          (payload) => {
+            console.log("🔔 メンバー更新イベント受信:", payload);
+            this.handleGroupUpdate(payload);
+          }
+        )
         .subscribe((status) => {
           console.log('リアルタイム接続状態:', status);
           this.updateConnectionStatus(status);
@@ -90,6 +103,32 @@ class ItemAssignmentManager {
       console.error("リアルタイム接続エラー:", err);
       this.updateConnectionStatus('error');
     }
+  }
+
+  /* ---------- メンバー更新（groupsテーブル）のハンドラー ---------- */
+  handleGroupUpdate(payload) {
+    console.log("=== メンバー更新を受信 ===", payload);
+
+    const newRecord = payload.new;
+    if (!newRecord) return;
+
+    // メンバー情報を最新化
+    if (Array.isArray(newRecord.members)) {
+      this.members = newRecord.members;
+      this.groupData.members = newRecord.members;
+    }
+    // グループ名も更新されていれば反映
+    if (newRecord.group_name) {
+      this.groupData.groupName = newRecord.group_name;
+    }
+
+    // sessionStorageも更新（整合性確保）
+    sessionStorage.setItem("groupData", JSON.stringify(this.groupData));
+
+    // 持ち物リストを再描画（担当者プルダウンに新メンバーを反映）
+    this.renderItems();
+
+    this.showNotification("メンバーが更新されました");
   }
 
   /* ---------- リアルタイム変更のハンドラー ---------- */
