@@ -399,13 +399,13 @@ header h1 {
     white-space: nowrap;
 }
 
-/* 矢印（右向き） */
+/* 矢印（右向きの線矢印 →） */
 .recent-group-arrow {
     flex-shrink: 0;
-    width: 9px;
-    height: 13.5px;
+    width: 19px;
+    height: 7px;
     background-color: #fff;
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    clip-path: polygon(0 40%, 65% 40%, 65% 15%, 100% 50%, 65% 85%, 65% 60%, 0 60%);
 }
 
 /* 履歴削除「×」ボタン */
