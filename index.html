@@ -96,6 +96,12 @@
             <a href="page2.html" class="start-button">はじめる
                 <span class="arrow"></span>
             </a>
+
+            <!-- 最近見たグループ（履歴がある場合のみJSで表示） -->
+            <section class="recent-groups" id="recentGroups" hidden>
+                <h2 class="recent-groups-title">前回のつづきから</h2>
+                <ul class="recent-groups-list" id="recentGroupsList"></ul>
+            </section>
         </section>
     </div>
 
@@ -221,6 +227,7 @@
     </footer>
 
     <!-- JavaScriptファイルをdefer属性で非ブロッキング化 -->
+    <script src="history.js" defer></script>
     <script src="page1.js" defer></script>
 
     <!-- Google Analytics と AdSense をページ読み込み後に遅延実行 -->
