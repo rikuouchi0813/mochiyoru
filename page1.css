@@ -299,6 +299,94 @@ header h1 {
     text-decoration: none;
 }
 
+/* ===== 最近見たグループ（URL控え忘れ対策の履歴） ===== */
+.recent-groups {
+    width: 100%;
+    max-width: 360px;
+    margin: 28px auto 0;
+    text-align: center;
+}
+
+.recent-groups-title {
+    font-family: 'Mochiy Pop P One', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: #404040;
+    margin: 0 0 12px 0;
+}
+
+.recent-groups-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recent-group-item {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+}
+
+.recent-group-link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    text-decoration: none;
+    box-shadow: 0 2px 8px 0 rgba(0, 206, 154, 0.15);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    min-width: 0;
+}
+
+.recent-group-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px 0 rgba(0, 206, 154, 0.25);
+}
+
+.recent-group-name {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    color: #242424;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.recent-group-arrow {
+    flex-shrink: 0;
+    width: 22px;
+    height: 12px;
+    margin-left: 12px;
+    background-color: #00E1A9;
+    clip-path: polygon(0 40%, 50% 40%, 50% 15%, 100% 50%, 50% 85%, 50% 60%, 0 60%);
+}
+
+.recent-group-remove {
+    flex-shrink: 0;
+    width: 32px;
+    border: none;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    color: #888;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+
+.recent-group-remove:hover {
+    background: #fff;
+    color: #404040;
+}
+
 /* ===== 絵文字バー ===== */
 .emoji-bar {
     text-align: center;
