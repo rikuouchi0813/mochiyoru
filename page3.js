@@ -1,339 +1,324 @@
+// グループ情報の管理とURL生成
 class GroupManager {
-    constructor() {
-        this.members = [];
-        this.isEditMode = false;
-        this.editingGroupId = null;
-        this.originalGroupData = null;
-        
-        this.bindElements();
-        this.initialize();
-        this.attachEventListeners();
+  constructor() {
+    this.groupData = this.loadGroupData();
+    this.baseUrl = this.getBaseUrl();
+    this.init();
+  }
+
+  // 現在のドメインからベースURLを取得
+  getBaseUrl() {
+    const currentDomain = window.location.hostname;
+    const protocol = window.location.protocol;
+    return `${protocol}//${currentDomain}/group/`;
+  }
+
+  // グループデータをURLパラメータから読み込み、フォールバックでセッションストレージも利用
+  loadGroupData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let groupName = urlParams.get("groupName");
+    let membersParam = urlParams.get("members");
+    let groupId = urlParams.get("groupId");
+
+    // URLパラメータがない場合はセッションストレージから取得
+    if (!groupName && !membersParam) {
+      try {
+        const sessionData = sessionStorage.getItem("groupData");
+        if (sessionData) {
+          const data = JSON.parse(sessionData);
+          groupName = data.groupName || "おはなグループ";
+          membersParam = JSON.stringify(
+            data.members.map((name) => ({ name: name }))
+          );
+          groupId = data.groupId;
+        }
+      } catch (error) {
+        // エラーは無視
+      }
     }
 
-    bindElements() {
-        this.memberInput = document.getElementById('memberName');
-        this.addMemberBtn = document.getElementById('addMember');
-        this.memberList = document.getElementById('memberList');
-        this.groupNameInput = document.getElementById('groupName');
-        this.createBtn = document.getElementById('createGroupBtn');
-        this.pageTitle = document.getElementById('pageTitle');
-        this.pageDescription = document.getElementById('pageDescription');
-        this.buttonText = document.getElementById('buttonText');
+    // デフォルト値を設定
+    groupName = groupName || "おはなグループ";
+
+    let members = [];
+    if (membersParam) {
+      try {
+        const parsedMembers = JSON.parse(decodeURIComponent(membersParam));
+        // メンバーデータの形式をチェック
+        if (Array.isArray(parsedMembers)) {
+          if (
+            parsedMembers.length > 0 &&
+            typeof parsedMembers[0] === "object" &&
+            parsedMembers[0].name
+          ) {
+            // オブジェクト形式の場合
+            members = parsedMembers;
+          } else if (typeof parsedMembers[0] === "string") {
+            // 文字列配列の場合はオブジェクト形式に変換
+            members = parsedMembers.map((name) => ({ name: name }));
+          }
+        }
+      } catch (error) {
+        members = [];
+      }
     }
 
-    initialize() {
-        // 編集モードかどうかチェック
-        const editMode = sessionStorage.getItem('editMode');
-        const groupData = sessionStorage.getItem('groupData');
-        
-        if (editMode === 'members' && groupData) {
-            this.setupEditMode(JSON.parse(groupData));
-        } else {
-            this.setupCreateMode();
-        }
+    // groupIdの処理
+    if (!groupId) {
+      groupId = this.generateGroupId();
     }
 
-    setupEditMode(groupData) {
-        this.isEditMode = true;
-        this.editingGroupId = groupData.groupId;
-        this.originalGroupData = { ...groupData };
-        
-        // UI更新（要素が存在する場合のみ）
-        if (this.pageTitle) {
-            this.pageTitle.textContent = 'メンバーを編集しよう';
-        }
-        if (this.pageDescription) {
-            this.pageDescription.textContent = 'メンバーを追加・削除して更新しましょう👇';
-        }
-        if (this.buttonText) {
-            this.buttonText.textContent = 'メンバーを更新';
-        }
-        
-        // フォームにデータ設定
-        if (this.groupNameInput) {
-            this.groupNameInput.value = groupData.groupName || '';
-        }
-        this.members = [...(groupData.members || [])];
-        
-        this.renderMembers();
-        
-        // editModeフラグをクリア
-        sessionStorage.removeItem('editMode');
+    return {
+      groupName: groupName,
+      members: members,
+      groupId: groupId,
+    };
+  }
+
+  // ユニークなグループIDを生成
+  generateGroupId() {
+    const timestamp = Date.now().toString(36);
+    const randomStr = Math.random().toString(36).substring(2, 8);
+    return `${timestamp}${randomStr}`;
+  }
+
+  // グループURLを生成
+  generateGroupUrl() {
+    return `${this.baseUrl}${this.groupData.groupId}`;
+  }
+
+  // 初期化処理
+  init() {
+    this.updateUI();
+    this.setupEventListeners();
+    this.saveGroupDataToSessionStorage();
+  }
+
+  // UIを更新
+  updateUI() {
+    const groupUrl = this.generateGroupUrl();
+    const urlElement = document.getElementById("groupUrl");
+    if (urlElement) {
+      urlElement.value = groupUrl;
     }
 
-    setupCreateMode() {
-        this.isEditMode = false;
-        this.editingGroupId = null;
-        this.originalGroupData = null;
-        
-        // UI更新（デフォルト状態）- 要素が存在する場合のみ
-        if (this.pageTitle) {
-            this.pageTitle.textContent = 'グループを作成しよう';
-        }
-        if (this.pageDescription) {
-            this.pageDescription.textContent = 'グループ名を決めてメンバーの名前を追加しましょう👇';
-        }
-        if (this.buttonText) {
-            this.buttonText.textContent = 'グループを作成';
-        }
-        
-        this.members = [];
-        this.renderMembers();
+    // 次のステップボタンにもグループ情報を含める
+    const nextStepBtn = document.getElementById("nextStepBtn");
+    if (nextStepBtn) {
+      const params = new URLSearchParams({
+        groupId: this.groupData.groupId,
+        groupName: this.groupData.groupName,
+        members: JSON.stringify(this.groupData.members),
+      });
+      nextStepBtn.href = `page4.html?${params.toString()}`;
+    }
+  }
+
+  // イベントリスナーの設定
+  setupEventListeners() {
+    // コピーボタンのクリックイベント
+    const copyBtn = document.getElementById("copyBtn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", () => this.copyUrl());
     }
 
-    attachEventListeners() {
-        if (this.addMemberBtn) {
-            this.addMemberBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.addMember();
-            });
-        }
-        
-        if (this.memberInput) {
-            this.memberInput.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    this.addMember();
-                }
-            });
-        }
+    // URL入力欄の設定
+    this.setupUrlInput();
+  }
 
-        if (this.createBtn) {
-            this.createBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (this.isEditMode) {
-                    this.updateGroup();
-                } else {
-                    this.createGroup();
-                }
-            });
-        }
+  // URL入力欄の設定
+  setupUrlInput() {
+    const urlInput = document.getElementById("groupUrl");
+    if (!urlInput) {
+      return;
     }
 
-    addMember() {
-        if (!this.memberInput) return;
+    // 初期状態では読み取り専用
+    urlInput.readOnly = true;
 
-        const name = this.memberInput.value.trim();
-        
-        if (!name) {
-            alert('メンバー名を入力してください。');
-            return;
-        }
+    // クリックで編集可能にする
+    urlInput.addEventListener("click", () => {
+      if (urlInput.readOnly) {
+        urlInput.readOnly = false;
+        urlInput.focus();
+        setTimeout(() => urlInput.select(), 0);
+      }
+    });
 
-        if (this.members.includes(name)) {
-            alert('すでに追加されているメンバーです。');
-            this.memberInput.value = '';
-            return;
-        }
+    // フォーカスを失った時に読み取り専用に戻す
+    urlInput.addEventListener("blur", () => {
+      urlInput.readOnly = true;
+    });
 
-        this.members.push(name);
-        this.memberInput.value = '';
-        this.renderMembers();
+    // キーボードショートカット
+    urlInput.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "a") {
+        e.preventDefault();
+        urlInput.select();
+      }
+
+      if (e.key === "Enter") {
+        urlInput.blur();
+      }
+
+      if (e.key === "Escape") {
+        urlInput.value = this.generateGroupUrl();
+        urlInput.blur();
+      }
+    });
+
+    // ダブルクリックで全選択
+    urlInput.addEventListener("dblclick", (e) => {
+      e.preventDefault();
+      urlInput.select();
+    });
+
+    // タッチデバイス用
+    urlInput.addEventListener("touchstart", (e) => {
+      if (urlInput.readOnly) {
+        e.preventDefault();
+        urlInput.readOnly = false;
+        urlInput.focus();
+        setTimeout(() => urlInput.select(), 100);
+      }
+    });
+  }
+
+  // URLをクリップボードにコピー
+  async copyUrl() {
+    const urlInput = document.getElementById("groupUrl");
+    const urlToCopy = urlInput ? urlInput.value : this.generateGroupUrl();
+    const fullUrl = urlToCopy.startsWith("http")
+      ? urlToCopy
+      : `https://${urlToCopy}`;
+
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(fullUrl);
+        this.showCopySuccess();
+      } else {
+        this.fallbackCopyUrl(fullUrl);
+      }
+    } catch (err) {
+      this.fallbackCopyUrl(fullUrl);
+    }
+  }
+
+  // フォールバック用のコピー機能
+  fallbackCopyUrl(url) {
+    const textArea = document.createElement("textarea");
+    textArea.value = url;
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
+    document.body.appendChild(textArea);
+
+    textArea.focus();
+    textArea.select();
+
+    try {
+      const successful = document.execCommand("copy");
+      if (successful) {
+        this.showCopySuccess();
+      } else {
+        this.showCopyError();
+      }
+    } catch (err) {
+      this.showCopyError();
     }
 
-    removeMember(name) {
-        this.members = this.members.filter(member => member !== name);
-        this.renderMembers();
+    document.body.removeChild(textArea);
+  }
+
+  // コピー成功メッセージを表示
+  showCopySuccess() {
+    const successMessage = document.getElementById("copySuccessMessage");
+    if (successMessage) {
+      successMessage.textContent = "コピーしました！";
+      successMessage.classList.add("show");
+
+      setTimeout(() => {
+        successMessage.classList.remove("show");
+      }, 2000);
     }
+  }
 
-    renderMembers() {
-        if (!this.memberList) return;
+  // コピーエラーメッセージを表示
+  showCopyError() {
+    const successMessage = document.getElementById("copySuccessMessage");
+    if (successMessage) {
+      successMessage.textContent = "コピーに失敗しました";
+      successMessage.classList.add("show");
 
-        this.memberList.innerHTML = '';
-        
-        this.members.forEach(member => {
-            const li = document.createElement('li');
-            li.className = 'member-tag';
-            
-            // メンバー名のテキスト部分を作成
-            const memberText = document.createTextNode(member);
-            li.appendChild(memberText);
-            
-            // 削除ボタンを作成
-            const removeBtn = document.createElement('button');
-            removeBtn.type = 'button';
-            removeBtn.className = 'remove-member';
-            removeBtn.textContent = '×';
-            removeBtn.addEventListener('click', () => this.removeMember(member));
-            
-            li.appendChild(removeBtn);
-            this.memberList.appendChild(li);
+      setTimeout(() => {
+        successMessage.classList.remove("show");
+      }, 2000);
+    }
+  }
+
+  // グループデータをSessionStorageに保存
+  saveGroupDataToSessionStorage() {
+    try {
+      const dataToSave = {
+        ...this.groupData,
+        createdAt: new Date().toISOString(),
+        groupUrl: this.generateGroupUrl(),
+      };
+
+      // SessionStorageを使用（ページ間でデータを共有）
+      sessionStorage.setItem(
+        `group_${this.groupData.groupId}`,
+        JSON.stringify(dataToSave)
+      );
+      sessionStorage.setItem("currentGroupId", this.groupData.groupId);
+
+      // localStorageの履歴にも保存（URL控え忘れ対策：トップから戻れるように）
+      if (window.MochiyoruHistory) {
+        window.MochiyoruHistory.addOrUpdate({
+          groupId: this.groupData.groupId,
+          groupName: this.groupData.groupName,
         });
+      }
+
+      // groupDataも更新（page4とpage2での整合性確保）
+      sessionStorage.setItem("groupData", JSON.stringify({
+        groupId: this.groupData.groupId,
+        groupName: this.groupData.groupName,
+        members: this.groupData.members.map(member => 
+          typeof member === 'string' ? member : member.name
+        )
+      }));
+
+    } catch (err) {
+      // エラーは無視
     }
+  }
 
-    async createGroup() {
-        if (!this.groupNameInput) return;
-
-        const groupName = this.groupNameInput.value.trim();
-        
-        if (!groupName) {
-            alert('グループ名を入力してください。');
-            return;
-        }
-        
-        if (this.members.length === 0) {
-            alert('少なくとも1人のメンバーを追加してください。');
-            return;
-        }
-
-        this.setLoading(true);
-
-        try {
-            const response = await fetch('/api/groups', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    groupName,
-                    members: this.members
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            // sessionStorageに保存
-            const groupData = {
-                groupId: data.groupId,
-                groupName: groupName,
-                members: this.members
-            };
-            
-            sessionStorage.setItem('groupData', JSON.stringify(groupData));
-
-            // page3.htmlに遷移
-            const params = new URLSearchParams({
-                groupId: data.groupId,
-                groupName: encodeURIComponent(groupName),
-                members: JSON.stringify(this.members)
-            });
-
-            window.location.href = `/page3.html?${params.toString()}`;
-
-        } catch (error) {
-            console.error('グループ作成エラー:', error);
-            alert('グループの作成に失敗しました。ネットワーク接続を確認して、もう一度お試しください。');
-        } finally {
-            this.setLoading(false);
-        }
+  // 他のページからグループデータを取得するための静的メソッド
+  static getGroupData(groupId) {
+    try {
+      const data = sessionStorage.getItem(`group_${groupId}`);
+      return data ? JSON.parse(data) : null;
+    } catch (err) {
+      return null;
     }
+  }
 
-    async updateGroup() {
-        if (!this.groupNameInput) return;
-
-        const groupName = this.groupNameInput.value.trim();
-        
-        if (!groupName) {
-            alert('グループ名を入力してください。');
-            return;
-        }
-        
-        if (this.members.length === 0) {
-            alert('少なくとも1人のメンバーを追加してください。');
-            return;
-        }
-
-        if (!this.editingGroupId) {
-            alert('グループIDが見つかりません。');
-            return;
-        }
-
-        this.setLoading(true);
-
-        try {
-            // Netlify Functionsのgroups-updateエンドポイントを呼び出し
-            const response = await fetch(`/.netlify/functions/groups-update/${this.editingGroupId}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    groupName,
-                    members: this.members
-                })
-            });
-
-            if (!response.ok) {
-                // レスポンスの詳細を取得
-                const errorText = await response.text();
-                
-                // 404/405の場合は、エンドポイントが正しく設定されていない可能性
-                if (response.status === 404) {
-                    throw new Error('NETLIFY_FUNCTION_NOT_FOUND');
-                } else if (response.status === 405) {
-                    throw new Error('METHOD_NOT_ALLOWED');
-                } else {
-                    throw new Error(`HTTP ${response.status}: ${errorText}`);
-                }
-            }
-
-            const data = await response.json();
-
-            // sessionStorageを更新（既存のgroupIdを保持）
-            const updatedGroupData = {
-                groupId: this.editingGroupId,
-                groupName: groupName,
-                members: this.members
-            };
-            
-            sessionStorage.setItem('groupData', JSON.stringify(updatedGroupData));
-
-            // page4.htmlに戻る（既存のgroupIdを使用）
-            const params = new URLSearchParams({
-                groupId: this.editingGroupId,
-                groupName: encodeURIComponent(groupName),
-                members: JSON.stringify(this.members)
-            });
-
-            window.location.href = `/page4.html?${params.toString()}`;
-
-        } catch (error) {
-            console.error('グループ更新エラー:', error);
-            
-            let errorMessage = 'メンバーの更新に失敗しました。\n\n';
-            
-            if (error.message === 'NETLIFY_FUNCTION_NOT_FOUND') {
-                errorMessage += 'Netlify Functionが見つかりません。\n';
-                errorMessage += 'groups-update.js が正しくデプロイされているか確認してください。';
-            } else if (error.message === 'METHOD_NOT_ALLOWED') {
-                errorMessage += 'リクエストメソッドが許可されていません。';
-            } else if (error.message.includes('500')) {
-                errorMessage += 'サーバーでエラーが発生しました。少し時間をおいてからお試しください。';
-            } else if (error.message.includes('404')) {
-                errorMessage += 'グループが見つかりませんでした。URLが正しいか確認してください。';
-            } else if (error.message.includes('Network')) {
-                errorMessage += 'ネットワーク接続を確認してください。';
-            } else {
-                errorMessage += '詳細: ' + error.message;
-            }
-            
-            alert(errorMessage);
-        } finally {
-            this.setLoading(false);
-        }
+  // 現在のグループIDを取得
+  static getCurrentGroupId() {
+    try {
+      return sessionStorage.getItem("currentGroupId");
+    } catch (err) {
+      return null;
     }
-
-    setLoading(loading) {
-        if (!this.createBtn || !this.buttonText) return;
-
-        if (loading) {
-            this.createBtn.classList.add('loading');
-            this.buttonText.textContent = this.isEditMode ? '更新中...' : '作成中...';
-            this.createBtn.style.pointerEvents = 'none';
-        } else {
-            this.createBtn.classList.remove('loading');
-            this.buttonText.textContent = this.isEditMode ? 'メンバーを更新' : 'グループを作成';
-            this.createBtn.style.pointerEvents = 'auto';
-        }
-    }
+  }
 }
 
-// DOMContentLoaded時にGroupManagerを初期化
-document.addEventListener('DOMContentLoaded', () => {
+// ページ読み込み時の処理
+document.addEventListener("DOMContentLoaded", () => {
+  try {
     new GroupManager();
+  } catch (error) {
+    // エラーが発生してもページは正常に表示される
+  }
 });
-
