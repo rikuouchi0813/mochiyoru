@@ -408,6 +408,15 @@ class ItemAssignmentManager {
 
     // 7. 最終データを保存
     sessionStorage.setItem("groupData", JSON.stringify(this.groupData));
+
+    // localStorageの履歴にも保存（URL控え忘れ対策：トップから戻れるように）
+    if (window.MochiyoruHistory && this.groupData.groupId) {
+      window.MochiyoruHistory.addOrUpdate({
+        groupId: this.groupData.groupId,
+        groupName: this.groupData.groupName,
+      });
+    }
+
     console.log("最終的なgroupData:", this.groupData);
     console.log("最終的なmembers:", this.members);
     console.log("=== loadOrCreateGroup 完了 ===");
